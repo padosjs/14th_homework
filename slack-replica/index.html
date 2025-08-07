@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <title>슬랙 클론 코딩</title>
+    <link rel="stylesheet" href="./index.css" />
+</head>
+
+<body>
+    <div class="가장큰배경">
+        <div class="헤더">
+            <div class="헤더__왼쪽영역">
+                <img src="./assets/icons/arrow_left.png" width="32px" height="32px" />
+                <img src="./assets/icons/arrow_right.png" width="32px" height="32px" />
+                <img src="./assets/icons/time.png" width="32px" height="32px" />
+            </div>
+            <div class="헤더__오른쪽영역">
+                <img src="./assets/images/searchbar.png" />
+                <div class="헤더__오른쪽영역__프로필설정">
+                    <img src="./assets/icons/badge.png" />
+                    <img src="./assets/icons/help.png" />
+                </div>
+            </div>
+        </div>
+        <div class="바디">
+            <div class="바디__사이드바왼쪽"></div>
+            <div class="바디__메인">
+                <div class="바디__메인__메뉴"></div>
+                <div class="바디__메인__회원가입">
+
+                        <h1>코드캠프에 가입하고<br>개발자로 커리어 점프 하세요.</h1>
+                        
+                        <form class="signup-form">
+                            <div class="form-group">
+                                <label for="name">이름</label>
+                                <input type="text" id="name" name="name" placeholder="이름을 입력해 주세요.">
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="email">이메일</label>
+                                <input type="email" id="email" name="email" placeholder="네이버, 구글, 한메일, 카카오 계정만 입력">
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="password">비밀번호</label>
+                                <input type="password" id="password" name="password" placeholder="비밀번호를 입력해 주세요.">
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="phone">전화번호</label>
+                                <input type="tel" id="phone" name="phone" placeholder="010으로 시작, '-'를 빼고 입력해 주세요.">
+                            </div>
+                            
+                            <div class="verification-group">
+                                <span class="verification-code">000000</span>
+                                <button type="button" class="verification-btn">인증번호 요청</button>
+                            </div>
+                            
+                            <button type="button" class="auth-btn">인증 하기</button>
+                            
+                            <div class="form-group">
+                                <label for="introduction">자기소개</label>
+                                <textarea id="introduction" name="introduction" placeholder="자기소개를 입력해 주세요." rows="4"></textarea>
+                            </div>
+                            
+                            <div class="gender-group">
+                                <span class="gender-label">성별</span>
+                                <div class="radio-group">
+                                    <input type="radio" id="male" name="gender" value="male" checked>
+                                    <label for="male">남성</label>
+                                    <input type="radio" id="female" name="gender" value="female">
+                                    <label for="female">여성</label>
+                                </div>
+                            </div>
+                            
+                            <div class="checkbox-group">
+                                <input type="checkbox" id="agree" name="agree">
+                                <label for="agree">집에는 있으려면 가는데 동의합니다.</label>
+                            </div>
+                            
+                            <button type="submit" class="submit-btn">가입</button>
+                        </form>
+
+                </div>
+                <div class="바디__메인__사진"></div>
+            </div>
+            <div class="바디__사이드바오른쪽"></div>
+        </div>
+        <div classs="푸터"></div>
+    </div>
+</body>
+
+</html>

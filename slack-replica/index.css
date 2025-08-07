@@ -1,0 +1,165 @@
+* {
+    margin: 0px;
+    padding: 0px;
+    box-sizing: border-box;
+}
+
+.가장큰배경 {
+    width: 1920px;
+    height: 1208px;
+    background-image: url("./assets/images/bg1.png");
+}
+
+.헤더 {
+    width: 1920px;
+    height: 80px;
+    display: flex;
+}
+
+.헤더__왼쪽영역 {
+    width: 480px;
+    height: 80px;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    gap: 16px;
+    padding-right: 16px;
+}
+
+.헤더__오른쪽영역 {
+    width: 1440px;
+    height: 80px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    padding-right: 80px;
+}
+
+.헤더__오른쪽영역__프로필설정 {
+    width: 163px;
+    height: 48px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.바디 {
+    width: 1920px;
+    height: 1048px;
+    display: flex;
+}
+
+.바디__사이드바왼쪽 {
+    width: 80px;
+    height: 1048px;
+}
+
+.바디__메인 {
+    width: 1760px;
+    height: 1048px;
+    background-image: url("./assets/images/bg2.png");
+    display: flex;
+}
+
+.바디__메인__메뉴 {
+    width: 400px;
+    height: 1048px;
+    background-color: yellow;
+}
+
+.바디__메인__회원가입 {
+    width: 680px;
+    height: 1048px;
+    background-color: skyblue;
+}
+
+.바디__메인__사진 {
+    width: 680px;
+    height: 1048px;
+    background-image: url("./assets/images/picture.png");
+}
+
+.바디__사이드바오른쪽 {
+    width: 80px;
+    height: 1048px;
+}
+
+.푸터 {
+    width: 1920px;
+    height: 80px;
+}
+
+
+
+
+.바디__메인__회원가입 {
+    display: flex;
+    width: 680px;
+    height: 1048px;
+    min-height: 920px;
+    padding: 40px 60px;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 40px;
+    border-radius: 0 8px 8px 0;
+    background: var(--Primary-P-L400, #D5BCE4);
+}
+
+.바디__메인__회원가입 h1 {
+    width: 560px;
+    color: var(--Primary-P-main, #491449);
+    text-align: center;
+    font-family: "Pretendard Variable";
+    font-size: 40px;
+    font-style: normal;
+    font-weight: 800;
+    line-height: 56px;
+    /* 140% */
+}
+
+
+.signup-form {
+    display: flex;
+    padding: 0 56px;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-end;
+    gap: 20px;
+    align-self: stretch;
+}
+
+.form-group {
+    display: flex;
+    justify-content: space-between;
+
+    align-items: flex-start;
+    gap: 8px;
+    align-self: stretch;
+}
+
+.form-group input {
+    display: flex;
+    width: 320px;
+    height: 44px;
+    padding: 8px 12px;
+    align-items: center;
+    gap: 10px;
+    border-radius: 8px;
+    border: 1px solid var(--gray-300, #C7C7C7);
+    background: var(--gray-W, #FFF);
+}
+
+
+.submit-btn {
+    display: flex;
+    min-width: 120px;
+    padding: 12px 16px;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    align-self: stretch;
+    border-radius: 8px;
+    background: #491449;
+}
