@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <title>감정기록 일기장</title>
+    <link rel="stylesheet" href="./index.css" />
+    <script src="./index.js"></script>
+</head>
+
+<body>
+    <div class="전체컨테이너">
+        <div class="내용컨테이너">
+            <div class="헤더">
+                <a href="./index.html">
+                    <h1>민지의 다이어리</h1>
+                </a>
+            </div>
+            <div class="상단배너이미지"></div>
+            <div class="탭바">
+                <div class="탭바항목_선택됨">
+                    일기보관함
+                </div>
+                <div class="탭바항목_선택안됨">
+                    사진보관함
+                </div>
+            </div>
+            <div class="카드목록_일기쓰기패널">
+                <div class="카드목록">
+                    <!-- 여기에 카드들이 표시됩니다 -->
+                </div>
+                <div class="일기쓰기패널">
+
+                    <h1>📍 일기 쓰기</h1>
+                    <div class="일기오늘기분">
+                        <h2>오늘 기분은 어땠나요?</h2>
+                        <div class="일기라디오">
+                            <div class="라디오그룹">
+                                <input type="radio" id="happy" name="기분" value="행복해요">
+                                <label for="happy" class="라디오라벨">행복해요</label>
+                            </div>
+
+                            <div class="라디오그룹">
+                                <input type="radio" id="sad" name="기분" value="슬퍼요">
+                                <label for="sad" class="라디오라벨">슬퍼요</label>
+                            </div>
+
+                            <div class="라디오그룹">
+                                <input type="radio" id="surprised" name="기분" value="놀랐어요">
+                                <label for="surprised" class="라디오라벨">놀랐어요</label>
+                            </div>
+
+                            <div class="라디오그룹">
+                                <input type="radio" id="angry" name="기분" value="화나요">
+                                <label for="angry" class="라디오라벨">화나요</label>
+                            </div>
+
+                            <div class="라디오그룹">
+                                <input type="radio" id="etc" name="기분" value="기타">
+                                <label for="etc" class="라디오라벨">기타</label>
+                            </div>
+                        </div>
+                    </div>
+
+
+
+                    <div class="일기텍스트">
+                        <div class="입력필드그룹">
+                            <p class="라벨">제목</p>
+                            <input type="text" class="입력창" placeholder="제목을 입력해 주세요.">
+                        </div>
+
+                        <div class="입력필드그룹">
+                            <p class="라벨">내용</p>
+                            <textarea class="입력창" placeholder="내용을 입력해 주세요." rows="4"></textarea>
+                        </div>
+                    </div>
+
+
+
+                    <button type="submit" class="일기등록버튼" disabled>등록하기</button>
+
+                </div>
+            </div>
+
+        </div>
+        <div class="푸터">
+            <div class="푸터텍스트컨테이너">
+                <span class="푸터텍스트1">민지의 다이어리</span>
+                <span class="푸터텍스트2">대표 : {name}</span>
+                <span class="푸터텍스트3">Copyright © 2024. {name} Co., Ltd.</span>
+            </div>
+        </div>
+    </div>
+    </div>
+
+
+</body>
+
+</html>

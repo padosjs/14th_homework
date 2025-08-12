@@ -30,6 +30,7 @@
     max-width: 1168px;
     align-items: center;
     gap: 10px;
+    
 }
 
 .헤더 h1 {
@@ -41,7 +42,13 @@
     line-height: 16px;
     /* 88.889% */
     letter-spacing: -0.18px;
+    
 }
+
+.헤더 a {
+    text-decoration: none; /* 링크 밑줄 제거 */
+    color: inherit;       /* 링크의 파란색 색상을 부모 요소의 색상으로 상속 */
+  }
 
 .상단배너이미지 {
     width: 100%;
@@ -113,6 +120,7 @@
     grid-template-columns: 1fr 1fr;
     gap: 24px;
 
+
 }
 
 .카드 {
@@ -123,9 +131,28 @@
     align-items: flex-start;
     gap: 16px;
     flex: 1 0 0;
+    border-radius: 16px;
+    background: #FFF;
+    overflow: hidden;
+    transition: all 0.5s ease;
 }
 
-.카드썸네일1 {
+/* 카드를 호버했을 때의 공통 효과 */
+.카드:hover {
+   
+    box-shadow: 0 2px 30px 0 rgba(0, 0, 0, 0.16);
+    transform: scale(1.1);
+    cursor: pointer;
+    /* 모든 변화에 0.3초의 부드러운 전환 효과를 적용 */
+}
+
+/* 카드를 호버했을 때 카드 안의 "~카드썸네일"에 블러 효과 적용 */
+.카드:hover [class$="카드썸네일"] {
+    filter: blur(3px);
+
+}
+
+.슬퍼요카드썸네일 {
     background-image: url("./assets/images/sad.png");
     border-radius: 16px;
     background-repeat: no-repeat;
@@ -135,7 +162,7 @@
     height: 285px;
 }
 
-.카드썸네일2 {
+.놀랐어요카드썸네일 {
     background-image: url("./assets/images/suprised.png");
     border-radius: 16px;
     background-repeat: no-repeat;
@@ -145,7 +172,7 @@
     height: 285px;
 }
 
-.카드썸네일3 {
+.화나요카드썸네일 {
     background-image: url("./assets/images/angry.png");
     border-radius: 16px;
     background-repeat: no-repeat;
@@ -155,7 +182,7 @@
     height: 285px;
 }
 
-.카드썸네일4 {
+.행복해요카드썸네일 {
     background-image: url("./assets/images/happy.png");
     border-radius: 16px;
     background-repeat: no-repeat;
@@ -165,7 +192,7 @@
     height: 285px;
 }
 
-.카드썸네일5 {
+.기타카드썸네일 {
     background-image: url("./assets/images/etc.png");
     border-radius: 16px;
     background-repeat: no-repeat;
@@ -175,15 +202,6 @@
     height: 285px;
 }
 
-.카드썸네일6 {
-    background-image: url("./assets/images/happy.png");
-    border-radius: 16px;
-    background-repeat: no-repeat;
-    background-size: cover;
-    background-position: center;
-    width: 100%;
-    height: 285px;
-}
 
 
 .카드텍스트컨테이너 {
@@ -195,14 +213,14 @@
     align-self: stretch;
 }
 
-.감정과날짜 {
+.기분과날짜 {
     display: flex;
     justify-content: space-between;
     align-items: center;
     align-self: stretch;
 }
 
-.슬퍼요 {
+.슬퍼요텍스트색상 {
     color: #28B4E1;
     font-family: "Pretendard Variable";
     font-size: 14px;
@@ -213,7 +231,7 @@
     letter-spacing: -0.14px;
 }
 
-.놀랐어요 {
+.놀랐어요텍스트색상 {
     color: #D59029;
     font-family: "Pretendard Variable";
     font-size: 14px;
@@ -224,7 +242,7 @@
     letter-spacing: -0.14px;
 }
 
-.화나요 {
+.화나요텍스트색상 {
     color: var(--Gray-Gray-600, #777);
     font-family: "Pretendard Variable";
     font-size: 14px;
@@ -235,7 +253,7 @@
     letter-spacing: -0.14px;
 }
 
-.행복해요 {
+.행복해요텍스트색상 {
     color: #EA5757;
     font-family: "Pretendard Variable";
     font-size: 14px;
@@ -246,7 +264,7 @@
     letter-spacing: -0.14px;
 }
 
-.기타 {
+.기타텍스트색상 {
     color: #A229ED;
     font-family: "Pretendard Variable";
     font-size: 14px;
@@ -364,6 +382,21 @@
     border-radius: 8px;
     border: 0px;
     background: var(--Gray-Gray-300, #C7C7C7);
+    color: var(--Gray-Gray-50, #F2F2F2);
+    font-family: "Pretendard Variable";
+    font-size: 18px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: 24px;
+    /* 133.333% */
+    letter-spacing: -0.18px;
+}
+
+.일기등록버튼_활성화 {
+
+    background: linear-gradient(0deg, #2C79EB 0%, #8891F0 100%);
+    cursor: pointer;
+    
 }
 
 .일기텍스트 {
@@ -402,10 +435,6 @@
     border-radius: 8px;
     border: 1px solid var(--Gray-Gray-200, #D4D3D3);
     background: var(--Gray-W, #FFF);
-}
-
-.입력창::placeholder {
-    color: var(--Gray-Gray-400, #ABABAB);
     font-family: "Pretendard Variable";
     font-size: 16px;
     font-style: normal;
@@ -413,7 +442,10 @@
     line-height: 24px;
     /* 150% */
     letter-spacing: -0.16px;
+}
 
+.입력창::placeholder {
+    color: var(--Gray-Gray-400, #ABABAB);
 }
 
 .푸터 {
@@ -469,4 +501,75 @@
     line-height: 16px;
     /* 114.286% */
     letter-spacing: -0.14px;
+}
+
+
+
+
+/* 공통 요소 모음 */
+
+.버튼_중간크기_화이트 {
+    display: flex;
+    width: 104px;
+    height: 48px;
+    padding: 8px 10px;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    border-radius: 8px;
+    border: 1px solid var(--Gray-B, #000);
+    background: var(--Gray-W, #FFF);
+    color: var(--Gray-Gray-900, #1C1C1C);
+    font-family: "Pretendard Variable";
+    font-size: 18px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: 24px;
+    /* 133.333% */
+    letter-spacing: -0.18px;
+    cursor: pointer;
+}
+
+.버튼_중간크기_블랙 {
+    display: flex;
+    width: 104px;
+    height: 48px;
+    padding: 8px 10px;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    border-radius: 8px;
+    background: var(--Gray-B, #000);
+    color: var(--Gray-Gray-50, #F2F2F2);
+    font-family: "Pretendard Variable";
+    font-size: 18px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: 24px;
+    /* 133.333% */
+    letter-spacing: -0.18px;
+    cursor: pointer;
+}
+
+.버튼_작은크기_화이트 {
+    display: flex;
+    padding: 8px 10px;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+    gap: 10px;
+    border-radius: 8px;
+    border: 1px solid var(--Gray-Gray-200, #D4D3D3);
+    background: var(--Gray-W, #FFF);
+    color: var(--Gray-Gray-900, #1C1C1C);
+    font-family: "Pretendard Variable";
+    font-size: 18px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: 24px;
+    /* 133.333% */
+    letter-spacing: -0.18px;
+    cursor: pointer;
 }
