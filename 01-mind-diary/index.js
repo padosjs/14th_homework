@@ -52,12 +52,12 @@ document.addEventListener("DOMContentLoaded", function () {
     const submitButton = document.querySelector(".일기등록버튼");
     const titleInput = document.querySelector('.일기텍스트 input[type="text"]');
     const contentTextarea = document.querySelector('.일기텍스트 textarea');
-    const moodRadios = document.querySelectorAll('input[name="mood"]');
+    const moodRadios = document.querySelectorAll('input[name="기분"]');
 
     // 2-2. '등록하기' 버튼에 클릭 이벤트 리스너를 추가합니다.
     submitButton.addEventListener("click", function () {
         // 선택된 기분 값 가져오기
-        const selectedMood = document.querySelector('input[name="mood"]:checked');
+        const selectedMood = document.querySelector('input[name="기분"]:checked');
         const 기분 = selectedMood.value;
 
         // 제목과 내용 값 가져오기
