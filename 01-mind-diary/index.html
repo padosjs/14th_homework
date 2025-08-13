@@ -10,6 +10,7 @@
 <body>
     <div class="전체컨테이너">
         <div class="내용컨테이너">
+            <img src="./assets/icons/topscroll-fab.svg" class="메인플로팅버튼" onclick="window.scrollTo({ top: 0, behavior: 'smooth' });">
             <div class="헤더">
                 <a href="./index.html">
                     <h1>민지의 다이어리</h1>
@@ -24,8 +25,20 @@
                     사진보관함
                 </div>
             </div>
+            <div class="컨트롤바">
+                <select class="기분필터드롭다운" name="기분필터드롭다운" id="기분필터드롭다운">
+                    <option value="전체" selected>전체</option>
+                    <option value="행복해요">행복해요</option>
+                    <option value="슬퍼요">슬퍼요</option>
+                    <option value="놀랐어요">놀랐어요</option>
+                    <option value="화나요">화나요</option>
+                    <option value="기타">기타</option>
+                </select>
+            </div>
             <div class="카드목록_일기쓰기패널">
                 <div class="카드목록">
+                    <!-- 여기에 카드들이 표시됩니다 -->
+                    <!-- 여기에 카드들이 표시됩니다 -->
                     <!-- 여기에 카드들이 표시됩니다 -->
                 </div>
                 <div class="일기쓰기패널">
