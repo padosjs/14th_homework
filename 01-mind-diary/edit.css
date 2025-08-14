@@ -1,24 +1,21 @@
 .내용컨테이너 {
-    max-width: 800px;
-
+    max-width: 50rem;
 }
 
 .일기수정메인 {
     display: flex;
-    max-width: 1168px;
-    padding-bottom: 16px;
+    max-width: 73rem;
+    padding-bottom: 1rem;
     flex-direction: column;
     align-items: flex-start;
-    gap: 24px;
+    gap: 1.5rem;
     align-self: stretch;
 }
-
 
 .버튼컨테이너 {
     display: flex;
     justify-content: center;
     align-items: flex-end;
-    gap: 16px;
+    gap: 1rem;
     align-self: stretch;
 }
-

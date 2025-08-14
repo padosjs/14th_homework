@@ -1,8 +1,12 @@
 * {
-    margin: 0px;
-    padding: 0px;
+    margin: 0;
+    padding: 0;
     box-sizing: border-box;
 }
+
+:root {
+    font-size: 16px; /* 기본 글꼴 크기 설정 (1rem = 16px) */
+  }
 
 .전체컨테이너 {
     width: 100%;
@@ -10,260 +14,237 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-
 }
 
 .내용컨테이너 {
     width: 100%;
-    max-width: 1168px;
+    padding: 0 1.5rem 0 1.5rem;
+    max-width: 73rem;
     display: flex;
     flex-direction: column;
-    gap: 24px;
-
+    gap: 1.5rem;
 }
 
 .메인플로팅버튼 {
     position: fixed;
-    width: 40px;
-    height: 40px;
-    bottom: 48px;
-    right: 48px;
+    width: 2.5rem;
+    height: 2.5rem;
+    bottom: 3rem;
+    right: 3rem;
     cursor: pointer;
 }
 
 .헤더 {
     display: flex;
-    height: 60px;
-    min-width: 320px;
-    max-width: 1168px;
+    height: 3.75rem;
+    min-width: 20rem;
+    max-width: 73rem;
     align-items: center;
-    gap: 10px;
-
+    gap: 0.625rem;
 }
 
 .헤더 h1 {
     color: #000;
     font-family: "Pretendard Variable";
-    font-size: 18px;
+    font-size: 1.125rem;
     font-style: normal;
     font-weight: 700;
-    line-height: 16px;
-    /* 88.889% */
-    letter-spacing: -0.18px;
-
+    line-height: 1rem;
+    letter-spacing: -0.01125rem;
 }
 
 .헤더 a {
     text-decoration: none;
-    /* 링크 밑줄 제거 */
     color: inherit;
-    /* 링크의 파란색 색상을 부모 요소의 색상으로 상속 */
 }
 
 .상단배너이미지 {
     width: 100%;
-    height: 240px;
+    height: 15rem;
     background-image: url(./assets/images/top_banner.jpg);
     background-repeat: no-repeat;
     background-size: cover;
     background-position: center;
     display: flex;
-    border-radius: 24px;
-
+    border-radius: 1.5rem;
 }
 
 .탭바 {
     width: 100%;
-    height: 48px;
-
+    height: 3rem;
     display: flex;
-    min-width: 204px;
+    min-width: 12.75rem;
     align-items: center;
-    gap: 16px;
+    gap: 1rem;
     flex: 1 0 0;
 }
 
 .탭바항목_선택됨 {
     color: #000;
     font-family: "Pretendard Variable";
-    font-size: 24px;
+    font-size: 1.5rem;
     font-style: normal;
     font-weight: 700;
-    line-height: 24px;
-    /* 100% */
-    letter-spacing: -0.24px;
+    line-height: 1.5rem;
+    letter-spacing: -0.015rem;
     display: flex;
-    padding: 12px 8px;
+    padding: 0.75rem 0.5rem;
     justify-content: center;
     align-items: center;
-    gap: 10px;
-    border-bottom: 2px solid #000;
+    gap: 0.625rem;
+    border-bottom: 0.125rem solid #000;
 }
 
 .탭바항목_선택안됨 {
     color: var(--Gray-Gray-400, #ABABAB);
     font-family: "Pretendard Variable";
-    font-size: 24px;
+    font-size: 1.5rem;
     font-style: normal;
     font-weight: 500;
-    line-height: 24px;
-    /* 100% */
-    letter-spacing: -0.24px;
+    line-height: 1.5rem;
+    letter-spacing: -0.015rem;
     display: flex;
-    padding: 12px 8px;
+    padding: 0.75rem 0.5rem;
     justify-content: center;
     align-items: center;
-    gap: 10px;
+    gap: 0.625rem;
 }
 
 .컨트롤바 {
     position: sticky;
     top: 0;
-    padding: 16px 0px 16px 0px;
+    padding: 1rem 0 1rem 0;
     z-index: 1;
 }
 
 .기분필터드롭다운 {
     display: flex;
-    min-width: 120px;
-    padding: 4px;
-    border-right: 16px solid transparent;
+    min-width: 7.5rem;
+    padding: 0.25rem;
+    border-right: 1rem solid transparent;
     flex-direction: column;
     align-items: flex-start;
-    gap: 10px;
-    border-radius: 8px;
-    border: 1px solid var(--Gray-Gray-300, #C7C7C7);
+    gap: 0.625rem;
+    border-radius: 0.5rem;
+    border: 0.0625rem solid var(--Gray-Gray-300, #C7C7C7);
     background: var(--Gray-W, #FFF);
     color: var(--Gray-Gray-900, #1C1C1C);
     font-family: "Pretendard Variable";
-    font-size: 16px;
+    font-size: 1rem;
     font-style: normal;
     font-weight: 500;
-    line-height: 24px;
-    /* 150% */
-    letter-spacing: -0.16px;
+    line-height: 1.5rem;
+    letter-spacing: -0.01rem;
 }
 
 .기분필터드롭다운.scrolled {
     background: var(--Gray-Gray-900, #1C1C1C);
-    /* 배경색 반전 */
     color: var(--Gray-W, #FFF);
-    /* 텍스트 색상 반전 */
-    border: 1px solid var(--Gray-Gray-900, #1C1C1C);
-    /* 테두리 색상도 배경색에 맞게 변경 */
+    border: 0.0625rem solid var(--Gray-Gray-900, #1C1C1C);
 }
 
-.카드목록_일기쓰기패널 {
+.카드목록과일기쓰기패널 {
     width: 100%;
     display: flex;
-    gap: 24px;
+    gap: 1.5rem;
     align-items: start;
-
 }
 
 .카드목록 {
     width: 100%;
     display: grid;
     grid-template-columns: 1fr 1fr;
-    gap: 24px;
-
-
+    gap: 1.5rem;
 }
 
 .카드 {
     display: flex;
     position: relative;
     width: 100%;
-    padding-bottom: 16px;
+    padding-bottom: 1rem;
     flex-direction: column;
     align-items: flex-start;
-    gap: 16px;
+    gap: 1rem;
     flex: 1 0 0;
-    border-radius: 16px;
+    border-radius: 1rem;
     background: #FFF;
     overflow: hidden;
     transition: all 0.5s ease;
 }
 
-/* 카드를 호버했을 때의 공통 효과 */
 .카드:hover {
-    box-shadow: 0 2px 30px 0 rgba(0, 0, 0, 0.16);
+    box-shadow: 0 0.125rem 1.875rem 0 rgba(0, 0, 0, 0.16);
     transform: scale(1.1);
     cursor: pointer;
-    /* 모든 변화에 0.3초의 부드러운 전환 효과를 적용 */
 }
 
-/* 카드를 호버했을 때 카드 안의 "~카드썸네일"에 블러 효과 적용 */
 .카드:hover [class$="카드썸네일"] {
-    filter: blur(3px);
+    filter: blur(0.1875rem);
 }
 
 .카드삭제버튼 {
     position: absolute;
-    top: 8px;
-    right: 8px;
+    top: 0.5rem;
+    right: 0.5rem;
     z-index: 1;
 }
 
 .슬퍼요카드썸네일 {
     background-image: url("./assets/images/sad.png");
-    border-radius: 16px;
+    border-radius: 1rem;
     background-repeat: no-repeat;
     background-size: cover;
     background-position: center;
     width: 100%;
-    height: 285px;
+    height: 17.8125rem;
 }
 
 .놀랐어요카드썸네일 {
     background-image: url("./assets/images/suprised.png");
-    border-radius: 16px;
+    border-radius: 1rem;
     background-repeat: no-repeat;
     background-size: cover;
     background-position: center;
     width: 100%;
-    height: 285px;
+    height: 17.8125rem;
 }
 
 .화나요카드썸네일 {
     background-image: url("./assets/images/angry.png");
-    border-radius: 16px;
+    border-radius: 1rem;
     background-repeat: no-repeat;
     background-size: cover;
     background-position: center;
     width: 100%;
-    height: 285px;
+    height: 17.8125rem;
 }
 
 .행복해요카드썸네일 {
     background-image: url("./assets/images/happy.png");
-    border-radius: 16px;
+    border-radius: 1rem;
     background-repeat: no-repeat;
     background-size: cover;
     background-position: center;
     width: 100%;
-    height: 285px;
+    height: 17.8125rem;
 }
 
 .기타카드썸네일 {
     background-image: url("./assets/images/etc.png");
-    border-radius: 16px;
+    border-radius: 1rem;
     background-repeat: no-repeat;
     background-size: cover;
     background-position: center;
     width: 100%;
-    height: 285px;
+    height: 17.8125rem;
 }
-
-
-
 
 .카드텍스트컨테이너 {
     display: flex;
-    padding: 0 8px;
+    padding: 0 0.5rem;
     flex-direction: column;
     align-items: flex-start;
-    gap: 8px;
+    gap: 0.5rem;
     align-self: stretch;
 }
 
@@ -277,144 +258,135 @@
 .슬퍼요텍스트색상 {
     color: #28B4E1;
     font-family: "Pretendard Variable";
-    font-size: 14px;
+    font-size: 0.875rem;
     font-style: normal;
     font-weight: 600;
-    line-height: 20px;
-    /* 142.857% */
-    letter-spacing: -0.14px;
+    line-height: 1.25rem;
+    letter-spacing: -0.00875rem;
 }
 
 .놀랐어요텍스트색상 {
     color: #D59029;
     font-family: "Pretendard Variable";
-    font-size: 14px;
+    font-size: 0.875rem;
     font-style: normal;
     font-weight: 600;
-    line-height: 20px;
-    /* 142.857% */
-    letter-spacing: -0.14px;
+    line-height: 1.25rem;
+    letter-spacing: -0.00875rem;
 }
 
 .화나요텍스트색상 {
     color: var(--Gray-Gray-600, #777);
     font-family: "Pretendard Variable";
-    font-size: 14px;
+    font-size: 0.875rem;
     font-style: normal;
     font-weight: 600;
-    line-height: 20px;
-    /* 142.857% */
-    letter-spacing: -0.14px;
+    line-height: 1.25rem;
+    letter-spacing: -0.00875rem;
 }
 
 .행복해요텍스트색상 {
     color: #EA5757;
     font-family: "Pretendard Variable";
-    font-size: 14px;
+    font-size: 0.875rem;
     font-style: normal;
     font-weight: 600;
-    line-height: 20px;
-    /* 142.857% */
-    letter-spacing: -0.14px;
+    line-height: 1.25rem;
+    letter-spacing: -0.00875rem;
 }
 
 .기타텍스트색상 {
     color: #A229ED;
     font-family: "Pretendard Variable";
-    font-size: 14px;
+    font-size: 0.875rem;
     font-style: normal;
     font-weight: 600;
-    line-height: 20px;
-    /* 142.857% */
-    letter-spacing: -0.14px;
+    line-height: 1.25rem;
+    letter-spacing: -0.00875rem;
 }
-
 
 .날짜 {
     color: var(--Gray-Gray-500, #919191);
     font-family: "Pretendard Variable";
-    font-size: 14px;
+    font-size: 0.875rem;
     font-style: normal;
     font-weight: 400;
-    line-height: 24px;
-    /* 171.429% */
-    letter-spacing: -0.14px;
+    line-height: 1.5rem;
+    letter-spacing: -0.00875rem;
 }
 
 .타이틀 {
     overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    width: 100%;
     color: #000;
     text-overflow: ellipsis;
     font-family: "Pretendard Variable";
-    font-size: 18px;
+    font-size: 1.125rem;
     font-style: normal;
     font-weight: 700;
-    line-height: 24px;
-    /* 133.333% */
-    letter-spacing: -0.18px;
+    line-height: 1.5rem;
+    letter-spacing: -0.01125rem;
 }
 
 .일기쓰기패널 {
     display: flex;
-    width: 360px;
-    min-width: 360px;
-    max-width: 760px;
-    padding: 24px;
+    width: 22.5rem;
+    min-width: 22.5rem;
+    padding: 1.5rem;
     flex-direction: column;
     align-items: start;
-    gap: 40px;
-    border-radius: 16px;
-    border: 1px solid var(--Gray-Gray-200, #D4D3D3);
+    gap: 2.5rem;
+    border-radius: 1rem;
+    border: 0.0625rem solid var(--Gray-Gray-200, #D4D3D3);
     background: var(--Gray-W, #FFF);
 }
 
 .일기쓰기패널 h1 {
     color: #000;
     font-family: "Pretendard Variable";
-    font-size: 24px;
+    font-size: 1.5rem;
     font-style: normal;
     font-weight: 700;
-    line-height: 24px;
-    /* 100% */
-    letter-spacing: -0.24px;
+    line-height: 1.5rem;
+    letter-spacing: -0.015rem;
 }
 
 .일기쓰기패널 h2 {
     color: #000;
     font-family: "Pretendard Variable";
-    font-size: 20px;
+    font-size: 1.25rem;
     font-style: normal;
     font-weight: 600;
-    line-height: 24px;
-    /* 120% */
-    letter-spacing: -0.2px;
+    line-height: 1.5rem;
+    letter-spacing: -0.0125rem;
 }
 
 .일기쓰기패널 p {
     color: var(--Gray-Gray-800, #333);
     font-family: "Pretendard Variable";
-    font-size: 14px;
+    font-size: 0.875rem;
     font-style: normal;
     font-weight: 500;
-    line-height: 20px;
-    /* 142.857% */
-    letter-spacing: -0.14px;
+    line-height: 1.25rem;
+    letter-spacing: -0.00875rem;
 }
 
 .일기오늘기분 {
     display: flex;
     flex-direction: column;
     align-items: flex-start;
-    gap: 16px;
+    gap: 1rem;
     align-self: stretch;
 }
 
 .일기라디오 {
     display: flex;
-    max-width: 592px;
+    max-width: 37rem;
     align-items: center;
     align-content: center;
-    gap: 20px;
+    gap: 1.25rem;
     align-self: stretch;
     flex-wrap: wrap;
 }
@@ -422,43 +394,40 @@
 .라디오그룹 {
     display: flex;
     align-items: center;
-    gap: 8px;
+    gap: 0.5rem;
 }
 
 .일기등록버튼 {
     display: flex;
-    height: 48px;
+    height: 3rem;
     width: 100%;
-    padding: 8px 10px;
+    padding: 0.5rem 0.625rem;
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    gap: 10px;
-    border-radius: 8px;
-    border: 0px;
+    gap: 0.625rem;
+    border-radius: 0.5rem;
+    border: 0;
     background: var(--Gray-Gray-300, #C7C7C7);
     color: var(--Gray-Gray-50, #F2F2F2);
     font-family: "Pretendard Variable";
-    font-size: 18px;
+    font-size: 1.125rem;
     font-style: normal;
     font-weight: 600;
-    line-height: 24px;
-    /* 133.333% */
-    letter-spacing: -0.18px;
+    line-height: 1.5rem;
+    letter-spacing: -0.01125rem;
 }
 
 .일기등록버튼_활성화 {
-
     background: linear-gradient(0deg, #2C79EB 0%, #8891F0 100%);
     cursor: pointer;
-
 }
 
 .일기텍스트 {
     display: flex;
     flex-direction: column;
     align-items: flex-start;
-    gap: 24px;
+    gap: 1.5rem;
     align-self: stretch;
 }
 
@@ -466,37 +435,36 @@
     display: flex;
     flex-direction: column;
     align-items: flex-start;
-    gap: 8px;
+    gap: 0.5rem;
     align-self: stretch;
 }
 
 .라디오라벨 {
     color: var(--Gray-Gray-800, #333);
     font-family: "Pretendard Variable";
-    font-size: 14px;
+    font-size: 0.875rem;
     font-style: normal;
     font-weight: 500;
-    line-height: 20px;
-    /* 142.857% */
-    letter-spacing: -0.14px;
+    line-height: 1.25rem;
+    letter-spacing: -0.00875rem;
 }
 
 .입력창 {
     display: flex;
-    padding: 12px 16px;
+    padding: 0.75rem 1rem;
     align-items: center;
-    gap: 10px;
+    gap: 0.625rem;
     align-self: stretch;
-    border-radius: 8px;
-    border: 1px solid var(--Gray-Gray-200, #D4D3D3);
+    border-radius: 0.5rem;
+    border: 0.0625rem solid var(--Gray-Gray-200, #D4D3D3);
     background: var(--Gray-W, #FFF);
     font-family: "Pretendard Variable";
-    font-size: 16px;
+    font-size: 1rem;
     font-style: normal;
     font-weight: 500;
-    line-height: 24px;
-    /* 150% */
-    letter-spacing: -0.16px;
+    line-height: 1.5rem;
+    letter-spacing: -0.01rem;
+    flex-grow: 1;
 }
 
 .입력창::placeholder {
@@ -505,11 +473,11 @@
 
 .푸터 {
     display: flex;
-    padding: 24px 20px;
-    margin-top: 40px;
+    padding: 1.5rem 1.25rem;
+    margin-top: 2.5rem;
     flex-direction: column;
     align-items: center;
-    gap: 10px;
+    gap: 0.625rem;
     align-self: stretch;
     background: var(--Gray-Gray-50, #F2F2F2);
 }
@@ -517,114 +485,130 @@
 .푸터텍스트컨테이너 {
     display: flex;
     width: 100%;
-    max-width: 1168px;
+    max-width: 73rem;
     flex-direction: column;
     align-items: flex-start;
-    gap: 32px;
+    gap: 2rem;
 }
 
 .푸터텍스트1 {
     color: #000;
     font-family: "Pretendard Variable";
-    font-size: 20px;
+    font-size: 1.25rem;
     font-style: normal;
     font-weight: 700;
-    line-height: 16px;
-    /* 80% */
-    letter-spacing: -0.2px;
+    line-height: 1rem;
+    letter-spacing: -0.0125rem;
 }
-
 
 .푸터텍스트2 {
     color: var(--Gray-Gray-700, #5F5F5F);
     font-family: "Pretendard Variable";
-    font-size: 14px;
+    font-size: 0.875rem;
     font-style: normal;
     font-weight: 400;
-    line-height: 16px;
-    /* 114.286% */
-    letter-spacing: -0.14px;
+    line-height: 1rem;
+    letter-spacing: -0.00875rem;
 }
-
 
 .푸터텍스트3 {
     color: var(--Gray-Gray-500, #919191);
     font-family: "Pretendard Variable";
-    font-size: 14px;
+    font-size: 0.875rem;
     font-style: normal;
     font-weight: 300;
-    line-height: 16px;
-    /* 114.286% */
-    letter-spacing: -0.14px;
+    line-height: 1rem;
+    letter-spacing: -0.00875rem;
 }
-
-
-
-
-/* 공통 요소 모음 */
 
 .버튼_중간크기_화이트 {
     display: flex;
-    width: 104px;
-    height: 48px;
-    padding: 8px 10px;
+    width: 6.5rem;
+    height: 3rem;
+    padding: 0.5rem 0.625rem;
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    gap: 10px;
-    border-radius: 8px;
-    border: 1px solid var(--Gray-B, #000);
+    gap: 0.625rem;
+    border-radius: 0.5rem;
+    border: 0.0625rem solid var(--Gray-B, #000);
     background: var(--Gray-W, #FFF);
     color: var(--Gray-Gray-900, #1C1C1C);
     font-family: "Pretendard Variable";
-    font-size: 18px;
+    font-size: 1.125rem;
     font-style: normal;
     font-weight: 600;
-    line-height: 24px;
-    /* 133.333% */
-    letter-spacing: -0.18px;
+    line-height: 1.5rem;
+    letter-spacing: -0.01125rem;
     cursor: pointer;
 }
 
 .버튼_중간크기_블랙 {
     display: flex;
-    width: 104px;
-    height: 48px;
-    padding: 8px 10px;
+    width: 6.5rem;
+    height: 3rem;
+    padding: 0.5rem 0.625rem;
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    gap: 10px;
-    border-radius: 8px;
+    gap: 0.625rem;
+    border-radius: 0.5rem;
     background: var(--Gray-B, #000);
     color: var(--Gray-Gray-50, #F2F2F2);
     font-family: "Pretendard Variable";
-    font-size: 18px;
+    font-size: 1.125rem;
     font-style: normal;
     font-weight: 600;
-    line-height: 24px;
-    /* 133.333% */
-    letter-spacing: -0.18px;
+    line-height: 1.5rem;
+    letter-spacing: -0.01125rem;
     cursor: pointer;
 }
 
 .버튼_작은크기_화이트 {
     display: flex;
-    padding: 8px 10px;
+    padding: 0.5rem 0.625rem;
     flex-direction: column;
     justify-content: center;
     align-items: flex-start;
-    gap: 10px;
-    border-radius: 8px;
-    border: 1px solid var(--Gray-Gray-200, #D4D3D3);
+    gap: 0.625rem;
+    border-radius: 0.5rem;
+    border: 0.0625rem solid var(--Gray-Gray-200, #D4D3D3);
     background: var(--Gray-W, #FFF);
     color: var(--Gray-Gray-900, #1C1C1C);
     font-family: "Pretendard Variable";
-    font-size: 18px;
+    font-size: 1.125rem;
     font-style: normal;
     font-weight: 500;
-    line-height: 24px;
-    /* 133.333% */
-    letter-spacing: -0.18px;
+    line-height: 1.5rem;
+    letter-spacing: -0.01125rem;
     cursor: pointer;
+}
+
+.버튼_작은크기_블랙 {
+    display: flex;
+    padding: 0.5rem 0.625rem;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+    gap: 0.625rem;
+    border-radius: 0.5rem;
+    background: var(--Gray-B, #000);
+    color: var(--Gray-W, #FFF);
+    font-family: "Pretendard Variable";
+    font-size: 1.125rem;
+    font-style: normal;
+    font-weight: 500;
+    line-height: 1.5rem;
+    letter-spacing: -0.01125rem;
+    cursor: pointer;
+}
+
+@media (max-width: 980px) {
+    .카드목록과일기쓰기패널 {
+        flex-direction: column;
+    }
+
+    .일기쓰기패널 {
+        width: 100%;
+    }
 }
