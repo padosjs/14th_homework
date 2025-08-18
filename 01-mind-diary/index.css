@@ -5,8 +5,9 @@
 }
 
 :root {
-    font-size: 16px; /* 기본 글꼴 크기 설정 (1rem = 16px) */
-  }
+    font-size: 16px;
+    /* 기본 글꼴 크기 설정 (1rem = 16px) */
+}
 
 .전체컨테이너 {
     width: 100%;
@@ -32,6 +33,7 @@
     bottom: 3rem;
     right: 3rem;
     cursor: pointer;
+    z-index: 9;
 }
 
 .헤더 {
@@ -112,6 +114,8 @@
 
 .컨트롤바 {
     position: sticky;
+    display: flex;
+    justify-content: space-between;
     top: 0;
     padding: 1rem 0 1rem 0;
     z-index: 1;
@@ -124,6 +128,7 @@
     border-right: 1rem solid transparent;
     flex-direction: column;
     align-items: flex-start;
+    align-self: center;
     gap: 0.625rem;
     border-radius: 0.5rem;
     border: 0.0625rem solid var(--Gray-Gray-300, #C7C7C7);
@@ -143,7 +148,7 @@
     border: 0.0625rem solid var(--Gray-Gray-900, #1C1C1C);
 }
 
-.카드목록과일기쓰기패널 {
+.카드목록컨테이너 {
     width: 100%;
     display: flex;
     gap: 1.5rem;
@@ -153,7 +158,7 @@
 .카드목록 {
     width: 100%;
     display: grid;
-    grid-template-columns: 1fr 1fr;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
     gap: 1.5rem;
 }
 
@@ -330,10 +335,9 @@
     letter-spacing: -0.01125rem;
 }
 
-.일기쓰기패널 {
+.모달패널 {
     display: flex;
-    width: 22.5rem;
-    min-width: 22.5rem;
+    width: 40rem;
     padding: 1.5rem;
     flex-direction: column;
     align-items: start;
@@ -343,7 +347,18 @@
     background: var(--Gray-W, #FFF);
 }
 
-.일기쓰기패널 h1 {
+.모달패널_작은크기 {
+    display: flex;
+    width: 30rem;
+    min-width: 30rem;
+    max-width: 47.5rem;
+    padding: 1.5rem;
+    flex-direction: column;
+    align-items: center;
+    gap: 2.5rem;
+}
+
+.모달패널 h1 {
     color: #000;
     font-family: "Pretendard Variable";
     font-size: 1.5rem;
@@ -353,7 +368,7 @@
     letter-spacing: -0.015rem;
 }
 
-.일기쓰기패널 h2 {
+.모달패널 h2 {
     color: #000;
     font-family: "Pretendard Variable";
     font-size: 1.25rem;
@@ -363,7 +378,19 @@
     letter-spacing: -0.0125rem;
 }
 
-.일기쓰기패널 p {
+.모달패널 h3 {
+    color: var(--Gray-Gray-800, #333);
+    text-align: center;
+    font-family: "Pretendard Variable";
+    font-size: 1.25rem;
+    font-style: normal;
+    font-weight: 500;
+    line-height: 1.5rem;
+    /* 120% */
+    letter-spacing: -0.0125rem;
+}
+
+.모달패널 p {
     color: var(--Gray-Gray-800, #333);
     font-family: "Pretendard Variable";
     font-size: 0.875rem;
@@ -371,6 +398,14 @@
     font-weight: 500;
     line-height: 1.25rem;
     letter-spacing: -0.00875rem;
+}
+
+.모달패널버튼컨테이너 {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 1rem;
 }
 
 .일기오늘기분 {
@@ -395,32 +430,6 @@
     display: flex;
     align-items: center;
     gap: 0.5rem;
-}
-
-.일기등록버튼 {
-    display: flex;
-    height: 3rem;
-    width: 100%;
-    padding: 0.5rem 0.625rem;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    gap: 0.625rem;
-    border-radius: 0.5rem;
-    border: 0;
-    background: var(--Gray-Gray-300, #C7C7C7);
-    color: var(--Gray-Gray-50, #F2F2F2);
-    font-family: "Pretendard Variable";
-    font-size: 1.125rem;
-    font-style: normal;
-    font-weight: 600;
-    line-height: 1.5rem;
-    letter-spacing: -0.01125rem;
-}
-
-.일기등록버튼_활성화 {
-    background: linear-gradient(0deg, #2C79EB 0%, #8891F0 100%);
-    cursor: pointer;
 }
 
 .일기텍스트 {
@@ -521,12 +530,19 @@
     letter-spacing: -0.00875rem;
 }
 
+
+.버튼_채우게 {
+    width: 100%;
+}
+
+.버튼_고정너비 {
+    width: 6.5rem;
+}
+
 .버튼_중간크기_화이트 {
     display: flex;
-    width: 6.5rem;
     height: 3rem;
     padding: 0.5rem 0.625rem;
-    flex-direction: column;
     justify-content: center;
     align-items: center;
     gap: 0.625rem;
@@ -545,14 +561,13 @@
 
 .버튼_중간크기_블랙 {
     display: flex;
-    width: 6.5rem;
     height: 3rem;
     padding: 0.5rem 0.625rem;
-    flex-direction: column;
     justify-content: center;
     align-items: center;
     gap: 0.625rem;
     border-radius: 0.5rem;
+    border: 0;
     background: var(--Gray-B, #000);
     color: var(--Gray-Gray-50, #F2F2F2);
     font-family: "Pretendard Variable";
@@ -564,12 +579,16 @@
     cursor: pointer;
 }
 
+.버튼_중간크기_블랙:disabled {
+    background-color: #C7C7C7;
+    cursor: default;
+}
+
 .버튼_작은크기_화이트 {
     display: flex;
     padding: 0.5rem 0.625rem;
-    flex-direction: column;
     justify-content: center;
-    align-items: flex-start;
+    align-items: center;
     gap: 0.625rem;
     border-radius: 0.5rem;
     border: 0.0625rem solid var(--Gray-Gray-200, #D4D3D3);
@@ -587,9 +606,9 @@
 .버튼_작은크기_블랙 {
     display: flex;
     padding: 0.5rem 0.625rem;
-    flex-direction: column;
+
     justify-content: center;
-    align-items: flex-start;
+    align-items: center;
     gap: 0.625rem;
     border-radius: 0.5rem;
     background: var(--Gray-B, #000);
@@ -603,12 +622,28 @@
     cursor: pointer;
 }
 
+.모달배경 {
+    display: none;
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    align-items: center;
+    justify-content: center;
+    z-index: 90;
+    transition: ease;
+}
+
 @media (max-width: 980px) {
-    .카드목록과일기쓰기패널 {
+    .카드목록컨테이너 {
         flex-direction: column;
     }
 
-    .일기쓰기패널 {
+    .카드목록 {
+        grid-template-columns: 1fr 1fr;
+    }
+
+    .모달패널 {
         width: 100%;
     }
 }

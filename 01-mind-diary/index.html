@@ -10,7 +10,8 @@
 <body>
     <div class="전체컨테이너">
         <div class="내용컨테이너">
-            <img src="./assets/icons/topscroll-fab.svg" class="메인플로팅버튼" onclick="window.scrollTo({ top: 0, behavior: 'smooth' });">
+            <img src="./assets/icons/topscroll-fab.svg" class="메인플로팅버튼"
+                onclick="window.scrollTo({ top: 0, behavior: 'smooth' });">
             <div class="헤더">
                 <a href="./index.html">
                     <h1>민지의 다이어리</h1>
@@ -34,67 +35,15 @@
                     <option value="화나요">화나요</option>
                     <option value="기타">기타</option>
                 </select>
+                <button class="버튼_중간크기_블랙" id="일기쓰기모달여는버튼"><img src="./assets/icons/plus-icon.svg">일기쓰기</button>
             </div>
-            <div class="카드목록과일기쓰기패널" id="카드목록과일기쓰기패널">
+            <div class="카드목록컨테이너" id="카드목록컨테이너">
                 <div class="카드목록" id="카드목록">
                     <!-- 여기에 카드들이 표시됩니다 -->
                     <!-- 여기에 카드들이 표시됩니다 -->
                     <!-- 여기에 카드들이 표시됩니다 -->
                 </div>
-                <div class="일기쓰기패널" id="일기쓰기패널">
-
-                    <h1>📍 일기 쓰기</h1>
-                    <div class="일기오늘기분">
-                        <h2>오늘 기분은 어땠나요?</h2>
-                        <div class="일기라디오">
-                            <div class="라디오그룹">
-                                <input type="radio" id="happy" name="기분" value="행복해요">
-                                <label for="happy" class="라디오라벨">행복해요</label>
-                            </div>
-
-                            <div class="라디오그룹">
-                                <input type="radio" id="sad" name="기분" value="슬퍼요">
-                                <label for="sad" class="라디오라벨">슬퍼요</label>
-                            </div>
-
-                            <div class="라디오그룹">
-                                <input type="radio" id="surprised" name="기분" value="놀랐어요">
-                                <label for="surprised" class="라디오라벨">놀랐어요</label>
-                            </div>
-
-                            <div class="라디오그룹">
-                                <input type="radio" id="angry" name="기분" value="화나요">
-                                <label for="angry" class="라디오라벨">화나요</label>
-                            </div>
-
-                            <div class="라디오그룹">
-                                <input type="radio" id="etc" name="기분" value="기타">
-                                <label for="etc" class="라디오라벨">기타</label>
-                            </div>
-                        </div>
-                    </div>
-
-
-
-                    <div class="일기텍스트">
-                        <div class="입력필드그룹">
-                            <p class="라벨">제목</p>
-                            <input type="text" class="입력창" placeholder="제목을 입력해 주세요.">
-                        </div>
-
-                        <div class="입력필드그룹">
-                            <p class="라벨">내용</p>
-                            <textarea class="입력창" placeholder="내용을 입력해 주세요." rows="4"></textarea>
-                        </div>
-                    </div>
-
-
-
-                    <button type="submit" class="일기등록버튼" disabled>등록하기</button>
-
-                </div>
             </div>
-
         </div>
         <div class="푸터">
             <div class="푸터텍스트컨테이너">
@@ -103,6 +52,77 @@
                 <span class="푸터텍스트3">Copyright © 2024. {name} Co., Ltd.</span>
             </div>
         </div>
+
+
+
+        <!-- 모달 모음입니다 -->
+        <!-- 모달 모음입니다 -->
+        <!-- 모달 모음입니다 -->
+        <div class="모달배경" id="일기쓰기모달">
+            <div class="모달패널">
+                <h1>📍 일기 쓰기</h1>
+                <div class="일기오늘기분">
+                    <h2>오늘 기분은 어땠나요?</h2>
+                    <div class="일기라디오">
+                        <div class="라디오그룹">
+                            <input type="radio" id="happy" name="기분" value="행복해요">
+                            <label for="happy" class="라디오라벨">행복해요</label>
+                        </div>
+                        <div class="라디오그룹">
+                            <input type="radio" id="sad" name="기분" value="슬퍼요">
+                            <label for="sad" class="라디오라벨">슬퍼요</label>
+                        </div>
+                        <div class="라디오그룹">
+                            <input type="radio" id="surprised" name="기분" value="놀랐어요">
+                            <label for="surprised" class="라디오라벨">놀랐어요</label>
+                        </div>
+                        <div class="라디오그룹">
+                            <input type="radio" id="angry" name="기분" value="화나요">
+                            <label for="angry" class="라디오라벨">화나요</label>
+                        </div>
+                        <div class="라디오그룹">
+                            <input type="radio" id="etc" name="기분" value="기타">
+                            <label for="etc" class="라디오라벨">기타</label>
+                        </div>
+                    </div>
+                </div>
+                <div class="일기텍스트">
+                    <div class="입력필드그룹">
+                        <p class="라벨">제목</p>
+                        <input type="text" class="입력창" placeholder="제목을 입력해 주세요.">
+                    </div>
+                    <div class="입력필드그룹">
+                        <p class="라벨">내용</p>
+                        <textarea class="입력창" placeholder="내용을 입력해 주세요." rows="4"></textarea>
+                    </div>
+                </div>
+                <div class="모달패널버튼컨테이너">
+                    <button id="일기쓰기닫기버튼" class="버튼_중간크기_화이트 버튼_고정너비">닫기</button>
+                    <button type="submit" id="일기등록버튼" class="버튼_중간크기_블랙 버튼_고정너비" disabled>등록하기</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="모달배경" id="일기등록완료모달">
+            <div class="모달패널 모달패널_작은크기">
+                <h1>일기 등록 완료</h1>
+                <h3>등록이 완료 되었습니다.</h3>
+                <button id="일기등록확인버튼" class="버튼_중간크기_블랙 버튼_채우게" onclick="location.reload()">확인</button>
+            </div>
+        </div>
+
+
+        <div class="모달배경" id="일기등록취소모달">
+            <div class="모달패널 모달패널_작은크기">
+                <h1>일기 등록 취소</h1>
+                <h3>일기 등록을 취소 하시겠어요?</h3>
+                <div class="모달패널버튼컨테이너">
+                    <button id="일기계속작성버튼" class="버튼_중간크기_화이트 버튼_고정너비">계속 작성</button>
+                    <button id="일기등록취소버튼" class="버튼_중간크기_블랙 버튼_고정너비">등록 취소</button>
+                </div>
+            </div>
+        </div>
+
     </div>
     </div>
 
