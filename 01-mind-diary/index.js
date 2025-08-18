@@ -30,12 +30,23 @@ document.addEventListener("DOMContentLoaded", () => {
     일기등록취소모달닫기버튼.addEventListener("click", () => 모달닫기('일기등록취소모달'));
 
     const 일기등록취소버튼 =  document.querySelector("#일기등록취소버튼");
-    일기등록취소버튼.addEventListener("click", () => {모달닫기('일기등록취소모달'); 모달닫기('일기쓰기모달')});
-
+    일기등록취소버튼.addEventListener("click", () => {
+        // 입력 필드 초기화
+        document.querySelector('.일기텍스트 input[type="text"]').value = "";
+        document.querySelector('.일기텍스트 textarea').value = "";
+        
+        // 라디오 버튼 초기화 (선택 해제)
+        document.querySelectorAll('input[name="기분"]').forEach(radio => {
+            radio.checked = false;
+        });
+    
+        // 모달 닫기
+        모달닫기('일기등록취소모달'); 
+        모달닫기('일기쓰기모달');
+    });
     // 모달 배경 클릭 시 닫기
     const 일기쓰기모달배경 = document.querySelector("#일기쓰기모달");
     일기쓰기모달배경.addEventListener("click", () => 모달닫기('일기쓰기모달'));
-
     const 일기등록취소모달배경 = document.querySelector("#일기등록취소모달");
     일기등록취소모달배경.addEventListener("click", () => 모달닫기('일기등록취소모달'));
 
