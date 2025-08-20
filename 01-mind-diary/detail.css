@@ -1,3 +1,10 @@
+/*
+    index.css에 다크모드 적용에 필요한 변수가 정의되어 있으므로,
+    detail.css에서는 해당 변수를 가져와서 사용합니다.
+*/
+
+
+
 .내용컨테이너 {
     max-width: 50rem;
 }
@@ -7,13 +14,13 @@
     max-width: 73rem;
     padding-bottom: 1rem;
     flex-direction: column;
-    align-items: flex-start;
+    align-items: center;
     gap: 1.5rem;
     align-self: stretch;
 }
 
 .일기상세타이틀 {
-    color: #000;
+    color: var(--기본-텍스트-색상);
     font-family: "Pretendard Variable";
     font-size: 1.375rem;
     font-style: normal;
@@ -26,7 +33,7 @@
     align-items: center;
     gap: 0.625rem;
     align-self: stretch;
-    border-bottom: 0.125rem solid #000;
+    border-bottom: 0.125rem solid var(--기본-텍스트-색상);
 }
 
 .일기상세기분과날짜 {
@@ -39,7 +46,7 @@
 
 .일기상세내용 {
     align-self: stretch;
-    color: var(--Gray-Gray-800, #333);
+    color: var(--보조-텍스트-색상-1);
     font-family: "Pretendard Variable";
     font-size: 1rem;
     font-style: normal;
@@ -48,17 +55,52 @@
     letter-spacing: -0.01rem;
 }
 
+.기능버튼컨테이너 {
+    width: 100%;
+    display: flex;
+    justify-content: end;
+}
+
+.복사토스트 {
+    display: flex;
+    position: fixed;
+    inset: auto auto 2.5rem auto;
+    width: 80%;
+    max-width: 47.5rem;
+    padding: 1rem;
+    justify-content: center;
+    align-items: center;
+    gap: 0.625rem;
+    border-radius: 0.5rem;
+    background: var(--기본-텍스트-색상);
+    color: var(--푸터-배경색);
+    font-family: "Pretendard Variable";
+    font-size: 1rem;
+    font-style: normal;
+    font-weight: 500;
+    line-height: 1.5rem;
+    /* 150% */
+    letter-spacing: -0.01rem;
+    z-index: 10;
+    opacity: 0;
+    transition: opacity ease 0.6s;
+}
+
+.복사토스트.활성화됨 {
+    opacity: 1;
+}
+
 .일기상세버튼컨테이너 {
     display: flex;
     max-width: 73rem;
-    justify-content: flex-end;
+    justify-content: end;
     align-items: center;
     gap: 1rem;
     align-self: stretch;
 }
 
 .회고영역컨테이너 {
-    border-top: 0.0625rem solid var(--Gray-B, #000);
+    border-top: 0.0625rem solid var(--테두리색-1);
     padding-top: 1.5rem;
     display: flex;
     max-width: 73rem;
@@ -86,7 +128,7 @@
     align-self: stretch;
     flex-wrap: wrap;
     padding: 0.75rem 0 0.75rem 0;
-    border-top: solid 0.0625rem #e4e4e4;
+    border-top: solid 0.0625rem var(--테두리색-1);
 }
 
 .회고개별:first-child {
@@ -94,7 +136,7 @@
 }
 
 .회고내용 {
-    color: #000;
+    color: var(--기본-텍스트-색상);
     font-family: "Pretendard Variable";
     font-size: 1rem;
     font-style: normal;
@@ -104,7 +146,7 @@
 }
 
 .회고작성일시 {
-    color: var(--Gray-Gray-600, #777);
+    color: var(--보조-텍스트-색상-2);
     font-family: "Pretendard Variable";
     font-size: 1rem;
     font-style: normal;

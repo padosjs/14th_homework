@@ -1,0 +1,65 @@
+.사진목록 {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 2.5rem;
+    align-self: stretch;
+}
+
+.강아지사진 {
+    width: 100%;
+    max-width: 40rem;
+    border-radius: 1.5rem;
+    object-fit: cover;
+    aspect-ratio: 1/1; /* 기본형: 1:1 비율 */
+    transition: aspect-ratio 0.3s ease;
+}
+
+.가로형 .강아지사진 {
+    aspect-ratio: 4/3; /* 가로형: 4:3 비율 */
+}
+
+.세로형 .강아지사진 {
+    aspect-ratio: 3/4; /* 세로형: 3:4 비율 */
+}
+
+.스켈레톤컨테이너 {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 2.5rem;
+    align-self: stretch;
+    position: relative;
+    overflow: hidden; /* 애니메이션이 부모 밖으로 나가지 않도록 */
+}
+
+.스켈레톤아이템 {
+    width: 100%;
+    max-width: 40rem;
+    aspect-ratio: 1/1; /* 기본형: 1:1 비율 */
+    background-color: var(--테두리색-1);
+    border-radius: 1.5rem;
+    position: relative;
+    overflow: hidden;
+}
+
+.스켈레톤아이템::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.5), transparent);
+    transform: translateX(-100%);
+    animation: shimmer 1.5s infinite;
+}
+
+@keyframes shimmer {
+    100% {
+        transform: translateX(100%);
+    }
+}

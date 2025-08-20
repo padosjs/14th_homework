@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <title>감정기록 일기장</title>
+    <link rel="stylesheet" href="./index.css" />
+    <link rel="stylesheet" href="./gallery.css" />
+    <script src="./gallery.js"></script>
+    <script src="./darkMode.js"></script>
+</head>
+
+<body>
+    <div class="전체컨테이너">
+        <div class="내용컨테이너">
+            <div class="gradient-blur" id="프로그레시브블러">
+                <div></div>
+                <div></div>
+                <div></div>
+                <div></div>
+                <div></div>
+                <div></div>
+            </div>
+            <img src="./assets/icons/topscroll-fab.svg" class="메인플로팅버튼"
+                onclick="window.scrollTo({ top: 0, behavior: 'smooth' });">
+            <div class="헤더">
+                <a href="./index.html">
+                    <h1>민지의 다이어리</h1>
+                </a>
+                <div class="토글컨테이너">다크모드<input type="checkbox" class="토글" id="다크모드전환토글"></div>
+            </div>
+            <div class="상단배너이미지"></div>
+            <div class="탭바">
+                <a href="./index.html">
+                    <div class="탭바항목_선택안됨">
+                        일기보관함
+                    </div>
+                </a>
+                <a href="./gallery.html">
+                    <div class="탭바항목_선택됨">
+                        사진보관함
+                    </div>
+                </a>
+            </div>
+            <div class="컨트롤바" id="컨트롤바">
+                <div class="드롭다운-컨테이너" id="신규사진필터">
+                    <input type="checkbox" id="드롭다운-토글" class="드롭다운-토글">
+                    <label for="드롭다운-토글" class="드롭다운-버튼">
+                        기본형
+                    </label>
+                    <ul class="드롭다운-메뉴">
+                        <li class="메뉴-항목" data-값="기본형">기본형</li>
+                        <li class="메뉴-항목" data-값="가로형">가로형</li>
+                        <li class="메뉴-항목" data-값="세로형">세로형</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="사진목록" id="강아지보여주는곳">
+               <!-- 여기에 강아지들 보여집니다 -->
+               <!-- 여기에 강아지들 보여집니다 -->
+               <!-- 여기에 강아지들 보여집니다 -->
+            </div>
+
+        </div>
+        <div class="푸터">
+            <div class="푸터텍스트컨테이너">
+                <span class="푸터텍스트1">민지의 다이어리</span>
+                <span class="푸터텍스트2">대표 : {name}</span>
+                <span class="푸터텍스트3">Copyright © 2024. {name} Co., Ltd.</span>
+            </div>
+        </div>
+
+    </div>
+    </div>
+
+
+</body>
+
+</html>

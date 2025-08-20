@@ -5,37 +5,67 @@
     <title>감정기록 일기장</title>
     <link rel="stylesheet" href="./index.css" />
     <script src="./index.js"></script>
+    <script src="./darkMode.js"></script>
 </head>
 
 <body>
     <div class="전체컨테이너">
         <div class="내용컨테이너">
+            <div class="gradient-blur" id="프로그레시브블러">
+                <div></div>
+                <div></div>
+                <div></div>
+                <div></div>
+                <div></div>
+                <div></div>
+            </div>
             <img src="./assets/icons/topscroll-fab.svg" class="메인플로팅버튼"
                 onclick="window.scrollTo({ top: 0, behavior: 'smooth' });">
             <div class="헤더">
                 <a href="./index.html">
                     <h1>민지의 다이어리</h1>
                 </a>
+                <div class="토글컨테이너">다크모드<input type="checkbox" class="토글" id="다크모드전환토글"></div>
             </div>
             <div class="상단배너이미지"></div>
             <div class="탭바">
-                <div class="탭바항목_선택됨">
-                    일기보관함
-                </div>
-                <div class="탭바항목_선택안됨">
-                    사진보관함
-                </div>
+                <a href="./index.html">
+                    <div class="탭바항목_선택됨">
+                        일기보관함
+                    </div>
+                </a>
+                <a href="./gallery.html">
+                    <div class="탭바항목_선택안됨">
+                        사진보관함
+                    </div>
+                </a>
             </div>
             <div class="컨트롤바" id="컨트롤바">
-                <select class="기분필터드롭다운" name="기분필터드롭다운" id="기분필터드롭다운">
-                    <option value="전체" selected>전체</option>
-                    <option value="행복해요">행복해요</option>
-                    <option value="슬퍼요">슬퍼요</option>
-                    <option value="놀랐어요">놀랐어요</option>
-                    <option value="화나요">화나요</option>
-                    <option value="기타">기타</option>
-                </select>
-                <button class="버튼_중간크기_블랙" id="일기쓰기모달여는버튼"><img src="./assets/icons/plus-icon.svg">일기쓰기</button>
+                <div class="필터와검색컨테이너">
+                    <div class="드롭다운-컨테이너" id="신규기분필터">
+                        <input type="checkbox" id="드롭다운-토글" class="드롭다운-토글">
+                        <label for="드롭다운-토글" class="드롭다운-버튼">
+                            전체
+                        </label>
+                        <ul class="드롭다운-메뉴">
+                            <li class="메뉴-항목" data-값="전체">전체</li>
+                            <li class="메뉴-항목" data-값="행복해요">행복해요</li>
+                            <li class="메뉴-항목" data-값="슬퍼요">슬퍼요</li>
+                            <li class="메뉴-항목" data-값="놀랐어요">놀랐어요</li>
+                            <li class="메뉴-항목" data-값="화나요">화나요</li>
+                            <li class="메뉴-항목" data-값="기타">기타</li>
+                        </ul>
+                    </div>
+                    <div class="일기검색컨테이너">
+                        <div class="icon-search"></div>
+                        <input class="입력창 검색창" type="text" id="일기검색입력" placeholder="검색어를 입력해 주세요.">
+                    </div>
+                </div>
+
+                <button class="버튼_중간크기_블랙" id="일기쓰기모달여는버튼">
+                    <span class="icon-plus"></span>
+                    일기쓰기
+                </button>
             </div>
             <div class="카드목록컨테이너" id="카드목록컨테이너">
                 <div class="카드목록" id="카드목록">
@@ -43,6 +73,7 @@
                     <!-- 여기에 카드들이 표시됩니다 -->
                     <!-- 여기에 카드들이 표시됩니다 -->
                 </div>
+                <div id="카드목록플레이스홀더" class="카드목록플레이스홀더">등록된 일기가 없습니다.</div>
             </div>
         </div>
         <div class="푸터">
@@ -52,15 +83,14 @@
                 <span class="푸터텍스트3">Copyright © 2024. {name} Co., Ltd.</span>
             </div>
         </div>
-
-
-
         <!-- 모달 모음입니다 -->
         <!-- 모달 모음입니다 -->
         <!-- 모달 모음입니다 -->
         <div class="모달배경" id="일기쓰기모달">
             <div class="모달패널">
-                <h1>📍 일기 쓰기</h1>
+                <div class="일기쓰기헤더컨테이너">
+                    <h1>📍 일기 쓰기</h1>
+                </div>
                 <div class="일기오늘기분">
                     <h2>오늘 기분은 어땠나요?</h2>
                     <div class="일기라디오">
@@ -102,7 +132,6 @@
                 </div>
             </div>
         </div>
-
         <div class="모달배경" id="일기등록완료모달">
             <div class="모달패널 모달패널_작은크기">
                 <h1>일기 등록 완료</h1>
@@ -110,8 +139,6 @@
                 <button id="일기등록확인버튼" class="버튼_중간크기_블랙 버튼_채우게" onclick="location.reload()">확인</button>
             </div>
         </div>
-
-
         <div class="모달배경" id="일기등록취소모달">
             <div class="모달패널 모달패널_작은크기">
                 <h1>일기 등록 취소</h1>
@@ -122,11 +149,20 @@
                 </div>
             </div>
         </div>
-
+        <div class="모달배경" id="일기삭제확인모달">
+            <div class="모달패널 모달패널_작은크기">
+                <h1>일기 삭제</h1>
+                <h3>일기를 삭제 하시겠어요?</h3>
+                <div class="모달패널버튼컨테이너">
+                    <button id="일기삭제취소버튼" class="버튼_중간크기_화이트 버튼_고정너비">취소</button>
+                    <button id="일기삭제확인버튼" class="버튼_중간크기_블랙 버튼_고정너비">삭제</button>
+                </div>
+            </div>
+        </div>
+        <!-- 모달 모음입니다 -->
+        <!-- 모달 모음입니다 -->
+        <!-- 모달 모음입니다 -->
     </div>
-    </div>
-
-
 </body>
 
 </html>
