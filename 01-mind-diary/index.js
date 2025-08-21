@@ -4,6 +4,13 @@ document.addEventListener("DOMContentLoaded", () => {
     const 일기목록 = JSON.parse(localStorage.getItem("민지의일기목록") ?? "[]");
     let 삭제할일기 = null;
 
+    // --- 페이지네이션 관련 변수 추가 ---
+    let 현재페이지 = 1;
+    const 페이지당항목수 = 12;
+    // 페이지 번호 그룹화 관련 상수 및 변수
+    const 페이지네이션_그룹_크기 = 10;
+    let 현재_그룹_시작_페이지 = 1;
+
     // DOM 요소 선택
     const 카드목록 = document.querySelector(".카드목록");
     const 카드목록플레이스홀더 = document.querySelector("#카드목록플레이스홀더");
@@ -20,7 +27,7 @@ document.addEventListener("DOMContentLoaded", () => {
     const 메뉴항목들 = document.querySelectorAll('.메뉴-항목');
     const 드롭다운토글 = document.getElementById('드롭다운-토글');
     const 일기검색입력 = document.querySelector("#일기검색입력");
-
+    const 페이지네이션컨테이너 = document.querySelector("#페이지네이션컨테이너");
 
     // 오프셋 값
     const 카드목록_offsetTop = 카드목록.offsetTop;
@@ -41,20 +48,28 @@ document.addEventListener("DOMContentLoaded", () => {
     };
 
     // --- 일기 목록 렌더링 기능 ---
-    const 렌더일기목록 = (필터값 = "전체", 검색어 = "") => {
-        const 검색된목록 = 일기목록.filter(diary => 
+    const 렌더일기목록 = (필터값 = "전체", 검색어 = "", 페이지 = 1) => {
+        const 검색된목록 = 일기목록.filter(diary =>
             diary.제목.includes(검색어) || diary.내용.includes(검색어)
         );
 
         const 필터된목록 = 필터값 === "전체" ? 검색된목록 : 검색된목록.filter(diary => diary.기분 === 필터값);
 
+        // --- 페이지네이션 적용: 현재 페이지의 데이터만 잘라내기 ---
+        const 시작인덱스 = (페이지 - 1) * 페이지당항목수;
+        const 끝인덱스 = 시작인덱스 + 페이지당항목수;
+        const 현재페이지목록 = 필터된목록.slice(시작인덱스, 끝인덱스);
+
         // 플레이스홀더 표시/숨기기
         if (필터된목록.length === 0) {
             카드목록플레이스홀더.style.display = 'flex';
-            카드목록.innerHTML = ''; // 필터링 결과가 없을 때 목록 비우기
+            카드목록.innerHTML = '';
+            페이지네이션컨테이너.style.display = 'none';
         } else {
             카드목록플레이스홀더.style.display = 'none';
-            const 카드HTML = 필터된목록.map(diary => `
+            페이지네이션컨테이너.style.display = 'flex';
+
+            const 카드HTML = 현재페이지목록.map(diary => `
                 <div class="카드" data-id="${diary.고유아이디}">
                     <img src="./assets/icons/close-icon.svg" class="카드삭제버튼">
                     <div class="${diary.기분}카드썸네일"></div>
@@ -71,13 +86,92 @@ document.addEventListener("DOMContentLoaded", () => {
             `).join('');
             카드목록.innerHTML = 카드HTML;
         }
+
+        // 전체 페이지 수 계산 및 페이지네이션 렌더링
+        const 총페이지수 = Math.ceil(필터된목록.length / 페이지당항목수);
+        렌더페이지네이션(총페이지수);
     };
-    렌더일기목록();
+
+    // --- 페이지네이션 UI 렌더링 함수 ---
+    const 렌더페이지네이션 = (총페이지수) => {
+        페이지네이션컨테이너.innerHTML = '';
+
+        if (총페이지수 <= 1) {
+            페이지네이션컨테이너.style.display = 'none';
+            return;
+        }
+
+        페이지네이션컨테이너.style.display = 'flex';
+
+        // '이전' 버튼 렌더링
+        const 이전버튼 = document.createElement('button');
+        const 이전아이콘 = document.createElement('img');
+        이전아이콘.src = './assets/icons/chevron-right-icon.svg';
+        이전아이콘.alt = '이전 페이지';
+        이전버튼.appendChild(이전아이콘);
+        이전버튼.classList.add('페이지네이션버튼');
+        if (현재_그룹_시작_페이지 <= 1) {
+            이전버튼.disabled = true;
+        } else {
+            이전버튼.addEventListener('click', () => {
+                현재_그룹_시작_페이지 -= 페이지네이션_그룹_크기;
+                렌더페이지네이션(총페이지수);
+                현재페이지 = 현재_그룹_시작_페이지;
+                렌더일기목록(document.querySelector('.메뉴-항목.선택됨').dataset.값, 일기검색입력.value, 현재페이지);
+                window.scrollTo({ top: 카드목록_offsetTop, behavior: 'smooth' });
+            });
+        }
+        페이지네이션컨테이너.appendChild(이전버튼);
+
+        // 페이지 번호 렌더링
+        const 현재_그룹_끝_페이지 = Math.min(현재_그룹_시작_페이지 + 페이지네이션_그룹_크기 - 1, 총페이지수);
+
+        for (let i = 현재_그룹_시작_페이지; i <= 현재_그룹_끝_페이지; i++) {
+            const 페이지버튼 = document.createElement('button');
+            페이지버튼.textContent = i;
+            페이지버튼.classList.add('페이지네이션버튼');
+            if (i === 현재페이지) {
+                페이지버튼.classList.add('활성페이지');
+            }
+            페이지버튼.addEventListener('click', () => {
+                현재페이지 = i;
+                const 검색어 = 일기검색입력.value;
+                const 현재필터값 = document.querySelector('.메뉴-항목.선택됨').dataset.값;
+                렌더일기목록(현재필터값, 검색어, 현재페이지);
+                // 현재 페이지 버튼 다시 렌더링
+                렌더페이지네이션(총페이지수);
+                window.scrollTo({ top: 카드목록_offsetTop, behavior: 'smooth' });
+            });
+            페이지네이션컨테이너.appendChild(페이지버튼);
+        }
+
+        // '다음' 버튼 렌더링
+        const 다음버튼 = document.createElement('button');
+        const 다음아이콘 = document.createElement('img');
+        다음아이콘.src = './assets/icons/chevron-left-icon.svg';
+        다음아이콘.alt = '다음 페이지';
+        다음버튼.appendChild(다음아이콘);
+        다음버튼.classList.add('페이지네이션버튼');
+        if (현재_그룹_끝_페이지 >= 총페이지수) {
+            다음버튼.disabled = true;
+        } else {
+            다음버튼.addEventListener('click', () => {
+                현재_그룹_시작_페이지 += 페이지네이션_그룹_크기;
+                렌더페이지네이션(총페이지수);
+                현재페이지 = 현재_그룹_시작_페이지;
+                렌더일기목록(document.querySelector('.메뉴-항목.선택됨').dataset.값, 일기검색입력.value, 현재페이지);
+                window.scrollTo({ top: 카드목록_offsetTop, behavior: 'smooth' });
+            });
+        }
+        페이지네이션컨테이너.appendChild(다음버튼);
+    };
+
+    렌더일기목록(); // 초기 페이지 로드
 
     // 디바운스 함수
     const 디바운스 = (함수, 지연시간) => {
         let 타이머;
-        return function(...args) {
+        return function (...args) {
             clearTimeout(타이머);
             타이머 = setTimeout(() => {
                 함수.apply(this, args);
@@ -89,7 +183,9 @@ document.addEventListener("DOMContentLoaded", () => {
     const 검색실행 = () => {
         const 검색어 = 일기검색입력.value;
         const 현재필터값 = document.querySelector('.메뉴-항목.선택됨').dataset.값;
-        렌더일기목록(현재필터값, 검색어);
+        현재페이지 = 1; // 검색 시 첫 페이지로 리셋
+        현재_그룹_시작_페이지 = 1; // 검색 시 첫 페이지 그룹으로 리셋
+        렌더일기목록(현재필터값, 검색어, 현재페이지);
     };
 
     // --- 제출 버튼 활성화/비활성화 기능 ---
@@ -203,9 +299,11 @@ document.addEventListener("DOMContentLoaded", () => {
             this.classList.add('선택됨');
             드롭다운버튼.textContent = this.textContent;
             드롭다운토글.checked = false;
-            // 변경: 드롭다운 메뉴 항목 클릭 시에도 검색어 유지
+            // 필터 변경 시 첫 페이지 그룹으로 리셋
+            현재페이지 = 1;
+            현재_그룹_시작_페이지 = 1;
             const 검색어 = 일기검색입력.value;
-            렌더일기목록(this.dataset.값, 검색어);
+            렌더일기목록(this.dataset.값, 검색어, 현재페이지);
         });
     });
 
@@ -219,5 +317,4 @@ document.addEventListener("DOMContentLoaded", () => {
             프로그레시브블러.classList.remove('scrolled');
         }
     });
-
 });

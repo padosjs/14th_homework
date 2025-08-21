@@ -2,6 +2,7 @@
 <html lang="ko">
 
 <head>
+    <meta charset="UTF-8">
     <title>감정기록 일기장</title>
     <link rel="stylesheet" href="./index.css" />
     <link rel="stylesheet" href="./gallery.css" />
@@ -28,7 +29,11 @@
                 </a>
                 <div class="토글컨테이너">다크모드<input type="checkbox" class="토글" id="다크모드전환토글"></div>
             </div>
-            <div class="상단배너이미지"></div>
+            <div class="상단배너이미지">
+                <video class="상단배너-비디오" muted autoplay loop playsinline poster="assets/images/top_banner.jpg">
+                    <source src="./assets/images/banner.mp4" type="video/mp4">
+                </video>
+            </div>
             <div class="탭바">
                 <a href="./index.html">
                     <div class="탭바항목_선택안됨">

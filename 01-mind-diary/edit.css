@@ -12,6 +12,10 @@
     align-self: stretch;
 }
 
+.일기수정메인 h2, p {
+    color: var(--기본-텍스트-색상);
+}
+
 .버튼컨테이너 {
     display: flex;
     justify-content: center;

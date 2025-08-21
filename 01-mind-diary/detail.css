@@ -19,6 +19,10 @@
     align-self: stretch;
 }
 
+.일기상세메인 h4 {
+    color: var(--기본-텍스트-색상);
+}
+
 .일기상세타이틀 {
     color: var(--기본-텍스트-색상);
     font-family: "Pretendard Variable";

@@ -1,3 +1,6 @@
+/* Pretendard Variable 폰트 임포트 */
+@import url("https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css");
+
 /* 전역 스타일 초기화 */
 * {
     margin: 0;
@@ -99,16 +102,20 @@ body.다크모드 {
     --search-icon-url: url('./assets/icons/search-icon-dark.svg');
 
     background-color: var(--배경색);
+
+    /* 폰트 스무딩 */
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
 }
 
+body.다크모드 .카드 {
+    border-color: var(--테두리색-1);
+}
 
 
 body.no-scroll {
     overflow: hidden;
 }
-
-
-
 
 
 .전체컨테이너 {
@@ -167,12 +174,20 @@ body.no-scroll {
 .상단배너이미지 {
     width: 100%;
     height: 15rem;
-    background-image: url(./assets/images/top_banner.jpg);
+    /* background-image: url(./assets/images/top_banner.jpg);
     background-repeat: no-repeat;
     background-size: cover;
-    background-position: center;
+    background-position: center; */
     display: flex;
     border-radius: 1.5rem;
+    overflow: hidden;
+}
+
+.상단배너-비디오 {
+    width: 100%;
+    height: 100%;
+    object-fit: cover; /* 컨테이너에 비디오가 꽉 차도록 비율을 유지하며 크기 조절 */
+    display: block;
 }
 
 .탭바 {
@@ -274,9 +289,12 @@ body.no-scroll {
     flex: 1 0 0;
     border-radius: 1rem;
     background: var(--카드-배경색);
+    border: 0.0625rem solid transparent;
     overflow: hidden;
     transition: all 0.5s ease;
 }
+
+
 
 .카드:hover {
     box-shadow: 0 0.125rem 1.875rem 0 rgba(0, 0, 0, 0.16);
@@ -607,6 +625,7 @@ body.no-scroll {
     border: 0;
     padding: 0;
     width: 100%;
+    text-overflow: ellipsis;
 }
 
 .검색창:focus {
@@ -1088,6 +1107,51 @@ body.no-scroll {
     background-repeat: no-repeat;
     background-size: contain;
     background-position: center;
+}
+
+
+#페이지네이션컨테이너 {
+    display: flex;
+    width: 100%;
+    justify-content: center;
+    align-items: center;
+    margin-top: 2.5rem;
+    gap: 1rem;
+    /* 버튼 사이의 간격 */
+}
+
+.페이지네이션버튼 {
+    text-align: center;
+    font-family: "Pretendard Variable";
+    font-size: 1rem;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 1.5rem;
+    /* 150% */
+    letter-spacing: -0.01rem;
+    width: 2rem;
+    height: 2rem;
+    border-radius: 0.5rem;
+    border: 0;
+    background-color: var(--배경색);
+    color: var(--보조-텍스트-색상-3);
+    cursor: pointer;
+    transition: background-color 0.2s;
+}
+
+.페이지네이션버튼:hover {
+    background-color: var(--푸터-배경색);
+}
+
+.페이지네이션버튼[disabled] {
+    opacity: 0.2;
+    cursor: not-allowed;
+}
+
+.페이지네이션버튼.활성페이지 {
+    background-color: var(--푸터-배경색);
+    color: var(--기본-텍스트-색상);
+    font-weight: 500;
 }
 
 
