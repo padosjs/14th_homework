@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <title>리액트 실습</title>
+    <link rel="stylesheet" href="./style.css"> 
+
+    <!-- 리액트 다운로드 -->
+    <script crossorigin src="https://unpkg.com/react@18/umd/react.development.js"></script>
+    <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
+
+    <!-- 바벨 다운로드 -->
+    <!-- 1. 최신문법으로 작성해도, 옛날 문법으로 바꿔줌 => 많은 구버전 브라우저에서 실행 가능하도록 -->
+    <!-- 2. 가짜 HTML(JSX) 입력하면, 진짜 HTML로 바꿔줌 -->
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+
+    <!-- 본격적인 React 시작! -->
+    <script type="text/babel" src="./index.js"></script>
+    <script type="text/babel" src="./button.js"></script>
+    <script type="text/babel" src="./input.js"></script>
+    <script type="text/babel">
+        // window.alert()
+        // window.document
+        // window.ReactDOM
+        const 나의도화지 = ReactDOM.createRoot(document.getElementById("root"))
+        나의도화지.render(
+            <게시글등록페이지 />
+        )
+
+    </script>
+
+
+</head>
+
+<body>
+    <div id="root"></div>
+</body>
+
+</html>
