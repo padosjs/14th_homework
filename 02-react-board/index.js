@@ -24,9 +24,9 @@ const 게시글등록페이지 = () => {
                 <인풋필드 인풋필드제목="유튜브 링크" 플레이스홀더텍스트="링크를 입력해주세요" />
                 <div className="input-divider"></div>
                 <div className="button-group-image-upload">
-                    <버튼 className="image-upload-button" icon="./assets/icons/icon/outline/add.svg" text="클릭해서 사진 업로드" />
-                    <버튼 className="image-upload-button" icon="./assets/icons/icon/outline/add.svg" text="클릭해서 사진 업로드" />
-                    <버튼 className="image-upload-button" icon="./assets/icons/icon/outline/add.svg" text="클릭해서 사진 업로드" />
+                    <버튼 className="image-upload-button" icon="./assets/icons/outline/add.svg" text="클릭해서 사진 업로드" />
+                    <버튼 className="image-upload-button" icon="./assets/icons/outline/add.svg" text="클릭해서 사진 업로드" />
+                    <버튼 className="image-upload-button" icon="./assets/icons/outline/add.svg" text="클릭해서 사진 업로드" />
                 </div>
                 <div className="input-divider"></div>
                 <div className="button-group">
