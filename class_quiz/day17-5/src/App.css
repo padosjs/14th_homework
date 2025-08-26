@@ -1,0 +1,279 @@
+/* Pretendard Variable 폰트 임포트 */
+@import url("https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css");
+
+:root {
+  font-size: 16px;
+  /* 기본 글꼴 크기 설정 (1rem = 16px) */
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  font-family: Pretendard Variable;
+
+}
+
+.main-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.title-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+}
+
+.title-icon {
+  width: 7.5rem;
+  height: 7.5rem;
+}
+
+.page-container {
+  display: flex;
+  width: 100%;
+  height: 100vh;
+  max-width: 800px;
+  padding: 2.5rem;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 5rem;
+  flex-shrink: 0;
+  background-image: url("../public/bg.png");
+  background-size: cover;
+  background-position: center;
+
+}
+
+
+.인풋과버튼컨테이너 {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  gap: 3rem;
+}
+
+.input-divider {
+  background: #9F9F9F;
+  width: 0.125rem;
+  height: 1.3125rem;
+}
+
+/* 제목 스타일 */
+.page-title {
+  color: #FFF;
+  font-family: "Noto Sans KR";
+  font-size: 3.75rem;
+  font-style: normal;
+  font-weight: 700;
+  line-height: normal;
+}
+
+/* 인풋 필드 컨테이너 스타일 */
+.input-container {
+  display: flex;
+  width: 100%;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 0.5rem;
+  align-self: stretch;
+}
+
+.input-title-container {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.25rem;
+  align-self: stretch;
+  /* me_16_24 */
+
+  font-style: normal;
+  font-weight: 500;
+  line-height: 1.5rem;
+  /* 150% */
+}
+
+.input-title {
+  color: var(--gray-800, #333);
+}
+
+.input-title-asterisk {
+  color: var(--red, #F66A6A);
+}
+
+.input-text {
+  display: flex;
+  width: 100%;
+  padding-bottom: 0.5rem;
+  flex-direction: column;
+  align-items: flex-start;
+
+  color: #FFF;
+  font-family: "Noto Sans KR";
+  font-size: 1.5rem;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+  border: 0;
+  border-bottom: 1px solid #7D7D7D;
+  background: transparent;
+
+
+  /* 150% */
+}
+
+.input-text::placeholder {
+  color: var(--Gray-Gray-400, #ABABAB);
+}
+
+.input-error-message {
+  color: #FF1B6D;
+  font-family: "Noto Sans KR";
+  font-size: 1rem;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+}
+
+.input-group-column {
+  display: flex;
+  width: 100%;
+  align-items: flex-start;
+  gap: 2.5rem;
+  align-self: stretch;
+}
+
+.input-group-address {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  align-items: flex-start;
+  gap: 0.5rem;
+  align-self: stretch;
+}
+
+.input-button-group-address {
+  display: flex;
+  width: 14rem;
+  align-items: end;
+  gap: 0.5rem;
+}
+
+
+/* 버튼 그룹 스타일 */
+.button-group {
+  display: flex;
+  width: 100%;
+  justify-content: center;
+  align-items: center;
+  gap: 2rem;
+
+
+  align-self: stretch;
+}
+
+.button-group-image-upload {
+  display: flex;
+  width: 100%;
+  gap: 1rem;
+}
+
+
+.button {
+  /* 공통 스타일: 모든 버튼에 적용될 기본 스타일을 여기에 정의합니다. */
+  display: flex;
+  flex-shrink: 0;
+  justify-content: center;
+  align-items: center;
+  gap: 0.5rem;
+  cursor: pointer;
+}
+
+.button-icon {
+  /* 아이콘 스타일 */
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.button-icon img {
+  width: 2.5rem;
+  height: 2.5rem;
+}
+
+.white-button {
+  color: #FFF;
+  font-family: "Noto Sans KR";
+  font-size: 1.25rem;
+  font-style: normal;
+  font-weight: 700;
+  line-height: normal;
+  background-color: transparent;
+  border: 0;
+}
+
+.red-button {
+  width: 100%;
+  height: 4.75rem;
+  border-radius: 2.375rem;
+
+  background: #ff1b6f9b;
+  color: #FFF;
+  font-family: "Noto Sans KR";
+  font-size: 1.625rem;
+  font-style: normal;
+  font-weight: 700;
+  line-height: normal;
+  border: 0;
+}
+
+.button-icon {
+  width: 2.02825rem;
+  height: 1.87306rem;
+}
+
+.yellow-button {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 1.8rem;
+
+  width: 100%;
+  height: 4.75rem;
+  border-radius: 2.375rem;
+  border: 2px solid #fae1008d;
+
+  background: rgba(255, 255, 255, 0.00);
+  color: #FFE100;
+  font-family: "Noto Sans KR";
+  font-size: 1.625rem;
+  font-style: normal;
+  font-weight: 700;
+  line-height: normal;
+}
+
+.image-upload-button {
+  width: 10rem;
+  height: 10rem;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  border-radius: 0.5rem;
+  border: 0;
+  background: var(--gray-50, #F2F2F2);
+
+  color: var(--gray-600, #777);
+
+  /* r_16_24 */
+  font-size: 1rem;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 1.5rem;
+  /* 150% */
+}

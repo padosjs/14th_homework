@@ -1,0 +1,36 @@
+const 인풋필드 = (props) => {
+    // isTextArea props가 true이면 textarea를, 아니면 input을 렌더링합니다.
+    const 필드 = props.isTextArea ? (
+        <textarea
+            className="input-text"
+            placeholder={props.플레이스홀더텍스트}
+            rows={props.rows || 5} // 기본 행 수를 5로 설정 (props로 덮어쓸 수 있음)
+            value={props.value}
+            onChange={props.onChange}
+        />
+    ) : (
+        <input
+            className="input-text"
+            // Add a new prop 'type' to control the input type
+            type={props.type || "text"}
+            placeholder={props.플레이스홀더텍스트}
+            value={props.value}
+            onChange={props.onChange}
+        />
+    );
+
+    return (
+        <div className="input-container">
+            <div className="input-title-container">
+                <h4 className="input-title">{props.인풋필드제목}</h4>
+                {/* isRequired props가 true일 때만 별표를 렌더링합니다. */}
+                {props.isRequired && <h4 className="input-title-asterisk">*</h4>}
+            </div>
+            {필드}
+            {/* hasError가 true일 때만 errorMessage를 표시합니다. */}
+            {props.hasError && <div className="input-error-message">{props.errorMessage}</div>}
+        </div>
+    );
+};
+
+export default 인풋필드;
