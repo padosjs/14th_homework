@@ -4,17 +4,17 @@
 :root {
     font-size: 16px;
     /* 기본 글꼴 크기 설정 (1rem = 16px) */
-
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
 }
 
 * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-}
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    font-family: Pretendard Variable;
 
+}
 
 .main-content {
     display: flex;
@@ -42,11 +42,9 @@
 /* 제목 스타일 */
 .page-title {
     align-self: stretch;
-
     color: #000;
 
     /* b_20_28 */
-    font-family: Pretendard;
     font-size: 1.25rem;
     font-style: normal;
     font-weight: 700;
@@ -70,7 +68,6 @@
     gap: 0.25rem;
     align-self: stretch;
     /* me_16_24 */
-    font-family: "Pretendard Variable";
     font-size: 1rem;
     font-style: normal;
     font-weight: 500;
@@ -80,14 +77,10 @@
 
 .input-title {
     color: var(--gray-800, #333);
-
-
 }
 
 .input-title-asterisk {
     color: var(--red, #F66A6A);
-
-
 }
 
 .input-text {
@@ -102,7 +95,6 @@
     background: var(--Gray-W, #FFF);
 
     /* r_16_24 */
-    font-family: "Pretendard Variable";
     font-size: 1rem;
     font-style: normal;
     font-weight: 400;
@@ -112,6 +104,17 @@
 
 .input-text::placeholder {
     color: var(--Gray-Gray-400, #ABABAB);
+}
+
+.input-error-message {
+    color: var(--red, #F66A6A);
+
+    /* me_16_24 */
+    font-size: 1rem;
+    font-style: normal;
+    font-weight: 500;
+    line-height: 1.5rem;
+    /* 150% */
 }
 
 .input-group-column {
@@ -163,7 +166,6 @@
     align-items: center;
     gap: 0.5rem;
     cursor: pointer;
-    font-family: "Pretendard Variable";
 }
 
 .button-icon {
