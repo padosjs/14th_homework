@@ -1,11 +1,11 @@
-// button.js
 const 버튼 = (props) => {
     const buttonClass = `button ${props.className || 'white-button'}`;
     
     return (
         <button
             className={buttonClass}
-            onClick={props.onClick} // 이 부분을 추가하여 props로 받은 onClick 함수를 적용합니다.
+            onClick={props.onClick}
+            disabled={props.disabled}
         >
             {props.icon && (
                 <span className="button-icon" style={{fill: props.iconColor}}>
@@ -17,4 +17,4 @@ const 버튼 = (props) => {
     );
 };
 
-export default 버튼
+export default 버튼;
