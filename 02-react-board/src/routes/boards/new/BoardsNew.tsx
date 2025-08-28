@@ -1,42 +1,40 @@
-import { useState } from 'react';
+import { useState, ChangeEvent } from 'react';
 import '../../../App.css';
 
-import 인풋필드 from '../../../input.js';
-import 버튼 from '../../../button.js';
+import InputField from '../../../input';
+import Button from '../../../button';
 
 const BoardsNew = () => {
-    const [author, setAuthor] = useState("");
-    const [password, setPassword] = useState("");
-    const [title, setTitle] = useState("");
-    const [content, setContent] = useState("");
+    const [author, setAuthor] = useState<string>("");
+    const [password, setPassword] = useState<string>("");
+    const [title, setTitle] = useState<string>("");
+    const [content, setContent] = useState<string>("");
 
-    const [authorError, setAuthorError] = useState(false);
-    const [passwordError, setPasswordError] = useState(false);
-    const [titleError, setTitleError] = useState(false);
-    const [contentError, setContentError] = useState(false);
+    const [authorError, setAuthorError] = useState<boolean>(false);
+    const [passwordError, setPasswordError] = useState<boolean>(false);
+    const [titleError, setTitleError] = useState<boolean>(false);
+    const [contentError, setContentError] = useState<boolean>(false);
 
-    // '등록' 버튼의 disabled 상태를 관리할 새로운 상태
-    const [isButtonDisabled, setIsButtonDisabled] = useState(true);
+    const [isButtonDisabled, setIsButtonDisabled] = useState<boolean>(true);
 
-    const onChangeAuthor = (event) => {
+    const onChangeAuthor = (event: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>): void => {
         setAuthor(event.target.value);
         checkFormValidity(event.target.value, password, title, content);
     };
-    const onChangePassword = (event) => {
+    const onChangePassword = (event: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>): void => {
         setPassword(event.target.value);
         checkFormValidity(author, event.target.value, title, content);
     };
-    const onChangeTitle = (event) => {
+    const onChangeTitle = (event: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>): void => {
         setTitle(event.target.value);
         checkFormValidity(author, password, event.target.value, content);
     };
-    const onChangeContent = (event) => {
+    const onChangeContent = (event: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>): void => {
         setContent(event.target.value);
         checkFormValidity(author, password, title, event.target.value);
     };
 
-    // 폼의 유효성을 검사하고 버튼의 disabled 상태를 업데이트하는 함수
-    const checkFormValidity = (author, password, title, content) => {
+    const checkFormValidity = (author: string, password: string, title: string, content: string): void => {
         if (author && password && title && content) {
             setIsButtonDisabled(false);
         } else {
@@ -44,14 +42,13 @@ const BoardsNew = () => {
         }
     };
 
-    const onClickSignup = (event) => {
-        // 모든 에러 상태를 우선 false로 초기화
+    const onClickSignup = (): void => {
         setAuthorError(false);
         setPasswordError(false);
         setTitleError(false);
         setContentError(false);
 
-        let isValid = true;
+        let isValid: boolean = true;
 
         if (author === "") {
             setAuthorError(true);
@@ -69,7 +66,6 @@ const BoardsNew = () => {
             setContentError(true);
             isValid = false;
         }
-        // 유효성 검사 실패 시 스크롤을 최상단으로 이동
         if (!isValid) {
             window.scrollTo({ top: 0, behavior: 'smooth' });
         } else {
@@ -82,68 +78,68 @@ const BoardsNew = () => {
             <div className="page-container">
                 <h1 className="page-title">게시물 등록</h1>
                 <div className="input-group-column">
-                    <인풋필드
-                        인풋필드제목="작성자"
-                        플레이스홀더텍스트="작성자명을 입력해주세요."
+                    <InputField
+                        title="작성자"
+                        placeholderText="작성자명을 입력해주세요."
                         isRequired={true}
                         onChange={onChangeAuthor}
                         value={author}
-                        hasError={authorError === true}
+                        hasError={authorError}
                         errorMessage="필수 입력 사항입니다."
                     />
-                    <인풋필드
-                        인풋필드제목="비밀번호"
-                        플레이스홀더텍스트="비밀번호를 입력해주세요."
+                    <InputField
+                        title="비밀번호"
+                        placeholderText="비밀번호를 입력해주세요."
                         isRequired={true}
                         onChange={onChangePassword}
                         value={password}
-                        hasError={passwordError === true}
+                        hasError={passwordError}
                         errorMessage="필수 입력 사항입니다."
                     />
                 </div>
                 <div className="divider"></div>
-                <인풋필드
-                    인풋필드제목="제목"
-                    플레이스홀더텍스트="제목을 입력해주세요."
+                <InputField
+                    title="제목"
+                    placeholderText="제목을 입력해주세요."
                     isRequired={true}
                     onChange={onChangeTitle}
                     value={title}
-                    hasError={titleError === true}
+                    hasError={titleError}
                     errorMessage="필수 입력 사항입니다."
                 />
                 <div className="divider"></div>
-                <인풋필드
-                    인풋필드제목="내용"
-                    플레이스홀더텍스트="내용을 입력해주세요."
+                <InputField
+                    title="내용"
+                    placeholderText="내용을 입력해주세요."
                     isRequired={true}
                     isTextArea={true}
                     rows={13}
                     onChange={onChangeContent}
                     value={content}
-                    hasError={contentError === true}
+                    hasError={contentError}
                     errorMessage="필수 입력 사항입니다."
                 />
                 <div className="divider"></div>
                 <div className="input-group-address">
                     <div className="input-button-group-address">
-                        <인풋필드 플레이스홀더텍스트="01234" />
-                        <버튼 className="white-button" text="우편번호 검색" />
+                        <InputField placeholderText="01234" />
+                        <Button className="white-button" text="우편번호 검색" onClick={() => {}} />
                     </div>
-                    <인풋필드 플레이스홀더텍스트="주소를 입력해주세요." />
-                    <인풋필드 플레이스홀더텍스트="상세주소" />
+                    <InputField placeholderText="주소를 입력해주세요." />
+                    <InputField placeholderText="상세주소" />
                 </div>
                 <div className="divider"></div>
-                <인풋필드 인풋필드제목="유튜브 링크" 플레이스홀더텍스트="링크를 입력해주세요" />
+                <InputField title="유튜브 링크" placeholderText="링크를 입력해주세요" />
                 <div className="divider"></div>
                 <div className="button-group-image-upload">
-                    <버튼 className="image-upload-button" icon="/assets/icons/outline/add.svg" text="클릭해서 사진 업로드" />
-                    <버튼 className="image-upload-button" icon="/assets/icons/outline/add.svg" text="클릭해서 사진 업로드" />
-                    <버튼 className="image-upload-button" icon="/assets/icons/outline/add.svg" text="클릭해서 사진 업로드" />
+                    <Button className="image-upload-button" icon="/assets/icons/outline/add.svg" text="클릭해서 사진 업로드" onClick={() => {}} />
+                    <Button className="image-upload-button" icon="/assets/icons/outline/add.svg" text="클릭해서 사진 업로드" onClick={() => {}} />
+                    <Button className="image-upload-button" icon="/assets/icons/outline/add.svg" text="클릭해서 사진 업로드" onClick={() => {}} />
                 </div>
                 <div className="divider"></div>
                 <div className="button-group">
-                    <버튼 className="white-button" text="취소" />
-                    <버튼 className="blue-button" text="등록" onClick={onClickSignup} disabled={isButtonDisabled} />
+                    <Button className="white-button" text="취소" onClick={() => {}} />
+                    <Button className="blue-button" text="등록" onClick={onClickSignup} disabled={isButtonDisabled} />
                 </div>
             </div>
         </div>

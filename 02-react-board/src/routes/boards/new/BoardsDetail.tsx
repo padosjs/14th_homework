@@ -1,6 +1,6 @@
 import '../../../App.css';
 
-import 버튼 from '../../../button.js';
+import Button from '../../../button';
 
 const BoardsDetail = () => {
 
@@ -17,8 +17,8 @@ const BoardsDetail = () => {
                     </div>
                     <div className="divider"></div>
                     <div className='boards-deatil-button-group1'>
-                        <버튼 className="simple-button" icon="/assets/icons/outline/link.svg"/>
-                        <버튼 className="simple-button" icon="/assets/icons/outline/location.svg" />
+                        <Button className="simple-button" icon="/assets/icons/outline/link.svg" />
+                        <Button className="simple-button" icon="/assets/icons/outline/location.svg" />
                     </div>
                 </div>
                 <div className='detail-container'>
@@ -58,12 +58,12 @@ const BoardsDetail = () => {
                 </div>
                 <div className='boards-detail-action'>
                     <div className='boards-deatil-button-group2'>
-                        <버튼 className="simple-vertical-button" icon="/assets/icons/outline/bad.svg" text="24" />
-                        <버튼 className="simple-vertical-button red-button" icon="/assets/icons/outline/good.svg" text="12" />
+                        <Button className="simple-vertical-button" icon="/assets/icons/outline/bad.svg" text="24" />
+                        <Button className="simple-vertical-button red-button" icon="/assets/icons/outline/good.svg" text="12" />
                     </div>
                     <div className='boards-deatil-button-group2'>
-                        <버튼 className="white-button" icon="/assets/icons/outline/menu.svg" text="목록으로" />
-                        <버튼 className="white-button" icon="/assets/icons/outline/edit.svg" text="수정하기" />
+                        <Button className="white-button" icon="/assets/icons/outline/menu.svg" text="목록으로" />
+                        <Button className="white-button" icon="/assets/icons/outline/edit.svg" text="수정하기" />
                     </div>
                 </div>
             </div>

@@ -13,7 +13,7 @@ const PageList = createBrowserRouter([
   { path: "/boardsdetail", element: <BoardsDetail/>},
 ])
 
-const root = ReactDOM.createRoot(document.getElementById('root'));
+const root = ReactDOM.createRoot(document.getElementById('root') as ReactDOM.Container);
 root.render(<RouterProvider router={PageList} />);
 
 // If you want to start measuring performance in your app, pass a function

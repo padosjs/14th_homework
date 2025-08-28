@@ -1,6 +1,15 @@
-const 버튼 = (props) => {
+interface ButtonProps {
+    className?: string;
+    onClick?: () => void;
+    disabled?: boolean;
+    icon?: string;
+    iconColor?: string;
+    text?: string;
+}
+
+const Button = (props: ButtonProps) => {
     const buttonClass = `button ${props.className || 'white-button'}`;
-    
+
     return (
         <button
             className={buttonClass}
@@ -17,4 +26,4 @@ const 버튼 = (props) => {
     );
 };
 
-export default 버튼;
+export default Button;
