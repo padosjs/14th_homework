@@ -3,7 +3,7 @@
 import Button from '@/components/button';
 import styles from './styles.module.css';
 
-const BoardsDetail = () => {
+export default function BoardsDetail() {
 
     return (
         <div className={styles['main-content']}>
@@ -74,5 +74,3 @@ const BoardsDetail = () => {
         </div>
     );
 }
-
-export default BoardsDetail;
