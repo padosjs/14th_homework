@@ -17,7 +17,7 @@ export default function Home() {
       <Link href="/boards/new">
         <Button className="white-button" text="게시글 등록 페이지" />
       </Link><br />
-      <Link href="/boards/detail">
+      <Link href="/boards/68b7d7d9e43aaf00291523e7">
         <Button className="white-button" text="게시글 상세 페이지" />
       </Link><br />
     </div>

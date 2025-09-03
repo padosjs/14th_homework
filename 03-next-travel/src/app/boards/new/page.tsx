@@ -5,6 +5,7 @@ import { gql, useMutation } from "@apollo/client"
 import InputField from '@/components/input'
 import Button from '@/components/button';
 import styles from './styles.module.css';
+import { useRouter } from 'next/navigation';
 
 const CREATE_BOARD = gql`
     mutation createBoard($createBoardInput: CreateBoardInput!) {
@@ -15,6 +16,7 @@ const CREATE_BOARD = gql`
 `
 
 export default function BoardsNew() {
+    const router = useRouter()
 
     const [writer, setWriter] = useState<string>("");
     const [password, setPassword] = useState<string>("");
@@ -89,17 +91,21 @@ export default function BoardsNew() {
     const [createBoard] = useMutation(CREATE_BOARD)
 
     const onClickSubmit = async () => {
-        const result = await createBoard({
-            variables: {
-                createBoardInput: {
-                    writer: writer,
-                    password: password,
-                    title: title,
-                    contents: content
+        try {
+            const result = await createBoard({
+                variables: {
+                    createBoardInput: {
+                        writer: writer,
+                        password: password,
+                        title: title,
+                        contents: content
+                    }
                 }
-            }
-        })
-        console.log(result)
+            })
+            console.log(result)
+            console.log(result.data.createBoard._id)
+            router.push(`/boards/${result.data.createBoard._id}`)
+        } catch (error) { alert("에러가 발생하였습니다. 다시 시도해 주세요.") }
     }
 
     return (
