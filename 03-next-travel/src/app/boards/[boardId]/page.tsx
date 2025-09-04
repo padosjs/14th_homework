@@ -2,8 +2,8 @@
 
 import Button from '@/components/button';
 import styles from './styles.module.css';
-import { gql, useQuery } from "@apollo/client"
-import { useParams } from "next/navigation"
+import { gql, useQuery } from "@apollo/client";
+import { useParams, useRouter } from "next/navigation";
 
 const FETCH_BOARD = gql`
     query fetchBoard($boardId: ID!){
@@ -11,12 +11,16 @@ const FETCH_BOARD = gql`
             writer
             title
             contents
+            createdAt
     }
 }
 `
 export default function BoardsDetail() {
 
     const addressparams = useParams()
+    const router = useRouter();
+
+    const onClickList = () => { router.push(`/boards/`); };
 
     const { data } = useQuery(FETCH_BOARD, {
         variables: {
@@ -33,7 +37,7 @@ export default function BoardsDetail() {
                         <div className={styles['boards-detail-profile']}>
                             <img src="/assets/images/profileimg.png" className={styles['profile-image-small']} />{data?.fetchBoard?.writer}
                         </div>
-                        <div>2024.11.11</div>
+                        <div>{new Date(data?.fetchBoard?.createdAt).toLocaleDateString()}</div>
                     </div>
                     <div className={styles['divider']}></div>
                     <div className={styles['boards-deatil-button-group1']}>
@@ -42,9 +46,7 @@ export default function BoardsDetail() {
                     </div>
                 </div>
                 <div className={styles['detail-container']}>
-                    <img src="/assets/images/detailbeach.jpg" className={styles['detail-image1']} />
                     {data?.fetchBoard?.contents}
-                    <img src="/assets/images/detailvideoimage.png" className={styles['detail-image2']} />
                 </div>
                 <div className={styles['boards-detail-action']}>
                     <div className={styles['boards-deatil-button-group2']}>
@@ -52,7 +54,7 @@ export default function BoardsDetail() {
                         <Button className="simple-vertical-button red-button" icon="/assets/icons/outline/good.svg" text="12" />
                     </div>
                     <div className={styles['boards-deatil-button-group2']}>
-                        <Button className="white-button" icon="/assets/icons/outline/menu.svg" text="목록으로" />
+                        <Button className="white-button" icon="/assets/icons/outline/menu.svg" text="목록으로" onClick={onClickList} />
                         <Button className="white-button" icon="/assets/icons/outline/edit.svg" text="수정하기" />
                     </div>
                 </div>

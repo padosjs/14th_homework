@@ -14,6 +14,9 @@ export default function Home() {
       작업된 페이지:
       <br />
       <br />
+      <Link href="/boards/">
+        <Button className="white-button" text="게시글 목록 페이지" />
+      </Link><br />
       <Link href="/boards/new">
         <Button className="white-button" text="게시글 등록 페이지" />
       </Link><br />
