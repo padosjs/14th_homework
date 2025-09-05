@@ -1,6 +1,6 @@
 "use client";
 
-import Button from '@/components/button';
+import Button from '@/components/button/button';
 import styles from './styles.module.css';
 import { gql, useQuery } from "@apollo/client";
 import { useParams, useRouter } from "next/navigation";
@@ -21,6 +21,7 @@ export default function BoardsDetail() {
     const router = useRouter();
 
     const onClickList = () => { router.push(`/boards/`); };
+    const onClickEdit = () => { router.push(`/boards/${addressparams.boardId}/edit`); };
 
     const { data } = useQuery(FETCH_BOARD, {
         variables: {
@@ -51,11 +52,11 @@ export default function BoardsDetail() {
                 <div className={styles['boards-detail-action']}>
                     <div className={styles['boards-deatil-button-group2']}>
                         <Button className="simple-vertical-button" icon="/assets/icons/outline/bad.svg" text="24" />
-                        <Button className="simple-vertical-button red-button" icon="/assets/icons/outline/good.svg" text="12" />
+                        <Button className="simple-vertical-red-button" icon="/assets/icons/outline/good.svg" text="12" />
                     </div>
                     <div className={styles['boards-deatil-button-group2']}>
                         <Button className="white-button" icon="/assets/icons/outline/menu.svg" text="목록으로" onClick={onClickList} />
-                        <Button className="white-button" icon="/assets/icons/outline/edit.svg" text="수정하기" />
+                        <Button className="white-button" icon="/assets/icons/outline/edit.svg" text="수정하기" onClick={onClickEdit} />
                     </div>
                 </div>
             </div>

@@ -1,0 +1,121 @@
+.button {
+  display: flex;
+  flex-shrink: 0;
+  justify-content: center;
+  align-items: center;
+  gap: 0.5rem;
+  cursor: pointer;
+}
+
+.button .button-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.button .button-icon img {
+  width: 1.5rem;
+  height: 1.5rem;
+}
+
+/* 색상별 버튼 스타일 */
+.white-button {
+  height: 3rem;
+  padding: 0.75rem 1rem;
+  align-items: center;
+  border-radius: 0.5rem;
+  border: 1px solid var(--gray-B, #000);
+  background: var(--gray-w, #FFF);
+  color: var(--gray-B, #000);
+  text-align: center;
+  /* sb_18_24 */
+  font-size: 1.125rem;
+  font-weight: 600;
+  line-height: 1.5rem;
+  /* 133.333% */
+}
+
+.blue-button {
+  height: 3rem;
+  padding: 0.75rem 1rem;
+  align-items: center;
+  border-radius: 0.5rem;
+  border: 0;
+  background: #2974E5;
+  color: #FFF;
+  text-align: center;
+  /* sb_18_24 */
+  font-size: 1.125rem;
+  font-weight: 600;
+  line-height: 1.5rem;
+  /* 133.333% */
+}
+
+.blue-button:disabled {
+  background-color: #c7c7c7;
+  color: #E4E4E4;
+  cursor: not-allowed;
+}
+
+/* 심플 버튼 스타일 */
+.simple-button {
+  width: 1.5rem;
+  height: 1.5rem;
+  background-color: transparent;
+  border: 0;
+}
+
+.simple-vertical-button {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 0.25rem;
+  background-color: transparent;
+  border: 0;
+  color: var(--gray-700, #5F5F5F);
+  /* r_14_20 */
+  font-size: 0.875rem;
+  font-weight: 400;
+  line-height: 1.25rem;
+  /* 142.857% */
+}
+
+.simple-vertical-red-button {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 0.25rem;
+  background-color: transparent;
+  border: 0;
+  color: var(--gray-700, rgba(246, 106, 106, 1));
+  /* r_14_20 */
+  font-size: 0.875rem;
+  font-weight: 400;
+  line-height: 1.25rem;
+  /* 142.857% */
+}
+
+/* 이미지 업로드 버튼 스타일 */
+.image-upload-button {
+  width: 10rem;
+  height: 10rem;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  border-radius: 0.5rem;
+  border: 0;
+  background: var(--gray-50, #F2F2F2);
+  color: var(--gray-600, #777);
+  /* r_16_24 */
+  font-size: 1rem;
+  font-weight: 400;
+  line-height: 1.5rem;
+  /* 150% */
+}
+
+.image-upload-button .button-icon img {
+  width: 2.5rem;
+  height: 2.5rem;
+}

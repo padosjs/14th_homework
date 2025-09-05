@@ -1,6 +1,6 @@
 "use client"
 
-import Button from '@/components/button';
+import Button from '@/components/button/button';
 import styles from './styles.module.css';
 import { gql, useQuery, useMutation } from "@apollo/client"
 import { useRouter } from 'next/navigation';
@@ -34,7 +34,7 @@ interface IQuery {
 export default function Boards() {
 
     const { data } = useQuery<IQuery>(FETCH_BOARDS, {
-        fetchPolicy: 'network-only',
+        // fetchPolicy: 'network-only', 이 옵션 써서 갱신하였으나 BoardsNew()에서 뮤테이션 시에 리페치하는 걸로 대체 적용해서 해결함
     });
     const router = useRouter();
     const [deleteBoard] = useMutation(DELETE_BOARD);
