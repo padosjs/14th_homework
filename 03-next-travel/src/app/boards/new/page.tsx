@@ -2,7 +2,7 @@
 
 import BoardsWrite from "@/components/boards-write";
 
-export default function BoardsNew() {
+export default function BoardNewPage() {
     return (
         <BoardsWrite isEdit={false} />
     );
