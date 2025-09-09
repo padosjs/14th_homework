@@ -1,18 +1,12 @@
-.main-content {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-}
-
 .page-container {
   display: flex;
   width: 100%;
-  max-width: 80rem;
-  padding: 2.5rem;
   flex-direction: column;
   align-items: center;
   gap: 2.5rem;
   flex-shrink: 0;
+  border-bottom: solid 0.0625rem #e4e4e4;
+  padding-bottom: 1.5rem;
 }
 
 .divider {
