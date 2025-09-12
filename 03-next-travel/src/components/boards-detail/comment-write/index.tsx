@@ -3,6 +3,7 @@ import InputField from '@/components/input/input'
 import Button from '@/components/button/button';
 import useCommentWrite from "./hook";
 import { ChatBubbleLeftIcon } from '@heroicons/react/24/outline'
+import { Rating, RatingButton } from '@/components/ui/shadcn-io/rating';
 
 export default function CommentWrite() {
 
@@ -11,6 +12,8 @@ export default function CommentWrite() {
         onChangePassword,
         onChangeContent,
         onClickCreateComment,
+        setRating,
+        rating,
         writer,
         password,
         content,
@@ -25,13 +28,11 @@ export default function CommentWrite() {
             <h4 className={styles['page-title']}>
                 <ChatBubbleLeftIcon className={styles['comment-header']} />댓글
             </h4>
-            <div className={styles['rating-group']}>
-                <img src="/assets/icons/filled/star.svg" />
-                <img src="/assets/icons/filled/star.svg" />
-                <img src="/assets/icons/filled/star.svg" />
-                <img src="/assets/icons/filled/star.svg" />
-                <img src="/assets/icons/filled/star.svg" />
-            </div>
+            <Rating value={rating} onValueChange={setRating}>
+                {Array.from({ length: 5 }).map((_, index) => (
+                    <RatingButton key={index} size={20} className="text-yellow-500" />
+                ))}
+            </Rating>
             <div className={styles['comment-input-button-group']}>
                 <div className={styles['input-group-column']}>
                     <InputField

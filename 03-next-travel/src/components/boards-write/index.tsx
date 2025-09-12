@@ -7,7 +7,17 @@ import styles from './styles.module.css';
 import { IBoardsWriteProps, Board } from "./types"
 import Postcode from '../PostcodePopup';
 import { PlusIcon } from '@heroicons/react/24/outline';
-
+import {
+    AlertDialog,
+    AlertDialogAction,
+    AlertDialogCancel,
+    AlertDialogContent,
+    AlertDialogDescription,
+    AlertDialogFooter,
+    AlertDialogHeader,
+    AlertDialogTitle,
+    AlertDialogTrigger,
+} from "@/components/ui/alert-dialog";
 
 export default function BoardsWrite(props: IBoardsWriteProps) {
     const {
@@ -20,8 +30,10 @@ export default function BoardsWrite(props: IBoardsWriteProps) {
         onClickSubmit,
         onClickUpdate,
         setAddressAndZipcode,
+        onChangePasswordforedit,
         writer,
         password,
+        passwordforedit,
         title,
         content,
         zipcode,
@@ -122,7 +134,31 @@ export default function BoardsWrite(props: IBoardsWriteProps) {
                 <div className={styles['divider']}></div>
                 <div className={styles['button-group']}>
                     <Button className="white-button" text="취소" onClick={() => router.back()} />
-                    <Button className="blue-button" text={props.isEdit ? "수정" : "등록"} onClick={props.isEdit ? onClickUpdate : onClickSubmit} disabled={isButtonDisabled} />
+                    {props.isEdit ? (
+                        <AlertDialog>
+                            <AlertDialogTrigger>
+                                <Button className="blue-button" text="수정" disabled={isButtonDisabled} />
+                            </AlertDialogTrigger>
+                            <AlertDialogContent>
+                                <AlertDialogHeader>
+                                    <AlertDialogTitle>글을 작성할 때 입력하셨던 비밀번호를 입력해 주세요.</AlertDialogTitle>
+                                    <AlertDialogDescription>
+                                        <InputField
+                                            placeholderText='비밀번호 입력'
+                                            value={passwordforedit}
+                                            onChange={onChangePasswordforedit}
+                                        />
+                                    </AlertDialogDescription>
+                                </AlertDialogHeader>
+                                <AlertDialogFooter>
+                                    <AlertDialogCancel>취소</AlertDialogCancel>
+                                    <AlertDialogAction onClick={onClickUpdate}>확인</AlertDialogAction>
+                                </AlertDialogFooter>
+                            </AlertDialogContent>
+                        </AlertDialog>
+                    ) : (
+                        <Button className="blue-button" text="등록" onClick={onClickSubmit} disabled={isButtonDisabled} />
+                    )}
                 </div>
             </div>
         </div>

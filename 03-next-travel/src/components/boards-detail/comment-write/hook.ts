@@ -1,4 +1,4 @@
-import { useState, ChangeEvent, useEffect } from 'react';
+import { useState, ChangeEvent } from 'react';
 import { useParams } from 'next/navigation';
 import { useMutation } from '@apollo/client';
 import { CREATE_BOARD_COMMENT, FETCH_BOARD_COMMENTS } from './queries';
@@ -14,11 +14,10 @@ export default function useCommentWrite() {
             },
         ],
     });
-
+    const [rating, setRating] = useState(0);
     const [writer, setWriter] = useState<string>("");
     const [password, setPassword] = useState<string>("");
     const [content, setContent] = useState<string>("");
-    const rating = 0;
 
     const [writerError, setWriterError] = useState<boolean>(false);
     const [passwordError, setPasswordError] = useState<boolean>(false);
@@ -78,6 +77,8 @@ export default function useCommentWrite() {
         onChangePassword,
         onChangeContent,
         onClickCreateComment,
+        setRating,
+        rating,
         writer,
         password,
         content,

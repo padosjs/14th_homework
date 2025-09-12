@@ -3,6 +3,7 @@
   flex-direction: column;
   align-items: center;
   padding: 2.5rem;
+  max-width: 80rem;
 }
 
 .table-container {
@@ -23,29 +24,24 @@
   align-items: center;
   gap: 0.5rem;
   align-self: stretch;
-
   overflow: hidden;
 }
 
 .table-cell-left-head {
   color: #1C1C1C;
-
   font-size: 1rem;
   font-style: normal;
   font-weight: 500;
-  line-height: 1.25rem;
-  /* 125% */
+  line-height: 1.25rem; /* 125% */
 }
 
 .table-cell-center-head {
   color: #1C1C1C;
   text-align: center;
-
   font-size: 1rem;
   font-style: normal;
   font-weight: 500;
-  line-height: 1.25rem;
-  /* 125% */
+  line-height: 1.25rem; /* 125% */
 }
 
 .table-row-body {
@@ -55,11 +51,16 @@
   align-items: center;
   gap: 0.5rem;
   align-self: stretch;
-
   border-radius: 0.5rem;
   border: 1px solid #F2F2F2;
-
   overflow: hidden;
+}
+
+.row-content {
+  display: flex;
+  flex-grow: 1;
+  align-items: center;
+  gap: 0.5rem;
   cursor: pointer;
 }
 
@@ -67,51 +68,41 @@
   display: -webkit-box;
   -webkit-box-orient: vertical;
   -webkit-line-clamp: 1;
-
   overflow: hidden;
   color: var(--Gray-90, #1C1C1C);
   text-overflow: ellipsis;
-
   font-size: 0.875rem;
   font-style: normal;
   font-weight: 500;
-  line-height: 1.25rem;
-  /* 142.857% */
+  line-height: 1.25rem; /* 142.857% */
 }
 
 .table-cell-center-gray {
-
   display: -webkit-box;
   -webkit-box-orient: vertical;
   -webkit-line-clamp: 1;
-
   overflow: hidden;
   color: var(--Gray-50, #919191);
   text-align: center;
   text-overflow: ellipsis;
-
   font-size: 0.875rem;
   font-style: normal;
   font-weight: 300;
-  line-height: 1.25rem;
-  /* 142.857% */
+  line-height: 1.25rem; /* 142.857% */
 }
 
 .table-cell-center-black {
   display: -webkit-box;
   -webkit-box-orient: vertical;
   -webkit-line-clamp: 1;
-
   overflow: hidden;
   color: var(--Gray-80, #333);
   text-align: center;
   text-overflow: ellipsis;
-
   font-size: 0.875rem;
   font-style: normal;
   font-weight: 300;
-  line-height: 1.25rem;
-  /* 142.857% */
+  line-height: 1.25rem; /* 142.857% */
 }
 
 .number-cell-width {

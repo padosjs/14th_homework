@@ -8,6 +8,11 @@ export const FETCH_BOARD_LIST = gql`
             contents
             createdAt
             youtubeUrl
+            boardAddress {
+                zipcode
+                address
+                addressDetail
+            }
     }
 }
 `

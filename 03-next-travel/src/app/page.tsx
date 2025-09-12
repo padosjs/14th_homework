@@ -3,11 +3,9 @@ import Button from '@/components/button/button';
 
 export default function Home() {
   return (
-    <div>
+    <div className="w-full max-w-[40rem] mx-auto p-8">
+
       메인 페이지입니다!
-      <br />
-      <br />
-      <br />
       <br />
       <br />
       <br />

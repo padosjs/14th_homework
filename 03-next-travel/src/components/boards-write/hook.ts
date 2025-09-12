@@ -6,7 +6,6 @@ import { useRouter, useParams } from 'next/navigation';
 import { CREATE_BOARD, FETCH_BOARD, FETCH_BOARDS, UPDATE_BOARD } from './queries';
 import { IBoardsWriteProps, Board } from "./types";
 
-
 export default function useBoardsWrite(props: IBoardsWriteProps) {
     const router = useRouter()
     const addressparams = useParams()
@@ -24,6 +23,7 @@ export default function useBoardsWrite(props: IBoardsWriteProps) {
 
     const [writer, setWriter] = useState<string>("");
     const [password, setPassword] = useState<string>("");
+    const [passwordforedit, setPasswordforedit] = useState<string>("");
     const [title, setTitle] = useState<string>("");
     const [content, setContent] = useState<string>("");
     const [zipcode, setZipcode] = useState<string>("");
@@ -63,6 +63,9 @@ export default function useBoardsWrite(props: IBoardsWriteProps) {
     };
     const onChangeYoutubeUrl = (event: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>): void => {
         setYoutubeUrl(event.target.value);
+    };
+    const onChangePasswordforedit = (event: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>): void => {
+        setPasswordforedit(event.target.value);
     };
 
     const checkFormValidity = (writer: string, password: string, title: string, content: string): void => {
@@ -121,7 +124,7 @@ export default function useBoardsWrite(props: IBoardsWriteProps) {
     // 기존 내용 수정 기능 
     const onClickUpdate = async () => {
         try {
-            const password = window.prompt("글을 작성할 때 입력하셨던 비밀번호를 입력해 주세요.");
+            const password = passwordforedit
             if (password === null) {
                 return;
             }
@@ -160,30 +163,32 @@ export default function useBoardsWrite(props: IBoardsWriteProps) {
         }
     };
 
-    return {
-        onChangeWriter,
-        onChangePassword,
-        onChangeTitle,
-        onChangeContent,
-        onChangeAddressDetail,
-        onChangeYoutubeUrl,
-        onClickSubmit,
-        onClickUpdate,
-        setAddressAndZipcode,
-        writer,
-        password,
-        title,
-        content,
-        zipcode,
-        address,
-        addressDetail,
-        youtubeUrl,
-        writerError,
-        passwordError,
-        titleError,
-        contentError,
-        isButtonDisabled,
-        data,
-        router
-    }
+return {
+    onChangeWriter,
+    onChangePassword,
+    onChangeTitle,
+    onChangeContent,
+    onChangeAddressDetail,
+    onChangeYoutubeUrl,
+    onClickSubmit,
+    onClickUpdate,
+    setAddressAndZipcode,
+    onChangePasswordforedit,
+    writer,
+    password,
+    passwordforedit,
+    title,
+    content,
+    zipcode,
+    address,
+    addressDetail,
+    youtubeUrl,
+    writerError,
+    passwordError,
+    titleError,
+    contentError,
+    isButtonDisabled,
+    data,
+    router
+}
 }

@@ -18,11 +18,7 @@ export default function useBoards() {
     };
 
     const onClickDelete = async (boardId: string) => {
-        const confirmDelete = window.confirm("정말 삭제하시겠습니까?");
 
-        if (!confirmDelete) {
-            return;
-        }
         try {
             await deleteBoard({
                 variables: { boardId },

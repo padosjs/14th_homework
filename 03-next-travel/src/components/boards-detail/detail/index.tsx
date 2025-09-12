@@ -3,8 +3,8 @@
 import Button from '@/components/button/button';
 import styles from './styles.module.css';
 import useBoardsDetail from './hook';
-import {  HandThumbDownIcon, HandThumbUpIcon, LinkIcon, ListBulletIcon, MapPinIcon, PencilIcon } from '@heroicons/react/24/outline';
-
+import { HandThumbDownIcon, HandThumbUpIcon, LinkIcon, ListBulletIcon, MapPinIcon, PencilIcon } from '@heroicons/react/24/outline';
+import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@/components/ui/tooltip"
 
 const extractYouTubeId = (url: string): string | null => {
     const regex = /(?:youtube\.com\/(?:[^\/]+\/.+\/|(?:v|e(?:mbed)?)\/|.*[?&]v=)|youtu\.be\/)([^"&?\/\s]{11})/;
@@ -36,7 +36,18 @@ export default function BoardsDetail() {
                 <div className={styles['divider']}></div>
                 <div className={styles['boards-deatil-button-group1']}>
                     <Button className="simple-button-small" icon={LinkIcon} />
-                    <Button className="simple-button-small" icon={MapPinIcon} />
+                    <TooltipProvider>
+                        <Tooltip delayDuration={0}>
+                            <TooltipTrigger>
+                                <Button className="simple-button-small" icon={MapPinIcon} />
+                            </TooltipTrigger>
+                            <TooltipContent>
+                                <p>
+                                    {data?.fetchBoard?.boardAddress?.address ? data.fetchBoard.boardAddress.address : '주소 없음'}
+                                </p>
+                            </TooltipContent>
+                        </Tooltip>
+                    </TooltipProvider>
                 </div>
             </div>
             <div className={styles['detail-container']}>

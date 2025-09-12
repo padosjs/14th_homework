@@ -1,7 +1,7 @@
 "use client"
 
 import { ApolloClient, ApolloProvider, InMemoryCache } from '@apollo/client'
-import { ReactNode } from 'react'; // ReactNode를 import 합니다.
+import { ReactNode } from 'react';
 
 const client = new ApolloClient({
     uri: "http://main-practice.codebootcamp.co.kr/graphql",
@@ -9,14 +9,14 @@ const client = new ApolloClient({
 })
 
 interface IProps {
-    allpage: ReactNode;
+    children: ReactNode;
 }
 
 export default function ApolloSetting(props: IProps) {
 
     return (
         <ApolloProvider client={client}>
-            {props.allpage}
+            {props.children}
         </ApolloProvider>
     )
 }

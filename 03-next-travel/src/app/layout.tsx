@@ -1,7 +1,8 @@
 import type { Metadata } from "next";
 import localFont from "next/font/local";
 import "./globals.css";
-import ApolloSetting from "@/common/settings/apollo-setting";
+import ApolloSetting from "@/commons/settings/apollo-setting";
+import Layout from "@/commons/layout";
 
 // Pretendard Variable 폰트를 로컬에서 불러옵니다.
 const pretendard = localFont({
@@ -19,11 +20,13 @@ interface IProps {
   children: React.ReactNode;
 }
 
-export default function RootLayout(props: IProps) {
+export default function RootLayout({ children }: IProps) {
   return (
     <html lang="en">
       <body className={`${pretendard.variable} antialiased`}>
-        <ApolloSetting allpage={props.children}/>
+        <ApolloSetting>
+          <Layout>{children}</Layout>
+        </ApolloSetting>
       </body>
     </html>
   );
