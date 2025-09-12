@@ -5,6 +5,8 @@ import InputField from '@/components/input/input'
 import Button from '@/components/button/button';
 import styles from './styles.module.css';
 import { IBoardsWriteProps, Board } from "./types"
+import Postcode from '../PostcodePopup';
+import { PlusIcon } from '@heroicons/react/24/outline';
 
 
 export default function BoardsWrite(props: IBoardsWriteProps) {
@@ -13,18 +15,26 @@ export default function BoardsWrite(props: IBoardsWriteProps) {
         onChangePassword,
         onChangeTitle,
         onChangeContent,
+        onChangeAddressDetail,
+        onChangeYoutubeUrl,
         onClickSubmit,
         onClickUpdate,
+        setAddressAndZipcode,
         writer,
         password,
         title,
         content,
+        zipcode,
+        address,
+        addressDetail,
+        youtubeUrl,
         writerError,
         passwordError,
         titleError,
         contentError,
         isButtonDisabled,
-        data
+        data,
+        router
     } = useBoardsWrite(props)
 
     const boardData = data?.fetchBoard as Board | undefined;
@@ -49,7 +59,7 @@ export default function BoardsWrite(props: IBoardsWriteProps) {
                         placeholderText="비밀번호를 입력해주세요."
                         isRequired={true}
                         onChange={onChangePassword}
-                        value={props.isEdit ? "******" : password}
+                        value={props.isEdit ? "●●●●●●" : password}
                         hasError={passwordError}
                         errorMessage="필수 입력 사항입니다."
                         disabled={props.isEdit}
@@ -80,23 +90,38 @@ export default function BoardsWrite(props: IBoardsWriteProps) {
                 <div className={styles['divider']}></div>
                 <div className={styles['input-group-address']}>
                     <div className={styles['input-button-group-address']}>
-                        <InputField placeholderText="01234" />
-                        <Button className="white-button" text="우편번호 검색" onClick={() => { }} />
+                        <InputField
+                            placeholderText="01234"
+                            value={zipcode}
+                        />
+                        <Postcode onAddressComplete={setAddressAndZipcode} />
                     </div>
-                    <InputField placeholderText="주소를 입력해주세요." />
-                    <InputField placeholderText="상세주소" />
+                    <InputField
+                        placeholderText="주소를 입력해주세요."
+                        value={address}
+                    />
+                    <InputField
+                        placeholderText="상세주소"
+                        onChange={onChangeAddressDetail}
+                        value={addressDetail}
+                    />
                 </div>
                 <div className={styles['divider']}></div>
-                <InputField title="유튜브 링크" placeholderText="링크를 입력해주세요" />
+                <InputField
+                    title="유튜브 링크"
+                    placeholderText="링크를 입력해주세요"
+                    value={youtubeUrl}
+                    onChange={onChangeYoutubeUrl}
+                />
                 <div className={styles['divider']}></div>
                 <div className={styles['button-group-image-upload']}>
-                    <Button className="image-upload-button" icon="/assets/icons/outline/add.svg" text="클릭해서 사진 업로드" onClick={() => { }} />
-                    <Button className="image-upload-button" icon="/assets/icons/outline/add.svg" text="클릭해서 사진 업로드" onClick={() => { }} />
-                    <Button className="image-upload-button" icon="/assets/icons/outline/add.svg" text="클릭해서 사진 업로드" onClick={() => { }} />
+                    <Button className="image-upload-button" icon={PlusIcon} text="클릭해서 사진 업로드" onClick={() => { }} />
+                    <Button className="image-upload-button" icon={PlusIcon} text="클릭해서 사진 업로드" onClick={() => { }} />
+                    <Button className="image-upload-button" icon={PlusIcon} text="클릭해서 사진 업로드" onClick={() => { }} />
                 </div>
                 <div className={styles['divider']}></div>
                 <div className={styles['button-group']}>
-                    <Button className="white-button" text="취소" onClick={() => { }} />
+                    <Button className="white-button" text="취소" onClick={() => router.back()} />
                     <Button className="blue-button" text={props.isEdit ? "수정" : "등록"} onClick={props.isEdit ? onClickUpdate : onClickSubmit} disabled={isButtonDisabled} />
                 </div>
             </div>

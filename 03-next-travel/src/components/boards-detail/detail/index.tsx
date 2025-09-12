@@ -3,6 +3,14 @@
 import Button from '@/components/button/button';
 import styles from './styles.module.css';
 import useBoardsDetail from './hook';
+import {  HandThumbDownIcon, HandThumbUpIcon, LinkIcon, ListBulletIcon, MapPinIcon, PencilIcon } from '@heroicons/react/24/outline';
+
+
+const extractYouTubeId = (url: string): string | null => {
+    const regex = /(?:youtube\.com\/(?:[^\/]+\/.+\/|(?:v|e(?:mbed)?)\/|.*[?&]v=)|youtu\.be\/)([^"&?\/\s]{11})/;
+    const match = url.match(regex);
+    return match ? match[1] : null;
+};
 
 export default function BoardsDetail() {
     const {
@@ -10,6 +18,10 @@ export default function BoardsDetail() {
         onClickEdit,
         data
     } = useBoardsDetail()
+
+    const youtubeId = data?.fetchBoard?.youtubeUrl
+        ? extractYouTubeId(data.fetchBoard.youtubeUrl)
+        : null;
 
     return (
         <div className={styles['page-container']}>
@@ -23,23 +35,36 @@ export default function BoardsDetail() {
                 </div>
                 <div className={styles['divider']}></div>
                 <div className={styles['boards-deatil-button-group1']}>
-                    <Button className="simple-button" icon="/assets/icons/outline/link.svg" />
-                    <Button className="simple-button" icon="/assets/icons/outline/location.svg" />
+                    <Button className="simple-button-small" icon={LinkIcon} />
+                    <Button className="simple-button-small" icon={MapPinIcon} />
                 </div>
             </div>
             <div className={styles['detail-container']}>
                 {data?.fetchBoard?.contents}
+                {youtubeId && (
+                    <div className={styles['youtube-container']}>
+                        <iframe
+                            width="100%"
+                            height="100%"
+                            src={`https://www.youtube.com/embed/${youtubeId}`}
+                            title="YouTube video player"
+                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                            referrerPolicy="strict-origin-when-cross-origin"
+                            allowFullScreen
+                        ></iframe>
+                    </div>
+                )}
             </div>
             <div className={styles['boards-detail-action']}>
                 <div className={styles['boards-deatil-button-group2']}>
-                    <Button className="simple-vertical-button" icon="/assets/icons/outline/bad.svg" text="24" />
-                    <Button className="simple-vertical-red-button" icon="/assets/icons/outline/good.svg" text="12" />
+                    <Button className="simple-vertical-button" icon={HandThumbDownIcon} text="24" />
+                    <Button className="simple-vertical-red-button" icon={HandThumbUpIcon} text="12" />
                 </div>
                 <div className={styles['boards-deatil-button-group2']}>
-                    <Button className="white-button" icon="/assets/icons/outline/menu.svg" text="목록으로" onClick={onClickList} />
-                    <Button className="white-button" icon="/assets/icons/outline/edit.svg" text="수정하기" onClick={onClickEdit} />
+                    <Button className="white-button" icon={ListBulletIcon} text="목록으로" onClick={onClickList} />
+                    <Button className="white-button" icon={PencilIcon} text="수정하기" onClick={onClickEdit} />
                 </div>
             </div>
-        </div>
+        </div >
     );
 }

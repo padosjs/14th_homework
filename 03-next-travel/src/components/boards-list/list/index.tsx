@@ -1,8 +1,10 @@
 "use client"
 
 import Button from '@/components/button/button';
-import styles from './styles.module.css';
 import useBoards from "./hook"
+import { TrashIcon } from '@heroicons/react/24/outline'
+import styles from './styles.module.css';
+
 
 export default function BoardsList() {
 
@@ -39,8 +41,9 @@ export default function BoardsList() {
                         </div>
                         <div className={styles['button-container']}>
                             <Button
-                                className="simple-button"
-                                icon="/assets/icons/outline/delete.svg"
+                                className="simple-button-small"
+                                icon={TrashIcon}
+                                iconColor="#ABABAB"
                                 onClick={(e) => {
                                     e.stopPropagation();
                                     onClickDelete(board._id);

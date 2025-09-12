@@ -1,9 +1,13 @@
 "use client";
 
-import BoardsList from "@/components/boards-list";
+import BannerCarousel from "@/components/boards-list/banner";
+import BoardsList from "@/components/boards-list/list";
 
 export default function BoardsListPage() {
     return (
-        <BoardsList />
+        <>
+            <BannerCarousel />
+            <BoardsList />
+        </>
     );
 }

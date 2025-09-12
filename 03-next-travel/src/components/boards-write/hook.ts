@@ -6,6 +6,7 @@ import { useRouter, useParams } from 'next/navigation';
 import { CREATE_BOARD, FETCH_BOARD, FETCH_BOARDS, UPDATE_BOARD } from './queries';
 import { IBoardsWriteProps, Board } from "./types";
 
+
 export default function useBoardsWrite(props: IBoardsWriteProps) {
     const router = useRouter()
     const addressparams = useParams()
@@ -25,6 +26,10 @@ export default function useBoardsWrite(props: IBoardsWriteProps) {
     const [password, setPassword] = useState<string>("");
     const [title, setTitle] = useState<string>("");
     const [content, setContent] = useState<string>("");
+    const [zipcode, setZipcode] = useState<string>("");
+    const [address, setAddress] = useState<string>("");
+    const [addressDetail, setAddressDetail] = useState<string>("");
+    const [youtubeUrl, setYoutubeUrl] = useState<string>("");
 
     const [writerError, setWriterError] = useState<boolean>(false);
     const [passwordError, setPasswordError] = useState<boolean>(false);
@@ -49,6 +54,16 @@ export default function useBoardsWrite(props: IBoardsWriteProps) {
         setContent(event.target.value);
         checkFormValidity(writer, password, title, event.target.value);
     };
+    const setAddressAndZipcode = (newAddress: string, newZipcode: string): void => {
+        setAddress(newAddress);
+        setZipcode(newZipcode);
+    }
+    const onChangeAddressDetail = (event: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>): void => {
+        setAddressDetail(event.target.value);
+    };
+    const onChangeYoutubeUrl = (event: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>): void => {
+        setYoutubeUrl(event.target.value);
+    };
 
     const checkFormValidity = (writer: string, password: string, title: string, content: string): void => {
         // 수정 모드일 때는 writer와 password를 검사하지 않음
@@ -70,13 +85,15 @@ export default function useBoardsWrite(props: IBoardsWriteProps) {
 
     useEffect(() => {
         if (props.isEdit && data?.fetchBoard) {
-            // 1. useQuery로 가져온 데이터를 state에 할당
-            setTitle(data.fetchBoard.title);
-            setContent(data.fetchBoard.contents);
-            // 2. 데이터가 채워진 후 checkFormValidity 함수를 호출하여 버튼 활성화
-            checkFormValidity(writer, password, data.fetchBoard.title, data.fetchBoard.contents);
+            setTitle(data.fetchBoard.title ?? "");
+            setContent(data.fetchBoard.contents ?? "");
+            setZipcode(data.fetchBoard.boardAddress?.zipcode ?? "");
+            setAddress(data.fetchBoard.boardAddress?.address ?? "");
+            setAddressDetail(data.fetchBoard.boardAddress?.addressDetail ?? "");
+            setYoutubeUrl(data.fetchBoard.youtubeUrl ?? "");
+            checkFormValidity(writer, password, data.fetchBoard.title ?? "", data.fetchBoard.contents ?? "");
         }
-    }, [props.isEdit, data]); // isEdit props와 data가 변경될 때마다 실행
+    }, [props.isEdit, data]);
 
     // 신규 등록 기능
     const onClickSubmit = async () => {
@@ -87,7 +104,13 @@ export default function useBoardsWrite(props: IBoardsWriteProps) {
                         writer: writer,
                         password: password,
                         title: title,
-                        contents: content
+                        contents: content,
+                        youtubeUrl: youtubeUrl,
+                        boardAddress: {
+                            zipcode: zipcode,
+                            address: address,
+                            addressDetail: addressDetail
+                        }
                     }
                 },
                 refetchQueries: [{ query: FETCH_BOARDS }]
@@ -102,12 +125,19 @@ export default function useBoardsWrite(props: IBoardsWriteProps) {
             if (password === null) {
                 return;
             }
+            const updateBoardInput = {
+                title: title,
+                contents: content,
+                youtubeUrl: youtubeUrl,
+                boardAddress: {
+                    zipcode: zipcode,
+                    address: address,
+                    addressDetail: addressDetail
+                }
+            };
             const result = await updateBoard({
                 variables: {
-                    updateBoardInput: {
-                        title: title,
-                        contents: content
-                    },
+                    updateBoardInput: updateBoardInput,
                     password: password,
                     boardId: addressparams.boardId
                 },
@@ -135,17 +165,25 @@ export default function useBoardsWrite(props: IBoardsWriteProps) {
         onChangePassword,
         onChangeTitle,
         onChangeContent,
+        onChangeAddressDetail,
+        onChangeYoutubeUrl,
         onClickSubmit,
         onClickUpdate,
+        setAddressAndZipcode,
         writer,
         password,
         title,
         content,
+        zipcode,
+        address,
+        addressDetail,
+        youtubeUrl,
         writerError,
         passwordError,
         titleError,
         contentError,
         isButtonDisabled,
-        data
+        data,
+        router
     }
 }

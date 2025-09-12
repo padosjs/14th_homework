@@ -3,6 +3,7 @@
 import styles from './styles.module.css';
 import Button from "@/components/button/button";
 import useBoardComments from "./hook";
+import { PencilIcon, XMarkIcon } from '@heroicons/react/24/outline';
 
 export default function BoardComments() {
 
@@ -36,8 +37,8 @@ export default function BoardComments() {
                                     <img src="/assets/icons/filled/star.svg" />
                                 </div>
                                 <div className={styles.buttonGroup}>
-                                    <Button className="simple-button-small" icon="/assets/icons/outline/edit.svg" />
-                                    <Button className="simple-button-small" icon="/assets/icons/outline/close.svg" />
+                                    <Button className="simple-button-small" icon={PencilIcon}/>
+                                    <Button className="simple-button-small" icon={XMarkIcon} />
                                 </div>
                             </div>
                             <span className={styles.commentContents}>{comment.contents}</span>

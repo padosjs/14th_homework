@@ -13,9 +13,16 @@
   justify-content: center;
 }
 
-.button .button-icon img {
+.button .button-icon img,
+.button .button-icon svg {
   width: 1.5rem;
   height: 1.5rem;
+}
+
+.simple-button-small .button-icon img,
+.simple-button-small .button-icon svg {
+  width: 1.25rem;
+  height: 1.25rem;
 }
 
 /* 색상별 버튼 스타일 */
@@ -115,14 +122,13 @@
   border: 0;
   background: var(--gray-50, #F2F2F2);
   color: var(--gray-600, #777);
-  /* r_16_24 */
   font-size: 1rem;
   font-weight: 400;
   line-height: 1.5rem;
-  /* 150% */
 }
 
-.image-upload-button .button-icon img {
+.image-upload-button .button-icon img,
+.image-upload-button .button-icon svg {
   width: 2.5rem;
   height: 2.5rem;
 }

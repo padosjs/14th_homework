@@ -3,8 +3,13 @@ import { gql } from "@apollo/client"
 // 신규 등록을 위한 API 정의
 export const CREATE_BOARD = gql`
     mutation createBoard($createBoardInput: CreateBoardInput!) {
-            createBoard(createBoardInput: $createBoardInput){
+        createBoard(createBoardInput: $createBoardInput) {
             _id
+            boardAddress {
+                zipcode
+                address
+                addressDetail
+            }
         }
     }
 `
@@ -36,6 +41,12 @@ export const FETCH_BOARD = gql`
             writer
             title
             contents
+            youtubeUrl
+            boardAddress {
+                zipcode
+                address
+                addressDetail
+            }
         }
     }
-`
+`;

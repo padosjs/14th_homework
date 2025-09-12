@@ -2,6 +2,7 @@ import styles from './styles.module.css'
 import InputField from '@/components/input/input'
 import Button from '@/components/button/button';
 import useCommentWrite from "./hook";
+import { ChatBubbleLeftIcon } from '@heroicons/react/24/outline'
 
 export default function CommentWrite() {
 
@@ -22,7 +23,7 @@ export default function CommentWrite() {
     return (
         <div className={styles['main-container']}>
             <h4 className={styles['page-title']}>
-                <img src="/assets/icons/outline/chat.svg" className={styles['comment-header']} />댓글
+                <ChatBubbleLeftIcon className={styles['comment-header']} />댓글
             </h4>
             <div className={styles['rating-group']}>
                 <img src="/assets/icons/filled/star.svg" />

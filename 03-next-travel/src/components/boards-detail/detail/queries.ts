@@ -7,6 +7,7 @@ export const FETCH_BOARD_LIST = gql`
             title
             contents
             createdAt
+            youtubeUrl
     }
 }
 `
