@@ -58,7 +58,29 @@
   /* 133.333% */
 }
 
+.black-button {
+  height: 3rem;
+  padding: 0.75rem 1rem;
+  align-items: center;
+  border-radius: 0.5rem;
+  border: 0;
+  background: #000000;
+  color: #FFF;
+  text-align: center;
+  /* sb_18_24 */
+  font-size: 1.125rem;
+  font-weight: 600;
+  line-height: 1.5rem;
+  /* 133.333% */
+}
+
 .blue-button:disabled {
+  background-color: #c7c7c7;
+  color: #E4E4E4;
+  cursor: not-allowed;
+}
+
+.black-button:disabled {
   background-color: #c7c7c7;
   color: #E4E4E4;
   cursor: not-allowed;

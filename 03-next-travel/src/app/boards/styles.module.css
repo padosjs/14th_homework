@@ -1,11 +1,15 @@
 .page {
+    display: flex;
+justify-content: center;
     padding: 2.5rem;
 }
 
 .container {
     display: flex;
+    width: 100%;
     padding: 1.5rem 3rem;
     flex-direction: column;
+    max-width: 80rem;
     align-items: flex-end;
     gap: 1.5rem;
     align-self: stretch;
