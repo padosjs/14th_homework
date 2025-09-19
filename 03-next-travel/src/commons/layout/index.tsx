@@ -15,8 +15,8 @@ export default function Layout({ children }: IProps) {
     // BannerCarousel을 숨길 경로 목록을 정의합니다.
     const pathsToHide = [
         '/boards/new',
-        // 'boards/[id]/edit'과 같은 동적 경로를 위한 패턴
         '/boards/',
+        '/openapis',
     ];
 
     // 현재 경로가 숨겨야 하는 경로 목록에 포함되는지 확인합니다.

@@ -21,6 +21,9 @@ export default function Home() {
       <Link href="/boards/68bace9fe43aaf002915260a">
         <Button className="white-button" text="게시글 상세 페이지" />
       </Link><br />
+      <Link href="/openapis">
+        <Button className="white-button" text="오픈 API" />
+      </Link><br />
     </div>
   );
 }

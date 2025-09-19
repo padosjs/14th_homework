@@ -147,13 +147,7 @@ export default function useCommentWrite({
                         rating,
                     },
                     password,
-                },
-                refetchQueries: [
-                    {
-                        query: FETCH_BOARD_COMMENTS,
-                        variables: { boardId: String(boardId) },
-                    },
-                ],
+                }
             });
             setPassword('');
             setContent('');
