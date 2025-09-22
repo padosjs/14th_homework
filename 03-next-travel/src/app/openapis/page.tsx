@@ -13,7 +13,8 @@ interface TourismItem {
 }
 
 async function getTourismData(mapX: number, mapY: number): Promise<{ items: TourismItem[] }> {
-    const serviceKey = process.env.SERVICE_KEY;
+    // const serviceKey = process.env.SERVICE_KEY;
+    const serviceKey = "581d0a37e0e6689b1eb456d9e5c5d81c47066938c803d38e29d8d18a5e785175";
     if (!serviceKey) {
         throw new Error('SERVICE_KEY가 설정되지 않았습니다. .env.local 확인하세요.');
     }

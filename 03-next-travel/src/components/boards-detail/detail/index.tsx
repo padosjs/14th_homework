@@ -51,6 +51,18 @@ export default function BoardsDetail() {
                 </div>
             </div>
             <div className={styles['detail-container']}>
+                {data?.fetchBoard?.images && data.fetchBoard.images.length > 0 && (
+                    <div className={styles['image-container']}>
+                        {data.fetchBoard.images.map((url, index) => (
+                            <img
+                                key={index}
+                                src={`https://storage.googleapis.com/${url}`}
+                                alt={`첨부 이미지 ${index + 1}`}
+                                className={styles['uploaded-image']}
+                            />
+                        ))}
+                    </div>
+                )}
                 {data?.fetchBoard?.contents}
                 {youtubeId && (
                     <div className={styles['youtube-container']}>

@@ -47,6 +47,16 @@ export const FETCH_BOARD = gql`
                 address
                 addressDetail
             }
+            images
         }
     }
 `;
+
+// 파일 업로드 관련 API
+export const UPLOAD_FILE = gql`
+    mutation uploadFile($file: Upload!) {
+        uploadFile(file: $file) {
+            url
+        }
+    }
+`

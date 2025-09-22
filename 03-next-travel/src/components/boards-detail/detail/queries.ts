@@ -13,6 +13,7 @@ export const FETCH_BOARD_LIST = gql`
                 address
                 addressDetail
             }
+            images
     }
 }
 `

@@ -17,6 +17,7 @@
     "@radix-ui/react-slot": "^1.2.3",
     "@radix-ui/react-tooltip": "^1.2.8",
     "@radix-ui/react-use-controllable-state": "^1.2.2",
+    "apollo-upload-client": "^18.0.1",
     "class-variance-authority": "^0.7.1",
     "clsx": "^2.1.1",
     "graphql": "^16.11.0",
@@ -33,6 +34,7 @@
   "devDependencies": {
     "@graphql-codegen/cli": "6.0.0",
     "@graphql-codegen/client-preset": "5.0.0",
+    "@types/apollo-upload-client": "^18.0.0",
     "@types/node": "^20",
     "@types/react": "^18",
     "@types/react-dom": "^18",

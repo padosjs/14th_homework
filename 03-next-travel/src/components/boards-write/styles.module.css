@@ -1,3 +1,4 @@
+/* styles.module.css 파일 */
 .main-content {
   display: flex;
   flex-direction: column;
@@ -34,8 +35,8 @@
   /* 140% */
 }
 
- /* 입력 필드 그룹 스타일 */
- .input-group-column {
+/* 입력 필드 그룹 스타일 */
+.input-group-column {
   display: flex;
   width: 100%;
   align-items: flex-start;
@@ -72,4 +73,72 @@
   display: flex;
   width: 100%;
   gap: 1rem;
+}
+
+/* 이미지 업로드 버튼 스타일 */
+.image-upload-button {
+  position: relative;
+  display: flex;
+  width: 10rem;
+  height: 10rem;
+  gap: 0.5rem;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  border-radius: 0.5rem;
+  border: 0;
+  background: var(--gray-50, #F2F2F2);
+  color: var(--gray-600, #777);
+  font-size: 1rem;
+  font-weight: 400;
+  line-height: 1.5rem;
+}
+
+.button-icon {
+  width: 2.5rem;
+  height: 2.5rem;
+}
+
+.image-upload-item {
+  position: relative;
+  display: flex;
+  width: 10rem;
+  height: 10rem;
+  border-radius: 0.5rem;
+  overflow: hidden;
+  justify-content: end;
+}
+
+.uploaded-image {
+  object-fit: cover;
+}
+
+.image-delete-button {
+  display: flex;
+  padding: 0.25rem;
+  align-items: center;
+  gap: 0.625rem;
+  border-radius: 6.25rem;
+  background: rgba(0, 0, 0, 0.40);
+
+  margin: 0.75rem;
+  position: absolute;
+  top: 0;
+  right: 0;
+  cursor: pointer;
+
+  opacity: 0; 
+  visibility: hidden; 
+  transition: opacity 0.3s ease, visibility 0.3s ease; 
+}
+
+.image-upload-item:hover .image-delete-button {
+  opacity: 1;
+  visibility: visible;
+}
+
+.image-delete-button-icon {
+  width: 1rem;
+  height: 1rem;
+  color: white
 }

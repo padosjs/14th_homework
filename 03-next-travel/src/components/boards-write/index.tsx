@@ -6,7 +6,7 @@ import Button from '@/components/button/button';
 import styles from './styles.module.css';
 import { IBoardsWriteProps, Board } from "./types"
 import Postcode from '../PostcodePopup';
-import { PlusIcon } from '@heroicons/react/24/outline';
+import { PlusIcon, XMarkIcon } from '@heroicons/react/24/outline';
 import {
     AlertDialog,
     AlertDialogAction,
@@ -46,10 +46,17 @@ export default function BoardsWrite(props: IBoardsWriteProps) {
         contentError,
         isButtonDisabled,
         data,
-        router
+        router,
+        imageUrls,
+        setImageUrls,
+        fileRef,
+        onChangeFile,
+        onClickImage,
+        onClickDeleteImage
     } = useBoardsWrite(props)
 
     const boardData = data?.fetchBoard as Board | undefined;
+    const UPLOAD_LIMIT = 3;
 
     return (
         <div className={styles['main-content']}>
@@ -127,9 +134,38 @@ export default function BoardsWrite(props: IBoardsWriteProps) {
                 />
                 <div className={styles['divider']}></div>
                 <div className={styles['button-group-image-upload']}>
-                    <Button className="image-upload-button" icon={PlusIcon} text="클릭해서 사진 업로드" onClick={() => { }} />
-                    <Button className="image-upload-button" icon={PlusIcon} text="클릭해서 사진 업로드" onClick={() => { }} />
-                    <Button className="image-upload-button" icon={PlusIcon} text="클릭해서 사진 업로드" onClick={() => { }} />
+                    {/* 이미지 업로드 버튼을 3개 생성 */}
+                    {Array.from({ length: UPLOAD_LIMIT }).map((_, index) => (
+                        <div key={index} className={styles['image-upload-item']}>
+                            {/* 이미지가 업로드 되었을 때 */}
+                            {imageUrls[index] ? (
+                                <>
+                                    <img
+                                        src={`https://storage.googleapis.com/${imageUrls[index]}`}
+                                        alt={`업로드된 이미지 ${index + 1}`}
+                                        className={styles['uploaded-image']}
+                                    />
+                                    <div className={styles['image-delete-button']} onClick={() => onClickDeleteImage(index)}>
+                                        <XMarkIcon className={styles['image-delete-button-icon']} />
+                                    </div>
+                                </>
+                            ) : (
+                                // 이미지가 없을 때
+                                <div className={styles['image-upload-button']} onClick={() => onClickImage(index)}>
+                                    <PlusIcon className={styles['button-icon']} />
+                                    <span>클릭해서 사진 업로드</span>
+                                </div>
+                            )}
+                            {/* 숨겨진 파일 인풋은 항상 존재 */}
+                            <input
+                                style={{ display: "none" }}
+                                type="file"
+                                onChange={(event) => onChangeFile(event, index)}
+                                ref={(el) => { fileRef.current[index] = el; }}
+                                accept="image/jpeg, image/png"
+                            />
+                        </div>
+                    ))}
                 </div>
                 <div className={styles['divider']}></div>
                 <div className={styles['button-group']}>

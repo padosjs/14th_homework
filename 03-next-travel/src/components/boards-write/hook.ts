@@ -1,9 +1,10 @@
 "use client";
 
-import { useState, ChangeEvent, useEffect } from 'react';
-import { useMutation, useQuery, ApolloError } from "@apollo/client"
+import { useState, ChangeEvent, useEffect, useRef } from 'react';
 import { useRouter, useParams } from 'next/navigation';
-import { CREATE_BOARD, FETCH_BOARD, FETCH_BOARDS, UPDATE_BOARD } from './queries';
+import { useMutation, useQuery, ApolloError } from "@apollo/client"
+import { checkValidationFile } from '@/commons/libraries/image-validation';
+import { CREATE_BOARD, FETCH_BOARD, FETCH_BOARDS, UPDATE_BOARD, UPLOAD_FILE } from './queries';
 import { IBoardsWriteProps, Board } from "./types";
 
 export default function useBoardsWrite(props: IBoardsWriteProps) {
@@ -12,6 +13,53 @@ export default function useBoardsWrite(props: IBoardsWriteProps) {
 
     const [createBoard] = useMutation(CREATE_BOARD)
     const [updateBoard] = useMutation(UPDATE_BOARD)
+
+
+    // 이미지 파일 업로드 관련
+    // 이미지 파일 업로드 관련
+    // 이미지 파일 업로드 관련
+
+    const [imageUrls, setImageUrls] = useState(["", "", ""])
+    const fileRef = useRef<HTMLInputElement[] | null[]>([]);
+    const [uploadFile] = useMutation(UPLOAD_FILE)
+
+    const onChangeFile = async (event: ChangeEvent<HTMLInputElement>, index: number) => {
+        const file = event.target.files?.[0];
+        if (!file) return;
+
+        const isValid = checkValidationFile(file)
+        if (!isValid) return
+
+        try {
+            const result = await uploadFile({ variables: { file } })
+            const url = result.data?.uploadFile.url
+
+            const newImageUrls = [...imageUrls];
+            newImageUrls[index] = url;
+            setImageUrls(newImageUrls);
+        } catch (error) {
+            console.error(error);
+        }
+    }
+    const onClickImage = (index: number) => {
+        fileRef.current[index]?.click()
+    }
+    const onClickDeleteImage = (index: number) => {
+        const newImageUrls = [...imageUrls];
+        newImageUrls[index] = "";
+        setImageUrls(newImageUrls);
+
+        if (fileRef.current[index]) {
+            fileRef.current[index]!.value = "";
+        }
+    }
+    // 이미지 파일 업로드 관련
+    // 이미지 파일 업로드 관련
+    // 이미지 파일 업로드 관련
+
+
+
+
 
     // 수정 모드를 위한 Fetch
     const { data } = useQuery<{ fetchBoard: Board }>(FETCH_BOARD, {
@@ -95,12 +143,21 @@ export default function useBoardsWrite(props: IBoardsWriteProps) {
             setAddressDetail(data.fetchBoard.boardAddress?.addressDetail ?? "");
             setYoutubeUrl(data.fetchBoard.youtubeUrl ?? "");
             checkFormValidity(writer, password, data.fetchBoard.title ?? "", data.fetchBoard.contents ?? "");
+
+            const fetchedImages = data.fetchBoard.images || [];
+            const newImageUrls = ["", "", ""]; // 3개짜리 빈 배열 생성
+            for (let i = 0; i < fetchedImages.length && i < 3; i++) {
+                newImageUrls[i] = fetchedImages[i];
+            }
+            setImageUrls(newImageUrls);
         }
     }, [props.isEdit, data]);
 
     // 신규 등록 기능
     const onClickSubmit = async () => {
         try {
+            const filteredImages = imageUrls.filter(url => url !== "");
+
             const result = await createBoard({
                 variables: {
                     createBoardInput: {
@@ -113,7 +170,9 @@ export default function useBoardsWrite(props: IBoardsWriteProps) {
                             zipcode: zipcode,
                             address: address,
                             addressDetail: addressDetail
-                        }
+                        },
+                        // 필터링된 이미지 배열을 전달
+                        images: filteredImages
                     }
                 },
                 refetchQueries: [{ query: FETCH_BOARDS }]
@@ -121,6 +180,7 @@ export default function useBoardsWrite(props: IBoardsWriteProps) {
             router.push(`/boards/${result.data.createBoard._id}`)
         } catch (error) { alert("에러가 발생하였습니다.") }
     }
+
     // 기존 내용 수정 기능 
     const onClickUpdate = async () => {
         try {
@@ -136,7 +196,8 @@ export default function useBoardsWrite(props: IBoardsWriteProps) {
                     zipcode: zipcode,
                     address: address,
                     addressDetail: addressDetail
-                }
+                },
+                images: imageUrls.filter(url => url !== "")
             };
             const result = await updateBoard({
                 variables: {
@@ -146,49 +207,52 @@ export default function useBoardsWrite(props: IBoardsWriteProps) {
                 },
                 refetchQueries: [
                     { query: FETCH_BOARD, variables: { boardId: addressparams.boardId } },
-                    { query: FETCH_BOARDS } // 이게 없으면 수정 후 들어가는 상세페이지 안의 '목록으로' 버튼 눌러서 이동했을 때 수정 사항이 바로 안 보임
+                    { query: FETCH_BOARDS }
                 ]
             })
             router.push(`/boards/${result.data.updateBoard._id}`);
         } catch (error) {
-            // 서버에서 받은 에러 메시지
             const errorMessage = (error as ApolloError).graphQLErrors[0]?.message;
-            // 에러 메시지가 있다면 해당 메시지를 alert 창으로 띄우고
             if (errorMessage) {
                 alert(errorMessage);
             } else {
-                // 에러 메시지가 없을 경우를 대비하여 일반적인 메시지 표시
                 alert("에러가 발생했습니다.");
             }
         }
     };
 
-return {
-    onChangeWriter,
-    onChangePassword,
-    onChangeTitle,
-    onChangeContent,
-    onChangeAddressDetail,
-    onChangeYoutubeUrl,
-    onClickSubmit,
-    onClickUpdate,
-    setAddressAndZipcode,
-    onChangePasswordforedit,
-    writer,
-    password,
-    passwordforedit,
-    title,
-    content,
-    zipcode,
-    address,
-    addressDetail,
-    youtubeUrl,
-    writerError,
-    passwordError,
-    titleError,
-    contentError,
-    isButtonDisabled,
-    data,
-    router
-}
+    return {
+        onChangeWriter,
+        onChangePassword,
+        onChangeTitle,
+        onChangeContent,
+        onChangeAddressDetail,
+        onChangeYoutubeUrl,
+        onClickSubmit,
+        onClickUpdate,
+        setAddressAndZipcode,
+        onChangePasswordforedit,
+        writer,
+        password,
+        passwordforedit,
+        title,
+        content,
+        zipcode,
+        address,
+        addressDetail,
+        youtubeUrl,
+        writerError,
+        passwordError,
+        titleError,
+        contentError,
+        isButtonDisabled,
+        data,
+        router,
+        imageUrls,
+        setImageUrls,
+        fileRef,
+        onChangeFile,
+        onClickImage,
+        onClickDeleteImage
+    }
 }
