@@ -1,0 +1,58 @@
+.container {
+    display: flex;
+    flex: 1 0 0;
+    align-items: center;
+    align-content: center;
+    gap: 0.5rem;
+    align-self: stretch;
+    flex-wrap: wrap;
+}
+
+.inputContainer {
+    display: flex;
+    min-width: 11.25rem;
+    max-width: 40rem;
+    padding: 0.75rem;
+    align-items: center;
+    gap: 0.5rem;
+    flex: 1 0 0;
+    border-radius: 0.5rem;
+    background: var(--gray-50, #F2F2F2);
+}
+
+.calendarContainer {
+    display: flex;
+    min-width: 11.25rem;
+    max-width: 40rem;
+    padding: 0.75rem;
+    align-items: center;
+    gap: 0.5rem;
+    border-radius: 0.5rem;
+    background: var(--gray-50, #F2F2F2);
+    font-size: 1rem;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 1.5rem;
+    height: 3rem;
+}
+
+.input {
+    width: 100%;
+    color: var(--gray-500, #000000);
+    background-color: transparent;
+    /* r_16_24 */
+    font-size: 1rem;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 1.5rem;
+    /* 150% */
+}
+
+.input::placeholder {
+    color: var(--Gray-Gray-400, #919191);
+}
+
+.icon {
+    width: 1.5rem;
+    height: 1.5rem;
+}

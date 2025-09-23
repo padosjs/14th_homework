@@ -144,6 +144,7 @@ export default function BoardsWrite(props: IBoardsWriteProps) {
                                         src={`https://storage.googleapis.com/${imageUrls[index]}`}
                                         alt={`업로드된 이미지 ${index + 1}`}
                                         className={styles['uploaded-image']}
+                                        onClick={() => onClickImage(index)}
                                     />
                                     <div className={styles['image-delete-button']} onClick={() => onClickDeleteImage(index)}>
                                         <XMarkIcon className={styles['image-delete-button-icon']} />

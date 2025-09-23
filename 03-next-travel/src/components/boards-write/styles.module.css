@@ -107,10 +107,12 @@
   border-radius: 0.5rem;
   overflow: hidden;
   justify-content: end;
+  cursor: pointer;
 }
 
 .uploaded-image {
   object-fit: cover;
+  width: 100%;
 }
 
 .image-delete-button {
