@@ -1,38 +1,15 @@
 "use client";
 
-import { ChangeEvent, useState } from "react";
-import _ from "lodash";
 import * as React from "react";
 import { ChevronDownIcon } from "lucide-react";
-import styles from "./styles.module.css";
 import { MagnifyingGlassIcon } from "@heroicons/react/24/outline";
 import { DateRange } from "react-day-picker";
-
 import { Button } from "@/components/ui/button";
 import { Calendar } from "@/components/ui/calendar";
 import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover";
-
-export interface SearchInputProps {
-    onSearch: (keyword: string) => void;
-}
-
-export const useSearch = ({ onSearch }: SearchInputProps) => {
-    const [keyword, setKeyword] = useState("");
-
-    const getDebounce = _.debounce((value: string) => {
-        onSearch(value);
-    }, 500);
-
-    const onChangeKeyword = (event: ChangeEvent<HTMLInputElement>) => {
-        setKeyword(event.target.value);
-        getDebounce(event.target.value);
-    };
-
-    return {
-        keyword,
-        onChangeKeyword,
-    };
-};
+import styles from "./styles.module.css";
+import { useSearch } from "./hooks";
+import { SearchInputProps } from "./types";
 
 export default function SearchInput({ onSearch }: SearchInputProps) {
     const { keyword, onChangeKeyword } = useSearch({ onSearch });

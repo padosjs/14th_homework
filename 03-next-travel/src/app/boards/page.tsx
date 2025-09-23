@@ -7,7 +7,7 @@ import { IQuery } from "./types";
 import Pagination from "@/components/boards-list/pagination";
 import { useState } from "react";
 import styles from "./styles.module.css";
-import SearchInput from "@/components/boards-list/search/page";
+import SearchInput from "@/components/boards-list/search/index";
 import Button from "@/components/button/button";
 import Link from "next/link";
 import { PencilSquareIcon } from '@heroicons/react/24/outline';
