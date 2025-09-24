@@ -70,7 +70,13 @@
     /* 150% */
 }
 
-.setting {
+.settingDefault {
+    display: flex;
+    align-items: center;
+    gap: 0.25rem;
+}
+
+.settingLoggedIn {
     display: flex;
     align-items: center;
     gap: 0.25rem;

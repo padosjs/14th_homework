@@ -4,35 +4,50 @@ import { ReactNode } from 'react';
 import { usePathname } from 'next/navigation';
 import Navigation from "@/commons/layout/navigation";
 import BannerCarousel from "@/commons/layout/banner";
+import { gql, useQuery } from "@apollo/client"
 
-interface IProps {
-    children: ReactNode;
-}
+const FETCH_USER_LOGGED_IN = gql`
+    query {
+        fetchUserLoggedIn {
+            _id
+            email
+            name
+        }
+    }
+`
+
+interface IProps { children: ReactNode; }
 
 export default function Layout({ children }: IProps) {
+    // useQuery를 통해 가져온 데이터는 data.fetchUserLoggedIn에 저장됩니다.
+    const { data } = useQuery(FETCH_USER_LOGGED_IN);
     const pathname = usePathname();
 
-    // BannerCarousel을 숨길 경로 목록을 정의합니다.
-    const pathsToHide = [
+    const pathsToHideBanner = [
         '/boards/new',
         '/boards/',
         '/openapis',
     ];
 
-    // 현재 경로가 숨겨야 하는 경로 목록에 포함되는지 확인합니다.
-    // 'boards/[id]/edit'과 같은 동적 경로도 포함됩니다.
-    const shouldHideBanner = pathsToHide.some(path => {
-        // '/boards/'로 시작하고 '/edit'으로 끝나는 경우를 추가합니다.
+    const pathsToHideBoth = [
+        '/login',
+        '/signup',
+    ];
+
+    const shouldHideBanner = pathsToHideBanner.some(path => {
         if (path === '/boards/') {
             return pathname.startsWith(path) && pathname.endsWith('/edit');
         }
-        // 다른 고정된 경로들을 확인합니다.
         return pathname === path;
-    });
+    }) || pathsToHideBoth.includes(pathname);
+
+    const shouldHideNavigation = pathsToHideBoth.includes(pathname);
 
     return (
         <>
-            <Navigation />
+            {/* shouldHideNavigation이 false일 때만 Navigation을 렌더링합니다. */}
+            {/* data.fetchUserLoggedIn을 prop으로 전달합니다. */}
+            {!shouldHideNavigation && <Navigation userData={data?.fetchUserLoggedIn} />}
             {/* shouldHideBanner가 false일 때만 BannerCarousel을 렌더링합니다. */}
             {!shouldHideBanner && <BannerCarousel />}
             <div>{children}</div>

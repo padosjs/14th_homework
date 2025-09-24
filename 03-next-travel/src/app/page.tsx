@@ -8,7 +8,6 @@ export default function Home() {
       메인 페이지입니다!
       <br />
       <br />
-      <br />
       작업된 페이지:
       <br />
       <br />
@@ -23,6 +22,12 @@ export default function Home() {
       </Link><br />
       <Link href="/openapis">
         <Button className="white-button" text="오픈 API" />
+      </Link><br />
+      <Link href="/login">
+        <Button className="white-button" text="로그인" />
+      </Link><br />
+      <Link href="/signup">
+        <Button className="white-button" text="회원가입" />
       </Link><br />
     </div>
   );

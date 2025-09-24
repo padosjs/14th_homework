@@ -1,51 +1,77 @@
 "use client"
 
+import { useAccessTokenStore } from "@/commons/stores/access-token-store"
+import Button from "@/components/button/button"
+import InputField from "@/components/input/input"
+import { gql, useMutation } from "@apollo/client"
+import Image from "next/image"
 import Link from "next/link"
-import styles from "./styles.module.css";
-import Button from "@/components/button/button";
+import { useRouter } from "next/navigation"
+import { useState } from "react"
+import styles from "./styles.module.css"
 
-// 사용자 정보가 담길 타입 인터페이스를 정의합니다.
-// null 또는 undefined일 수 있으므로 선택적(optional)으로 처리합니다.
-interface ILoggedInUser {
-    _id: string;
-    email: string;
-    name: string;
-}
-
-// Navigation 컴포넌트가 userData prop을 받을 수 있도록 수정합니다.
-export default function Navigation({ userData }: { userData?: ILoggedInUser | null }) {
-    // userData가 존재하면 true, 없으면 false가 됩니다.
-    const isLoggedIn = !!userData;
-
-    // 로그인 여부에 따라 다른 컴포넌트를 반환합니다.
-    const renderSetting = () => {
-        if (isLoggedIn) {
-            // 로그인 상태일 때
-            return (
-                <div className={styles.settingLoggedIn}>
-                    <img src="/assets/images/profileimg.png" className={styles.profileImage} />
-                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
-                        <path d="M11.5203 14.174L8.369 11.023C8.32567 10.9795 8.2915 10.9309 8.2665 10.8773C8.2415 10.8238 8.229 10.7663 8.229 10.705C8.229 10.5825 8.27042 10.476 8.35325 10.3855C8.43609 10.2952 8.54525 10.25 8.68075 10.25H15.3193C15.4548 10.25 15.5639 10.2957 15.6468 10.387C15.7296 10.4782 15.771 10.5846 15.771 10.7063C15.771 10.7368 15.7243 10.8423 15.6308 11.023L12.4798 14.174C12.4074 14.2465 12.3326 14.2994 12.2553 14.3327C12.1779 14.3661 12.0928 14.3828 12 14.3828C11.9072 14.3828 11.8221 14.3661 11.7448 14.3327C11.6674 14.2994 11.5926 14.2465 11.5203 14.174Z" fill="black" />
-                    </svg>
-                    <div>{userData.name} 님</div>
-                </div>
-            );
-        } else {
-            // 로그아웃 상태일 때
-            return (
-                <div className={styles.settingDefault}>
-                    <Button className="black-button" text="로그인" path="/login" />
-                </div>
-            );
+const LOGIN_USER = gql`
+    mutation loginUser($email: String!, $password: String!) {
+        loginUser(email: $email, password: $password) {
+            accessToken
         }
-    };
+    }
+`
+
+export default function LoginPage() {
+
+    const router = useRouter()
+    const [loginUser] = useMutation(LOGIN_USER)
+    const { setAccessToken } = useAccessTokenStore()
+
+    const [email, setEmail] = useState("")
+    const [password, setPassword] = useState("")
+    // 하나의 에러 상태로 통합
+    const [loginError, setLoginError] = useState<boolean>(false);
+
+    const onChangeEmail = (event) => { setEmail(event.target.value) }
+    const onChangePassword = (event) => { setPassword(event.target.value) }
+
+    const onClickLogin = async () => {
+        // 입력 필드가 비어 있을 경우
+        if (!email || !password) {
+            setLoginError(true);
+            return;
+        }
+
+        // 입력 필드가 모두 채워져 있으면 에러 상태 초기화
+        setLoginError(false);
+
+        try {
+            const result = await loginUser({
+                variables: { email, password }
+            })
+            const API로받은_accessToken = result.data?.loginUser.accessToken
+            console.log(API로받은_accessToken)
+
+            setAccessToken(API로받은_accessToken)
+
+            router.push("/boards")
+
+        } catch (error) {
+            // API 호출 실패 시 에러 상태 업데이트
+            setLoginError(true)
+        }
+    }
 
     return (
-        <div className={styles.bar}>
-            <div className={styles.container}>
-                <div className={styles.mainNav}>
-                <Link href="/">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="52" height="32" viewBox="0 0 52 32" fill="none">
+        <>
+            <div className={styles.loginPageContainer}>
+                <div className={styles.loginFormBox}>
+                    <Link href="/">
+                        <svg
+                            xmlns="http://www.w3.org/2000/svg"
+                            width="7.5rem"
+                            height="4.65831rem"
+                            viewBox="0 0 52 32"
+                            fill="none"
+                            className={styles.logo}
+                        >
                             <path d="M33.2223 6.31243H34.4082C35.7218 6.31243 36.3786 5.74078 36.3786 4.59749C36.3786 3.4542 35.7218 2.88255 34.4082 2.88255H33.2223V6.31243ZM33.2223 11.9681C33.2223 12.9555 32.4219 13.756 31.4344 13.756C30.447 13.756 29.6465 12.9555 29.6465 11.9681V2.2805C29.6465 1.02101 30.6675 0 31.927 0H35.3387C36.8833 0 38.0631 0.401368 38.878 1.2041C39.7051 2.00684 40.1186 3.13797 40.1186 4.59749C40.1186 6.05701 39.7051 7.18814 38.878 7.99088C38.0631 8.79362 36.8833 9.19498 35.3387 9.19498H33.2223V11.9681Z" fill="black" />
                             <path d="M44.6249 24.5564H45.8107C47.1243 24.5564 47.7811 23.9848 47.7811 22.8415C47.7811 21.6982 47.1243 21.1266 45.8107 21.1266H44.6249V24.5564ZM44.6249 30.2121C44.6249 31.1995 43.8244 32 42.8369 32C41.8495 32 41.049 31.1995 41.049 30.2121V20.5245C41.049 19.265 42.07 18.244 43.3295 18.244H46.7412C48.2858 18.244 49.4656 18.6454 50.2805 19.4481C51.1076 20.2509 51.5211 21.382 51.5211 22.8415C51.5211 24.301 51.1076 25.4322 50.2805 26.2349C49.4656 27.0376 48.2858 27.439 46.7412 27.439H44.6249V30.2121Z" fill="black" />
                             <path d="M14.6161 6.14823H15.2911C15.9965 6.14823 16.5378 6.00228 16.9148 5.71038C17.2919 5.41847 17.4804 4.99886 17.4804 4.45154C17.4804 3.90422 17.2919 3.48461 16.9148 3.1927C16.5378 2.9008 15.9965 2.75485 15.2911 2.75485C14.9183 2.75485 14.6161 3.05707 14.6161 3.42987V6.14823ZM22.4792 13.756H18.0277L14.6161 8.46522V13.756H11.0402V1.52033C11.0402 0.680676 11.7209 0 12.5606 0H16.6047C17.3709 0 18.0399 0.115545 18.6115 0.346636C19.1832 0.565564 19.6514 0.869631 20.0163 1.25884C20.3933 1.64804 20.6731 2.09806 20.8555 2.60889C21.0501 3.11973 21.1474 3.66705 21.1474 4.25085C21.1474 5.29684 20.892 6.14823 20.3812 6.80502C19.8825 7.44964 19.1406 7.8875 18.1554 8.11859L22.4792 13.756Z" fill="black" />
@@ -58,14 +84,38 @@ export default function Navigation({ userData }: { userData?: ILoggedInUser | nu
                             <path d="M39.5287 20.1444C39.5287 21.194 38.6778 22.0448 37.6283 22.0448C36.5787 22.0448 35.7279 21.194 35.7279 20.1444C35.7279 19.0949 36.5787 18.244 37.6283 18.244C38.6778 18.244 39.5287 19.0949 39.5287 20.1444Z" fill="#F66A6A" />
                         </svg>
                     </Link>
-                    <div className={styles.navLinksContainer}>
-                        <div className={styles.navLinkActive}>트립토크</div>
-                        <div className={styles.navLink}>숙박권 구매</div>
-                        <div className={styles.navLink}>마이 페이지</div>
+                    <h1 className={styles.title}>트립트립에 오신 것을 환영합니다</h1>
+                    <p className={styles.subtitle}>트립트립에 로그인하세요</p>
+                    <div className={styles.InputFields}>
+                        <InputField
+                            placeholderText="이메일을 입력해주세요."
+                            onChange={onChangeEmail}
+                            value={email}
+                            hasError={loginError}
+                        />
+                        <InputField
+                            placeholderText="비밀번호를 입력해주세요."
+                            type="password"
+                            onChange={onChangePassword}
+                            value={password}
+                            hasError={loginError}
+                            errorMessage="아이디 또는 비밀번호를 확인해 주세요."
+                        />
+                    </div>
+                    <div className={styles.Buttons}>
+                        <Button className="blue-button-full" text="로그인" onClick={onClickLogin} />
+                        <Button className="white-button-full" text="회원가입" path="/signup" />
                     </div>
                 </div>
-                {renderSetting()}
+                <div className={styles.backgroundImage}>
+                    <Image
+                        src={"/assets/images/bg.jpg"}
+                        alt="로그인 배경 이미지"
+                        fill
+                        style={{ objectFit: "cover" }}
+                    />
+                </div>
             </div>
-        </div>
-    );
+        </>
+    )
 }

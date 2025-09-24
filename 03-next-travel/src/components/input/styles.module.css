@@ -45,6 +45,10 @@
   /* 150% */
 }
 
+.input-text.error {
+  border: 1px solid var(--red, #F66A6A);
+}
+
 /* 비활성화 상태 스타일 추가 */
 .input-text:disabled {
   cursor: not-allowed;

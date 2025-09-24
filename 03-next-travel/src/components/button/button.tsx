@@ -1,5 +1,8 @@
+"use client"
+
 import styles from './styles.module.css'
 import { MouseEventHandler, ComponentType, SVGProps } from 'react';
+import { useRouter } from 'next/navigation';
 
 interface ButtonProps {
     /** 추가적인 CSS 클래스를 지정합니다. (예: 'white-button', 'blue-button') */
@@ -16,9 +19,24 @@ interface ButtonProps {
     iconSize?: string;
     /** 아이콘의 색상을 지정합니다. (예: 'red', '#ff0000') */
     iconColor?: string;
+    /** 버튼 클릭 시 이동할 경로를 지정합니다. */
+    path?: string;
 }
 
-const Button = ({ className, onClick, disabled, icon: Icon, text, iconColor }: ButtonProps) => {
+const Button = ({ className, onClick, disabled, icon: Icon, text, iconColor, path }: ButtonProps) => {
+    const router = useRouter();
+
+    const handleClick = (event: React.MouseEvent<HTMLButtonElement>) => {
+        // path prop이 있으면 페이지를 이동합니다.
+        if (path) {
+            router.push(path);
+        }
+        // 원래 onClick 함수가 정의되어 있으면 실행합니다.
+        if (onClick) {
+            onClick(event);
+        }
+    };
+    
     // className prop이 제공되면 해당 클래스를 사용하고, 그렇지 않으면 'white-button'을 기본값으로 설정합니다.
     const buttonClass = `${styles.button} ${styles[className || 'white-button']}`;
 
@@ -27,7 +45,7 @@ const Button = ({ className, onClick, disabled, icon: Icon, text, iconColor }: B
     return (
         <button
             className={buttonClass}
-            onClick={onClick}
+            onClick={handleClick}
             disabled={disabled}
         >
             {/* Icon prop이 있을 때만 아이콘을 렌더링합니다. */}
