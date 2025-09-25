@@ -1,25 +1,64 @@
 "use client";
 
 import * as React from "react";
+import { ChangeEvent, useState } from "react";
+import _ from "lodash";
 import { ChevronDownIcon } from "lucide-react";
 import { MagnifyingGlassIcon } from "@heroicons/react/24/outline";
 import { DateRange } from "react-day-picker";
 import { Button } from "@/components/ui/button";
 import { Calendar } from "@/components/ui/calendar";
 import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover";
+import { ko } from 'date-fns/locale';
 import styles from "./styles.module.css";
-import { useSearch } from "./hooks";
-import { SearchInputProps } from "./types";
+
+interface SearchInputProps { onSearch: (newKeyword: string, newStartDate: any, newEndDate: any) => void; }
+
+const useSearch = ({ onSearch }: SearchInputProps) => {
+    const [keyword, setKeyword] = useState("");
+    const [date, setDate] = useState<DateRange | undefined>(undefined);
+    const [open, setOpen] = useState(false);
+
+    const getDebounce = React.useCallback(
+        _.debounce((currentKeyword: string, currentDate: DateRange | undefined) => {
+            onSearch(currentKeyword, currentDate?.from, currentDate?.to);
+        }, 500),
+        [onSearch]
+    );
+
+    const onChangeKeyword = (event: ChangeEvent<HTMLInputElement>) => {
+        const newKeyword = event.target.value;
+        setKeyword(newKeyword);
+        getDebounce(newKeyword, date);
+    };
+
+    const onChangeDate = (newDate: DateRange | undefined) => {
+        setDate(newDate);
+        getDebounce(keyword, newDate);
+    };
+
+    const toggleOpen = (newOpen: boolean) => {
+        setOpen(newOpen);
+    };
+
+    return {
+        keyword,
+        onChangeKeyword,
+        date,
+        onChangeDate,
+        open,
+        toggleOpen,
+    };
+};
+
 
 export default function SearchInput({ onSearch }: SearchInputProps) {
-    const { keyword, onChangeKeyword } = useSearch({ onSearch });
 
-    const [open, setOpen] = React.useState(false);
-    const [date, setDate] = React.useState<DateRange | undefined>(undefined);
+    const { keyword, onChangeKeyword, date, onChangeDate, open, toggleOpen } = useSearch({ onSearch });
 
     return (
         <div className={styles.container}>
-            <Popover open={open} onOpenChange={setOpen}>
+            <Popover open={open} onOpenChange={toggleOpen}>
                 <PopoverTrigger asChild>
                     <Button variant="outline" id="date" className={styles.calendarContainer}>
                         {date?.from ? (
@@ -31,7 +70,7 @@ export default function SearchInput({ onSearch }: SearchInputProps) {
                     </Button>
                 </PopoverTrigger>
                 <PopoverContent className="w-auto overflow-hidden p-0" align="start">
-                    <Calendar mode="range" selected={date} captionLayout="dropdown" onSelect={setDate} />
+                    <Calendar mode="range" selected={date} captionLayout="dropdown" onSelect={onChangeDate} locale={ko} />
                 </PopoverContent>
             </Popover>
             <div className={styles.inputContainer}>

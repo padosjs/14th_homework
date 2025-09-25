@@ -7,7 +7,7 @@ import { IQuery } from "./types";
 import Pagination from "@/components/boards-list/pagination";
 import { useState } from "react";
 import styles from "./styles.module.css";
-import SearchInput from "@/components/boards-list/search/index";
+import SearchInput from "@/components/boards-list/search/page";
 import Button from "@/components/button/button";
 import Link from "next/link";
 import { PencilSquareIcon } from '@heroicons/react/24/outline';
@@ -16,11 +16,15 @@ export default function BoardsListPage() {
     const [keyword, setKeyword] = useState("");
     const [startPage, setStartPage] = useState(1);
     const [currentPage, setCurrentPage] = useState(1);
+    const [startDate, setStartDate] = useState(undefined);
+    const [endDate, setEndDate] = useState(undefined);
 
     const { data, refetch } = useQuery<IQuery>(FETCH_BOARDS, {
         variables: {
             search: keyword,
             page: currentPage,
+            startDate: startDate,
+            endDate: endDate,
         },
     });
     const { data: dataBoardsCount, refetch: refetchBoardsCount } = useQuery(
@@ -28,6 +32,8 @@ export default function BoardsListPage() {
         {
             variables: {
                 search: keyword,
+                startDate: startDate,
+                endDate: endDate,
             },
         }
     );
@@ -35,8 +41,19 @@ export default function BoardsListPage() {
 
     const lastPage = Math.ceil((dataBoardsCount?.fetchBoardsCount ?? 10) / 10);
 
-    const handleSearch = (newKeyword: string) => {
+    const handleSearch = (newKeyword: string, newStartDate: any, newEndDate: any) => {
         setKeyword(newKeyword);
+        setStartDate(newStartDate);
+
+        let adjustedEndDate = newEndDate;
+        if (newEndDate) {
+            // newEndDate를 복사한 후 시간을 변경합니다.
+            adjustedEndDate = new Date(newEndDate); 
+            adjustedEndDate.setHours(23, 59, 59, 999);
+        }
+        setEndDate(adjustedEndDate);
+
+        console.log(newStartDate, adjustedEndDate);
         setCurrentPage(1);
         setStartPage(1);
     };

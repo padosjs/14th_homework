@@ -50,6 +50,7 @@ export default function LoginPage() {
             console.log(API로받은_accessToken)
 
             setAccessToken(API로받은_accessToken)
+            localStorage.setItem("accessToken", API로받은_accessToken) // 임시 사용(나중에 refreshToken으로 대체 예정)
 
             router.push("/boards")
 
