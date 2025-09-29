@@ -4,8 +4,9 @@ import BoardsDetail from "@/components/boards-detail/detail";
 import CommentWrite from "@/components/boards-detail/comment-write";
 import BoardComments from "@/components/boards-detail/comment-list";
 import styles from "./styles.module.css"
+import { withAuth } from "@/commons/hocs/withAuth";
 
-export default function BoardDetailPage() {
+function BoardDetailPage() {
     return (
 
         <div className={styles['page-container']}>
@@ -17,3 +18,5 @@ export default function BoardDetailPage() {
         </div>
     );
 }
+
+export default withAuth(BoardDetailPage)

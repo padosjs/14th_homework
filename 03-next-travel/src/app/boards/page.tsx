@@ -11,8 +11,10 @@ import SearchInput from "@/components/boards-list/search/page";
 import Button from "@/components/button/button";
 import Link from "next/link";
 import { PencilSquareIcon } from '@heroicons/react/24/outline';
+import { withAuth } from "@/commons/hocs/withAuth"
 
-export default function BoardsListPage() {
+
+function BoardsListPage() {
     const [keyword, setKeyword] = useState("");
     const [startPage, setStartPage] = useState(1);
     const [currentPage, setCurrentPage] = useState(1);
@@ -48,7 +50,7 @@ export default function BoardsListPage() {
         let adjustedEndDate = newEndDate;
         if (newEndDate) {
             // newEndDate를 복사한 후 시간을 변경합니다.
-            adjustedEndDate = new Date(newEndDate); 
+            adjustedEndDate = new Date(newEndDate);
             adjustedEndDate.setHours(23, 59, 59, 999);
         }
         setEndDate(adjustedEndDate);
@@ -89,3 +91,5 @@ export default function BoardsListPage() {
         </div>
     );
 }
+
+export default withAuth(BoardsListPage)
