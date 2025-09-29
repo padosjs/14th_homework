@@ -1,3 +1,6 @@
+"use client"
+
+import { withAuth } from '@/commons/hocs/withAuth';
 import Image from 'next/image';
 
 interface TourismItem {
@@ -36,7 +39,7 @@ async function getTourismData(mapX: number, mapY: number): Promise<{ items: Tour
     };
 }
 
-export default async function HomePage({
+async function HomePage({
     searchParams,
 }: {
     searchParams: { mapX?: string; mapY?: string };
@@ -81,3 +84,5 @@ export default async function HomePage({
         </main>
     );
 }
+
+export default withAuth(HomePage)
