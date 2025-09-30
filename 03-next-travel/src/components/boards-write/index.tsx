@@ -1,7 +1,6 @@
 "use client";
 
 import useBoardsWrite from './hook';
-import InputField from '@/components/input/input'
 import Button from '@/components/button/button';
 import styles from './styles.module.css';
 import { IBoardsWriteProps, Board } from "./types"
@@ -18,33 +17,24 @@ import {
     AlertDialogTitle,
     AlertDialogTrigger,
 } from "@/components/ui/alert-dialog";
+import { zodResolver } from "@hookform/resolvers/zod"
+import { useForm } from "react-hook-form"
+import { IScehma, schema, editSchema } from "./schema"
+import { useEffect } from 'react'; 
 
 export default function BoardsWrite(props: IBoardsWriteProps) {
     const {
-        onChangeWriter,
-        onChangePassword,
-        onChangeTitle,
-        onChangeContent,
-        onChangeAddressDetail,
-        onChangeYoutubeUrl,
-        onClickSubmit,
-        onClickUpdate,
+        onChangeAddressDetail, 
+        onChangeYoutubeUrl, 
+        onClickSubmit, 
+        onClickUpdate, 
         setAddressAndZipcode,
         onChangePasswordforedit,
-        writer,
-        password,
         passwordforedit,
-        title,
-        content,
         zipcode,
         address,
         addressDetail,
         youtubeUrl,
-        writerError,
-        passwordError,
-        titleError,
-        contentError,
-        isButtonDisabled,
         data,
         router,
         imageUrls,
@@ -52,92 +42,174 @@ export default function BoardsWrite(props: IBoardsWriteProps) {
         fileRef,
         onChangeFile,
         onClickImage,
-        onClickDeleteImage
+        onClickDeleteImage,
     } = useBoardsWrite(props)
 
     const boardData = data?.fetchBoard as Board | undefined;
     const UPLOAD_LIMIT = 3;
 
+    const {
+        register,
+        handleSubmit,
+        formState: { errors, isValid }, 
+        setValue, 
+        getValues,
+    } = useForm<IScehma>({
+        resolver: zodResolver(props.isEdit ? editSchema : schema),
+        mode: "onChange",
+        defaultValues: {
+            writer: props.isEdit ? boardData?.writer || "" : "",
+            password: props.isEdit ? "●●●●●●" : "", 
+            title: props.isEdit ? boardData?.title || "" : "",
+            content: props.isEdit ? boardData?.contents || "" : "",
+        }
+    })
+
+    const onSubmitCreate = (formData: IScehma) => {
+        const fullData = {
+            ...formData,
+            zipcode,
+            address,
+            addressDetail,
+            youtubeUrl,
+            imageUrls,
+        }
+        onClickSubmit(fullData as any); 
+    }
+
+    const onClickUpdateWithValidation = () => {
+        if (props.isEdit) {
+            // 수정 모드에서는 title과 content만 검증
+            const { title, content } = getValues();
+            if (!title || !content) {
+                alert("제목과 내용을 입력해주세요.");
+                return;
+            }
+        } else if (!isValid) {
+            console.error("폼 유효성 검사 실패");
+            return;
+        }
+        
+        const formData = getValues();
+        const fullData = {
+            ...formData,
+            zipcode,
+            address,
+            addressDetail,
+            youtubeUrl,
+            imageUrls,
+            passwordforedit,
+        };
+        onClickUpdate(fullData as any);
+    }
+
+    useEffect(() => {
+        if (props.isEdit && boardData) {
+            setValue("writer", boardData.writer || "");
+            setValue("password", "●●●●●●"); 
+            setValue("title", boardData.title || "");
+            setValue("content", boardData.contents || "");
+        }
+    }, [props.isEdit, boardData, setValue])
+
+
     return (
-        <div className={styles['main-content']}>
+        <form className={styles['main-content']} onSubmit={props.isEdit ? (e) => e.preventDefault() : handleSubmit(onSubmitCreate)}>
             <div className={styles['page-container']}>
                 <h1 className={styles['page-title']}>게시물 {props.isEdit ? "수정" : "등록"}</h1>
                 <div className={styles['input-group-column']}>
-                    <InputField
-                        title="작성자"
-                        placeholderText="작성자명을 입력해주세요."
-                        isRequired={true}
-                        onChange={onChangeWriter}
-                        value={props.isEdit ? boardData?.writer || "" : writer}
-                        hasError={writerError}
-                        errorMessage="필수 입력 사항입니다."
-                        disabled={props.isEdit}
-                    />
-                    <InputField
-                        title="비밀번호"
-                        placeholderText="비밀번호를 입력해주세요."
-                        isRequired={true}
-                        onChange={onChangePassword}
-                        value={props.isEdit ? "●●●●●●" : password}
-                        hasError={passwordError}
-                        errorMessage="필수 입력 사항입니다."
-                        disabled={props.isEdit}
-                    />
+                    <div className={styles['input-container']}>
+                        <label htmlFor="writer" className={`${styles['input-title']} ${styles['required']}`}>작성자 <p className={styles['input-title-asterisk']}>*</p></label>
+                        <input
+                            id="writer"
+                            className={`${styles['input-text']} ${errors.writer ? styles['input-error'] : ''}`}
+                            type="text"
+                            placeholder="작성자명을 입력해주세요."
+                            {...register("writer")} 
+                            disabled={props.isEdit}
+                        />
+                        {errors.writer && <p className={styles['error-message']}>{errors.writer.message}</p>}
+                    </div>
+                    <div className={styles['input-container']}>
+                        <label htmlFor="password" className={`${styles['input-title']} ${styles['required']}`}>비밀번호 <p className={styles['input-title-asterisk']}>*</p></label>
+                        <input
+                            id="password"
+                            className={`${styles['input-text']} ${errors.password ? styles['input-error'] : ''}`}
+                            type="password"
+                            placeholder="비밀번호를 입력해주세요."
+                            {...register("password")} 
+                            disabled={props.isEdit}
+                        />
+                        {errors.password && <p className={styles['error-message']}>{errors.password.message}</p>}
+                    </div>
                 </div>
                 <div className={styles['divider']}></div>
-                <InputField
-                    title="제목"
-                    placeholderText="제목을 입력해주세요."
-                    isRequired={true}
-                    onChange={onChangeTitle}
-                    value={title}
-                    hasError={titleError}
-                    errorMessage="필수 입력 사항입니다."
-                />
+                <div className={styles['input-container']}>
+                    <label htmlFor="title" className={`${styles['input-title']} ${styles['required']}`}>제목 <p className={styles['input-title-asterisk']}>*</p></label>
+                    <input
+                        id="title"
+                        className={`${styles['input-text']} ${errors.title ? styles['input-error'] : ''}`}
+                        type="text"
+                        placeholder="제목을 입력해주세요."
+                        {...register("title")} 
+                    />
+                    {errors.title && <p className={styles['error-message']}>{errors.title.message}</p>}
+                </div>
                 <div className={styles['divider']}></div>
-                <InputField
-                    title="내용"
-                    placeholderText="내용을 입력해주세요."
-                    isRequired={true}
-                    isTextArea={true}
-                    rows={13}
-                    onChange={onChangeContent}
-                    value={content}
-                    hasError={contentError}
-                    errorMessage="필수 입력 사항입니다."
-                />
+                <div className={styles['input-container']}>
+                    <label htmlFor="content" className={`${styles['input-title']} ${styles['required']}`}>내용 <p className={styles['input-title-asterisk']}>*</p></label>
+                    <textarea
+                        id="content"
+                        className={`${styles['input-text']} ${styles['textarea-field']} ${errors.content ? styles['input-error'] : ''}`}
+                        placeholder="내용을 입력해주세요."
+                        rows={13}
+                        {...register("content")} 
+                    />
+                    {errors.content && <p className={styles['error-message']}>{errors.content.message}</p>}
+                </div>
                 <div className={styles['divider']}></div>
                 <div className={styles['input-group-address']}>
                     <div className={styles['input-button-group-address']}>
-                        <InputField
-                            placeholderText="01234"
+                        <input
+                            className={styles['input-text']}
+                            type="text"
+                            placeholder="01234"
                             value={zipcode}
+                            readOnly
                         />
                         <Postcode onAddressComplete={setAddressAndZipcode} />
                     </div>
-                    <InputField
-                        placeholderText="주소를 입력해주세요."
+                    <input
+                        className={styles['input-text']}
+                        type="text"
+                        placeholder="주소를 입력해주세요."
                         value={address}
+                        readOnly
                     />
-                    <InputField
-                        placeholderText="상세주소"
+                    <input
+                        className={styles['input-text']}
+                        type="text"
+                        placeholder="상세주소"
                         onChange={onChangeAddressDetail}
                         value={addressDetail}
                     />
                 </div>
                 <div className={styles['divider']}></div>
-                <InputField
-                    title="유튜브 링크"
-                    placeholderText="링크를 입력해주세요"
-                    value={youtubeUrl}
-                    onChange={onChangeYoutubeUrl}
-                />
+                <div className={styles['input-container']}>
+                    <label htmlFor="youtubeUrl" className={styles['input-title']}>유튜브 링크</label>
+                    <input
+                        id="youtubeUrl"
+                        className={styles['input-text']}
+                        type="text"
+                        placeholder="링크를 입력해주세요"
+                        value={youtubeUrl}
+                        onChange={onChangeYoutubeUrl}
+                    />
+                </div>
                 <div className={styles['divider']}></div>
                 <div className={styles['button-group-image-upload']}>
-                    {/* 이미지 업로드 버튼을 3개 생성 */}
                     {Array.from({ length: UPLOAD_LIMIT }).map((_, index) => (
                         <div key={index} className={styles['image-upload-item']}>
-                            {/* 이미지가 업로드 되었을 때 */}
                             {imageUrls[index] ? (
                                 <>
                                     <img
@@ -151,13 +223,11 @@ export default function BoardsWrite(props: IBoardsWriteProps) {
                                     </div>
                                 </>
                             ) : (
-                                // 이미지가 없을 때
                                 <div className={styles['image-upload-button']} onClick={() => onClickImage(index)}>
                                     <PlusIcon className={styles['button-icon']} />
                                     <span>클릭해서 사진 업로드</span>
                                 </div>
                             )}
-                            {/* 숨겨진 파일 인풋은 항상 존재 */}
                             <input
                                 style={{ display: "none" }}
                                 type="file"
@@ -173,15 +243,17 @@ export default function BoardsWrite(props: IBoardsWriteProps) {
                     <Button className="white-button" text="취소" onClick={() => router.back()} />
                     {props.isEdit ? (
                         <AlertDialog>
-                            <AlertDialogTrigger>
-                                <Button className="blue-button" text="수정" disabled={isButtonDisabled} />
+                            <AlertDialogTrigger asChild>
+                                <Button className="blue-button" text="수정" disabled={!isValid}/>
                             </AlertDialogTrigger>
                             <AlertDialogContent>
                                 <AlertDialogHeader>
                                     <AlertDialogTitle>글을 작성할 때 입력하셨던 비밀번호를 입력해 주세요.</AlertDialogTitle>
                                     <AlertDialogDescription>
-                                        <InputField
-                                            placeholderText='비밀번호 입력'
+                                        <input
+                                            className={styles['input-text']}
+                                            type="password"
+                                            placeholder='비밀번호 입력'
                                             value={passwordforedit}
                                             onChange={onChangePasswordforedit}
                                         />
@@ -189,15 +261,15 @@ export default function BoardsWrite(props: IBoardsWriteProps) {
                                 </AlertDialogHeader>
                                 <AlertDialogFooter>
                                     <AlertDialogCancel>취소</AlertDialogCancel>
-                                    <AlertDialogAction onClick={onClickUpdate}>확인</AlertDialogAction>
+                                    <AlertDialogAction onClick={onClickUpdateWithValidation}>확인</AlertDialogAction>
                                 </AlertDialogFooter>
                             </AlertDialogContent>
                         </AlertDialog>
                     ) : (
-                        <Button className="blue-button" text="등록" onClick={onClickSubmit} disabled={isButtonDisabled} />
+                        <Button className="blue-button" text="등록" type="submit" disabled={!isValid} />
                     )}
                 </div>
             </div>
-        </div>
+        </form>
     );
 }

@@ -1,9 +1,9 @@
 import { useDaumPostcodePopup } from 'react-daum-postcode';
 import type { Address } from 'react-daum-postcode';
-import Button from '../button/button';
+import styles from './styles.module.css'
 
 interface IPostcodeProps {
-  onAddressComplete: (address: string, zipcode: string) => void;
+    onAddressComplete: (address: string, zipcode: string) => void;
 }
 
 export default function Postcode(props: IPostcodeProps) {
@@ -22,7 +22,7 @@ export default function Postcode(props: IPostcodeProps) {
             }
             fullAddress += extraAddress !== '' ? ` (${extraAddress})` : '';
         }
-        
+
         props.onAddressComplete(fullAddress, data.zonecode);
     };
 
@@ -31,6 +31,6 @@ export default function Postcode(props: IPostcodeProps) {
     };
 
     return (
-        <Button className="white-button" text="우편번호 검색" onClick={handleClick} />
+        <button type="button" className={`${styles.button} ${styles['white-button']}`} onClick={handleClick}>우편번호 검색</button>
     );
 };

@@ -6,6 +6,16 @@ import { useMutation, useQuery, ApolloError } from "@apollo/client"
 import { checkValidationFile } from '@/commons/libraries/image-validation';
 import { CREATE_BOARD, FETCH_BOARD, FETCH_BOARDS, UPDATE_BOARD, UPLOAD_FILE } from './queries';
 import { IBoardsWriteProps, Board } from "./types";
+import { IScehma } from "./schema"; 
+
+interface IFormFullData extends IScehma {
+    zipcode: string;
+    address: string;
+    addressDetail: string;
+    youtubeUrl: string;
+    imageUrls: string[];
+    passwordforedit?: string; 
+}
 
 export default function useBoardsWrite(props: IBoardsWriteProps) {
     const router = useRouter()
@@ -14,10 +24,6 @@ export default function useBoardsWrite(props: IBoardsWriteProps) {
     const [createBoard] = useMutation(CREATE_BOARD)
     const [updateBoard] = useMutation(UPDATE_BOARD)
 
-
-    // 이미지 파일 업로드 관련
-    // 이미지 파일 업로드 관련
-    // 이미지 파일 업로드 관련
 
     const [imageUrls, setImageUrls] = useState(["", "", ""])
     const fileRef = useRef<HTMLInputElement[] | null[]>([]);
@@ -53,15 +59,7 @@ export default function useBoardsWrite(props: IBoardsWriteProps) {
             fileRef.current[index]!.value = "";
         }
     }
-    // 이미지 파일 업로드 관련
-    // 이미지 파일 업로드 관련
-    // 이미지 파일 업로드 관련
 
-
-
-
-
-    // 수정 모드를 위한 Fetch
     const { data } = useQuery<{ fetchBoard: Board }>(FETCH_BOARD, {
         variables: {
             boardId: addressparams.boardId
@@ -69,39 +67,12 @@ export default function useBoardsWrite(props: IBoardsWriteProps) {
         skip: !props.isEdit
     });
 
-    const [writer, setWriter] = useState<string>("");
-    const [password, setPassword] = useState<string>("");
     const [passwordforedit, setPasswordforedit] = useState<string>("");
-    const [title, setTitle] = useState<string>("");
-    const [content, setContent] = useState<string>("");
     const [zipcode, setZipcode] = useState<string>("");
     const [address, setAddress] = useState<string>("");
     const [addressDetail, setAddressDetail] = useState<string>("");
     const [youtubeUrl, setYoutubeUrl] = useState<string>("");
 
-    const [writerError, setWriterError] = useState<boolean>(false);
-    const [passwordError, setPasswordError] = useState<boolean>(false);
-    const [titleError, setTitleError] = useState<boolean>(false);
-    const [contentError, setContentError] = useState<boolean>(false);
-
-    const [isButtonDisabled, setIsButtonDisabled] = useState<boolean>(true);
-
-    const onChangeWriter = (event: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>): void => {
-        setWriter(event.target.value);
-        checkFormValidity(event.target.value, password, title, content);
-    };
-    const onChangePassword = (event: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>): void => {
-        setPassword(event.target.value);
-        checkFormValidity(writer, event.target.value, title, content);
-    };
-    const onChangeTitle = (event: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>): void => {
-        setTitle(event.target.value);
-        checkFormValidity(writer, password, event.target.value, content);
-    };
-    const onChangeContent = (event: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>): void => {
-        setContent(event.target.value);
-        checkFormValidity(writer, password, title, event.target.value);
-    };
     const setAddressAndZipcode = (newAddress: string, newZipcode: string): void => {
         setAddress(newAddress);
         setZipcode(newZipcode);
@@ -116,36 +87,15 @@ export default function useBoardsWrite(props: IBoardsWriteProps) {
         setPasswordforedit(event.target.value);
     };
 
-    const checkFormValidity = (writer: string, password: string, title: string, content: string): void => {
-        // 수정 모드일 때는 writer와 password를 검사하지 않음
-        if (props.isEdit) {
-            if (title && content) {
-                setIsButtonDisabled(false);
-            } else {
-                setIsButtonDisabled(true);
-            }
-        } else {
-            // 신규 등록 모드일 때는 모든 필드 검사
-            if (writer && password && title && content) {
-                setIsButtonDisabled(false);
-            } else {
-                setIsButtonDisabled(true);
-            }
-        }
-    };
-
     useEffect(() => {
         if (props.isEdit && data?.fetchBoard) {
-            setTitle(data.fetchBoard.title ?? "");
-            setContent(data.fetchBoard.contents ?? "");
             setZipcode(data.fetchBoard.boardAddress?.zipcode ?? "");
             setAddress(data.fetchBoard.boardAddress?.address ?? "");
             setAddressDetail(data.fetchBoard.boardAddress?.addressDetail ?? "");
             setYoutubeUrl(data.fetchBoard.youtubeUrl ?? "");
-            checkFormValidity(writer, password, data.fetchBoard.title ?? "", data.fetchBoard.contents ?? "");
 
             const fetchedImages = data.fetchBoard.images || [];
-            const newImageUrls = ["", "", ""]; // 3개짜리 빈 배열 생성
+            const newImageUrls = ["", "", ""]; 
             for (let i = 0; i < fetchedImages.length && i < 3; i++) {
                 newImageUrls[i] = fetchedImages[i];
             }
@@ -153,25 +103,24 @@ export default function useBoardsWrite(props: IBoardsWriteProps) {
         }
     }, [props.isEdit, data]);
 
-    // 신규 등록 기능
-    const onClickSubmit = async () => {
+
+    const onClickSubmit = async (data: IFormFullData) => {
         try {
-            const filteredImages = imageUrls.filter(url => url !== "");
+            const filteredImages = data.imageUrls.filter(url => url !== "");
 
             const result = await createBoard({
                 variables: {
                     createBoardInput: {
-                        writer: writer,
-                        password: password,
-                        title: title,
-                        contents: content,
-                        youtubeUrl: youtubeUrl,
+                        writer: data.writer,
+                        password: data.password,
+                        title: data.title,
+                        contents: data.content,
+                        youtubeUrl: data.youtubeUrl,
                         boardAddress: {
-                            zipcode: zipcode,
-                            address: address,
-                            addressDetail: addressDetail
+                            zipcode: data.zipcode,
+                            address: data.address,
+                            addressDetail: data.addressDetail
                         },
-                        // 필터링된 이미지 배열을 전달
                         images: filteredImages
                     }
                 },
@@ -181,23 +130,22 @@ export default function useBoardsWrite(props: IBoardsWriteProps) {
         } catch (error) { alert("에러가 발생하였습니다.") }
     }
 
-    // 기존 내용 수정 기능 
-    const onClickUpdate = async () => {
+    const onClickUpdate = async (data: IFormFullData) => {
         try {
-            const password = passwordforedit
-            if (password === null) {
+            const password = data.passwordforedit 
+            if (password === null || password === undefined) { 
                 return;
             }
             const updateBoardInput = {
-                title: title,
-                contents: content,
-                youtubeUrl: youtubeUrl,
+                title: data.title,
+                contents: data.content,
+                youtubeUrl: data.youtubeUrl,
                 boardAddress: {
-                    zipcode: zipcode,
-                    address: address,
-                    addressDetail: addressDetail
+                    zipcode: data.zipcode,
+                    address: data.address,
+                    addressDetail: data.addressDetail
                 },
-                images: imageUrls.filter(url => url !== "")
+                images: data.imageUrls.filter(url => url !== "")
             };
             const result = await updateBoard({
                 variables: {
@@ -222,30 +170,17 @@ export default function useBoardsWrite(props: IBoardsWriteProps) {
     };
 
     return {
-        onChangeWriter,
-        onChangePassword,
-        onChangeTitle,
-        onChangeContent,
         onChangeAddressDetail,
         onChangeYoutubeUrl,
         onClickSubmit,
         onClickUpdate,
         setAddressAndZipcode,
         onChangePasswordforedit,
-        writer,
-        password,
         passwordforedit,
-        title,
-        content,
         zipcode,
         address,
         addressDetail,
         youtubeUrl,
-        writerError,
-        passwordError,
-        titleError,
-        contentError,
-        isButtonDisabled,
         data,
         router,
         imageUrls,
