@@ -1,0 +1,18 @@
+.commentList {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    gap: 2.5rem;
+}
+
+.statusMessage {
+    color: var(--gray-600, #777);
+    text-align: center;
+    /* r_14_20 */
+    font-size: 0.875rem;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 1.25rem;
+    /* 142.857% */
+}
+

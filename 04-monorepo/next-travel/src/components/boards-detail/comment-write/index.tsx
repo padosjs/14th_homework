@@ -1,6 +1,5 @@
 import styles from './styles.module.css'
-import InputField from '@/components/input/input'
-import Button from '@/components/button/button';
+import { InputField, Button } from '@commons/ui';
 import useCommentWrite from "./hook";
 import { ChatBubbleLeftIcon } from '@heroicons/react/24/outline'
 import { Rating, RatingButton } from '@/components/ui/shadcn-io/rating';

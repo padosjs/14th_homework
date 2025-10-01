@@ -1,0 +1,54 @@
+.main-container {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 1.5rem;
+  align-self: stretch;
+}
+
+.page-title {
+  display: flex;
+  width: 100%;
+  align-items: center;
+  gap: 0.5rem;
+  color: #000;
+  /* sb_16_24 */
+  font-size: 1rem;
+  font-style: normal;
+  font-weight: 600;
+  line-height: 1.5rem;
+  /* 150% */
+}
+
+.comment-header {
+  width: 1.5rem;
+  height: 1.5rem;
+}
+
+.comment-input-button-group {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  gap: 1rem;
+}
+
+.input-group-column {
+  display: flex;
+  width: 100%;
+  max-width: 40rem;
+  gap: 1rem;
+}
+
+.button-container {
+  display: flex;
+  width: 100%;
+  justify-content: end;
+}
+
+.edit-button-container {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  gap: 1rem;
+  align-self: stretch;
+}
