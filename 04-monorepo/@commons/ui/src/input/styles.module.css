@@ -1,0 +1,70 @@
+.input-container {
+  display: flex;
+  width: 100%;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 0.5rem;
+  align-self: stretch;
+}
+
+/* 입력 필드 제목 스타일 */
+.input-title-container {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.25rem;
+  align-self: stretch;
+  /* me_16_24 */
+  font-size: 1rem;
+  font-weight: 500;
+  line-height: 1.5rem;
+  /* 150% */
+}
+
+.input-title {
+  color: var(--gray-800, #333);
+}
+
+.input-title-asterisk {
+  color: var(--red, #F66A6A);
+}
+
+/* 입력 필드 본문 스타일 */
+.input-text {
+  display: flex;
+  width: 100%;
+  padding: 0.75rem 1rem;
+  flex-direction: column;
+  align-items: flex-start;
+  border-radius: 0.5rem;
+  border: 1px solid var(--Gray-Gray-200, #D4D3D3);
+  background: var(--Gray-W, #FFF);
+  /* r_16_24 */
+  font-size: 1rem;
+  font-weight: 400;
+  line-height: 1.5rem;
+  /* 150% */
+}
+
+.input-text.error {
+  border: 1px solid var(--red, #F66A6A);
+}
+
+/* 비활성화 상태 스타일 추가 */
+.input-text:disabled {
+  cursor: not-allowed;
+  background: var(--gray-50, #F2F2F2);
+}
+
+.input-text::placeholder {
+  color: var(--Gray-Gray-400, #ABABAB);
+}
+
+/* 에러 메시지 스타일 */
+.input-error-message {
+  color: var(--red, #F66A6A);
+  /* me_16_24 */
+  font-size: 1rem;
+  font-weight: 500;
+  line-height: 1.5rem;
+  /* 150% */
+}
