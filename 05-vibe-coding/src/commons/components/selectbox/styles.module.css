@@ -1,0 +1,327 @@
+/* Base Selectbox Styles */
+.selectbox {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  border-radius: 8px;
+  font-family: 'Pretendard Variable', -apple-system, BlinkMacSystemFont, system-ui, Roboto, 'Helvetica Neue', 'Segoe UI', 'Apple SD Gothic Neo', 'Noto Sans KR', 'Malgun Gothic', sans-serif;
+  box-sizing: border-box;
+}
+
+.selectbox__select {
+  flex: 1;
+  width: 100%;
+  border: none;
+  background: transparent;
+  outline: none;
+  font-family: inherit;
+  font-weight: 500;
+  letter-spacing: -0.01em;
+  color: inherit;
+  cursor: pointer;
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+}
+
+.selectbox__select:disabled {
+  cursor: not-allowed;
+}
+
+.selectbox__icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  pointer-events: none;
+}
+
+/* Size Variants */
+.selectbox--small {
+  height: 40px;
+  padding: 8px 8px 8px 12px;
+  gap: 8px;
+}
+
+.selectbox--small .selectbox__select {
+  font-size: 14px;
+  line-height: 20px;
+}
+
+.selectbox--medium {
+  height: 48px;
+  padding: 12px 10px 12px 10px;
+  gap: 8px;
+}
+
+.selectbox--medium .selectbox__select {
+  font-size: 16px;
+  line-height: 24px;
+}
+
+.selectbox--large {
+  height: 56px;
+  padding: 16px 16px 16px 20px;
+  gap: 8px;
+}
+
+.selectbox--large .selectbox__select {
+  font-size: 18px;
+  line-height: 24px;
+}
+
+/* Light Theme - Primary Variant */
+.selectbox--light.selectbox--primary {
+  background-color: #FFFFFF;
+  border: 1px solid #C7C7C7;
+  color: #1C1C1C;
+}
+
+.selectbox--light.selectbox--primary .selectbox__select option {
+  background-color: #FFFFFF;
+  color: #1C1C1C;
+}
+
+.selectbox--light.selectbox--primary:hover:not(.selectbox--disabled) {
+  border-color: #ABABAB;
+}
+
+.selectbox--light.selectbox--primary:focus-within:not(.selectbox--disabled) {
+  border-color: #6DA5FA;
+  box-shadow: 0 0 0 3px rgba(109, 165, 250, 0.1);
+}
+
+/* Light Theme - Secondary Variant */
+.selectbox--light.selectbox--secondary {
+  background-color: #F2F2F2;
+  border: 1px solid #E4E4E4;
+  color: #1C1C1C;
+}
+
+.selectbox--light.selectbox--secondary .selectbox__select option {
+  background-color: #F2F2F2;
+  color: #1C1C1C;
+}
+
+.selectbox--light.selectbox--secondary:hover:not(.selectbox--disabled) {
+  background-color: #E4E4E4;
+  border-color: #D4D3D3;
+}
+
+.selectbox--light.selectbox--secondary:focus-within:not(.selectbox--disabled) {
+  background-color: #FFFFFF;
+  border-color: #6DA5FA;
+  box-shadow: 0 0 0 3px rgba(109, 165, 250, 0.1);
+}
+
+/* Light Theme - Tertiary Variant */
+.selectbox--light.selectbox--tertiary {
+  background-color: transparent;
+  border: none;
+  border-bottom: 1px solid #D4D3D3;
+  border-radius: 0;
+  color: #1C1C1C;
+}
+
+.selectbox--light.selectbox--tertiary .selectbox__select option {
+  background-color: #FFFFFF;
+  color: #1C1C1C;
+}
+
+.selectbox--light.selectbox--tertiary:hover:not(.selectbox--disabled) {
+  border-bottom-color: #ABABAB;
+}
+
+.selectbox--light.selectbox--tertiary:focus-within:not(.selectbox--disabled) {
+  border-bottom-color: #6DA5FA;
+  box-shadow: 0 1px 0 0 #6DA5FA;
+}
+
+/* Dark Theme - Primary Variant */
+.selectbox--dark.selectbox--primary {
+  background-color: #333333;
+  border: 1px solid #5F5F5F;
+  color: #FFFFFF;
+}
+
+.selectbox--dark.selectbox--primary .selectbox__select option {
+  background-color: #333333;
+  color: #FFFFFF;
+}
+
+.selectbox--dark.selectbox--primary:hover:not(.selectbox--disabled) {
+  border-color: #777777;
+}
+
+.selectbox--dark.selectbox--primary:focus-within:not(.selectbox--disabled) {
+  border-color: #6DA5FA;
+  box-shadow: 0 0 0 3px rgba(109, 165, 250, 0.2);
+}
+
+/* Dark Theme - Secondary Variant */
+.selectbox--dark.selectbox--secondary {
+  background-color: #1C1C1C;
+  border: 1px solid #333333;
+  color: #FFFFFF;
+}
+
+.selectbox--dark.selectbox--secondary .selectbox__select option {
+  background-color: #1C1C1C;
+  color: #FFFFFF;
+}
+
+.selectbox--dark.selectbox--secondary:hover:not(.selectbox--disabled) {
+  background-color: #333333;
+  border-color: #5F5F5F;
+}
+
+.selectbox--dark.selectbox--secondary:focus-within:not(.selectbox--disabled) {
+  background-color: #333333;
+  border-color: #6DA5FA;
+  box-shadow: 0 0 0 3px rgba(109, 165, 250, 0.2);
+}
+
+/* Dark Theme - Tertiary Variant */
+.selectbox--dark.selectbox--tertiary {
+  background-color: transparent;
+  border: none;
+  border-bottom: 1px solid #5F5F5F;
+  border-radius: 0;
+  color: #FFFFFF;
+}
+
+.selectbox--dark.selectbox--tertiary .selectbox__select option {
+  background-color: #333333;
+  color: #FFFFFF;
+}
+
+.selectbox--dark.selectbox--tertiary:hover:not(.selectbox--disabled) {
+  border-bottom-color: #777777;
+}
+
+.selectbox--dark.selectbox--tertiary:focus-within:not(.selectbox--disabled) {
+  border-bottom-color: #6DA5FA;
+  box-shadow: 0 1px 0 0 #6DA5FA;
+}
+
+/* Error State */
+.selectbox--light.selectbox--primary.selectbox--error {
+  border-color: #F03851;
+}
+
+.selectbox--light.selectbox--primary.selectbox--error:focus-within {
+  border-color: #F03851;
+  box-shadow: 0 0 0 3px rgba(240, 56, 81, 0.1);
+}
+
+.selectbox--light.selectbox--secondary.selectbox--error {
+  border-color: #F03851;
+}
+
+.selectbox--light.selectbox--secondary.selectbox--error:focus-within {
+  border-color: #F03851;
+  box-shadow: 0 0 0 3px rgba(240, 56, 81, 0.1);
+}
+
+.selectbox--light.selectbox--tertiary.selectbox--error {
+  border-bottom-color: #F03851;
+}
+
+.selectbox--light.selectbox--tertiary.selectbox--error:focus-within {
+  border-bottom-color: #F03851;
+  box-shadow: 0 1px 0 0 #F03851;
+}
+
+.selectbox--dark.selectbox--primary.selectbox--error {
+  border-color: #F03851;
+}
+
+.selectbox--dark.selectbox--primary.selectbox--error:focus-within {
+  border-color: #F03851;
+  box-shadow: 0 0 0 3px rgba(240, 56, 81, 0.2);
+}
+
+.selectbox--dark.selectbox--secondary.selectbox--error {
+  border-color: #F03851;
+}
+
+.selectbox--dark.selectbox--secondary.selectbox--error:focus-within {
+  border-color: #F03851;
+  box-shadow: 0 0 0 3px rgba(240, 56, 81, 0.2);
+}
+
+.selectbox--dark.selectbox--tertiary.selectbox--error {
+  border-bottom-color: #F03851;
+}
+
+.selectbox--dark.selectbox--tertiary.selectbox--error:focus-within {
+  border-bottom-color: #F03851;
+  box-shadow: 0 1px 0 0 #F03851;
+}
+
+/* Success State */
+.selectbox--light.selectbox--primary.selectbox--success {
+  border-color: #12B75F;
+}
+
+.selectbox--light.selectbox--primary.selectbox--success:focus-within {
+  border-color: #12B75F;
+  box-shadow: 0 0 0 3px rgba(18, 183, 95, 0.1);
+}
+
+.selectbox--light.selectbox--secondary.selectbox--success {
+  border-color: #12B75F;
+}
+
+.selectbox--light.selectbox--secondary.selectbox--success:focus-within {
+  border-color: #12B75F;
+  box-shadow: 0 0 0 3px rgba(18, 183, 95, 0.1);
+}
+
+.selectbox--light.selectbox--tertiary.selectbox--success {
+  border-bottom-color: #12B75F;
+}
+
+.selectbox--light.selectbox--tertiary.selectbox--success:focus-within {
+  border-bottom-color: #12B75F;
+  box-shadow: 0 1px 0 0 #12B75F;
+}
+
+.selectbox--dark.selectbox--primary.selectbox--success {
+  border-color: #12B75F;
+}
+
+.selectbox--dark.selectbox--primary.selectbox--success:focus-within {
+  border-color: #12B75F;
+  box-shadow: 0 0 0 3px rgba(18, 183, 95, 0.2);
+}
+
+.selectbox--dark.selectbox--secondary.selectbox--success {
+  border-color: #12B75F;
+}
+
+.selectbox--dark.selectbox--secondary.selectbox--success:focus-within {
+  border-color: #12B75F;
+  box-shadow: 0 0 0 3px rgba(18, 183, 95, 0.2);
+}
+
+.selectbox--dark.selectbox--tertiary.selectbox--success {
+  border-bottom-color: #12B75F;
+}
+
+.selectbox--dark.selectbox--tertiary.selectbox--success:focus-within {
+  border-bottom-color: #12B75F;
+  box-shadow: 0 1px 0 0 #12B75F;
+}
+
+/* Disabled State */
+.selectbox--disabled {
+  cursor: not-allowed;
+  opacity: 0.5;
+}
+
+.selectbox--disabled .selectbox__select {
+  cursor: not-allowed;
+}
+

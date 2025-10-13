@@ -1,0 +1,195 @@
+/* Base Input Styles */
+.input {
+  width: 100%;
+  border-radius: 8px;
+  font-family: 'Pretendard Variable', -apple-system, BlinkMacSystemFont, system-ui, Roboto, 'Helvetica Neue', 'Segoe UI', 'Apple SD Gothic Neo', 'Noto Sans KR', 'Malgun Gothic', sans-serif;
+  font-weight: 500;
+  letter-spacing: -0.01em;
+  transition: all 0.2s ease-in-out;
+  outline: none;
+  box-sizing: border-box;
+}
+
+.input::placeholder {
+  color: #ABABAB;
+  font-weight: 500;
+}
+
+/* Size Variants */
+.input--small {
+  height: 40px;
+  padding: 8px 12px;
+  font-size: 14px;
+  line-height: 20px;
+}
+
+.input--medium {
+  height: 48px;
+  padding: 12px 16px;
+  font-size: 16px;
+  line-height: 24px;
+}
+
+.input--large {
+  height: 56px;
+  padding: 16px 20px;
+  font-size: 18px;
+  line-height: 24px;
+}
+
+/* Light Theme Variants */
+.input--light.input--primary {
+  background-color: #FFFFFF;
+  border: 1px solid #D4D3D3;
+  color: #333333;
+}
+
+.input--light.input--primary:hover:not(:disabled) {
+  border-color: #ABABAB;
+}
+
+.input--light.input--primary:focus:not(:disabled) {
+  border-color: #6DA5FA;
+  box-shadow: 0 0 0 3px rgba(109, 165, 250, 0.1);
+}
+
+.input--light.input--secondary {
+  background-color: #F2F2F2;
+  border: 1px solid #E4E4E4;
+  color: #333333;
+}
+
+.input--light.input--secondary:hover:not(:disabled) {
+  background-color: #E4E4E4;
+  border-color: #D4D3D3;
+}
+
+.input--light.input--secondary:focus:not(:disabled) {
+  background-color: #FFFFFF;
+  border-color: #6DA5FA;
+  box-shadow: 0 0 0 3px rgba(109, 165, 250, 0.1);
+}
+
+.input--light.input--tertiary {
+  background-color: transparent;
+  border: none;
+  border-bottom: 1px solid #D4D3D3;
+  border-radius: 0;
+  color: #333333;
+}
+
+.input--light.input--tertiary:hover:not(:disabled) {
+  border-bottom-color: #ABABAB;
+}
+
+.input--light.input--tertiary:focus:not(:disabled) {
+  border-bottom-color: #6DA5FA;
+  box-shadow: 0 1px 0 0 #6DA5FA;
+}
+
+/* Dark Theme Variants */
+.input--dark.input--primary {
+  background-color: #333333;
+  border: 1px solid #5F5F5F;
+  color: #FFFFFF;
+}
+
+.input--dark.input--primary::placeholder {
+  color: #919191;
+}
+
+.input--dark.input--primary:hover:not(:disabled) {
+  border-color: #777777;
+}
+
+.input--dark.input--primary:focus:not(:disabled) {
+  border-color: #6DA5FA;
+  box-shadow: 0 0 0 3px rgba(109, 165, 250, 0.2);
+}
+
+.input--dark.input--secondary {
+  background-color: #1C1C1C;
+  border: 1px solid #333333;
+  color: #FFFFFF;
+}
+
+.input--dark.input--secondary::placeholder {
+  color: #919191;
+}
+
+.input--dark.input--secondary:hover:not(:disabled) {
+  background-color: #333333;
+  border-color: #5F5F5F;
+}
+
+.input--dark.input--secondary:focus:not(:disabled) {
+  background-color: #333333;
+  border-color: #6DA5FA;
+  box-shadow: 0 0 0 3px rgba(109, 165, 250, 0.2);
+}
+
+.input--dark.input--tertiary {
+  background-color: transparent;
+  border: none;
+  border-bottom: 1px solid #5F5F5F;
+  border-radius: 0;
+  color: #FFFFFF;
+}
+
+.input--dark.input--tertiary::placeholder {
+  color: #919191;
+}
+
+.input--dark.input--tertiary:hover:not(:disabled) {
+  border-bottom-color: #777777;
+}
+
+.input--dark.input--tertiary:focus:not(:disabled) {
+  border-bottom-color: #6DA5FA;
+  box-shadow: 0 1px 0 0 #6DA5FA;
+}
+
+/* Error State */
+.input--error {
+  border-color: #F03851 !important;
+}
+
+.input--light.input--error:focus {
+  box-shadow: 0 0 0 3px rgba(240, 56, 81, 0.1) !important;
+}
+
+.input--dark.input--error:focus {
+  box-shadow: 0 0 0 3px rgba(240, 56, 81, 0.2) !important;
+}
+
+.input--tertiary.input--error:focus {
+  box-shadow: 0 1px 0 0 #F03851 !important;
+}
+
+/* Success State */
+.input--success {
+  border-color: #12B75F !important;
+}
+
+.input--light.input--success:focus {
+  box-shadow: 0 0 0 3px rgba(18, 183, 95, 0.1) !important;
+}
+
+.input--dark.input--success:focus {
+  box-shadow: 0 0 0 3px rgba(18, 183, 95, 0.2) !important;
+}
+
+.input--tertiary.input--success:focus {
+  box-shadow: 0 1px 0 0 #12B75F !important;
+}
+
+/* Disabled State */
+.input--disabled {
+  cursor: not-allowed;
+  opacity: 0.5;
+}
+
+.input--disabled::placeholder {
+  color: #C7C7C7;
+}
+

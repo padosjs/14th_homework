@@ -1,0 +1,206 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  /* Blue Colors */
+  --color-blue-5: #F0F7FF;
+  --color-blue-10: #DBEEFF;
+  --color-blue-20: #BDDBFF;
+  --color-blue-30: #93BEFF;
+  --color-blue-40: #6DA5FA;
+  --color-blue-50: #497CFF;
+  --color-blue-60: #3A5CF3;
+  --color-blue-70: #274AE1;
+  --color-blue-80: #1530A6;
+  --color-blue-90: #0B2184;
+
+  /* Gray Colors */
+  --color-gray-white: #FFFFFF;
+  --color-gray-5: #F2F2F2;
+  --color-gray-10: #E4E4E4;
+  --color-gray-20: #D4D3D3;
+  --color-gray-30: #C7C7C7;
+  --color-gray-40: #ABABAB;
+  --color-gray-50: #919191;
+  --color-gray-60: #777777;
+  --color-gray-70: #5F5F5F;
+  --color-gray-80: #333333;
+  --color-gray-90: #1C1C1C;
+  --color-gray-black: #000000;
+
+  /* Red Colors */
+  --color-red-5: #FDD7DC;
+  --color-red-10: #F797A4;
+  --color-red-20: #F4677A;
+  --color-red-30: #F03851;
+  --color-red-40: #E4112E;
+  --color-red-50: #B40E24;
+  --color-red-60: #850A1B;
+
+  /* Green Colors */
+  --color-green-5: #D3F3E0;
+  --color-green-10: #92E6B9;
+  --color-green-20: #15D66F;
+  --color-green-30: #12B75F;
+  --color-green-40: #109C51;
+  --color-green-50: #0E723C;
+  --color-green-60: #084424;
+
+  /* Yellow Colors */
+  --color-yellow-5: #FFE499;
+  --color-yellow-10: #FFD666;
+  --color-yellow-20: #FFC933;
+  --color-yellow-30: #FFB300;
+  --color-yellow-40: #EBA500;
+  --color-yellow-50: #D69600;
+  --color-yellow-60: #B27D00;
+
+  /* Cool Gray Colors */
+  --color-cool-gray-1: #F8F8FA;
+  --color-cool-gray-5: #F6F6F9;
+  --color-cool-gray-10: #EDEEF2;
+  --color-cool-gray-20: #DDDFE5;
+  --color-cool-gray-30: #D2D4DD;
+  --color-cool-gray-40: #C7C9D5;
+  --color-cool-gray-50: #BBBECD;
+  --color-cool-gray-60: #B0B3C4;
+
+  /* System Colors - Light Mode */
+  --color-primary: var(--color-blue-40);
+  --color-primary-strong: var(--color-blue-60);
+  --color-error: var(--color-red-30);
+  --color-success: var(--color-green-30);
+  --color-warning: var(--color-yellow-30);
+
+  /* Background & Foreground - Light Mode */
+  --background: var(--color-gray-white);
+  --foreground: var(--color-gray-90);
+
+  /* Font Families */
+  --font-family-korean: Pretendard, -apple-system, BlinkMacSystemFont, system-ui, Roboto, 'Helvetica Neue', 'Segoe UI', 'Apple SD Gothic Neo', 'Noto Sans KR', 'Malgun Gothic', sans-serif;
+  --font-family-english: SUIT Variable, -apple-system, BlinkMacSystemFont, system-ui, Roboto, 'Helvetica Neue', 'Segoe UI', sans-serif;
+
+  /* Font Weights */
+  --font-weight-regular: 400;
+  --font-weight-medium: 500;
+  --font-weight-semibold: 600;
+  --font-weight-bold: 700;
+  --font-weight-extrabold: 800;
+
+  /* Web Typography - Headline */
+  --typo-web-headline01-size: 48px;
+  --typo-web-headline01-line-height: 60px;
+  --typo-web-headline01-weight: var(--font-weight-semibold);
+
+  --typo-web-headline02-size: 36px;
+  --typo-web-headline02-line-height: 48px;
+  --typo-web-headline02-weight: var(--font-weight-semibold);
+
+  --typo-web-headline03-size: 28px;
+  --typo-web-headline03-line-height: 36px;
+  --typo-web-headline03-weight: var(--font-weight-semibold);
+
+  /* Mobile Typography - Headline */
+  --typo-mobile-headline01-size: 24px;
+  --typo-mobile-headline01-line-height: 32px;
+  --typo-mobile-headline01-weight: var(--font-weight-bold);
+
+  --typo-mobile-headline02-size: 22px;
+  --typo-mobile-headline02-line-height: 30px;
+  --typo-mobile-headline02-weight: var(--font-weight-extrabold);
+
+  --typo-mobile-headline03-size: 20px;
+  --typo-mobile-headline03-line-height: 28px;
+  --typo-mobile-headline03-weight: var(--font-weight-bold);
+
+  /* Mobile Typography - Title */
+  --typo-mobile-title01-size: 18px;
+  --typo-mobile-title01-line-height: 24px;
+  --typo-mobile-title01-weight: var(--font-weight-bold);
+
+  --typo-mobile-title02-size: 16px;
+  --typo-mobile-title02-line-height: 22px;
+  --typo-mobile-title02-weight: var(--font-weight-bold);
+
+  --typo-mobile-title03-size: 14px;
+  --typo-mobile-title03-line-height: 20px;
+  --typo-mobile-title03-weight: var(--font-weight-bold);
+
+  --typo-mobile-subtitle01-size: 14px;
+  --typo-mobile-subtitle01-line-height: 22px;
+  --typo-mobile-subtitle01-weight: var(--font-weight-semibold);
+
+  --typo-mobile-subtitle02-size: 12px;
+  --typo-mobile-subtitle02-line-height: 18px;
+  --typo-mobile-subtitle02-weight: var(--font-weight-semibold);
+
+  /* Mobile Typography - Body */
+  --typo-mobile-body01-size: 16px;
+  --typo-mobile-body01-line-height: 24px;
+  --typo-mobile-body01-weight: var(--font-weight-medium);
+
+  --typo-mobile-body02-m-size: 14px;
+  --typo-mobile-body02-m-line-height: 22px;
+  --typo-mobile-body02-m-weight: var(--font-weight-medium);
+
+  --typo-mobile-body03-size: 12px;
+  --typo-mobile-body03-line-height: 18px;
+  --typo-mobile-body03-weight: var(--font-weight-medium);
+
+  --typo-mobile-body01-r-size: 16px;
+  --typo-mobile-body01-r-line-height: 22px;
+  --typo-mobile-body01-r-weight: var(--font-weight-regular);
+
+  --typo-mobile-body02-s-size: 14px;
+  --typo-mobile-body02-s-line-height: 20px;
+  --typo-mobile-body02-s-weight: var(--font-weight-regular);
+
+  --typo-mobile-body03-r-size: 12px;
+  --typo-mobile-body03-r-line-height: 16px;
+  --typo-mobile-body03-r-weight: var(--font-weight-regular);
+
+  /* Mobile Typography - Caption */
+  --typo-mobile-caption01-size: 12px;
+  --typo-mobile-caption01-line-height: 14px;
+  --typo-mobile-caption01-weight: var(--font-weight-semibold);
+
+  --typo-mobile-caption02-m-size: 10px;
+  --typo-mobile-caption02-m-line-height: 12px;
+  --typo-mobile-caption02-m-weight: var(--font-weight-semibold);
+
+  --typo-mobile-caption02-s-size: 10px;
+  --typo-mobile-caption02-s-line-height: 12px;
+  --typo-mobile-caption02-s-weight: var(--font-weight-medium);
+
+  --typo-mobile-caption03-size: 8px;
+  --typo-mobile-caption03-line-height: 10px;
+  --typo-mobile-caption03-weight: var(--font-weight-semibold);
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    /* System Colors - Dark Mode */
+    --color-primary: var(--color-blue-50);
+    --color-primary-strong: var(--color-blue-40);
+    --color-error: var(--color-red-20);
+    --color-success: var(--color-green-20);
+    --color-warning: var(--color-yellow-20);
+
+    /* Background & Foreground - Dark Mode */
+    --background: var(--color-gray-black);
+    --foreground: var(--color-gray-5);
+  }
+}
+
+body {
+  color: var(--foreground);
+  background: var(--background);
+  font-family: var(--font-family-korean);
+}
+
+@layer utilities {
+  .text-balance {
+    text-wrap: balance;
+  }
+}

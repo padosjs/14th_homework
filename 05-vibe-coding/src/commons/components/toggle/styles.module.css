@@ -1,0 +1,380 @@
+/* Base Toggle Styles */
+.toggle {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  padding: 0;
+  border: none;
+  background: transparent;
+  cursor: pointer;
+  user-select: none;
+  transition: all 0.2s ease-in-out;
+}
+
+.toggle:focus-visible {
+  outline: 2px solid #497CFF;
+  outline-offset: 2px;
+  border-radius: 100px;
+}
+
+.toggle:active:not(.disabled) .thumb {
+  transform: scale(0.95);
+}
+
+/* Track (Background container) */
+.track {
+  position: relative;
+  display: flex;
+  align-items: center;
+  border-radius: 100px;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  box-sizing: border-box;
+}
+
+/* Thumb (Moving circle) */
+.thumb {
+  position: absolute;
+  border-radius: 50%;
+  background-color: #FFFFFF;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1), 0 1px 2px rgba(0, 0, 0, 0.06);
+  box-sizing: border-box;
+}
+
+/* ============================================ */
+/* SIZE VARIANTS */
+/* ============================================ */
+
+/* Small Size */
+.size-small .track {
+  width: 36px;
+  height: 20px;
+  padding: 2px;
+}
+
+.size-small .thumb {
+  width: 16px;
+  height: 16px;
+  left: 2px;
+}
+
+.size-small.checked .thumb {
+  left: 18px;
+}
+
+/* Medium Size */
+.size-medium .track {
+  width: 48px;
+  height: 28px;
+  padding: 3px;
+}
+
+.size-medium .thumb {
+  width: 22px;
+  height: 22px;
+  left: 3px;
+}
+
+.size-medium.checked .thumb {
+  left: 23px;
+}
+
+/* Large Size */
+.size-large .track {
+  width: 60px;
+  height: 34px;
+  padding: 4px;
+}
+
+.size-large .thumb {
+  width: 26px;
+  height: 26px;
+  left: 4px;
+}
+
+.size-large.checked .thumb {
+  left: 30px;
+}
+
+/* ============================================ */
+/* PRIMARY VARIANT */
+/* ============================================ */
+
+/* Primary - Light Theme - Unchecked */
+.variant-primary.theme-light .track {
+  background-color: #D4D3D3;
+}
+
+.variant-primary.theme-light:hover:not(.disabled):not(.checked) .track {
+  background-color: #C7C7C7;
+}
+
+.variant-primary.theme-light:active:not(.disabled):not(.checked) .track {
+  background-color: #ABABAB;
+}
+
+/* Primary - Light Theme - Checked */
+.variant-primary.theme-light.checked .track {
+  background-color: #6DA5FA;
+}
+
+.variant-primary.theme-light.checked:hover:not(.disabled) .track {
+  background-color: #497CFF;
+}
+
+.variant-primary.theme-light.checked:active:not(.disabled) .track {
+  background-color: #3A5CF3;
+}
+
+/* Primary - Dark Theme - Unchecked */
+.variant-primary.theme-dark .track {
+  background-color: #5F5F5F;
+}
+
+.variant-primary.theme-dark:hover:not(.disabled):not(.checked) .track {
+  background-color: #777777;
+}
+
+.variant-primary.theme-dark:active:not(.disabled):not(.checked) .track {
+  background-color: #919191;
+}
+
+/* Primary - Dark Theme - Checked */
+.variant-primary.theme-dark.checked .track {
+  background-color: #93BEFF;
+}
+
+.variant-primary.theme-dark.checked:hover:not(.disabled) .track {
+  background-color: #BDDBFF;
+}
+
+.variant-primary.theme-dark.checked:active:not(.disabled) .track {
+  background-color: #DBEEFF;
+}
+
+.variant-primary.theme-dark .thumb {
+  background-color: #F2F2F2;
+}
+
+/* ============================================ */
+/* SECONDARY VARIANT */
+/* ============================================ */
+
+/* Secondary - Light Theme - Unchecked */
+.variant-secondary.theme-light .track {
+  background-color: #E4E4E4;
+  border: 1px solid #D4D3D3;
+}
+
+.variant-secondary.theme-light:hover:not(.disabled):not(.checked) .track {
+  background-color: #D4D3D3;
+  border-color: #C7C7C7;
+}
+
+.variant-secondary.theme-light:active:not(.disabled):not(.checked) .track {
+  background-color: #C7C7C7;
+  border-color: #ABABAB;
+}
+
+/* Secondary - Light Theme - Checked */
+.variant-secondary.theme-light.checked .track {
+  background-color: #F0F7FF;
+  border: 1px solid #6DA5FA;
+}
+
+.variant-secondary.theme-light.checked:hover:not(.disabled) .track {
+  background-color: #DBEEFF;
+  border-color: #497CFF;
+}
+
+.variant-secondary.theme-light.checked:active:not(.disabled) .track {
+  background-color: #BDDBFF;
+  border-color: #3A5CF3;
+}
+
+.variant-secondary.theme-light.checked .thumb {
+  background-color: #6DA5FA;
+}
+
+.variant-secondary.theme-light.checked:hover:not(.disabled) .thumb {
+  background-color: #497CFF;
+}
+
+.variant-secondary.theme-light.checked:active:not(.disabled) .thumb {
+  background-color: #3A5CF3;
+}
+
+/* Secondary - Dark Theme - Unchecked */
+.variant-secondary.theme-dark .track {
+  background-color: #333333;
+  border: 1px solid #777777;
+}
+
+.variant-secondary.theme-dark:hover:not(.disabled):not(.checked) .track {
+  background-color: #1C1C1C;
+  border-color: #919191;
+}
+
+.variant-secondary.theme-dark:active:not(.disabled):not(.checked) .track {
+  background-color: #000000;
+  border-color: #ABABAB;
+}
+
+/* Secondary - Dark Theme - Checked */
+.variant-secondary.theme-dark.checked .track {
+  background-color: #1C1C1C;
+  border: 1px solid #93BEFF;
+}
+
+.variant-secondary.theme-dark.checked:hover:not(.disabled) .track {
+  background-color: #000000;
+  border-color: #BDDBFF;
+}
+
+.variant-secondary.theme-dark.checked:active:not(.disabled) .track {
+  background-color: #000000;
+  border-color: #DBEEFF;
+}
+
+.variant-secondary.theme-dark .thumb {
+  background-color: #E4E4E4;
+}
+
+.variant-secondary.theme-dark.checked .thumb {
+  background-color: #93BEFF;
+}
+
+.variant-secondary.theme-dark.checked:hover:not(.disabled) .thumb {
+  background-color: #BDDBFF;
+}
+
+.variant-secondary.theme-dark.checked:active:not(.disabled) .thumb {
+  background-color: #DBEEFF;
+}
+
+/* ============================================ */
+/* TERTIARY VARIANT */
+/* ============================================ */
+
+/* Tertiary - Light Theme - Unchecked */
+.variant-tertiary.theme-light .track {
+  background-color: transparent;
+  border: 2px solid #D4D3D3;
+}
+
+.variant-tertiary.theme-light:hover:not(.disabled):not(.checked) .track {
+  border-color: #C7C7C7;
+}
+
+.variant-tertiary.theme-light:active:not(.disabled):not(.checked) .track {
+  border-color: #ABABAB;
+}
+
+.variant-tertiary.theme-light .thumb {
+  background-color: #D4D3D3;
+}
+
+.variant-tertiary.theme-light:hover:not(.disabled):not(.checked) .thumb {
+  background-color: #C7C7C7;
+}
+
+.variant-tertiary.theme-light:active:not(.disabled):not(.checked) .thumb {
+  background-color: #ABABAB;
+}
+
+/* Tertiary - Light Theme - Checked */
+.variant-tertiary.theme-light.checked .track {
+  background-color: transparent;
+  border: 2px solid #6DA5FA;
+}
+
+.variant-tertiary.theme-light.checked:hover:not(.disabled) .track {
+  border-color: #497CFF;
+}
+
+.variant-tertiary.theme-light.checked:active:not(.disabled) .track {
+  border-color: #3A5CF3;
+}
+
+.variant-tertiary.theme-light.checked .thumb {
+  background-color: #6DA5FA;
+}
+
+.variant-tertiary.theme-light.checked:hover:not(.disabled) .thumb {
+  background-color: #497CFF;
+}
+
+.variant-tertiary.theme-light.checked:active:not(.disabled) .thumb {
+  background-color: #3A5CF3;
+}
+
+/* Tertiary - Dark Theme - Unchecked */
+.variant-tertiary.theme-dark .track {
+  background-color: transparent;
+  border: 2px solid #777777;
+}
+
+.variant-tertiary.theme-dark:hover:not(.disabled):not(.checked) .track {
+  border-color: #919191;
+}
+
+.variant-tertiary.theme-dark:active:not(.disabled):not(.checked) .track {
+  border-color: #ABABAB;
+}
+
+.variant-tertiary.theme-dark .thumb {
+  background-color: #777777;
+}
+
+.variant-tertiary.theme-dark:hover:not(.disabled):not(.checked) .thumb {
+  background-color: #919191;
+}
+
+.variant-tertiary.theme-dark:active:not(.disabled):not(.checked) .thumb {
+  background-color: #ABABAB;
+}
+
+/* Tertiary - Dark Theme - Checked */
+.variant-tertiary.theme-dark.checked .track {
+  background-color: transparent;
+  border: 2px solid #93BEFF;
+}
+
+.variant-tertiary.theme-dark.checked:hover:not(.disabled) .track {
+  border-color: #BDDBFF;
+}
+
+.variant-tertiary.theme-dark.checked:active:not(.disabled) .track {
+  border-color: #DBEEFF;
+}
+
+.variant-tertiary.theme-dark.checked .thumb {
+  background-color: #93BEFF;
+}
+
+.variant-tertiary.theme-dark.checked:hover:not(.disabled) .thumb {
+  background-color: #BDDBFF;
+}
+
+.variant-tertiary.theme-dark.checked:active:not(.disabled) .thumb {
+  background-color: #DBEEFF;
+}
+
+/* ============================================ */
+/* DISABLED STATE */
+/* ============================================ */
+
+.toggle.disabled {
+  cursor: not-allowed;
+  opacity: 0.4;
+  pointer-events: none;
+}
+
+.toggle.disabled .track {
+  cursor: not-allowed;
+}
+
+.toggle.disabled .thumb {
+  cursor: not-allowed;
+}
+

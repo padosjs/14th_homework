@@ -1,0 +1,221 @@
+/* Base Searchbar Styles */
+.searchbar {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  width: 100%;
+  border-radius: 100px;
+  font-family: 'Pretendard Variable', -apple-system, BlinkMacSystemFont, system-ui, Roboto, 'Helvetica Neue', 'Segoe UI', 'Apple SD Gothic Neo', 'Noto Sans KR', 'Malgun Gothic', sans-serif;
+  transition: all 0.2s ease-in-out;
+  box-sizing: border-box;
+}
+
+.searchbar__icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  opacity: 0.5;
+  transition: opacity 0.2s ease-in-out;
+}
+
+.searchbar__input {
+  flex: 1;
+  border: none;
+  background: transparent;
+  outline: none;
+  font-family: inherit;
+  font-weight: 500;
+  letter-spacing: -0.01em;
+  color: inherit;
+  min-width: 0;
+}
+
+.searchbar__input::placeholder {
+  color: #ABABAB;
+  font-weight: 500;
+}
+
+/* Size Variants */
+.searchbar--small {
+  height: 40px;
+  padding: 8px 12px;
+}
+
+.searchbar--small .searchbar__input {
+  font-size: 14px;
+  line-height: 20px;
+}
+
+.searchbar--medium {
+  height: 48px;
+  padding: 12px 16px;
+}
+
+.searchbar--medium .searchbar__input {
+  font-size: 16px;
+  line-height: 24px;
+}
+
+.searchbar--large {
+  height: 56px;
+  padding: 16px 20px;
+}
+
+.searchbar--large .searchbar__input {
+  font-size: 18px;
+  line-height: 24px;
+}
+
+/* Light Theme - Primary Variant */
+.searchbar--light.searchbar--primary {
+  background-color: #FFFFFF;
+  border: 1px solid #C7C7C7;
+  color: #333333;
+}
+
+.searchbar--light.searchbar--primary:hover:not(.searchbar--disabled) {
+  border-color: #ABABAB;
+}
+
+.searchbar--light.searchbar--primary:focus-within:not(.searchbar--disabled) {
+  border-color: #6DA5FA;
+  box-shadow: 0 0 0 3px rgba(109, 165, 250, 0.1);
+}
+
+.searchbar--light.searchbar--primary:focus-within .searchbar__icon {
+  opacity: 1;
+}
+
+/* Light Theme - Secondary Variant */
+.searchbar--light.searchbar--secondary {
+  background-color: #F2F2F2;
+  border: 1px solid #E4E4E4;
+  color: #333333;
+}
+
+.searchbar--light.searchbar--secondary:hover:not(.searchbar--disabled) {
+  background-color: #E4E4E4;
+  border-color: #D4D3D3;
+}
+
+.searchbar--light.searchbar--secondary:focus-within:not(.searchbar--disabled) {
+  background-color: #FFFFFF;
+  border-color: #6DA5FA;
+  box-shadow: 0 0 0 3px rgba(109, 165, 250, 0.1);
+}
+
+.searchbar--light.searchbar--secondary:focus-within .searchbar__icon {
+  opacity: 1;
+}
+
+/* Light Theme - Tertiary Variant */
+.searchbar--light.searchbar--tertiary {
+  background-color: #F8F8FA;
+  border: 1px solid transparent;
+  color: #333333;
+}
+
+.searchbar--light.searchbar--tertiary:hover:not(.searchbar--disabled) {
+  background-color: #EDEEF2;
+}
+
+.searchbar--light.searchbar--tertiary:focus-within:not(.searchbar--disabled) {
+  background-color: #FFFFFF;
+  border-color: #6DA5FA;
+  box-shadow: 0 0 0 3px rgba(109, 165, 250, 0.1);
+}
+
+.searchbar--light.searchbar--tertiary:focus-within .searchbar__icon {
+  opacity: 1;
+}
+
+/* Dark Theme - Primary Variant */
+.searchbar--dark.searchbar--primary {
+  background-color: #333333;
+  border: 1px solid #5F5F5F;
+  color: #FFFFFF;
+}
+
+.searchbar--dark.searchbar--primary .searchbar__input::placeholder {
+  color: #919191;
+}
+
+.searchbar--dark.searchbar--primary:hover:not(.searchbar--disabled) {
+  border-color: #777777;
+}
+
+.searchbar--dark.searchbar--primary:focus-within:not(.searchbar--disabled) {
+  border-color: #6DA5FA;
+  box-shadow: 0 0 0 3px rgba(109, 165, 250, 0.2);
+}
+
+.searchbar--dark.searchbar--primary:focus-within .searchbar__icon {
+  opacity: 1;
+}
+
+/* Dark Theme - Secondary Variant */
+.searchbar--dark.searchbar--secondary {
+  background-color: #1C1C1C;
+  border: 1px solid #333333;
+  color: #FFFFFF;
+}
+
+.searchbar--dark.searchbar--secondary .searchbar__input::placeholder {
+  color: #919191;
+}
+
+.searchbar--dark.searchbar--secondary:hover:not(.searchbar--disabled) {
+  background-color: #333333;
+  border-color: #5F5F5F;
+}
+
+.searchbar--dark.searchbar--secondary:focus-within:not(.searchbar--disabled) {
+  background-color: #333333;
+  border-color: #6DA5FA;
+  box-shadow: 0 0 0 3px rgba(109, 165, 250, 0.2);
+}
+
+.searchbar--dark.searchbar--secondary:focus-within .searchbar__icon {
+  opacity: 1;
+}
+
+/* Dark Theme - Tertiary Variant */
+.searchbar--dark.searchbar--tertiary {
+  background-color: #1C1C1C;
+  border: 1px solid transparent;
+  color: #FFFFFF;
+}
+
+.searchbar--dark.searchbar--tertiary .searchbar__input::placeholder {
+  color: #919191;
+}
+
+.searchbar--dark.searchbar--tertiary:hover:not(.searchbar--disabled) {
+  background-color: #333333;
+}
+
+.searchbar--dark.searchbar--tertiary:focus-within:not(.searchbar--disabled) {
+  background-color: #333333;
+  border-color: #6DA5FA;
+  box-shadow: 0 0 0 3px rgba(109, 165, 250, 0.2);
+}
+
+.searchbar--dark.searchbar--tertiary:focus-within .searchbar__icon {
+  opacity: 1;
+}
+
+/* Disabled State */
+.searchbar--disabled {
+  cursor: not-allowed;
+  opacity: 0.5;
+}
+
+.searchbar--disabled .searchbar__input {
+  cursor: not-allowed;
+}
+
+.searchbar--disabled .searchbar__input::placeholder {
+  color: #C7C7C7;
+}
+
