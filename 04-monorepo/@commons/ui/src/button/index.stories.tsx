@@ -6,7 +6,7 @@ export default {
 
 export const Primary = {
     render: () => {
-        return <Button className="white-button" text="회원가입" />
+        return <Button className="blue-button" text="버튼 텍스트는 여기에 표시됨" />
 
     }
 }
