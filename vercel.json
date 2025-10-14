@@ -1,0 +1,13 @@
+{
+  "buildCommand": "cd 05-vibe-coding && npm run build",
+  "outputDirectory": "05-vibe-coding/.next",
+  "installCommand": "cd 05-vibe-coding && npm install",
+  "framework": "nextjs",
+  "rewrites": [
+    {
+      "source": "/(.*)",
+      "destination": "/05-vibe-coding/$1"
+    }
+  ]
+}
+

@@ -51,30 +51,30 @@
 
 /* Primary Variant - Light Theme */
 .variant-primary.theme-light {
-  background-color: #6DA5FA;
-  color: #FFFFFF;
-}
-
-.variant-primary.theme-light:hover:not(:disabled) {
-  background-color: #497CFF;
-}
-
-.variant-primary.theme-light:active:not(:disabled) {
-  background-color: #3A5CF3;
-}
-
-/* Primary Variant - Dark Theme */
-.variant-primary.theme-dark {
   background-color: #333333;
   color: #FFFFFF;
 }
 
-.variant-primary.theme-dark:hover:not(:disabled) {
+.variant-primary.theme-light:hover:not(:disabled) {
   background-color: #1C1C1C;
 }
 
-.variant-primary.theme-dark:active:not(:disabled) {
+.variant-primary.theme-light:active:not(:disabled) {
   background-color: #000000;
+}
+
+/* Primary Variant - Dark Theme */
+.variant-primary.theme-dark {
+  background-color: #FFFFFF;
+  color: #333333;
+}
+
+.variant-primary.theme-dark:hover:not(:disabled) {
+  background-color: #F2F2F2;
+}
+
+.variant-primary.theme-dark:active:not(:disabled) {
+  background-color: #E4E4E4;
 }
 
 /* Secondary Variant - Light Theme */
