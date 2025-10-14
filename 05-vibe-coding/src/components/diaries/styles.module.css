@@ -1,0 +1,140 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+
+.gap32 {
+  width: 1168px;
+  height: 32px;
+}
+
+.search {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  width: 1168px;
+  height: 48px;
+}
+
+.searchLeft {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 16px;
+}
+
+.selectbox {
+  width: 120px;
+}
+
+.searchbar {
+  width: 320px;
+}
+
+.writeButton {
+  width: 110px;
+}
+
+.gap42 {
+  width: 1168px;
+  height: 42px;
+}
+
+.main {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  width: 1168px;
+}
+
+.row {
+  display: flex;
+  flex-direction: row;
+  gap: 24px;
+  width: 1168px;
+}
+
+.diaryCard {
+  display: flex;
+  flex-direction: column;
+  width: 274px;
+  background-color: var(--color-gray-white);
+  border-radius: 16px;
+}
+
+.cardImageWrapper {
+  position: relative;
+  width: 274px;
+  height: 208px;
+}
+
+.cardImage {
+  width: 274px;
+  height: 208px;
+  object-fit: cover;
+  border-radius: 16px 16px 16px 16px;
+}
+
+.closeIcon {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  width: 24px;
+  height: 24px;
+  cursor: pointer;
+}
+
+.cardContent {
+  display: flex;
+  flex-direction: column;
+  padding: 8px;
+  gap: 8px;
+}
+
+.cardHeader {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  height: 24px;
+}
+
+.emotion {
+  font-size: var(--typo-mobile-subtitle01-size);
+  line-height: var(--typo-mobile-subtitle01-line-height);
+  font-weight: var(--typo-mobile-subtitle01-weight);
+  letter-spacing: -0.14px;
+}
+
+.date {
+  font-size: var(--typo-mobile-subtitle01-size);
+  line-height: var(--typo-mobile-body01-r-line-height);
+  font-weight: var(--typo-mobile-body01-r-weight);
+  letter-spacing: -0.14px;
+  color: var(--color-gray-50);
+}
+
+.title {
+  font-size: var(--typo-mobile-title01-size);
+  line-height: var(--typo-mobile-title01-line-height);
+  font-weight: var(--typo-mobile-title01-weight);
+  letter-spacing: -0.18px;
+  color: var(--color-gray-black);
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+.gap40 {
+  width: 1168px;
+  height: 40px;
+}
+
+.pagination {
+  width: 1168px;
+  display: flex;
+  justify-content: center;
+}
+

@@ -1,0 +1,142 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+}
+
+.header {
+  width: 1168px;
+  height: 60px;
+  display: flex;
+  align-items: center;
+}
+
+.logo {
+  width: 120px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+}
+
+.logoText {
+  font-family: var(--font-family-korean);
+  font-size: 18px;
+  font-weight: var(--font-weight-bold);
+  line-height: 16px;
+  letter-spacing: -0.18px;
+  color: var(--color-gray-black);
+}
+
+.gap {
+  width: 1168px;
+  height: 24px;
+}
+
+.banner {
+  width: 1168px;
+  height: 240px;
+  position: relative;
+  border-radius: 24px;
+  overflow: hidden;
+}
+
+.bannerImage {
+  object-fit: cover;
+}
+
+.navigation {
+  width: 1168px;
+  height: 48px;
+  display: flex;
+}
+
+.tabContainer {
+  display: flex;
+  gap: 16px;
+}
+
+.tabActive {
+  display: flex;
+  align-items: center;
+  height: 48px;
+  padding: 0 8px;
+  border-bottom: 2px solid var(--color-gray-black);
+}
+
+.tabActiveText {
+  font-family: var(--font-family-korean);
+  font-size: 24px;
+  font-weight: var(--font-weight-bold);
+  line-height: 24px;
+  letter-spacing: -0.24px;
+  color: var(--color-gray-black);
+}
+
+.tab {
+  display: flex;
+  align-items: center;
+  height: 48px;
+  padding: 0 8px;
+}
+
+.tabText {
+  font-family: var(--font-family-korean);
+  font-size: 24px;
+  font-weight: var(--font-weight-medium);
+  line-height: 24px;
+  letter-spacing: -0.24px;
+  color: var(--color-gray-40);
+}
+
+.main {
+  width: 1168px;
+}
+
+.footer {
+  width: 100%;
+  height: 160px;
+  background-color: var(--color-gray-5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.footerContent {
+  width: 1168px;
+  height: 112px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.footerTitle {
+  font-family: var(--font-family-korean);
+  font-size: 20px;
+  font-weight: var(--font-weight-bold);
+  line-height: 16px;
+  letter-spacing: -0.2px;
+  color: var(--color-gray-black);
+  margin: 0;
+}
+
+.footerCeo {
+  font-family: var(--font-family-korean);
+  font-size: 14px;
+  font-weight: var(--font-weight-regular);
+  line-height: 16px;
+  letter-spacing: -0.14px;
+  color: var(--color-gray-70);
+  margin: 0;
+}
+
+.footerCopyright {
+  font-family: var(--font-family-korean);
+  font-size: 14px;
+  font-weight: 300;
+  line-height: 16px;
+  letter-spacing: -0.14px;
+  color: var(--color-gray-50);
+  margin: 0;
+}
+

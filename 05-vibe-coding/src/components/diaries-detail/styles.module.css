@@ -1,0 +1,236 @@
+.wrapper {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.gap1 {
+  width: 1168px;
+  height: 64px;
+}
+
+.detailTitle {
+  width: 1168px;
+  display: flex;
+  flex-direction: column;
+}
+
+.gap2 {
+  width: 1168px;
+  height: 24px;
+}
+
+.detailContent {
+  width: 1168px;
+  display: flex;
+  flex-direction: column;
+}
+
+.gap3 {
+  width: 1168px;
+  height: 24px;
+}
+
+.detailFooter {
+  width: 1168px;
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
+  align-items: center;
+  padding-bottom: 16px;
+  border-bottom: 1px solid var(--color-gray-black);
+}
+
+.gap4 {
+  width: 1168px;
+  height: 24px;
+}
+
+.retrospectInput {
+  width: 1168px;
+  display: flex;
+  flex-direction: column;
+  gap: 13px;
+}
+
+.gap5 {
+  width: 1168px;
+  height: 16px;
+}
+
+.retrospectList {
+  width: 1168px;
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 64px;
+}
+
+.retrospectLabel {
+  font-size: var(--typo-mobile-title01-size);
+  font-weight: var(--typo-mobile-subtitle01-weight);
+  line-height: var(--typo-mobile-title01-line-height);
+  letter-spacing: -0.18px;
+  color: var(--color-gray-black);
+}
+
+.retrospectInputWrapper {
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  gap: 16px;
+}
+
+.retrospectInputField {
+  width: 1101px;
+}
+
+.retrospectSubmitButton {
+  width: 51px;
+}
+
+.retrospectItem {
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  gap: 12px;
+  padding: 12px 0;
+  border-bottom: 1px solid var(--color-gray-10);
+}
+
+.retrospectText {
+  font-size: var(--typo-mobile-body01-size);
+  font-weight: var(--typo-mobile-body01-weight);
+  line-height: var(--typo-mobile-body01-line-height);
+  letter-spacing: -0.16px;
+  color: var(--color-gray-black);
+}
+
+.retrospectDate {
+  font-size: var(--typo-mobile-body01-size);
+  font-weight: var(--typo-mobile-body01-r-weight);
+  line-height: var(--typo-mobile-body01-line-height);
+  letter-spacing: -0.16px;
+  color: var(--color-gray-60);
+}
+
+.titleSection {
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  padding-bottom: 12px;
+  border-bottom: 2px solid var(--color-gray-black);
+}
+
+.titleText {
+  font-size: var(--typo-mobile-headline02-size);
+  font-weight: var(--typo-mobile-headline02-weight);
+  line-height: var(--typo-mobile-headline02-line-height);
+  letter-spacing: -0.22px;
+  color: var(--color-gray-black);
+}
+
+.emotionDateSection {
+  width: 100%;
+  height: 32px;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 16px;
+}
+
+.emotionWrapper {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 8px;
+}
+
+.emotionIcon {
+  width: 32px;
+  height: 32px;
+}
+
+.emotionText {
+  font-size: var(--typo-mobile-headline03-size);
+  font-weight: var(--typo-mobile-subtitle01-weight);
+  line-height: var(--typo-mobile-headline03-line-height);
+  letter-spacing: -0.2px;
+}
+
+.dateWrapper {
+  display: flex;
+  flex-direction: row;
+  gap: 8px;
+}
+
+.dateText {
+  font-size: var(--typo-mobile-subtitle01-size);
+  font-weight: var(--typo-mobile-body01-r-weight);
+  line-height: var(--typo-mobile-subtitle01-line-height);
+  letter-spacing: -0.14px;
+  color: var(--color-gray-50);
+}
+
+.contentWrapper {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 13px;
+}
+
+.contentLabel {
+  font-size: var(--typo-mobile-title02-size);
+  font-weight: var(--typo-mobile-title02-weight);
+  line-height: var(--typo-mobile-subtitle01-line-height);
+  letter-spacing: -0.16px;
+  color: var(--color-gray-black);
+}
+
+.contentText {
+  font-size: var(--typo-mobile-title02-size);
+  font-weight: var(--typo-mobile-body01-m-weight);
+  line-height: var(--typo-mobile-subtitle01-line-height);
+  letter-spacing: -0.16px;
+  color: var(--color-gray-80);
+}
+
+.copyWrapper {
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
+  align-items: center;
+  margin-top: 12px;
+}
+
+.copyButton {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 8px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+}
+
+.copyIcon {
+  width: 24px;
+  height: 24px;
+}
+
+.copyText {
+  font-size: var(--typo-mobile-body01-size);
+  font-weight: var(--typo-mobile-body01-r-weight);
+  line-height: var(--typo-mobile-body01-line-height);
+  letter-spacing: -0.16px;
+  color: var(--color-gray-90);
+}
+
+.footerButtons {
+  display: flex;
+  flex-direction: row;
+  gap: 16px;
+}
