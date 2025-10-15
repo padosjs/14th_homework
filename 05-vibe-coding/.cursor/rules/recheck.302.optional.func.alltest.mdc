@@ -1,0 +1,7 @@
+---
+description:
+globs:
+alwaysApply: false
+---
+
+프로젝트 전체테스트 npm run test:e2e 요청

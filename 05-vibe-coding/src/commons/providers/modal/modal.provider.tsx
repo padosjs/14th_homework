@@ -2,6 +2,7 @@
 
 import { createContext, useContext, useState, ReactNode, useEffect } from "react";
 import { createPortal } from "react-dom";
+import styles from "./modal.module.css";
 
 interface ModalContextType {
   openModal: (content: ReactNode) => void;
@@ -55,15 +56,16 @@ export default function ModalProvider({ children }: ModalProviderProps) {
         isOpen &&
         createPortal(
           <div
-            className="fixed inset-0 z-50 flex items-center justify-center"
+            className={styles.modalOverlay}
             onClick={closeModal}
+            data-testid="modal-overlay"
           >
             {/* Overlay */}
-            <div className="absolute inset-0 bg-black bg-opacity-50" />
+            <div className={styles.overlay} />
             
-            {/* Modal Wrapper - max-w-md, w-full 제거됨 */}
+            {/* Modal Wrapper */}
             <div
-              className="relative z-10 bg-white rounded-lg shadow-lg p-6"
+              className={styles.modalWrapper}
               onClick={(e) => e.stopPropagation()}
             >
               {modalContent}

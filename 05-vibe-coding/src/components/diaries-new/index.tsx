@@ -5,8 +5,10 @@ import styles from "./styles.module.css";
 import { Input } from "@/commons/components/input";
 import { Button } from "@/commons/components/button";
 import { Emotion, EMOTION_DATA } from "@/commons/constants/enum";
+import { useModal } from "@/commons/providers/modal/modal.provider";
 
 export default function DiariesNew() {
+  const { closeModal } = useModal();
   const [selectedEmotion, setSelectedEmotion] = useState<Emotion>(Emotion.HAPPY);
   const [title, setTitle] = useState("");
   const [content, setContent] = useState("");
@@ -16,7 +18,7 @@ export default function DiariesNew() {
   };
 
   const handleClose = () => {
-    // 닫기 로직
+    closeModal();
   };
 
   const handleSubmit = () => {
@@ -24,10 +26,10 @@ export default function DiariesNew() {
   };
 
   return (
-    <div className={styles.wrapper}>
+    <div className={styles.wrapper} data-testid="diary-modal">
       {/* Header */}
       <div className={styles.header}>
-        <h1 className={styles.headerTitle}>일기 쓰기</h1>
+        <h1 className={styles.headerTitle} data-testid="diary-modal-title">일기 쓰기</h1>
       </div>
       <div className={styles.gap40}></div>
 
@@ -91,6 +93,7 @@ export default function DiariesNew() {
           theme="light"
           onClick={handleClose}
           className={styles.closeButton}
+          data-testid="close-modal-button"
         >
           닫기
         </Button>

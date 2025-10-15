@@ -7,6 +7,7 @@ import { Searchbar } from "@/commons/components/searchbar";
 import { Button } from "@/commons/components/button";
 import { Pagination } from "@/commons/components/pagination";
 import { Emotion, getEmotionLabel, getEmotionColor } from "@/commons/constants/enum";
+import { useDiaryModal } from "./hooks/index.link.modal.hook";
 
 // Mock 데이터
 const mockDiaries = [
@@ -100,6 +101,8 @@ const mockDiaries = [
 ];
 
 export default function Diaries() {
+  const { openDiaryModal } = useDiaryModal();
+
   // 4개씩 그룹화
   const rows = [];
   for (let i = 0; i < mockDiaries.length; i += 4) {
@@ -107,7 +110,7 @@ export default function Diaries() {
   }
 
   return (
-    <div className={styles.container}>
+    <div className={styles.container} data-testid="diaries-container">
       <div className={styles.gap32}></div>
       <div className={styles.search}>
         <div className={styles.searchLeft}>
@@ -129,8 +132,10 @@ export default function Diaries() {
         <Button
           variant="primary"
           size="medium"
-          theme="dark"
+          theme="light"
           className={styles.writeButton}
+          onClick={openDiaryModal}
+          data-testid="write-diary-button"
           leftIcon={
             <Image
               src="/icons/plus_outline_light_m.svg"
