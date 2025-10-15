@@ -21,15 +21,15 @@ test.describe('Layout Area Visibility', () => {
     await expect(page.locator('[data-testid="layout-footer"]')).toBeVisible();
   });
 
-  test.skip('로그인 페이지 테스트 스킵', async ({ page }) => {
+  test.skip('로그인 페이지 테스트 스킵', async () => {
     // 테스트 제외 대상
   });
 
-  test.skip('회원가입 페이지 테스트 스킵', async ({ page }) => {
+  test.skip('회원가입 페이지 테스트 스킵', async () => {
     // 테스트 제외 대상
   });
 
-  test.skip('사진보관함 페이지 테스트 스킵', async ({ page }) => {
+  test.skip('사진보관함 페이지 테스트 스킵', async () => {
     // 테스트 제외 대상
   });
 });
