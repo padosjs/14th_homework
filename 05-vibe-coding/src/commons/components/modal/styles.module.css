@@ -1,0 +1,100 @@
+/* Modal Container */
+.modal {
+  display: flex;
+  flex-direction: column;
+  width: 480px;
+  background-color: #FFFFFF;
+  border-radius: 24px;
+  padding: 24px;
+  box-sizing: border-box;
+}
+
+/* Content Area */
+.content {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  margin-bottom: 32px;
+}
+
+/* Title */
+.title {
+  font-family: Pretendard, -apple-system, BlinkMacSystemFont, system-ui, Roboto, 'Helvetica Neue', 'Segoe UI', 'Apple SD Gothic Neo', 'Noto Sans KR', 'Malgun Gothic', sans-serif;
+  font-size: 24px;
+  font-weight: 700;
+  line-height: 24px;
+  letter-spacing: -0.24px;
+  text-align: center;
+  color: #000000;
+  margin: 0;
+}
+
+/* Description */
+.description {
+  font-family: Pretendard, -apple-system, BlinkMacSystemFont, system-ui, Roboto, 'Helvetica Neue', 'Segoe UI', 'Apple SD Gothic Neo', 'Noto Sans KR', 'Malgun Gothic', sans-serif;
+  font-size: 20px;
+  font-weight: 500;
+  line-height: 24px;
+  letter-spacing: -0.2px;
+  text-align: center;
+  color: #333333;
+  margin: 0;
+}
+
+/* Button Wrapper */
+.buttonWrapper {
+  display: flex;
+  gap: 21px;
+}
+
+/* Single Action - Full Width Button */
+.actions-single {
+  justify-content: center;
+}
+
+.singleButton {
+  width: 100%;
+}
+
+/* Dual Action - Fixed Width Buttons */
+.actions-dual {
+  justify-content: center;
+}
+
+.dualButton {
+  width: 104px;
+}
+
+/* Button Size Override for Modal */
+.modal .singleButton,
+.modal .dualButton {
+  height: 48px;
+  font-size: 18px;
+  line-height: 24px;
+  letter-spacing: -0.18px;
+  padding: 12px 24px;
+}
+
+/* Variant Styles - Info */
+.variant-info {
+  /* Default styles already applied */
+}
+
+/* Variant Styles - Danger */
+.variant-danger .title {
+  color: #F03851;
+}
+
+/* Theme Styles - Dark */
+.theme-dark {
+  background-color: #1C1C1C;
+}
+
+.theme-dark .title {
+  color: #FFFFFF;
+}
+
+.theme-dark .description {
+  color: #F2F2F2;
+}
+

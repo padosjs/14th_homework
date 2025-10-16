@@ -5,24 +5,18 @@ import styles from "./styles.module.css";
 import { Input } from "@/commons/components/input";
 import { Button } from "@/commons/components/button";
 import { Emotion, EMOTION_DATA } from "@/commons/constants/enum";
-import { useModal } from "@/commons/providers/modal/modal.provider";
+import { useCloseModal } from "./hooks/index.link.modal.close.hook";
+import { useFormHook } from "./hooks/index.form.hook";
 
 export default function DiariesNew() {
-  const { closeModal } = useModal();
+  const { handleCloseWithConfirm } = useCloseModal();
   const [selectedEmotion, setSelectedEmotion] = useState<Emotion>(Emotion.HAPPY);
-  const [title, setTitle] = useState("");
-  const [content, setContent] = useState("");
+  
+  const { register, handleSubmit, setValue, isValid } = useFormHook(selectedEmotion);
 
   const handleEmotionChange = (emotion: Emotion) => {
     setSelectedEmotion(emotion);
-  };
-
-  const handleClose = () => {
-    closeModal();
-  };
-
-  const handleSubmit = () => {
-    // 등록하기 로직
+    setValue("emotion", emotion);
   };
 
   return (
@@ -66,9 +60,9 @@ export default function DiariesNew() {
           size="medium"
           theme="light"
           placeholder="제목을 입력합니다."
-          value={title}
-          onChange={(e) => setTitle(e.target.value)}
           className={styles.inputField}
+          data-testid="diary-title-input"
+          {...register("title")}
         />
       </div>
       <div className={styles.gap24}></div>
@@ -78,9 +72,9 @@ export default function DiariesNew() {
         <label className={styles.inputLabel}>내용</label>
         <textarea
           placeholder="내용을 입력합니다."
-          value={content}
-          onChange={(e) => setContent(e.target.value)}
           className={styles.textarea}
+          data-testid="diary-content-textarea"
+          {...register("content")}
         />
       </div>
       <div className={styles.gap40}></div>
@@ -91,7 +85,7 @@ export default function DiariesNew() {
           variant="secondary"
           size="medium"
           theme="light"
-          onClick={handleClose}
+          onClick={handleCloseWithConfirm}
           className={styles.closeButton}
           data-testid="close-modal-button"
         >
@@ -103,6 +97,8 @@ export default function DiariesNew() {
           theme="light"
           onClick={handleSubmit}
           className={styles.submitButton}
+          disabled={!isValid}
+          data-testid="submit-diary-button"
         >
           등록하기
         </Button>

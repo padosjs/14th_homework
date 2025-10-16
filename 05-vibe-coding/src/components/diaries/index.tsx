@@ -6,107 +6,20 @@ import { Selectbox } from "@/commons/components/selectbox";
 import { Searchbar } from "@/commons/components/searchbar";
 import { Button } from "@/commons/components/button";
 import { Pagination } from "@/commons/components/pagination";
-import { Emotion, getEmotionLabel, getEmotionColor } from "@/commons/constants/enum";
+import { getEmotionLabel, getEmotionColor } from "@/commons/constants/enum";
 import { useDiaryModal } from "./hooks/index.link.modal.hook";
-
-// Mock 데이터
-const mockDiaries = [
-  // 첫 번째 행
-  {
-    id: 1,
-    emotion: Emotion.SAD,
-    date: "2024. 03. 12",
-    title: "타이틀 영역 입니다. 한줄까지만 노출 됩니다.",
-    image: "/images/emotion-sad-m.png",
-  },
-  {
-    id: 2,
-    emotion: Emotion.SURPRISE,
-    date: "2024. 03. 12",
-    title: "타이틀 영역 입니다.",
-    image: "/images/emotion-surprise-m.png",
-  },
-  {
-    id: 3,
-    emotion: Emotion.ANGRY,
-    date: "2024. 03. 12",
-    title: "타이틀 영역 입니다.",
-    image: "/images/emotion-angry-m.png",
-  },
-  {
-    id: 4,
-    emotion: Emotion.HAPPY,
-    date: "2024. 03. 12",
-    title: "타이틀 영역 입니다.",
-    image: "/images/emotion-happy-m.png",
-  },
-  // 두 번째 행
-  {
-    id: 5,
-    emotion: Emotion.ETC,
-    date: "2024. 03. 12",
-    title: "타이틀 영역 입니다. 한줄까지만 노출 됩니다.",
-    image: "/images/emotion-etc-m.png",
-  },
-  {
-    id: 6,
-    emotion: Emotion.SURPRISE,
-    date: "2024. 03. 12",
-    title: "타이틀 영역 입니다.",
-    image: "/images/emotion-surprise-m.png",
-  },
-  {
-    id: 7,
-    emotion: Emotion.ANGRY,
-    date: "2024. 03. 12",
-    title: "타이틀 영역 입니다.",
-    image: "/images/emotion-angry-m.png",
-  },
-  {
-    id: 8,
-    emotion: Emotion.HAPPY,
-    date: "2024. 03. 12",
-    title: "타이틀 영역 입니다.",
-    image: "/images/emotion-happy-m.png",
-  },
-  // 세 번째 행
-  {
-    id: 9,
-    emotion: Emotion.SAD,
-    date: "2024. 03. 12",
-    title: "타이틀 영역 입니다. 한줄까지만 노출 됩니다.",
-    image: "/images/emotion-sad-m.png",
-  },
-  {
-    id: 10,
-    emotion: Emotion.SURPRISE,
-    date: "2024. 03. 12",
-    title: "타이틀 영역 입니다.",
-    image: "/images/emotion-surprise-m.png",
-  },
-  {
-    id: 11,
-    emotion: Emotion.ANGRY,
-    date: "2024. 03. 12",
-    title: "타이틀 영역 입니다.",
-    image: "/images/emotion-angry-m.png",
-  },
-  {
-    id: 12,
-    emotion: Emotion.HAPPY,
-    date: "2024. 03. 12",
-    title: "타이틀 영역 입니다.",
-    image: "/images/emotion-happy-m.png",
-  },
-];
+import { useDiaryBinding } from "./hooks/index.binding.hook";
+import { useDiaryRouting } from "./hooks/index.link.routing.hook";
 
 export default function Diaries() {
   const { openDiaryModal } = useDiaryModal();
+  const { diaries } = useDiaryBinding();
+  const { navigateToDetail } = useDiaryRouting();
 
   // 4개씩 그룹화
   const rows = [];
-  for (let i = 0; i < mockDiaries.length; i += 4) {
-    rows.push(mockDiaries.slice(i, i + 4));
+  for (let i = 0; i < diaries.length; i += 4) {
+    rows.push(diaries.slice(i, i + 4));
   }
 
   return (
@@ -153,7 +66,12 @@ export default function Diaries() {
         {rows.map((row, rowIndex) => (
           <div key={rowIndex} className={styles.row}>
             {row.map((diary) => (
-              <div key={diary.id} className={styles.diaryCard}>
+              <div
+                key={diary.id}
+                className={styles.diaryCard}
+                data-testid="diary-card"
+                onClick={() => navigateToDetail(diary.id)}
+              >
                 <div className={styles.cardImageWrapper}>
                   <Image
                     src={diary.image}
@@ -161,6 +79,7 @@ export default function Diaries() {
                     width={274}
                     height={208}
                     className={styles.cardImage}
+                    data-testid="diary-image"
                   />
                   <Image
                     src="/icons/close_outline_light_s.svg"
@@ -168,6 +87,10 @@ export default function Diaries() {
                     width={24}
                     height={24}
                     className={styles.closeIcon}
+                    data-testid="diary-delete-icon"
+                    onClick={(e) => {
+                      e.stopPropagation();
+                    }}
                   />
                 </div>
                 <div className={styles.cardContent}>
@@ -175,12 +98,13 @@ export default function Diaries() {
                     <span
                       className={styles.emotion}
                       style={{ color: getEmotionColor(diary.emotion) }}
+                      data-testid="diary-emotion"
                     >
                       {getEmotionLabel(diary.emotion)}
                     </span>
-                    <span className={styles.date}>{diary.date}</span>
+                    <span className={styles.date} data-testid="diary-date">{diary.date}</span>
                   </div>
-                  <div className={styles.title}>{diary.title}</div>
+                  <div className={styles.title} data-testid="diary-title">{diary.title}</div>
                 </div>
               </div>
             ))}

@@ -62,6 +62,7 @@
   width: 274px;
   background-color: var(--color-gray-white);
   border-radius: 16px;
+  cursor: pointer;
 }
 
 .cardImageWrapper {

@@ -35,7 +35,7 @@ test.describe('일기쓰기 모달 기능', () => {
     await expect(modalContent).toBeVisible();
   });
 
-  test('닫기 버튼 클릭시 모달이 닫힌다', async ({ page }) => {
+  test('닫기 버튼 클릭시 등록취소 확인 모달이 열린다', async ({ page }) => {
     // 일기쓰기 버튼 클릭
     await page.click('[data-testid="write-diary-button"]');
     
@@ -46,8 +46,9 @@ test.describe('일기쓰기 모달 기능', () => {
     // 닫기 버튼 클릭
     await page.click('[data-testid="close-modal-button"]');
     
-    // 모달이 닫혔는지 확인
-    await expect(modal).not.toBeVisible();
+    // 등록취소 확인 모달이 열렸는지 확인
+    const cancelModal = page.locator('[data-testid="modal"]');
+    await expect(cancelModal).toBeVisible();
   });
 });
 

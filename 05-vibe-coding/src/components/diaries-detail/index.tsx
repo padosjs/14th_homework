@@ -4,31 +4,27 @@ import { useState } from "react";
 import Image from "next/image";
 import { Button } from "@/commons/components/button";
 import { Input } from "@/commons/components/input";
-import { Emotion, getEmotionImage, getEmotionLabel, getEmotionColor } from "@/commons/constants/enum";
+import { getEmotionImage, getEmotionLabel, getEmotionColor } from "@/commons/constants/enum";
 import styles from "./styles.module.css";
+import { useDiaryDetail } from "./hooks/index.binding.hook";
 
 export default function DiariesDetail() {
   const [retrospectInput, setRetrospectInput] = useState("");
-  
-  // Mock 데이터
-  const mockDiary = {
-    title: "이것은 타이틀 입니다.",
-    emotion: Emotion.HAPPY,
-    date: "2024. 07. 12",
-    content: "내용이 들어갑니다내용이 들어갑니다내용이 들어갑니다내용이 들어갑니다내용이 들어갑니다내용이 들어갑니다내용이 들어갑니다내용이 들어갑니다내용이 들어갑니다내용이 들어갑니다내용이 들어갑니다내용이 들어갑니다내용이 들어갑니다내용이 들어갑니다내용이 들어갑니다내용이 들어갑니다내용이 들어갑니다내용이 들어갑니다내용이 들어갑니다내용이 들어갑니다내용이 들어갑니다내용이 들어갑니다내용이 들어갑니다내용이 들어갑니다내용이 들어갑니다내용이 들어갑니다내용이 들어갑니다내용이 들어갑니다내용이 들어갑니다내용이 들어갑니다내용이 들어갑니다내용이 들어갑니다내용이 들어갑니다내용이 들어갑니다내용이 들어갑니다내용이 들어갑니다내용이 들어갑니다내용이 들어갑니다내용이 들어갑니다내용이 들어갑니다내용이 들어갑니다내용이 들어갑니다내용이 들어갑니다내용이 들어갑니다내용이 들어갑니다"
-  };
+  const { diary } = useDiaryDetail();
 
   const mockRetrospects = [
     { id: 1, text: "3년이 지나고 다시 보니 이때가 그립다.", date: "[2024. 09. 24]" },
     { id: 2, text: "3년이 지나고 다시 보니 이때가 그립다.", date: "[2024. 09. 24]" }
   ];
 
-  const emotionImagePath = `/images/${getEmotionImage(mockDiary.emotion, "small").replace('.svg', '.png')}`;
-  const emotionLabel = getEmotionLabel(mockDiary.emotion);
-  const emotionColor = getEmotionColor(mockDiary.emotion);
+  const emotionImagePath = diary ? `/images/${getEmotionImage(diary.emotion, "small").replace('.svg', '.png')}` : "";
+  const emotionLabel = diary ? getEmotionLabel(diary.emotion) : "";
+  const emotionColor = diary ? getEmotionColor(diary.emotion) : "";
 
   const handleCopyContent = () => {
-    navigator.clipboard.writeText(mockDiary.content);
+    if (diary) {
+      navigator.clipboard.writeText(diary.content);
+    }
   };
 
   const handleEdit = () => {
@@ -47,31 +43,35 @@ export default function DiariesDetail() {
   };
 
   return (
-    <div className={styles.wrapper}>
+    <div className={styles.wrapper} data-testid="diary-detail-wrapper">
       <div className={styles.gap1} />
       
       <div className={styles.detailTitle}>
         <div className={styles.titleSection}>
-          <span className={styles.titleText}>{mockDiary.title}</span>
+          <span className={styles.titleText} data-testid="diary-detail-title">{diary?.title || ""}</span>
         </div>
         
         <div className={styles.emotionDateSection}>
           <div className={styles.emotionWrapper}>
-            <Image
-              src={emotionImagePath}
-              alt={emotionLabel}
-              width={32}
-              height={32}
-              className={styles.emotionIcon}
-            />
-            <span className={styles.emotionText} style={{ color: emotionColor }}>
-              {emotionLabel}
-            </span>
+            {diary && (
+              <>
+                <Image
+                  src={emotionImagePath}
+                  alt={emotionLabel}
+                  width={32}
+                  height={32}
+                  className={styles.emotionIcon}
+                />
+                <span className={styles.emotionText} style={{ color: emotionColor }} data-testid="diary-detail-emotion-text">
+                  {emotionLabel}
+                </span>
+              </>
+            )}
           </div>
           
           <div className={styles.dateWrapper}>
-            <span className={styles.dateText}>{mockDiary.date}</span>
-            <span className={styles.dateText}>작성</span>
+            <span className={styles.dateText} data-testid="diary-detail-date">{diary?.createdAt || ""}</span>
+            {diary && <span className={styles.dateText}>작성</span>}
           </div>
         </div>
       </div>
@@ -81,7 +81,7 @@ export default function DiariesDetail() {
       <div className={styles.detailContent}>
         <div className={styles.contentWrapper}>
           <div className={styles.contentLabel}>내용</div>
-          <div className={styles.contentText}>{mockDiary.content}</div>
+          <div className={styles.contentText} data-testid="diary-detail-content">{diary?.content || ""}</div>
         </div>
         
         <div className={styles.copyWrapper}>

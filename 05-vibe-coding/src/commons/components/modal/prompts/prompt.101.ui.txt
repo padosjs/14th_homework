@@ -1,0 +1,47 @@
+아래의 조건을 모두 적용하여, 아래의 요구사항을 모두 구현할 것.
+구현 결과를 체크리스트로 반환할 것.
+
+==============================================
+
+조건-커서룰) 아래의 커서룰을 적용하여 작업하고, 이 작업이 끝나면 해당 rules 적용 결과를 체크리스트로 반환할 것.
+            - @01-common.mdc
+            - @02-wireframe.mdc
+            - @03-ui.mdc
+
+==============================================
+
+조건-피그마) 활용할MCP: CursorTalkToFigmaMCP(채널명: avs8sfpl)
+조건-피그마) 참고할 공통컴포넌트 노드ID(variant: 'info', actions: 'single'): 3:1046
+조건-피그마) 참고할 공통컴포넌트 노드ID(variant: 'info', actions: 'dual'): 3:670
+
+조건-파일경로) 구현될 TSX 파일경로: src/commons/components/modal/index.tsx
+조건-파일경로) 구현될 CSS 파일경로: src/commons/components/modal/styles.module.css
+
+==============================================
+
+기존히스토리-참고만) MCP를 연동하여 피그마의 디자인을 그대로 소스코드로 구현할 것.
+                - 스토리북은 생성하지 말 것.
+                - 기존의 공통컴포넌트와 스타일일관성을 통일할 것
+                - modal.provider와 함께 사용할 것이므로, 자체 backdrop 스타일을 생성하지 말 것.
+
+기존히스토리-참고만) 다음 조건을 모두 만족하는 완전한 variant 시스템을 구현할 것.
+                - variant: 'info' | 'danger'
+                - actions: 'single' | 'dual'
+                - theme: 'light' | 'dark'
+
+기존히스토리-참고만) 모달에 사용될 <Button /> 공통컴포넌트는 다음의 규칙을 지켜 step-by-step 으로 구현하고, 적용 결과를 체크리스트로 반환할 것.
+                1) 모달에 사용될 <Button /> 공통컴포넌트 원본을 수정하지 말고, 아래의 props만 활용할 것.
+                    - variant: primary, secondary를 확인하여 구현할 것.
+                    - theme: light 모드만 사용할 것.
+                    - size: 피그마와 일치할 것.
+                    - className 전달: width만 허용할 것.
+
+                2) 적용될 공통컴포넌트 목록을 구현할 것.
+                    - 확인: <Button />
+                    - 취소: <Button />
+
+==============================================
+
+핵심요구사항) 모달 actions: 'dual'일 때, 모달에 공통컴포넌트로 등록된 <Button /> 2개 width가 화면 전체로 길어지는데,
+           피그마와 동일하게 104px로 고정할 것.
+           단, actions: 'single'인 경우는 현재 늘리기 상태 유지.
