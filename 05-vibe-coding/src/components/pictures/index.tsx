@@ -73,7 +73,7 @@ export default function Pictures() {
           options={FILTER_OPTIONS}
           value={selectedFilter}
           onChange={(e) => setSelectedFilter(e.target.value)}
-          className={styles.selectbox}
+          style={{ width: '120px' }}
         />
       </div>
       <div className={styles.gap42}></div>
