@@ -17,6 +17,10 @@
   align-items: center;
 }
 
+.selectboxWrapper {
+  width: 120px;
+}
+
 .gap42 {
   width: 1168px;
   height: 42px;

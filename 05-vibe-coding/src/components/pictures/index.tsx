@@ -66,15 +66,16 @@ export default function Pictures() {
     <div className={styles.container} data-testid="pictures-container" ref={containerRef}>
       <div className={styles.gap32}></div>
       <div className={styles.filter}>
-        <Selectbox
-          variant="primary"
-          theme="light"
-          size="medium"
-          options={FILTER_OPTIONS}
-          value={selectedFilter}
-          onChange={(e) => setSelectedFilter(e.target.value)}
-          style={{ width: '120px' }}
-        />
+        <div className={styles.selectboxWrapper}>
+          <Selectbox
+            variant="primary"
+            theme="light"
+            size="medium"
+            options={FILTER_OPTIONS}
+            value={selectedFilter}
+            onChange={(e) => setSelectedFilter(e.target.value)}
+          />
+        </div>
       </div>
       <div className={styles.gap42}></div>
       <div className={styles.main}>
