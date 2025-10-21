@@ -37,13 +37,11 @@ const createUser = async (input: {
   password: string;
   name: string;
 }) => {
-  const response = await fetch("https://main-practice.codebootcamp.co.kr/graphql", {
+  const response = await fetch("/api/graphql", {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
     },
-    credentials: "include",
-    mode: "cors",
     body: JSON.stringify({
       query: `
         mutation createUser($createUserInput: CreateUserInput!) {

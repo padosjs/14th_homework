@@ -22,13 +22,11 @@ type LoginFormData = z.infer<typeof loginSchema>;
 
 // GraphQL API 호출 함수
 const loginUser = async (input: { email: string; password: string }) => {
-  const response = await fetch("https://main-practice.codebootcamp.co.kr/graphql", {
+  const response = await fetch("/api/graphql", {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
     },
-    credentials: "include",
-    mode: "cors",
     body: JSON.stringify({
       query: `
         mutation loginUser($email: String!, $password: String!) {
@@ -51,14 +49,12 @@ const loginUser = async (input: { email: string; password: string }) => {
 };
 
 const fetchUserLoggedIn = async (accessToken: string) => {
-  const response = await fetch("https://main-practice.codebootcamp.co.kr/graphql", {
+  const response = await fetch("/api/graphql", {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
       Authorization: `Bearer ${accessToken}`,
     },
-    credentials: "include",
-    mode: "cors",
     body: JSON.stringify({
       query: `
         query {
@@ -183,4 +179,6 @@ export default function useLoginForm() {
     isLoading: mutation.isPending,
   };
 }
+
+
 
