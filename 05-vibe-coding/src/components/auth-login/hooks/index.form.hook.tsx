@@ -27,6 +27,8 @@ const loginUser = async (input: { email: string; password: string }) => {
     headers: {
       "Content-Type": "application/json",
     },
+    credentials: "include",
+    mode: "cors",
     body: JSON.stringify({
       query: `
         mutation loginUser($email: String!, $password: String!) {
@@ -55,6 +57,8 @@ const fetchUserLoggedIn = async (accessToken: string) => {
       "Content-Type": "application/json",
       Authorization: `Bearer ${accessToken}`,
     },
+    credentials: "include",
+    mode: "cors",
     body: JSON.stringify({
       query: `
         query {

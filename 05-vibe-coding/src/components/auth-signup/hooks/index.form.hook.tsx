@@ -42,6 +42,8 @@ const createUser = async (input: {
     headers: {
       "Content-Type": "application/json",
     },
+    credentials: "include",
+    mode: "cors",
     body: JSON.stringify({
       query: `
         mutation createUser($createUserInput: CreateUserInput!) {
