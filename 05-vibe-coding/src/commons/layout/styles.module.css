@@ -10,6 +10,7 @@
   height: 60px;
   display: flex;
   align-items: center;
+  justify-content: space-between;
 }
 
 .logo {
@@ -27,6 +28,29 @@
   line-height: 16px;
   letter-spacing: -0.18px;
   color: var(--color-gray-black);
+}
+
+.authStatus {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.userName {
+  font-family: var(--font-family-korean);
+  font-size: var(--typo-mobile-body01-size);
+  font-weight: var(--typo-mobile-body01-weight);
+  line-height: var(--typo-mobile-body01-line-height);
+  letter-spacing: -0.16px;
+  color: var(--color-gray-black);
+}
+
+.logoutButton {
+  width: 88px;
+}
+
+.loginButton {
+  width: 88px;
 }
 
 .gap {

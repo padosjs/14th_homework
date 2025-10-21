@@ -1,0 +1,109 @@
+.container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+  background-color: var(--color-cool-gray-1);
+  padding: 40px 20px;
+}
+
+.formWrapper {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  max-width: 480px;
+  background-color: var(--color-gray-white);
+  border-radius: 24px;
+  padding: 48px 40px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+}
+
+.header {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 40px;
+}
+
+.title {
+  font-size: var(--typo-web-headline03-size);
+  font-weight: var(--typo-web-headline03-weight);
+  line-height: var(--typo-web-headline03-line-height);
+  color: var(--color-gray-90);
+  margin: 0;
+}
+
+.subtitle {
+  font-size: var(--typo-mobile-body02-m-size);
+  font-weight: var(--typo-mobile-body02-m-weight);
+  line-height: var(--typo-mobile-body02-m-line-height);
+  color: var(--color-gray-60);
+  margin: 0;
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.inputGroup {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.label {
+  font-size: var(--typo-mobile-subtitle01-size);
+  font-weight: var(--typo-mobile-subtitle01-weight);
+  line-height: var(--typo-mobile-subtitle01-line-height);
+  color: var(--color-gray-80);
+}
+
+.input {
+  width: 100%;
+}
+
+.submitButton {
+  width: 100%;
+  margin-top: 8px;
+}
+
+.footer {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding-top: 8px;
+}
+
+.footerText {
+  font-size: var(--typo-mobile-body02-s-size);
+  font-weight: var(--typo-mobile-body02-s-weight);
+  line-height: var(--typo-mobile-body02-s-line-height);
+  color: var(--color-gray-60);
+}
+
+.signupLink {
+  font-size: var(--typo-mobile-body02-s-size);
+  font-weight: var(--typo-mobile-subtitle01-weight);
+  line-height: var(--typo-mobile-body02-s-line-height);
+  color: var(--color-primary);
+  text-decoration: none;
+  transition: color 0.2s ease-in-out;
+}
+
+.signupLink:hover {
+  color: var(--color-primary-strong);
+  text-decoration: underline;
+}
+
+.errorMessage {
+  font-size: var(--typo-mobile-body03-size);
+  font-weight: var(--typo-mobile-body03-weight);
+  line-height: var(--typo-mobile-body03-line-height);
+  color: var(--color-red);
+  margin: 0;
+}
+

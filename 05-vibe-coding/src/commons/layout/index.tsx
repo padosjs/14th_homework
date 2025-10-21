@@ -4,6 +4,8 @@ import Image from "next/image";
 import styles from "./styles.module.css";
 import { useLinkRouting } from "./hooks/index.link.routing.hook";
 import { useAreaVisibility } from "./hooks/index.area.hook";
+import { useAuthStatus } from "./hooks/index.auth.hook";
+import { Button } from "@/commons/components/button";
 
 interface LayoutProps {
   children: React.ReactNode;
@@ -21,6 +23,8 @@ export default function Layout({ children }: LayoutProps) {
   const { showHeader, showBanner, showNavigation, showFooter } =
     useAreaVisibility();
 
+  const { isLoggedIn, userName, handleLogin, handleLogout } = useAuthStatus();
+
   return (
     <div className={styles.container}>
       {showHeader && (
@@ -31,6 +35,36 @@ export default function Layout({ children }: LayoutProps) {
             data-testid="layout-logo"
           >
             <span className={styles.logoText}>민지의 다이어리</span>
+          </div>
+          <div className={styles.authStatus} data-testid="auth-status">
+            {isLoggedIn ? (
+              <>
+                <span className={styles.userName} data-testid="user-name">
+                  {userName}
+                </span>
+                <Button
+                  variant="secondary"
+                  size="medium"
+                  theme="light"
+                  className={styles.logoutButton}
+                  onClick={handleLogout}
+                  data-testid="logout-button"
+                >
+                  로그아웃
+                </Button>
+              </>
+            ) : (
+              <Button
+                variant="secondary"
+                size="medium"
+                theme="light"
+                className={styles.loginButton}
+                onClick={handleLogin}
+                data-testid="login-button"
+              >
+                로그인
+              </Button>
+            )}
           </div>
         </header>
       )}
