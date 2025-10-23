@@ -1,11 +1,13 @@
 import { useModal } from "@/commons/providers/modal/modal.provider";
 import DiariesNew from "@/components/diaries-new";
 import { Modal } from "@/commons/components/modal";
+import { useAuthGuard } from "@/commons/providers/auth/auth.guard.hook";
 
 export const useDiaryModal = () => {
   const { openModal, closeModal } = useModal();
+  const { withAuthGuard } = useAuthGuard();
 
-  const handleOpenDiaryModal = () => {
+  const handleOpenDiaryModalInternal = () => {
     // dim 영역 클릭 시 실행될 함수
     const handleCloseWithConfirm = () => {
       // 계속작성: 등록취소 모달(자식)만 닫기
@@ -38,6 +40,8 @@ export const useDiaryModal = () => {
     // DiariesNew 모달을 열 때 onClose에 handleCloseWithConfirm 전달
     openModal(<DiariesNew />, { onClose: handleCloseWithConfirm });
   };
+
+  const handleOpenDiaryModal = withAuthGuard(handleOpenDiaryModalInternal);
 
   return {
     openDiaryModal: handleOpenDiaryModal,
