@@ -12,6 +12,7 @@ interface User {
 interface AuthContextType {
   isLoggedIn: boolean;
   user: User | null;
+  isInitialized: boolean;
   login: () => void;
   logout: () => void;
 }
@@ -35,6 +36,7 @@ export default function AuthProvider({ children }: AuthProviderProps) {
   const pathname = usePathname();
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [user, setUser] = useState<User | null>(null);
+  const [isInitialized, setIsInitialized] = useState(false);
 
   // 로그인 상태 실시간 감지
   useEffect(() => {
@@ -55,6 +57,9 @@ export default function AuthProvider({ children }: AuthProviderProps) {
         setIsLoggedIn(false);
         setUser(null);
       }
+      
+      // 초기 체크 완료 표시
+      setIsInitialized(true);
     };
 
     // 초기 체크
@@ -99,6 +104,7 @@ export default function AuthProvider({ children }: AuthProviderProps) {
   const value: AuthContextType = {
     isLoggedIn,
     user,
+    isInitialized,
     login,
     logout,
   };

@@ -1,20 +1,21 @@
 "use client";
 
-import { useState, useEffect, useRef } from "react";
+import { useEffect, useRef } from "react";
 import Image from "next/image";
 import { Selectbox } from "@/commons/components/selectbox";
 import { useFetchDogs } from "./hooks/index.binding.hook";
+import { useImageFilter } from "./hooks/index.filter.hook";
 import styles from "./styles.module.css";
 
 const FILTER_OPTIONS = [
   { value: "default", label: "기본" },
-  { value: "recent", label: "최신순" },
-  { value: "popular", label: "인기순" },
+  { value: "landscape", label: "가로형" },
+  { value: "portrait", label: "세로형" },
 ];
 
 export default function Pictures() {
-  const [selectedFilter, setSelectedFilter] = useState("default");
   const containerRef = useRef<HTMLDivElement>(null);
+  const { filter, setFilter, imageSize } = useImageFilter();
   
   const {
     data,
@@ -72,8 +73,9 @@ export default function Pictures() {
             theme="light"
             size="medium"
             options={FILTER_OPTIONS}
-            value={selectedFilter}
-            onChange={(e) => setSelectedFilter(e.target.value)}
+            value={filter}
+            onChange={(e) => setFilter(e.target.value as any)}
+            data-testid="filter-selectbox"
           />
         </div>
       </div>
@@ -86,6 +88,10 @@ export default function Pictures() {
                 key={`splash-${i}`}
                 className={styles.splashScreen}
                 data-testid="splash-screen"
+                style={{
+                  width: `${imageSize.width}px`,
+                  height: `${imageSize.height}px`,
+                }}
               />
             ))}
           </>
@@ -94,12 +100,19 @@ export default function Pictures() {
         {!isLoading && !isError && (
           <>
             {allDogs.map((dogUrl, index) => (
-              <div key={`${dogUrl}-${index}`} className={styles.imageWrapper}>
+              <div 
+                key={`${dogUrl}-${index}`} 
+                className={styles.imageWrapper}
+                style={{
+                  width: `${imageSize.width}px`,
+                  height: `${imageSize.height}px`,
+                }}
+              >
                 <Image
                   src={dogUrl}
                   alt={`강아지 사진 ${index + 1}`}
-                  width={640}
-                  height={640}
+                  width={imageSize.width}
+                  height={imageSize.height}
                   className={styles.image}
                   data-testid="dog-image"
                   unoptimized
@@ -114,6 +127,10 @@ export default function Pictures() {
                     key={`splash-next-${i}`}
                     className={styles.splashScreen}
                     data-testid="splash-screen"
+                    style={{
+                      width: `${imageSize.width}px`,
+                      height: `${imageSize.height}px`,
+                    }}
                   />
                 ))}
               </>

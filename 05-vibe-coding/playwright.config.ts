@@ -1,5 +1,8 @@
 import { defineConfig, devices } from '@playwright/test';
 
+const agentIndex = process.env.AGENT_INDEX ? Number(process.env.AGENT_INDEX) : 0;
+const PORT = 3000 + agentIndex;
+
 export default defineConfig({
   testDir: './tests',
   fullyParallel: true,
@@ -8,7 +11,7 @@ export default defineConfig({
   workers: process.env.CI ? 1 : undefined,
   reporter: 'html',
   use: {
-    baseURL: 'http://localhost:3000',
+    baseURL: `http://localhost:${PORT}`,
     trace: 'on-first-retry',
   },
 
@@ -20,8 +23,8 @@ export default defineConfig({
   ],
 
   webServer: {
-    command: 'npm run dev',
-    url: 'http://localhost:3000',
+    command: `PORT=${PORT} npm run dev`,
+    url: `http://localhost:${PORT}`,
     reuseExistingServer: !process.env.CI,
   },
 });

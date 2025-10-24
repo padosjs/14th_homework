@@ -234,3 +234,138 @@
   flex-direction: row;
   gap: 16px;
 }
+
+.emotionSelect {
+  padding: 8px 12px;
+  border: 1px solid var(--color-gray-30);
+  border-radius: 4px;
+  font-size: var(--typo-mobile-headline03-size);
+  font-weight: var(--typo-mobile-subtitle01-weight);
+  line-height: var(--typo-mobile-headline03-line-height);
+  letter-spacing: -0.2px;
+  color: var(--color-gray-black);
+  background-color: var(--color-gray-white);
+  cursor: pointer;
+}
+
+.contentTextarea {
+  width: 100%;
+  min-height: 120px;
+  padding: 12px;
+  border: 1px solid var(--color-gray-30);
+  border-radius: 4px;
+  font-size: var(--typo-mobile-title02-size);
+  font-weight: var(--typo-mobile-body01-m-weight);
+  line-height: var(--typo-mobile-subtitle01-line-height);
+  letter-spacing: -0.16px;
+  color: var(--color-gray-80);
+  background-color: var(--color-gray-white);
+  resize: vertical;
+  font-family: inherit;
+}
+
+.errorText {
+  font-size: var(--typo-mobile-body02-size);
+  font-weight: var(--typo-mobile-body02-weight);
+  line-height: var(--typo-mobile-body02-line-height);
+  letter-spacing: -0.14px;
+  color: var(--color-red-60);
+  margin-top: 4px;
+}
+
+/* 삭제 모달 스타일 */
+.deleteModalOverlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+
+.deleteModal {
+  width: 480px;
+  height: 200px;
+  background-color: var(--color-gray-white);
+  border-radius: 24px;
+  padding: 24px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.deleteModalHeader {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 16px;
+}
+
+.deleteModalTitle {
+  font-size: 24px;
+  font-weight: 700;
+  line-height: 24px;
+  letter-spacing: -0.24px;
+  color: var(--color-gray-black);
+  text-align: center;
+}
+
+.deleteModalMessage {
+  font-size: 20px;
+  font-weight: 500;
+  line-height: 24px;
+  letter-spacing: -0.2px;
+  color: var(--color-gray-80);
+  text-align: center;
+}
+
+.deleteModalButtons {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  gap: 16px;
+}
+
+.deleteModalCancelButton {
+  width: 104px;
+  height: 48px;
+  background-color: var(--color-gray-white);
+  border: 1px solid var(--color-gray-black);
+  border-radius: 8px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+}
+
+.deleteModalCancelText {
+  font-size: 18px;
+  font-weight: 600;
+  line-height: 24px;
+  letter-spacing: -0.18px;
+  color: var(--color-gray-black);
+}
+
+.deleteModalDeleteButton {
+  width: 104px;
+  height: 48px;
+  background-color: var(--color-gray-black);
+  border: none;
+  border-radius: 8px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+}
+
+.deleteModalDeleteText {
+  font-size: 18px;
+  font-weight: 600;
+  line-height: 24px;
+  letter-spacing: -0.18px;
+  color: var(--color-gray-white);
+}

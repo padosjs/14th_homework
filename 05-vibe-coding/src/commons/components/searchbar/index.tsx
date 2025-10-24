@@ -28,6 +28,8 @@ export const Searchbar = forwardRef<HTMLInputElement, SearchbarProps>(
     },
     ref
   ) => {
+    const inputRef = React.useRef<HTMLInputElement | null>(null);
+
     const containerClassName = [
       styles.searchbar,
       styles[`searchbar--${variant}`],
@@ -46,11 +48,22 @@ export const Searchbar = forwardRef<HTMLInputElement, SearchbarProps>(
       onKeyDown?.(e);
     };
 
+    const handleSearchClick = () => {
+      if (onSearch && inputRef.current) {
+        onSearch(inputRef.current.value);
+      }
+    };
+
     const iconSize = size === 'small' ? 20 : size === 'medium' ? 24 : 28;
 
     return (
       <div className={containerClassName}>
-        <div className={styles.searchbar__icon}>
+        <div 
+          className={styles.searchbar__icon} 
+          onClick={handleSearchClick}
+          data-testid="search-button"
+          style={{ cursor: 'pointer' }}
+        >
           <Image
             src="/icons/search_outline_light_m.svg"
             alt="검색"
@@ -59,7 +72,14 @@ export const Searchbar = forwardRef<HTMLInputElement, SearchbarProps>(
           />
         </div>
         <input
-          ref={ref}
+          ref={(node) => {
+            inputRef.current = node;
+            if (typeof ref === 'function') {
+              ref(node);
+            } else if (ref) {
+              ref.current = node;
+            }
+          }}
           type="text"
           className={styles.searchbar__input}
           disabled={disabled}

@@ -14,12 +14,17 @@ interface AuthGuardProps {
 export default function AuthGuard({ children }: AuthGuardProps) {
   const pathname = usePathname();
   const router = useRouter();
-  const { isLoggedIn } = useAuth();
+  const { isLoggedIn, isInitialized } = useAuth();
   const { openModal, closeModal } = useModal();
   const [isAuthorized, setIsAuthorized] = useState(false);
   const hasShownModal = useRef(false);
 
   useEffect(() => {
+    // 초기화가 완료되지 않았으면 대기
+    if (!isInitialized) {
+      return;
+    }
+
     // 테스트 환경인지 확인
     const isTestEnv = process.env.NEXT_PUBLIC_TEST_ENV === "test";
 
@@ -57,7 +62,7 @@ export default function AuthGuard({ children }: AuthGuardProps) {
         );
       }
     }
-  }, [pathname, isLoggedIn, openModal, closeModal, router]);
+  }, [pathname, isLoggedIn, isInitialized, openModal, closeModal, router]);
 
   // 인가 전까지 빈 화면 표시
   if (!isAuthorized) {

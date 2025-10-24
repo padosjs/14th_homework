@@ -28,10 +28,12 @@
 
 .main {
   display: flex;
-  flex-wrap: wrap;
+  flex-direction: column;
+  flex-wrap: nowrap;
   width: 1168px;
   gap: 24px;
-  justify-content: center;
+  justify-content: flex-start;
+  align-items: center;
   margin-bottom: 80px;
 }
 
