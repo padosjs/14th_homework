@@ -26,7 +26,7 @@ export const useDiaryDelete = (): DiaryDeleteHook => {
   const showDeleteModal = (id: number) => {
     openModal(
       <Modal
-        variant="warning"
+        variant="danger"
         actions="dual"
         title="일기를 삭제하시겠습니까?"
         description="삭제된 일기는 복구할 수 없습니다."
