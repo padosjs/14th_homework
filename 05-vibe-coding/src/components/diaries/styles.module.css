@@ -5,7 +5,7 @@
 }
 
 .gap32 {
-  width: 1168px;
+  width: 100%;
   height: 32px;
 }
 
@@ -14,7 +14,7 @@
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
-  width: 1168px;
+  width: 100%;
   height: 48px;
 }
 
@@ -23,6 +23,20 @@
   flex-direction: row;
   align-items: center;
   gap: 16px;
+}
+
+@media (max-width: 767px) {
+  .search {
+    flex-direction: column;
+    align-items: stretch;
+    height: auto;
+    gap: 16px;
+  }
+
+  .searchLeft {
+    flex-direction: column;
+    gap: 16px;
+  }
 }
 
 .selectbox {
@@ -37,23 +51,37 @@
   width: 110px;
 }
 
+@media (max-width: 767px) {
+  .selectbox {
+    width: 100%;
+  }
+
+  .searchbar {
+    width: 100%;
+  }
+
+  .writeButton {
+    width: 100%;
+  }
+}
+
 .gap42 {
-  width: 1168px;
+  width: 100%;
   height: 42px;
 }
 
 .main {
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
+  flex-wrap: wrap;
   gap: 24px;
-  width: 1168px;
+  width: 100%;
 }
 
-.row {
-  display: flex;
-  flex-direction: row;
-  gap: 24px;
-  width: 1168px;
+@media (max-width: 767px) {
+  .main {
+    gap: 16px;
+  }
 }
 
 .diaryCard {
@@ -65,10 +93,23 @@
   cursor: pointer;
 }
 
+@media (max-width: 767px) {
+  .diaryCard {
+    width: 152px;
+  }
+}
+
 .cardImageWrapper {
   position: relative;
   width: 274px;
   height: 208px;
+}
+
+@media (max-width: 767px) {
+  .cardImageWrapper {
+    width: 152px;
+    height: 116px;
+  }
 }
 
 .cardImage {
@@ -76,6 +117,13 @@
   height: 208px;
   object-fit: cover;
   border-radius: 16px 16px 16px 16px;
+}
+
+@media (max-width: 767px) {
+  .cardImage {
+    width: 152px;
+    height: 116px;
+  }
 }
 
 .closeIcon {
@@ -129,12 +177,12 @@
 }
 
 .gap40 {
-  width: 1168px;
+  width: 100%;
   height: 40px;
 }
 
 .pagination {
-  width: 1168px;
+  width: 100%;
   display: flex;
   justify-content: center;
 }

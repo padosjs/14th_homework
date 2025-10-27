@@ -8,6 +8,14 @@
   padding: 24px;
 }
 
+@media (max-width: 767px) {
+  .wrapper {
+    width: 320px;
+    height: 620px;
+    padding: 24px;
+  }
+}
+
 .header {
   display: flex;
   width: 100%;
@@ -23,16 +31,37 @@
   margin: 0;
 }
 
+@media (max-width: 767px) {
+  .headerTitle {
+    font-size: 20px;
+    font-weight: 700;
+    line-height: 24px;
+    letter-spacing: -0.2px;
+  }
+}
+
 .gap40 {
   display: flex;
   width: 100%;
   height: 40px;
 }
 
+@media (max-width: 767px) {
+  .gap40 {
+    height: 24px;
+  }
+}
+
 .gap24 {
   display: flex;
   width: 100%;
   height: 24px;
+}
+
+@media (max-width: 767px) {
+  .gap24 {
+    height: 16px;
+  }
 }
 
 .emotionBox {
@@ -43,6 +72,13 @@
   gap: 16px;
 }
 
+@media (max-width: 767px) {
+  .emotionBox {
+    height: 204px;
+    gap: 12px;
+  }
+}
+
 .emotionTitle {
   font-size: 20px;
   font-weight: var(--font-weight-semibold);
@@ -51,10 +87,27 @@
   color: var(--color-gray-black);
 }
 
+@media (max-width: 767px) {
+  .emotionTitle {
+    font-size: 16px;
+    font-weight: 600;
+    line-height: 20px;
+    letter-spacing: -0.16px;
+  }
+}
+
 .emotionRadioGroup {
   display: flex;
   gap: 20px;
   align-items: center;
+}
+
+@media (max-width: 767px) {
+  .emotionRadioGroup {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 12px;
+  }
 }
 
 .radioLabel {
@@ -80,12 +133,28 @@
   color: var(--color-gray-80);
 }
 
+@media (max-width: 767px) {
+  .radioText {
+    font-size: 16px;
+    font-weight: 500;
+    line-height: 20px;
+    letter-spacing: -0.16px;
+    color: #333333;
+  }
+}
+
 .inputTitle {
   display: flex;
   flex-direction: column;
   width: 100%;
   height: 76px;
   gap: 8px;
+}
+
+@media (max-width: 767px) {
+  .inputTitle {
+    height: 64px;
+  }
 }
 
 .inputContent {
@@ -96,6 +165,12 @@
   gap: 8px;
 }
 
+@media (max-width: 767px) {
+  .inputContent {
+    height: 152px;
+  }
+}
+
 .inputLabel {
   font-size: 14px;
   font-weight: var(--font-weight-medium);
@@ -104,8 +179,34 @@
   color: var(--color-gray-80);
 }
 
+@media (max-width: 767px) {
+  .inputLabel {
+    font-size: 12px;
+    font-weight: 500;
+    line-height: 16px;
+    letter-spacing: -0.12px;
+    color: #333333;
+  }
+}
+
 .inputField {
   width: 100%;
+}
+
+@media (max-width: 767px) {
+  .inputField {
+    height: 40px;
+    padding: 8px 16px;
+    font-size: 14px;
+    font-weight: 500;
+    line-height: 24px;
+    letter-spacing: -0.14px;
+    border: 1px solid #d4d3d3;
+  }
+  
+  .inputField::placeholder {
+    color: #ababab;
+  }
 }
 
 .textarea {
@@ -125,8 +226,26 @@
   outline: none;
 }
 
+@media (max-width: 767px) {
+  .textarea {
+    height: 128px;
+    padding: 12px 16px;
+    font-size: 14px;
+    font-weight: 500;
+    line-height: 24px;
+    letter-spacing: -0.14px;
+    border: 1px solid #d4d3d3;
+  }
+}
+
 .textarea::placeholder {
   color: var(--color-gray-black);
+}
+
+@media (max-width: 767px) {
+  .textarea::placeholder {
+    color: #ababab;
+  }
 }
 
 .textarea:focus {
@@ -141,13 +260,36 @@
   gap: 16px;
 }
 
+@media (max-width: 767px) {
+  .footer {
+    width: 176px;
+    height: 40px;
+    gap: 16px;
+    align-self: center;
+  }
+}
+
 .closeButton {
   width: 104px;
   height: 48px;
 }
 
+@media (max-width: 767px) {
+  .closeButton {
+    width: 80px;
+    height: 40px;
+  }
+}
+
 .submitButton {
   width: 104px;
   height: 48px;
+}
+
+@media (max-width: 767px) {
+  .submitButton {
+    width: 80px;
+    height: 40px;
+  }
 }
 

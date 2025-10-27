@@ -5,34 +5,34 @@
 }
 
 .gap1 {
-  width: 1168px;
+  width: 100%;
   height: 64px;
 }
 
 .detailTitle {
-  width: 1168px;
+  width: 100%;
   display: flex;
   flex-direction: column;
 }
 
 .gap2 {
-  width: 1168px;
+  width: 100%;
   height: 24px;
 }
 
 .detailContent {
-  width: 1168px;
+  width: 100%;
   display: flex;
   flex-direction: column;
 }
 
 .gap3 {
-  width: 1168px;
+  width: 100%;
   height: 24px;
 }
 
 .detailFooter {
-  width: 1168px;
+  width: 100%;
   display: flex;
   flex-direction: row;
   justify-content: flex-end;
@@ -42,24 +42,24 @@
 }
 
 .gap4 {
-  width: 1168px;
+  width: 100%;
   height: 24px;
 }
 
 .retrospectInput {
-  width: 1168px;
+  width: 100%;
   display: flex;
   flex-direction: column;
   gap: 13px;
 }
 
 .gap5 {
-  width: 1168px;
+  width: 100%;
   height: 16px;
 }
 
 .retrospectList {
-  width: 1168px;
+  width: 100%;
   display: flex;
   flex-direction: column;
   margin-bottom: 64px;
@@ -81,7 +81,7 @@
 }
 
 .retrospectInputField {
-  width: 1101px;
+  flex: 1;
 }
 
 .retrospectSubmitButton {

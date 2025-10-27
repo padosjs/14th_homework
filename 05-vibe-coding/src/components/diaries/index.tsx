@@ -15,7 +15,7 @@ import { useDiaryFilter } from "./hooks/index.filter.hook";
 import { usePagination } from "./hooks/index.pagination.hook";
 import { useDiaryDelete } from "./hooks/index.delete.hook";
 import { useAuth } from "@/commons/providers/auth/auth.provider";
-import { useMemo } from "react";
+import { useMemo, useState, useEffect } from "react";
 
 export default function Diaries() {
   const { openDiaryModal } = useDiaryModal();
@@ -25,6 +25,19 @@ export default function Diaries() {
   const { selectedEmotion, handleFilterChange } = useDiaryFilter();
   const { deleteDiary } = useDiaryDelete();
   const { isLoggedIn } = useAuth();
+  
+  const [isMobile, setIsMobile] = useState(false);
+
+  useEffect(() => {
+    const checkMobile = () => {
+      setIsMobile(window.innerWidth <= 767);
+    };
+    
+    checkMobile();
+    window.addEventListener('resize', checkMobile);
+    
+    return () => window.removeEventListener('resize', checkMobile);
+  }, []);
 
   const filteredDiaries = useMemo(() => {
     let result = diaries;
@@ -52,7 +65,7 @@ export default function Diaries() {
     handlePageChange,
   } = usePagination({
     items: filteredDiaries,
-    itemsPerPage: 12, // 3행 4열 = 12개
+    itemsPerPage: isMobile ? 6 : 12, // 모바일: 3행 2열 = 6개, 데스크톱: 3행 4열 = 12개
   });
 
   // Emotion 필터 옵션 생성
@@ -64,11 +77,6 @@ export default function Diaries() {
     })),
   ];
 
-  // 4개씩 그룹화 (페이지네이션된 아이템 사용)
-  const rows = [];
-  for (let i = 0; i < paginatedItems.length; i += 4) {
-    rows.push(paginatedItems.slice(i, i + 4));
-  }
 
   return (
     <div className={styles.container} data-testid="diaries-container">
@@ -117,54 +125,51 @@ export default function Diaries() {
       </div>
       <div className={styles.gap42}></div>
       <div className={styles.main}>
-        {rows.map((row, rowIndex) => (
-          <div key={rowIndex} className={styles.row}>
-            {row.map((diary) => (
-              <div
-                key={diary.id}
-                className={styles.diaryCard}
-                data-testid="diary-card"
-                onClick={() => navigateToDetail(diary.id)}
-              >
-                <div className={styles.cardImageWrapper}>
-                  <Image
-                    src={diary.image}
-                    alt={getEmotionLabel(diary.emotion as Emotion)}
-                    width={274}
-                    height={208}
-                    className={styles.cardImage}
-                    data-testid="diary-image"
-                  />
-                  {isLoggedIn && (
-                    <Image
-                      src="/icons/close_outline_light_s.svg"
-                      alt="삭제"
-                      width={24}
-                      height={24}
-                      className={styles.closeIcon}
-                      data-testid="diary-delete-icon"
-                      onClick={(e) => {
-                        e.stopPropagation();
-                        deleteDiary(diary.id);
-                      }}
-                    />
-                  )}
-                </div>
-                <div className={styles.cardContent}>
-                  <div className={styles.cardHeader}>
-                    <span
-                      className={styles.emotion}
-                      style={{ color: getEmotionColor(diary.emotion as Emotion) }}
-                      data-testid="diary-emotion"
-                    >
-                      {getEmotionLabel(diary.emotion as Emotion)}
-                    </span>
-                    <span className={styles.date} data-testid="diary-date">{diary.date}</span>
-                  </div>
-                  <div className={styles.title} data-testid="diary-title">{diary.title}</div>
-                </div>
+        {paginatedItems.map((diary) => (
+          <div
+            key={diary.id}
+            className={styles.diaryCard}
+            data-testid="diary-card"
+            onClick={() => navigateToDetail(diary.id)}
+          >
+            <div className={styles.cardImageWrapper}>
+              <Image
+                src={diary.image}
+                alt={getEmotionLabel(diary.emotion as Emotion)}
+                width={274}
+                height={208}
+                className={styles.cardImage}
+                data-testid="diary-image"
+                sizes="(max-width: 767px) 152px, 274px"
+              />
+              {isLoggedIn && (
+                <Image
+                  src="/icons/close_outline_light_s.svg"
+                  alt="삭제"
+                  width={24}
+                  height={24}
+                  className={styles.closeIcon}
+                  data-testid="diary-delete-icon"
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    deleteDiary(diary.id);
+                  }}
+                />
+              )}
+            </div>
+            <div className={styles.cardContent}>
+              <div className={styles.cardHeader}>
+                <span
+                  className={styles.emotion}
+                  style={{ color: getEmotionColor(diary.emotion as Emotion) }}
+                  data-testid="diary-emotion"
+                >
+                  {getEmotionLabel(diary.emotion as Emotion)}
+                </span>
+                <span className={styles.date} data-testid="diary-date">{diary.date}</span>
               </div>
-            ))}
+              <div className={styles.title} data-testid="diary-title">{diary.title}</div>
+            </div>
           </div>
         ))}
       </div>
