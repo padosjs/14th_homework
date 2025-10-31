@@ -129,6 +129,10 @@ export interface UpdateBoardCommentResponse {
   updateBoardComment: GraphQLComment
 }
 
+export interface DeleteBoardCommentResponse {
+  deleteBoardComment: boolean
+}
+
 // 댓글 관련 타입 - UI
 export interface Comment {
   id: string

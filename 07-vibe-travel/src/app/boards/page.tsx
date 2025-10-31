@@ -31,7 +31,7 @@ export default function BoardsPage() {
   }
 
   // 게시글 목록 조회
-  const { data: boardsData, loading: boardsLoading, error: boardsError } = useQuery<FetchBoardsResponse>(FETCH_BOARDS, {
+  const { data: boardsData, loading: boardsLoading, error: boardsError, refetch: refetchBoards } = useQuery<FetchBoardsResponse>(FETCH_BOARDS, {
     variables: {
       page: currentPage,
       search: searchQuery || undefined,
@@ -42,13 +42,30 @@ export default function BoardsPage() {
   })
 
   // 전체 게시글 수 조회 (페이지네이션용)
-  const { data: countData } = useQuery<FetchBoardsCountResponse>(FETCH_BOARDS_COUNT, {
+  const { data: countData, refetch: refetchCount } = useQuery<FetchBoardsCountResponse>(FETCH_BOARDS_COUNT, {
     variables: {
       search: searchQuery || undefined,
       startDate: startDate || undefined,
       endDate: endDate || undefined
     }
   })
+
+  // 삭제 후 목록 새로고침 함수
+  const handleRefetch = async () => {
+    await Promise.all([
+      refetchBoards({
+        page: currentPage,
+        search: searchQuery || undefined,
+        startDate: startDate || undefined,
+        endDate: endDate || undefined
+      }),
+      refetchCount({
+        search: searchQuery || undefined,
+        startDate: startDate || undefined,
+        endDate: endDate || undefined
+      })
+    ])
+  }
 
   // GraphQL 응답을 기존 BoardPost 형식으로 변환
   const posts: BoardPost[] = boardsData?.fetchBoards?.map((board: GraphQLBoard, index: number) => ({
@@ -98,7 +115,7 @@ export default function BoardsPage() {
             <div className="text-center">로딩 중...</div>
           ) : (
             <>
-              <BoardList posts={posts} />
+              <BoardList posts={posts} onRefetch={handleRefetch} />
 
               {totalPages > 1 && (
                 <Pagination

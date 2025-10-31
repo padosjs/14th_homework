@@ -122,17 +122,25 @@ export const CREATE_BOARD_COMMENT = gql`
 `;
 
 export const UPDATE_BOARD_COMMENT = gql`
-  mutation UpdateBoardComment($boardCommentId: ID!, $updateBoardCommentInput: UpdateBoardCommentInput!, $password: String!) {
+  mutation updateBoardComment($boardCommentId: ID!, $updateBoardCommentInput: UpdateBoardCommentInput!, $password: String) {
     updateBoardComment(
       boardCommentId: $boardCommentId
       updateBoardCommentInput: $updateBoardCommentInput
       password: $password
     ) {
       _id
-      writer
       contents
       rating
-      createdAt
+      updatedAt
     }
+  }
+`;
+
+export const DELETE_BOARD_COMMENT = gql`
+  mutation DeleteBoardComment($boardCommentId: ID!, $password: String) {
+    deleteBoardComment(
+      boardCommentId: $boardCommentId
+      password: $password
+    )
   }
 `;

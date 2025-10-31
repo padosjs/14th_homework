@@ -7,9 +7,10 @@ import { cn } from "@/lib/utils"
 interface BoardListProps {
   posts: BoardPost[]
   className?: string
+  onRefetch?: () => void
 }
 
-export function BoardList({ posts, className }: BoardListProps) {
+export function BoardList({ posts, className, onRefetch }: BoardListProps) {
   return (
     <div className={cn("bg-white rounded-2xl shadow-custom overflow-hidden px-8 py-4", className)}>
       {/* 헤더 */}
@@ -39,7 +40,7 @@ export function BoardList({ posts, className }: BoardListProps) {
       <div className="px-6 py-6 space-y-3">
         {posts.length > 0 ? (
           posts.map((post) => (
-            <BoardListItem key={post.id} post={post} />
+            <BoardListItem key={post.id} post={post} onRefetch={onRefetch} />
           ))
         ) : (
           <div className="py-12 text-center">

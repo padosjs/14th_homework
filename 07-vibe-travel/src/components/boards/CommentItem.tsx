@@ -5,10 +5,12 @@ import { cn } from '@/lib/utils'
 
 interface CommentItemProps {
   comment: Comment
+  onDelete?: (commentId: string) => void
+  onEdit?: (comment: Comment) => void
   className?: string
 }
 
-export function CommentItem({ comment, className }: CommentItemProps) {
+export function CommentItem({ comment, onDelete, onEdit, className }: CommentItemProps) {
   return (
     <div className={cn('flex flex-col gap-2 w-full', className)}>
       {/* 프로필, 별점, 수정/삭제 버튼 영역 */}
@@ -52,12 +54,20 @@ export function CommentItem({ comment, className }: CommentItemProps) {
 
         {/* 수정/삭제 버튼 */}
         <div className="flex gap-2">
-          <button className="p-1 hover:opacity-70 transition-opacity" aria-label="수정">
+          <button 
+            className="p-1 hover:opacity-70 transition-opacity" 
+            aria-label="수정"
+            onClick={() => onEdit?.(comment)}
+          >
             <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#333333" strokeWidth="2">
               <path d="M3 17.25V21h3.75L17.81 9.94m-2.85-2.85l2.83-2.83a2 2 0 012.83 0l2.83 2.83a2 2 0 010 2.83l-2.83 2.83m-2.83-2.83l2.83-2.83" />
             </svg>
           </button>
-          <button className="p-1 hover:opacity-70 transition-opacity" aria-label="삭제">
+          <button 
+            className="p-1 hover:opacity-70 transition-opacity" 
+            aria-label="삭제"
+            onClick={() => onDelete?.(comment.id)}
+          >
             <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#333333" strokeWidth="2">
               <line x1="18" y1="6" x2="6" y2="18"></line>
               <line x1="6" y1="6" x2="18" y2="18"></line>

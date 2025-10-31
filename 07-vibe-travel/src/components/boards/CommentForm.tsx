@@ -1,14 +1,17 @@
 'use client'
 
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { Input } from '@/components/ui/input'
 import { Textarea } from '@/components/ui/textarea'
 import { Button } from '@/components/ui/button'
-import { CommentFormData } from '@/types/board'
+import { CommentFormData, Comment } from '@/types/board'
 import { cn } from '@/lib/utils'
 
 interface CommentFormProps {
   onSubmit?: (data: CommentFormData) => Promise<void> | void
+  editComment?: Comment
+  onCancel?: () => void
+  onUpdate?: (commentId: string, data: CommentFormData) => Promise<void> | void
   className?: string
 }
 
@@ -19,9 +22,25 @@ const INITIAL_FORM_DATA: CommentFormData = {
   rating: 5,
 }
 
-export function CommentForm({ onSubmit, className }: CommentFormProps) {
+export function CommentForm({ onSubmit, editComment, onCancel, onUpdate, className }: CommentFormProps) {
+  const isEditMode = !!editComment
+  
   const [formData, setFormData] = useState<CommentFormData>(INITIAL_FORM_DATA)
   const [isLoading, setIsLoading] = useState(false)
+
+  // 수정 모드일 때 폼에 기존 댓글 데이터 미리 채우기
+  useEffect(() => {
+    if (editComment) {
+      setFormData({
+        author: editComment.author,
+        password: '', // 비밀번호는 매번 새로 입력
+        content: editComment.content,
+        rating: editComment.rating,
+      })
+    } else {
+      setFormData(INITIAL_FORM_DATA)
+    }
+  }, [editComment])
 
   const handleAuthorChange = (value: string) => {
     setFormData((prev) => ({ ...prev, author: value }))
@@ -45,9 +64,13 @@ export function CommentForm({ onSubmit, className }: CommentFormProps) {
   const handleSubmit = async () => {
     try {
       setIsLoading(true)
-      await onSubmit?.(formData)
-      // 성공 후 초기화
-      setFormData(INITIAL_FORM_DATA)
+      if (isEditMode && editComment) {
+        await onUpdate?.(editComment.id, formData)
+      } else {
+        await onSubmit?.(formData)
+        // 성공 후 초기화
+        setFormData(INITIAL_FORM_DATA)
+      }
     } finally {
       setIsLoading(false)
     }
@@ -63,6 +86,7 @@ export function CommentForm({ onSubmit, className }: CommentFormProps) {
             placeholder="작성자 명을 입력해 주세요."
             value={formData.author}
             onChange={(e) => handleAuthorChange(e.target.value)}
+            disabled={isEditMode}
           />
         </div>
         <div className="flex-1">
@@ -108,15 +132,25 @@ export function CommentForm({ onSubmit, className }: CommentFormProps) {
         onChange={handleContentChange}
       />
 
-      {/* 등록 버튼 */}
-      <div className="flex justify-end">
+      {/* 등록/수정 버튼 */}
+      <div className="flex justify-end gap-2">
+        {isEditMode && (
+          <Button
+            variant="tertiary"
+            size="m"
+            onClick={onCancel}
+            disabled={isLoading}
+          >
+            취소
+          </Button>
+        )}
         <Button
           variant="primary"
           size="m"
           onClick={handleSubmit}
           disabled={!formData.author || !formData.password || !formData.content || isLoading}
         >
-          {isLoading ? '등록 중...' : '댓글 등록'}
+          {isLoading ? (isEditMode ? '수정 중...' : '등록 중...') : (isEditMode ? '댓글 수정' : '댓글 등록')}
         </Button>
       </div>
     </div>

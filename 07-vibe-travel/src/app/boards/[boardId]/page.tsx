@@ -3,8 +3,8 @@
 import { Button } from "@/components/ui/button"
 import { useRouter } from "next/navigation"
 import { useQuery, useMutation } from "@apollo/client"
-import { FETCH_BOARD, FETCH_BOARD_COMMENTS, CREATE_BOARD_COMMENT } from "@/lib/graphql"
-import { FetchBoardResponse, Comment, CommentFormData, FetchBoardCommentsResponse, CreateBoardCommentResponse, GraphQLComment } from "@/types/board"
+import { FETCH_BOARD, FETCH_BOARD_COMMENTS, CREATE_BOARD_COMMENT, UPDATE_BOARD_COMMENT, DELETE_BOARD_COMMENT } from "@/lib/graphql"
+import { FetchBoardResponse, Comment, CommentFormData, FetchBoardCommentsResponse, CreateBoardCommentResponse, UpdateBoardCommentResponse, DeleteBoardCommentResponse, GraphQLComment } from "@/types/board"
 import { CommentList } from "@/components/boards/CommentList"
 
 function normalizeImageUrl(src: string): string {
@@ -63,6 +63,12 @@ export default function BoardDetailPage({ params }: { params: { boardId: string 
   // 댓글 작성 뮤테이션
   const [createBoardComment] = useMutation<CreateBoardCommentResponse>(CREATE_BOARD_COMMENT)
 
+  // 댓글 수정 뮤테이션
+  const [updateBoardComment] = useMutation<UpdateBoardCommentResponse>(UPDATE_BOARD_COMMENT)
+
+  // 댓글 삭제 뮤테이션
+  const [deleteBoardComment] = useMutation<DeleteBoardCommentResponse>(DELETE_BOARD_COMMENT)
+
   const handleCommentSubmit = async (formData: CommentFormData) => {
     try {
       await createBoardComment({
@@ -81,6 +87,48 @@ export default function BoardDetailPage({ params }: { params: { boardId: string 
     } catch (error) {
       console.error("댓글 작성 실패:", error)
       alert("댓글 작성에 실패했습니다.")
+    }
+  }
+
+  const handleCommentUpdate = async (commentId: string, formData: CommentFormData) => {
+    try {
+      await updateBoardComment({
+        variables: {
+          boardCommentId: commentId,
+          updateBoardCommentInput: {
+            contents: formData.content,
+            rating: formData.rating
+          },
+          password: formData.password
+        }
+      })
+      // 댓글 수정 성공 후 댓글 목록 새로고침
+      refetchComments()
+    } catch (error) {
+      console.error("댓글 수정 실패:", error)
+      alert("댓글 수정에 실패했습니다.")
+    }
+  }
+
+  const handleCommentDelete = async (commentId: string) => {
+    // 비밀번호 확인
+    const password = prompt("댓글 비밀번호를 입력하세요:")
+    if (!password) {
+      return // 사용자가 취소하거나 빈 값 입력
+    }
+
+    try {
+      await deleteBoardComment({
+        variables: {
+          boardCommentId: commentId,
+          password: password
+        }
+      })
+      // 댓글 삭제 성공 후 댓글 목록 새로고침
+      refetchComments()
+    } catch (error) {
+      console.error("댓글 삭제 실패:", error)
+      alert("댓글 삭제에 실패했습니다.")
     }
   }
 
@@ -290,6 +338,8 @@ export default function BoardDetailPage({ params }: { params: { boardId: string 
           <CommentList
             comments={comments}
             onCommentSubmit={handleCommentSubmit}
+            onCommentUpdate={handleCommentUpdate}
+            onCommentDelete={handleCommentDelete}
           />
         </div>
     </main>

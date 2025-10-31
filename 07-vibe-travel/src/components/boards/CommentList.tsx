@@ -1,5 +1,6 @@
 'use client'
 
+import { useState } from 'react'
 import { Comment, CommentFormData } from '@/types/board'
 import { CommentForm } from './CommentForm'
 import { CommentItem } from './CommentItem'
@@ -8,10 +9,26 @@ import { cn } from '@/lib/utils'
 interface CommentListProps {
   comments: Comment[]
   onCommentSubmit?: (data: CommentFormData) => void
+  onCommentDelete?: (commentId: string) => void
+  onCommentUpdate?: (commentId: string, data: CommentFormData) => void
   className?: string
 }
 
-export function CommentList({ comments, onCommentSubmit, className }: CommentListProps) {
+export function CommentList({ comments, onCommentSubmit, onCommentDelete, onCommentUpdate, className }: CommentListProps) {
+  const [editingCommentId, setEditingCommentId] = useState<string | null>(null)
+
+  const handleEdit = (comment: Comment) => {
+    setEditingCommentId(comment.id)
+  }
+
+  const handleCancelEdit = () => {
+    setEditingCommentId(null)
+  }
+
+  const handleUpdate = async (commentId: string, data: CommentFormData) => {
+    await onCommentUpdate?.(commentId, data)
+    setEditingCommentId(null)
+  }
   return (
     <div className={cn('flex flex-col gap-10 w-full', className)}>
       {/* 댓글 섹션 헤더 */}
@@ -32,7 +49,19 @@ export function CommentList({ comments, onCommentSubmit, className }: CommentLis
       <div className="flex flex-col gap-8 w-full">
         {comments.map((comment, index) => (
           <div key={comment.id}>
-            <CommentItem comment={comment} />
+            {editingCommentId === comment.id ? (
+              <CommentForm
+                editComment={comment}
+                onCancel={handleCancelEdit}
+                onUpdate={handleUpdate}
+              />
+            ) : (
+              <CommentItem 
+                comment={comment} 
+                onDelete={onCommentDelete}
+                onEdit={handleEdit}
+              />
+            )}
             {index < comments.length - 1 && (
               <div className="border-t border-gray-200 mt-8" />
             )}

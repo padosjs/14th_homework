@@ -4,7 +4,7 @@ import { cva, type VariantProps } from "class-variance-authority"
 import { cn } from "@/lib/utils"
 
 const inputVariants = cva(
-  "w-full transition-colors disabled:cursor-not-allowed disabled:opacity-50",
+  "w-full transition-colors disabled:cursor-not-allowed disabled:opacity-50 disabled:bg-gray-50",
   {
     variants: {
       variant: {
