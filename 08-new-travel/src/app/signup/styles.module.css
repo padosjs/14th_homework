@@ -1,0 +1,62 @@
+.loginPageContainer {
+    display: flex;
+    height: 100vh;
+}
+
+.loginFormBox {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    max-width: 25rem;
+    padding: 1.25rem 1.25rem 2.5rem 1.25rem;
+    flex: 1 0 0;
+    gap: 2rem;
+}
+
+.logo {
+    /* SVG 로고 스타일 */
+}
+
+.title {
+    color: #000;
+    text-align: center;
+    
+    /* sb_18_24 */
+    font-size: 1.125rem;
+    font-style: normal;
+    font-weight: 600;
+    line-height: 1.5rem; /* 133.333% */
+}
+
+.subtitle {
+    color: var(--gray-800, #333);
+    text-align: center;
+    
+    /* me_14_20 */
+    font-size: 0.875rem;
+    font-style: normal;
+    font-weight: 500;
+    line-height: 1.25rem; /* 142.857% */
+}
+
+.InputFields {
+    display: flex;
+    width: 100%;
+    flex-direction: column;
+    gap: 1.5rem;
+}
+
+.Buttons {
+    display: flex;
+    width: 100%;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.backgroundImage {
+    position: relative;
+    display: flex;
+    flex: 1 0 0;
+    overflow: hidden;
+}

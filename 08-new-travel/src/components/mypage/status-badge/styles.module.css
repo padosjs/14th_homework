@@ -1,0 +1,26 @@
+.badge {
+  display: inline-block;
+  padding: 4px 12px;
+  border-radius: 4px;
+  font-size: 12px;
+  font-weight: 600;
+  white-space: nowrap;
+}
+
+.default {
+  background: #dbeafe;
+  color: #0369a1;
+  border: 1px solid #0369a1;
+}
+
+.completed {
+  background: #fee2e2;
+  color: #991b1b;
+  border: 1px solid #991b1b;
+}
+
+.reserved {
+  background: #fef3c7;
+  color: #92400e;
+  border: 1px solid #92400e;
+}

@@ -1,0 +1,88 @@
+.bar {
+    display: flex;
+    width: 100%;
+    justify-content: center;
+}
+
+.container {
+    display: flex;
+    width: 100%;
+    height: 5rem;
+    max-width: 80rem;
+    padding: 1.25rem;
+    justify-content: space-between;
+    align-items: center;
+    align-self: stretch;
+}
+
+.mainNav {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 1.5rem;
+}
+
+.navLinksContainer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 1rem;
+}
+
+.navLinkActive {
+    border-bottom: 2px solid var(--gray-B, #000);
+    color: var(--gray-800, #333);
+    text-align: center;
+    display: flex;
+    padding: 0.5rem;
+    justify-content: center;
+    align-items: center;
+    gap: 0.625rem;
+
+    color: var(--gray-B, #000);
+    text-align: center;
+
+    /* b_16_24 */
+    font-size: 1rem;
+    font-style: normal;
+    font-weight: 700;
+    line-height: 1.5rem;
+    /* 150% */
+}
+
+.navLink {
+    color: var(--gray-800, #333);
+    text-align: center;
+    display: flex;
+    padding: 0.5rem;
+    justify-content: center;
+    align-items: center;
+    gap: 0.625rem;
+
+    color: var(--gray-800, #333);
+    text-align: center;
+
+    /* me_16_24 */
+    font-size: 1rem;
+    font-style: normal;
+    font-weight: 500;
+    line-height: 1.5rem;
+    /* 150% */
+}
+
+.settingDefault {
+    display: flex;
+    align-items: center;
+    gap: 0.25rem;
+}
+
+.settingLoggedIn {
+    display: flex;
+    align-items: center;
+    gap: 0.25rem;
+}
+
+.profileImage {
+    width: 2.5rem;
+    height: 2.5rem;
+}

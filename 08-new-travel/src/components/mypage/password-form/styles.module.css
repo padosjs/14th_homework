@@ -1,0 +1,44 @@
+.form {
+  background: #ffffff;
+  border: 1px solid #e5e7eb;
+  border-radius: 8px;
+  padding: 32px;
+  max-width: 500px;
+}
+
+.formGroup {
+  margin-bottom: 24px;
+}
+
+.label {
+  display: block;
+  font-size: 14px;
+  font-weight: 600;
+  color: #1f2937;
+  margin-bottom: 8px;
+}
+
+.error {
+  color: #dc2626;
+  font-size: 14px;
+  padding: 12px;
+  background: #fee2e2;
+  border-radius: 6px;
+  margin-bottom: 24px;
+  border-left: 4px solid #dc2626;
+}
+
+.buttonGroup {
+  display: flex;
+  gap: 12px;
+}
+
+@media (max-width: 640px) {
+  .form {
+    padding: 24px 16px;
+  }
+
+  .buttonGroup {
+    flex-direction: column;
+  }
+}

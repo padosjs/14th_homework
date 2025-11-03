@@ -1,0 +1,134 @@
+.container {
+  background: #ffffff;
+  border: 1px solid #e4e4e4;
+  border-radius: 8px;
+  padding: 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  min-width: 280px;
+}
+
+.title {
+  font-size: 18px;
+  font-weight: 600;
+  color: #000000;
+  margin: 0;
+  font-family: 'Pretendard Variable', sans-serif;
+  line-height: 24px;
+}
+
+.profileSection {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.profileImage {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  flex-shrink: 0;
+  overflow: hidden;
+  background: #f2f2f2;
+}
+
+.profileImage img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.userName {
+  font-size: 16px;
+  font-weight: 500;
+  color: #333333;
+  margin: 0;
+  font-family: 'Pretendard Variable', sans-serif;
+  line-height: 20px;
+}
+
+.divider {
+  width: 100%;
+  height: 1px;
+  background: #e4e4e4;
+}
+
+.pointSection {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.pointIcon {
+  width: 24px;
+  height: 24px;
+  flex-shrink: 0;
+}
+
+.pointValue {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  font-family: 'Pretendard Variable', sans-serif;
+  font-weight: 500;
+  font-size: 20px;
+  line-height: 24px;
+  color: #000000;
+}
+
+.pointNumber {
+  font-weight: 500;
+}
+
+.pointUnit {
+  font-weight: 500;
+}
+
+.menuSection {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.menuItem {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 8px 12px;
+  background: transparent;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background-color 0.2s;
+  width: 100%;
+  text-align: left;
+}
+
+.menuItem:hover {
+  background: #f9f9f9;
+}
+
+.menuItemActive {
+  background: #f2f2f2;
+}
+
+.menuItemActive .menuText {
+  font-weight: 600;
+}
+
+.menuText {
+  font-size: 16px;
+  font-weight: 400;
+  color: #000000;
+  font-family: 'Pretendard Variable', sans-serif;
+  line-height: 24px;
+  flex: 1;
+}
+
+.menuIcon {
+  width: 20px;
+  height: 20px;
+  color: #333333;
+  flex-shrink: 0;
+}

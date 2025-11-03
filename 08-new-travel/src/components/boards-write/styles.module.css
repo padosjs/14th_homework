@@ -1,0 +1,218 @@
+/* styles.module.css 파일 */
+.main-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.page-container {
+  display: flex;
+  width: 100%;
+  max-width: 80rem;
+  padding: 2.5rem;
+  flex-direction: column;
+  align-items: center;
+  gap: 2.5rem;
+  flex-shrink: 0;
+}
+
+.divider {
+  background: var(--gray-100, #E4E4E4);
+  width: 100%;
+  height: 0.0625rem;
+}
+
+/* 제목 스타일 */
+.page-title {
+  align-self: stretch;
+  color: #000;
+
+  /* b_20_28 */
+  font-size: 1.25rem;
+  font-style: normal;
+  font-weight: 700;
+  line-height: 1.75rem;
+  /* 140% */
+}
+
+/* 입력 필드 그룹 스타일 */
+.input-group-column {
+  display: flex;
+  width: 100%;
+  align-items: flex-start;
+  gap: 2.5rem;
+  align-self: stretch;
+}
+
+.input-group-address {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  align-items: flex-start;
+  gap: 0.5rem;
+  align-self: stretch;
+}
+
+.input-button-group-address {
+  display: flex;
+  width: 14rem;
+  align-items: end;
+  gap: 0.5rem;
+}
+
+/* 그룹별 버튼 스타일 */
+.button-group {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  gap: 1rem;
+  align-self: stretch;
+}
+
+.button-group-image-upload {
+  display: flex;
+  width: 100%;
+  gap: 1rem;
+}
+
+/* 이미지 업로드 버튼 스타일 */
+.image-upload-button {
+  position: relative;
+  display: flex;
+  width: 10rem;
+  height: 10rem;
+  gap: 0.5rem;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  border-radius: 0.5rem;
+  border: 0;
+  background: var(--gray-50, #F2F2F2);
+  color: var(--gray-600, #777);
+  font-size: 1rem;
+  font-weight: 400;
+  line-height: 1.5rem;
+}
+
+.button-icon {
+  width: 2.5rem;
+  height: 2.5rem;
+}
+
+.image-upload-item {
+  position: relative;
+  display: flex;
+  width: 10rem;
+  height: 10rem;
+  border-radius: 0.5rem;
+  overflow: hidden;
+  justify-content: end;
+  cursor: pointer;
+}
+
+.uploaded-image {
+  object-fit: cover;
+  width: 100%;
+}
+
+.image-delete-button {
+  display: flex;
+  padding: 0.25rem;
+  align-items: center;
+  gap: 0.625rem;
+  border-radius: 6.25rem;
+  background: rgba(0, 0, 0, 0.40);
+
+  margin: 0.75rem;
+  position: absolute;
+  top: 0;
+  right: 0;
+  cursor: pointer;
+
+  opacity: 0; 
+  visibility: hidden; 
+  transition: opacity 0.3s ease, visibility 0.3s ease; 
+}
+
+.image-upload-item:hover .image-delete-button {
+  opacity: 1;
+  visibility: visible;
+}
+
+.image-delete-button-icon {
+  width: 1rem;
+  height: 1rem;
+  color: white
+}
+
+
+
+
+.input-container {
+  display: flex;
+  width: 100%;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 0.5rem;
+  align-self: stretch;
+}
+
+
+.input-title {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.25rem;
+  align-self: stretch;
+  /* me_16_24 */
+  font-size: 1rem;
+  font-weight: 500;
+  line-height: 1.5rem;
+  /* 150% */
+  color: var(--gray-800, #333);
+}
+
+.input-title-asterisk {
+  color: var(--red, #F66A6A);
+}
+
+/* 입력 필드 본문 스타일 */
+.input-text {
+  display: flex;
+  width: 100%;
+  padding: 0.75rem 1rem;
+  flex-direction: column;
+  align-items: flex-start;
+  border-radius: 0.5rem;
+  border: 1px solid var(--Gray-Gray-200, #D4D3D3);
+  background: var(--Gray-W, #FFF);
+  /* r_16_24 */
+  font-size: 1rem;
+  font-weight: 400;
+  line-height: 1.5rem;
+  /* 150% */
+}
+
+/* 비활성화 상태 스타일 추가 */
+.input-text:disabled {
+  cursor: not-allowed;
+  background: var(--gray-50, #F2F2F2);
+}
+
+.input-text::placeholder {
+  color: var(--Gray-Gray-400, #ABABAB);
+}
+
+.input-text.error {
+  border: 1px solid var(--red, #F66A6A);
+}
+
+/* 에러 메시지 스타일 */
+.error-message {
+  color: var(--red, #F66A6A);
+  /* me_16_24 */
+  font-size: 1rem;
+  font-weight: 500;
+  line-height: 1.5rem;
+  /* 150% */
+}
+
