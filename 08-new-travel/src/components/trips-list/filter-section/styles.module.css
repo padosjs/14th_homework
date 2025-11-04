@@ -1,0 +1,79 @@
+.container {
+  background: #ffffff;
+  width: 100%;
+}
+
+.filterList {
+  background: #ffffff;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1rem 0; /* 16px 0 */
+  border-radius: 1rem; /* 16px */
+  width: 100%;
+}
+
+.filterItem {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem; /* 8px */
+  align-items: center;
+  justify-content: center;
+  width: 6.25rem; /* 100px */
+  cursor: pointer;
+  transition: opacity 0.3s ease;
+}
+
+.filterItem:hover {
+  opacity: 0.7;
+}
+
+.filterIcon {
+  width: 2.5rem; /* 40px */
+  height: 2.5rem; /* 40px */
+  color: var(--gray-800, #333333);
+  stroke-width: 1.5;
+}
+
+.filterLabel {
+  font-family: 'Pretendard Variable', sans-serif;
+  font-weight: 500;
+  font-size: 1rem; /* 16px */
+  line-height: 1.5rem; /* 24px */
+  color: var(--gray-800, #333333);
+  text-align: center;
+  margin: 0;
+  min-width: 100%;
+  width: min-content;
+  white-space: pre-wrap;
+}
+
+/* 반응형 */
+@media (max-width: 1024px) {
+  .filterList {
+    flex-wrap: wrap;
+    gap: 1rem;
+    justify-content: flex-start;
+  }
+
+  .filterItem {
+    width: calc(25% - 0.75rem);
+    min-width: 5rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .filterItem {
+    width: calc(33.333% - 0.67rem);
+  }
+
+  .filterIcon {
+    width: 2rem;
+    height: 2rem;
+  }
+
+  .filterLabel {
+    font-size: 0.875rem;
+    line-height: 1.25rem;
+  }
+}

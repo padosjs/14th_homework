@@ -1,0 +1,147 @@
+.card {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 0.625rem; /* 10px */
+  flex: 1 0 0;
+  height: 39.25rem; /* 628px */
+  min-width: 0;
+  border-radius: 1rem; /* 16px */
+  overflow: hidden;
+}
+
+.imageContainer {
+  position: absolute;
+  inset: 0;
+  border-radius: 1rem; /* 16px */
+  overflow: hidden;
+}
+
+.image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: 50% 50%;
+  border-radius: 1rem; /* 16px */
+}
+
+.gradient {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to bottom, rgba(0, 0, 0, 0) 29.14%, rgba(0, 0, 0, 0.9) 100%);
+  border-radius: 1rem; /* 16px */
+}
+
+.bookmark {
+  position: absolute;
+  top: 1.5rem; /* 24px */
+  right: 1.5rem; /* 24px */
+  display: flex;
+  align-items: center;
+  padding: 0.25rem 0.5rem 0.25rem 0.25rem; /* 4px 8px 4px 4px */
+  background: rgba(0, 0, 0, 0.4);
+  border-radius: 0.5rem; /* 8px */
+  box-shadow: 0px 0px 8px 0px rgba(0, 0, 0, 0.25);
+}
+
+.bookmarkIcon {
+  width: 1.5rem; /* 24px */
+  height: 1.5rem; /* 24px */
+  color: var(--gray-w, #ffffff);
+  stroke-width: 2;
+}
+
+.bookmarkCount {
+  font-family: 'Pretendard Variable', sans-serif;
+  font-weight: 500;
+  font-size: 0.875rem; /* 14px */
+  line-height: 1.25rem; /* 20px */
+  color: var(--gray-w, #ffffff);
+  text-shadow: 0px 0px 4px rgba(0, 0, 0, 0.25);
+}
+
+.content {
+  position: absolute;
+  bottom: 1.5rem; /* 24px */
+  left: 1.5rem; /* 24px */
+  right: 1.5rem; /* 24px */
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem; /* 8px */
+  height: 6.75rem; /* 108px */
+}
+
+.textContent {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem; /* 4px */
+  color: var(--gray-w, #ffffff);
+  width: 100%;
+  white-space: nowrap;
+  overflow: hidden;
+}
+
+.title {
+  font-family: 'Pretendard', sans-serif;
+  font-weight: 700;
+  font-size: 1.5rem; /* 24px */
+  line-height: 2rem; /* 32px */
+  margin: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.description {
+  font-family: 'Pretendard Variable', sans-serif;
+  font-weight: 500;
+  font-size: 1.25rem; /* 20px */
+  line-height: 1.5rem; /* 24px */
+  margin: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.priceContainer {
+  display: flex;
+  gap: 0.25rem; /* 4px */
+  height: 2rem; /* 32px */
+  align-items: center;
+  justify-content: flex-end;
+  font-family: 'Pretendard', sans-serif;
+  font-weight: 700;
+  font-size: 1.5rem; /* 24px */
+  line-height: 2rem; /* 32px */
+  color: var(--gray-w, #ffffff);
+  width: 100%;
+}
+
+.price,
+.currency {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+/* 반응형 */
+@media (max-width: 768px) {
+  .card {
+    height: 25rem; /* 400px */
+  }
+
+  .title {
+    font-size: 1.25rem;
+    line-height: 1.75rem;
+  }
+
+  .description {
+    font-size: 1rem;
+    line-height: 1.5rem;
+  }
+
+  .priceContainer {
+    font-size: 1.25rem;
+    line-height: 1.75rem;
+  }
+}

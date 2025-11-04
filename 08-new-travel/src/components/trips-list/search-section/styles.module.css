@@ -1,0 +1,157 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem; /* 8px */
+  width: 100%;
+}
+
+.searchRow {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem; /* 8px */
+  align-items: center;
+  min-width: 40rem; /* 640px */
+  width: 100%;
+  align-content: center;
+}
+
+/* 날짜 선택기 */
+.datePicker {
+  background: var(--gray-50, #f2f2f2);
+  border: none;
+  display: flex;
+  gap: 0.5rem; /* 8px */
+  align-items: center;
+  padding: 0.75rem; /* 12px */
+  border-radius: 0.5rem; /* 8px */
+  cursor: pointer;
+  height: 3rem; /* 48px */
+}
+
+.datePicker:hover {
+  background: var(--gray-100, #e4e4e4);
+}
+
+.calendarIcon {
+  width: 1.5rem; /* 24px */
+  height: 1.5rem; /* 24px */
+  color: var(--gray-600, #777777);
+}
+
+.dateText {
+  display: flex;
+  gap: 0.25rem; /* 4px */
+  align-items: center;
+  font-family: 'Pretendard Variable', sans-serif;
+  font-weight: 400;
+  font-size: 1rem; /* 16px */
+  line-height: 1.5rem; /* 24px */
+  color: var(--gray-600, #777777);
+  text-align: center;
+}
+
+/* 검색 입력 */
+.searchInput {
+  background: var(--gray-50, #f2f2f2);
+  display: flex;
+  flex: 1 0 0;
+  gap: 0.5rem; /* 8px */
+  align-items: center;
+  padding: 0.75rem; /* 12px */
+  border-radius: 0.5rem; /* 8px */
+  max-width: 40rem; /* 640px */
+  min-width: 11.25rem; /* 180px */
+  min-height: 0;
+}
+
+.searchIcon {
+  width: 1.5rem; /* 24px */
+  height: 1.5rem; /* 24px */
+  color: #000000;
+}
+
+.input {
+  flex: 1 0 0;
+  font-family: 'Pretendard Variable', sans-serif;
+  font-weight: 400;
+  font-size: 1rem; /* 16px */
+  line-height: 1.5rem; /* 24px */
+  color: var(--gray-500, #919191);
+  background: transparent;
+  border: none;
+  outline: none;
+  min-width: 8.75rem; /* 140px */
+  min-height: 0;
+}
+
+.input::placeholder {
+  color: var(--gray-500, #919191);
+}
+
+/* 검색 버튼 */
+.searchButton {
+  background: var(--gray-b, #000000);
+  display: flex;
+  gap: 0.5rem; /* 8px */
+  height: 3rem; /* 48px */
+  align-items: center;
+  padding: 0.75rem 1rem; /* 12px 16px */
+  border-radius: 0.5rem; /* 8px */
+  border: none;
+  cursor: pointer;
+  font-family: 'Pretendard Variable', sans-serif;
+  font-weight: 600;
+  font-size: 1.125rem; /* 18px */
+  line-height: 1.5rem; /* 24px */
+  text-align: center;
+  color: #ffffff;
+}
+
+.searchButton:hover {
+  opacity: 0.9;
+}
+
+/* 판매하기 버튼 */
+.sellButton {
+  background: #2974e5;
+  display: flex;
+  gap: 0.5rem; /* 8px */
+  height: 3rem; /* 48px */
+  align-items: center;
+  padding: 0.75rem 1rem; /* 12px 16px */
+  border-radius: 0.5rem; /* 8px */
+  border: none;
+  cursor: pointer;
+  font-family: 'Pretendard Variable', sans-serif;
+  font-weight: 600;
+  font-size: 1.125rem; /* 18px */
+  line-height: 1.5rem; /* 24px */
+  text-align: center;
+  color: #ffffff;
+}
+
+.sellButton:hover {
+  opacity: 0.9;
+}
+
+.plusIcon {
+  width: 1.5rem; /* 24px */
+  height: 1.5rem; /* 24px */
+  color: #ffffff;
+}
+
+/* 반응형 */
+@media (max-width: 768px) {
+  .searchRow {
+    min-width: 100%;
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .datePicker,
+  .searchInput,
+  .searchButton,
+  .sellButton {
+    width: 100%;
+  }
+}

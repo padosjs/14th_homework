@@ -1,0 +1,196 @@
+.card {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem; /* 12px */
+  width: 18.5rem; /* 296px */
+}
+
+/* 이미지 섹션 */
+.imageSection {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem; /* 12px */
+  align-items: flex-start;
+  width: 100%;
+  position: relative;
+}
+
+.imageContainer {
+  position: relative;
+  width: 18.5rem; /* 296px */
+  height: 18.5rem; /* 296px */
+  border-radius: 1rem; /* 16px */
+  overflow: hidden;
+}
+
+.image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: 50% 50%;
+  border-radius: 1rem; /* 16px */
+}
+
+.bookmark {
+  position: absolute;
+  top: 1rem; /* 16px */
+  right: 1rem; /* 16px */
+  display: flex;
+  align-items: center;
+  padding: 0.25rem 0.5rem 0.25rem 0.25rem; /* 4px 8px 4px 4px */
+  background: rgba(0, 0, 0, 0.4);
+  border-radius: 0.5rem; /* 8px */
+  box-shadow: 0px 0px 8px 0px rgba(0, 0, 0, 0.25);
+}
+
+.bookmarkIcon {
+  width: 1.5rem; /* 24px */
+  height: 1.5rem; /* 24px */
+  color: var(--gray-w, #ffffff);
+  stroke-width: 2;
+}
+
+.bookmarkCount {
+  font-family: 'Pretendard Variable', sans-serif;
+  font-weight: 500;
+  font-size: 0.875rem; /* 14px */
+  line-height: 1.25rem; /* 20px */
+  color: var(--gray-w, #ffffff);
+  text-shadow: 0px 0px 4px rgba(0, 0, 0, 0.25);
+}
+
+/* 텍스트 영역 */
+.content {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem; /* 4px */
+  width: 100%;
+}
+
+.textContent {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem; /* 4px */
+  width: 100%;
+  white-space: nowrap;
+}
+
+.title {
+  font-family: 'Pretendard Variable', sans-serif;
+  font-weight: 500;
+  font-size: 1rem; /* 16px */
+  line-height: 1.5rem; /* 24px */
+  color: var(--gray-800, #333333);
+  margin: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  width: 100%;
+}
+
+.description {
+  font-family: 'Pretendard Variable', sans-serif;
+  font-weight: 400;
+  font-size: 0.875rem; /* 14px */
+  line-height: 1.25rem; /* 20px */
+  color: var(--gray-700, #5f5f5f);
+  margin: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  width: 100%;
+}
+
+/* 정보 섹션 */
+.infoSection {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem; /* 12px */
+  width: 100%;
+}
+
+.tags {
+  display: flex;
+  gap: 0.5rem; /* 8px */
+  align-items: center;
+  width: 100%;
+}
+
+.tagsText {
+  font-family: 'Pretendard Variable', sans-serif;
+  font-weight: 400;
+  font-size: 0.875rem; /* 14px */
+  line-height: 1.25rem; /* 20px */
+  color: var(--n-main, #2974e5);
+  margin: 0;
+}
+
+/* Footer */
+.footer {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  width: 100%;
+}
+
+.seller {
+  display: flex;
+  gap: 0.25rem; /* 4px */
+  align-items: center;
+}
+
+.sellerImage {
+  width: 1.5rem; /* 24px */
+  height: 1.5rem; /* 24px */
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+.sellerIcon {
+  width: 1.5rem; /* 24px */
+  height: 1.5rem; /* 24px */
+  color: var(--gray-700, #5f5f5f);
+}
+
+.sellerName {
+  font-family: 'Pretendard Variable', sans-serif;
+  font-weight: 300;
+  font-size: 0.875rem; /* 14px */
+  line-height: 1.25rem; /* 20px */
+  color: var(--gray-700, #5f5f5f);
+}
+
+.priceContainer {
+  display: flex;
+  flex: 1 0 0;
+  gap: 0.25rem; /* 4px */
+  align-items: center;
+  justify-content: flex-end;
+  font-family: 'Pretendard Variable', sans-serif;
+  font-weight: 600;
+  font-size: 1rem; /* 16px */
+  line-height: 1.5rem; /* 24px */
+  color: #1c1c1c;
+  min-width: 0;
+  min-height: 0;
+}
+
+.price,
+.currency {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+/* 반응형 */
+@media (max-width: 768px) {
+  .card {
+    width: 100%;
+  }
+
+  .imageContainer {
+    width: 100%;
+    height: auto;
+    aspect-ratio: 1 / 1;
+  }
+}
