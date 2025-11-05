@@ -15,6 +15,7 @@
   display: flex;
   flex-direction: column;
   gap: 4rem; /* 64px */
+  padding-top: 2.5rem; /* 40px */
   padding-bottom: 2.5rem; /* 40px */
 }
 
@@ -51,12 +52,9 @@
 
 /* 숙소 그리드 */
 .accommodationGrid {
-  display: flex;
-  flex-wrap: wrap;
-  align-content: center;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
   gap: 2rem; /* 32px */
-  align-items: center;
-  min-width: 42.5rem; /* 680px */
   width: 100%;
 }
 
@@ -112,36 +110,4 @@
   border-radius: 0.5rem; /* 8px */
 }
 
-/* 반응형 */
-@media (max-width: 1024px) {
-  .accommodationGrid {
-    gap: 1.5rem;
-    min-width: 100%;
-    justify-content: center;
-  }
 
-  .recentItems {
-    display: none;
-  }
-}
-
-@media (max-width: 768px) {
-  .container {
-    gap: 2rem;
-    padding-bottom: 1.5rem;
-  }
-
-  .sectionTitle {
-    font-size: 1.5rem;
-    line-height: 2rem;
-  }
-
-  .featuredGrid {
-    flex-direction: column;
-  }
-
-  .accommodationGrid {
-    flex-direction: column;
-    align-items: stretch;
-  }
-}

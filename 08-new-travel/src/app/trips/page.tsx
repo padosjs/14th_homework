@@ -18,7 +18,7 @@ const MOCK_DATA = {
       description: "살어리 살어리랏다 쳥산(靑山)애 살어리랏다멀위랑 ᄃᆞ래랑 먹고 쳥산(靑山)애 살어리랏다얄리얄리 얄랑셩 얄라리 얄라 우러라 우러라 새여 자고 니러 우러라 새여 널라와 시름 한 나도 자고 니러 우니로라 얄리얄리 얄라셩 얄라리 얄라",
       price: 32900,
       bookmarkCount: 24,
-      image: "/assets/images/bannerA.jpg",
+      image: "/assets/images/tripsbg1.jpg",
     },
     {
       id: "2",
@@ -26,7 +26,7 @@ const MOCK_DATA = {
       description: "살어리 살어리랏다 강릉에 평생 살어리랏다",
       price: 32900,
       bookmarkCount: 24,
-      image: "/assets/images/bannerB.jpg",
+      image: "/assets/images/tripsbg2.jpg",
     },
   ],
   accommodations: Array.from({ length: 8 }, (_, i) => ({

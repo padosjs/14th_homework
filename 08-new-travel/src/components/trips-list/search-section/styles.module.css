@@ -13,6 +13,16 @@
   min-width: 40rem; /* 640px */
   width: 100%;
   align-content: center;
+  justify-content: space-between;
+}
+
+/* 검색 필터 컨테이너 */
+.filterContainer {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem; /* 8px */
+  align-items: center;
+  flex: 1 0 0;
 }
 
 /* 날짜 선택기 */
@@ -146,6 +156,10 @@
     min-width: 100%;
     flex-direction: column;
     align-items: stretch;
+  }
+
+  .filterContainer {
+    flex-direction: column;
   }
 
   .datePicker,

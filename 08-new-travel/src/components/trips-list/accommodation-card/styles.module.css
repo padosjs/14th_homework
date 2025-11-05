@@ -2,7 +2,7 @@
   display: flex;
   flex-direction: column;
   gap: 0.75rem; /* 12px */
-  width: 18.5rem; /* 296px */
+  width: 100%;
 }
 
 /* 이미지 섹션 */
@@ -17,8 +17,8 @@
 
 .imageContainer {
   position: relative;
-  width: 18.5rem; /* 296px */
-  height: 18.5rem; /* 296px */
+  width: 100%;
+  aspect-ratio: 1 / 1;
   border-radius: 1rem; /* 16px */
   overflow: hidden;
 }
@@ -72,7 +72,6 @@
   flex-direction: column;
   gap: 0.25rem; /* 4px */
   width: 100%;
-  white-space: nowrap;
 }
 
 .title {
@@ -84,8 +83,10 @@
   margin: 0;
   overflow: hidden;
   text-overflow: ellipsis;
-  white-space: nowrap;
   width: 100%;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
 }
 
 .description {
@@ -97,8 +98,10 @@
   margin: 0;
   overflow: hidden;
   text-overflow: ellipsis;
-  white-space: nowrap;
   width: 100%;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
 }
 
 /* 정보 섹션 */
@@ -162,7 +165,7 @@
 
 .priceContainer {
   display: flex;
-  flex: 1 0 0;
+
   gap: 0.25rem; /* 4px */
   align-items: center;
   justify-content: flex-end;
@@ -172,7 +175,7 @@
   line-height: 1.5rem; /* 24px */
   color: #1c1c1c;
   min-width: 0;
-  min-height: 0;
+  overflow: hidden;
 }
 
 .price,
@@ -180,17 +183,4 @@
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
-}
-
-/* 반응형 */
-@media (max-width: 768px) {
-  .card {
-    width: 100%;
-  }
-
-  .imageContainer {
-    width: 100%;
-    height: auto;
-    aspect-ratio: 1 / 1;
-  }
 }

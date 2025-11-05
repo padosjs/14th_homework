@@ -5,7 +5,7 @@ export default function PromoBanner() {
     <div className={styles.banner}>
       <div className={styles.imageContainer}>
         <img
-          src="/assets/images/bg.jpg"
+          src="/assets/images/promobanner.png"
           alt="빌 페소 르꼬 전시회"
           className={styles.image}
         />
@@ -22,8 +22,8 @@ export default function PromoBanner() {
           </div>
         </div>
         <div className={styles.textContent}>
-          <p className={styles.line1}>천만 관객이 사랑한</p>
-          <p className={styles.line2}>빌 페소 르꼬 전시회 근처 숙소 특가 예약</p>
+          <p className={styles.textLine}>천만 관객이 사랑한</p>
+          <p className={styles.textLine}>빌 페소 르꼬 전시회 근처 숙소 특가 예약</p>
         </div>
       </div>
     </div>
