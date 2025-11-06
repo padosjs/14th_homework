@@ -124,7 +124,17 @@ export default function useBoardsWrite(props: IBoardsWriteProps) {
                         images: filteredImages
                     }
                 },
-                refetchQueries: [{ query: FETCH_BOARDS }]
+                update(cache, { data: mutationData }) {
+                    const existingBoards = cache.readQuery({ query: FETCH_BOARDS });
+                    if (existingBoards) {
+                        cache.writeQuery({
+                            query: FETCH_BOARDS,
+                            data: {
+                                fetchBoards: [mutationData.createBoard, ...existingBoards.fetchBoards]
+                            }
+                        });
+                    }
+                }
             })
             router.push(`/boards/${result.data.createBoard._id}`)
         } catch (error) { alert("에러가 발생하였습니다.") }
@@ -153,10 +163,33 @@ export default function useBoardsWrite(props: IBoardsWriteProps) {
                     password: password,
                     boardId: addressparams.boardId
                 },
-                refetchQueries: [
-                    { query: FETCH_BOARD, variables: { boardId: addressparams.boardId } },
-                    { query: FETCH_BOARDS }
-                ]
+                update(cache, { data: mutationData }) {
+                    const boardId = addressparams.boardId as string;
+
+                    // Update FETCH_BOARD cache
+                    cache.writeQuery({
+                        query: FETCH_BOARD,
+                        variables: { boardId },
+                        data: {
+                            fetchBoard: mutationData.updateBoard
+                        }
+                    });
+
+                    // Update FETCH_BOARDS cache
+                    const existingBoards = cache.readQuery({ query: FETCH_BOARDS });
+                    if (existingBoards) {
+                        cache.writeQuery({
+                            query: FETCH_BOARDS,
+                            data: {
+                                fetchBoards: existingBoards.fetchBoards.map((board: any) =>
+                                    board._id === mutationData.updateBoard._id
+                                        ? mutationData.updateBoard
+                                        : board
+                                )
+                            }
+                        });
+                    }
+                }
             })
             router.push(`/boards/${result.data.updateBoard._id}`);
         } catch (error) {
