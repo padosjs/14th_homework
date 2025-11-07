@@ -1,0 +1,115 @@
+.modalContent {
+  width: 100%;
+  max-width: 480px;
+  padding: 24px;
+  gap: 24px;
+}
+
+.header {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  align-items: center;
+  width: 100%;
+}
+
+.iconWrapper {
+  width: 80px;
+  height: 56px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.title {
+  font-size: 18px;
+  font-weight: 600;
+  line-height: 24px;
+  text-align: center;
+  color: #000;
+  margin: 0;
+}
+
+.amountSelector {
+  width: 100%;
+}
+
+.select {
+  width: 100%;
+  padding: 8px 10px;
+  border: 1px solid #c7c7c7;
+  border-radius: 8px;
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 20px;
+  color: #919191;
+  background-color: #fff;
+  cursor: pointer;
+  appearance: none;
+  background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23333333' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3e%3cpolyline points='6 9 12 15 18 9'%3e%3c/polyline%3e%3c/svg%3e");
+  background-repeat: no-repeat;
+  background-position: right 10px center;
+  background-size: 24px;
+  padding-right: 40px;
+}
+
+.select:hover {
+  border-color: #2974e5;
+}
+
+.select:focus {
+  outline: none;
+  border-color: #2974e5;
+  box-shadow: 0 0 0 3px rgba(41, 116, 229, 0.1);
+}
+
+.footer {
+  display: flex;
+  gap: 12px;
+  width: 100%;
+}
+
+.cancelButton {
+  flex: 1;
+  height: 40px;
+  max-width: 120px;
+  min-width: 96px;
+  padding: 8px 12px;
+  border: 1px solid #000;
+  border-radius: 8px;
+  font-size: 14px;
+  font-weight: 600;
+  line-height: 20px;
+  color: #000;
+  background-color: #fff;
+  cursor: pointer;
+}
+
+.cancelButton:hover {
+  background-color: #f5f5f5;
+}
+
+.chargeButton {
+  flex: 1;
+  height: 40px;
+  max-width: 120px;
+  min-width: 96px;
+  padding: 8px 12px;
+  border: none;
+  border-radius: 8px;
+  font-size: 14px;
+  font-weight: 600;
+  line-height: 20px;
+  color: #fff;
+  background-color: #2974e5;
+  cursor: pointer;
+}
+
+.chargeButton:hover:not(:disabled) {
+  background-color: #2061c9;
+}
+
+.chargeButton:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}

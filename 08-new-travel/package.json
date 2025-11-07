@@ -13,6 +13,7 @@
     "@apollo/client": "~3.11.10",
     "@heroicons/react": "^2.2.0",
     "@hookform/resolvers": "^5.2.2",
+    "@portone/browser-sdk": "^0.1.1",
     "@radix-ui/react-alert-dialog": "^1.1.15",
     "@radix-ui/react-navigation-menu": "^1.2.14",
     "@radix-ui/react-popover": "^1.1.15",

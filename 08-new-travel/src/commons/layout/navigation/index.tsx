@@ -3,6 +3,17 @@
 import Link from "next/link"
 import styles from "./styles.module.css";
 import Button from "@/components/button/button";
+import { Button as UIButton } from "@/components/ui/button";
+import { useMutation, gql } from "@apollo/client";
+import { useAccessTokenStore } from "@/commons/stores/access-token-store";
+import { useUserPointsStore } from "@/commons/stores/user-points-store";
+
+// GraphQL 로그아웃 뮤테이션
+const LOGOUT_USER = gql`
+    mutation {
+        logoutUser
+    }
+`
 
 // 사용자 정보가 담길 타입 인터페이스를 정의합니다.
 // null 또는 undefined일 수 있으므로 선택적(optional)으로 처리합니다.
@@ -10,12 +21,45 @@ interface ILoggedInUser {
     _id: string;
     email: string;
     name: string;
+    userPoint?: {
+        _id: string;
+        amount: number;
+    };
 }
 
 // Navigation 컴포넌트가 userData prop을 받을 수 있도록 수정합니다.
 export default function Navigation({ userData }: { userData?: ILoggedInUser | null }) {
     // userData가 존재하면 true, 없으면 false가 됩니다.
     const isLoggedIn = !!userData;
+
+    // 로그아웃 뮤테이션 및 상태 관리
+    const [logoutUser] = useMutation(LOGOUT_USER);
+    const { setAccessToken } = useAccessTokenStore();
+
+    // 로그아웃 핸들러
+    const handleLogout = async () => {
+        try {
+            // API 호출로 백엔드 세션 정리
+            await logoutUser();
+        } catch (error) {
+            console.error("로그아웃 중 오류 발생:", error);
+        } finally {
+            // 로컬 상태 정리 (API 결과와 무관하게 실행)
+            setAccessToken("");
+            localStorage.removeItem("accessToken");
+        }
+    };
+
+    // 포인트 스토어에서 모달 열기 함수 가져오기
+    const { openChargeModal, setPoints } = useUserPointsStore();
+
+    // 포인트 충전 버튼 클릭 핸들러
+    const handleChargeClick = () => {
+        if (userData?.userPoint?.amount !== undefined) {
+            setPoints(userData.userPoint.amount);
+        }
+        openChargeModal();
+    };
 
     // 로그인 여부에 따라 다른 컴포넌트를 반환합니다.
     const renderSetting = () => {
@@ -27,7 +71,11 @@ export default function Navigation({ userData }: { userData?: ILoggedInUser | nu
                     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
                         <path d="M11.5203 14.174L8.369 11.023C8.32567 10.9795 8.2915 10.9309 8.2665 10.8773C8.2415 10.8238 8.229 10.7663 8.229 10.705C8.229 10.5825 8.27042 10.476 8.35325 10.3855C8.43609 10.2952 8.54525 10.25 8.68075 10.25H15.3193C15.4548 10.25 15.5639 10.2957 15.6468 10.387C15.7296 10.4782 15.771 10.5846 15.771 10.7063C15.771 10.7368 15.7243 10.8423 15.6308 11.023L12.4798 14.174C12.4074 14.2465 12.3326 14.2994 12.2553 14.3327C12.1779 14.3661 12.0928 14.3828 12 14.3828C11.9072 14.3828 11.8221 14.3661 11.7448 14.3327C11.6674 14.2994 11.5926 14.2465 11.5203 14.174Z" fill="black" />
                     </svg>
-                    <div>{userData.name} 님</div>
+                    <div className={styles.userInfo}>
+                        <span>{userData.name} 님 ({userData.userPoint?.amount || 0}P)</span>
+                        <UIButton variant="outline" size="sm" onClick={handleChargeClick}>포인트 충전</UIButton>
+                        <UIButton variant="ghost" size="sm" onClick={handleLogout}>로그아웃</UIButton>
+                    </div>
                 </div>
             );
         } else {

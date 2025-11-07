@@ -3,6 +3,7 @@ import { useEffect, ReactNode } from 'react';
 import { usePathname, useRouter } from 'next/navigation';
 import Navigation from "@/commons/layout/navigation";
 import BannerCarousel from "@/commons/layout/banner";
+import PointChargeModal from "@/components/point-charge-modal";
 import { gql, useQuery } from "@apollo/client"
 
 const FETCH_USER_LOGGED_IN = gql`
@@ -11,6 +12,10 @@ const FETCH_USER_LOGGED_IN = gql`
             _id
             email
             name
+            userPoint {
+                _id
+                amount
+            }
         }
     }
 `
@@ -62,6 +67,7 @@ export default function Layout({ children }: IProps) {
             {!shouldHideNavigation && <Navigation userData={data?.fetchUserLoggedIn} />}
             {!shouldHideBanner && <BannerCarousel />}
             <div>{children}</div>
+            <PointChargeModal />
         </>
     );
 }

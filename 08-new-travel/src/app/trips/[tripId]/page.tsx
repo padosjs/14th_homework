@@ -1,7 +1,20 @@
 "use client";
 
+import { useState } from "react";
 import { ChatBubbleLeftIcon, BookmarkIcon, MapPinIcon, LinkIcon, TrashIcon } from "@heroicons/react/24/outline";
 import Button from "@/components/button/button";
+import {
+  AlertDialog,
+  AlertDialogTrigger,
+  AlertDialogContent,
+  AlertDialogHeader,
+  AlertDialogFooter,
+  AlertDialogTitle,
+  AlertDialogDescription,
+  AlertDialogAction,
+  AlertDialogCancel,
+} from "@/components/ui/alert-dialog";
+import { useUserPointsStore } from "@/commons/stores/user-points-store";
 import styles from "./styles.module.css";
 
 const mockTripData = {
@@ -26,11 +39,11 @@ const mockTripData = {
 얄리얄리 얄라셩 얄라리 얄라
 
 가다가 가다가 드로라 에졍지 가다가 드로라
-사ᄉᆞ미 지ᇝ대예 올아셔 ᄒᆡ금(奚琴)을 혀거를 드로라
+사ᄉᆞ미 ᄌ대예 올아셔 금(奚琴)을 혀거를 드로라
 얄리얄리 얄라셩 얄라리 얄라
 
-가다니 ᄇᆡ브른 도긔 설진 강수를 비조라
-조롱곳 누로기 ᄆᆡ와 잡ᄉᆞ와니 내 엇디 ᄒᆞ리잇고
+가다니 브른 도긔 설진 강수를 비조라
+조롱곳 누로기 와 잡ᄉᆞ와니 내 엇디 ᄒᆞ리잇고
 얄리얄리 얄라셩 얄라리 얄라`,
   seller: {
     name: "김상훈",
@@ -49,11 +62,37 @@ const mockTripData = {
 };
 
 export default function TripDetailPage() {
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [isInsufficientPointsModalOpen, setIsInsufficientPointsModalOpen] = useState(false);
+  const { points, openChargeModal } = useUserPointsStore();
+
+  const handlePurchase = () => {
+    // 포인트 체크
+    if (points < mockTripData.price) {
+      setIsInsufficientPointsModalOpen(true);
+      return;
+    }
+
+    // 포인트 충분 - 구매 진행
+    console.log("구매 진행");
+    setIsModalOpen(false);
+  };
+
+  const handleChargeFromInsufficientModal = () => {
+    setIsInsufficientPointsModalOpen(false);
+    openChargeModal();
+  };
+
   return (
     <div className={styles["page-container"]}>
       <div className={styles["content-wrapper"]}>
         <div className={styles["title-header"]}>
-          <h1 className={styles["title"]}>{mockTripData.title}</h1>
+          <div className={styles["title-section"]}>
+            <h1 className={styles["title"]}>{mockTripData.title}</h1>
+            <p className={styles["tags"]}>
+              {mockTripData.tags.map((tag) => `#${tag}`).join(" ")}
+            </p>
+          </div>
           <div className={styles["action-icons"]}>
             <button className={styles["icon-button"]}>
               <TrashIcon className={styles["icon"]} />
@@ -69,106 +108,139 @@ export default function TripDetailPage() {
               <span>{mockTripData.bookmarkCount}</span>
             </div>
           </div>
+
         </div>
 
         <div className={styles["layout-container"]}>
           <div className={styles["main-content"]}>
-            <div className={styles["title-section"]}>
-              <p className={styles["subtitle"]}>{mockTripData.subtitle}</p>
-              <p className={styles["tags"]}>
-                {mockTripData.tags.map((tag) => `#${tag}`).join(" ")}
+
+
+            <div className={styles["image-gallery"]}>
+              <div className={styles["main-image"]}>
+                <img src={mockTripData.images.main} alt="숙소 메인 이미지" />
+              </div>
+              <div className={styles["thumbnail-list"]}>
+                {mockTripData.images.thumbnails.map((thumb, index) => (
+                  <div
+                    key={index}
+                    className={styles["thumbnail"]}
+                    style={{ opacity: index === 0 ? 1 : 0.5 }}
+                  >
+                    <img src={thumb} alt={`숙소 이미지 ${index + 1}`} />
+                  </div>
+                ))}
+                <div className={styles["thumbnail-gradient"]} />
+              </div>
+            </div>
+
+            <div className={styles["divider"]} />
+
+            <div className={styles["detail-section"]}>
+              <h2 className={styles["section-title"]}>상세 설명</h2>
+              <p className={styles["description"]}>{mockTripData.description}</p>
+            </div>
+
+            <div className={styles["divider"]} />
+
+            <div className={styles["location-section"]}>
+              <h2 className={styles["section-title"]}>상세 위치</h2>
+              <div className={styles["map-container"]}>
+                <img src={mockTripData.mapImage} alt="상세 위치 지도" />
+              </div>
+            </div>
+
+            <div className={styles["inquiry-section"]}>
+              <div className={styles["inquiry-header"]}>
+                <ChatBubbleLeftIcon className={styles["icon"]} />
+                <h2 className={styles["inquiry-title"]}>문의하기</h2>
+              </div>
+              <div className={styles["inquiry-form"]}>
+                <div className={styles["textarea-wrapper"]}>
+                  <textarea
+                    className={styles["inquiry-textarea"]}
+                    placeholder="문의사항을 입력해 주세요."
+                    maxLength={100}
+                  />
+                  <div className={styles["char-count"]}>0/100</div>
+                </div>
+                <Button className="black-button" text="문의 하기" />
+              </div>
+              <p className={styles["empty-message"]}>
+                등록된 문의사항이 없습니다.
               </p>
             </div>
+          </div>
 
-          <div className={styles["image-gallery"]}>
-            <div className={styles["main-image"]}>
-              <img src={mockTripData.images.main} alt="숙소 메인 이미지" />
-            </div>
-            <div className={styles["thumbnail-list"]}>
-              {mockTripData.images.thumbnails.map((thumb, index) => (
-                <div
-                  key={index}
-                  className={styles["thumbnail"]}
-                  style={{ opacity: index === 0 ? 1 : 0.5 }}
-                >
-                  <img src={thumb} alt={`숙소 이미지 ${index + 1}`} />
+          <aside className={styles["sidebar"]}>
+            <div className={styles["price-card"]}>
+              <div className={styles["price-info"]}>
+                <div className={styles["price"]}>
+                  <span className={styles["price-amount"]}>
+                    {mockTripData.price.toLocaleString()}
+                  </span>
+                  <span className={styles["price-unit"]}>원</span>
                 </div>
-              ))}
-              <div className={styles["thumbnail-gradient"]} />
+                <ul className={styles["price-notice"]}>
+                  <li>숙박권은 트립트립에서 포인트 충전 후 구매하실 수 있습니다.</li>
+                  <li className={styles["light"]}>
+                    상세 설명에 숙박권 사용기한을 꼭 확인해 주세요.
+                  </li>
+                </ul>
+              </div>
+              <AlertDialog open={isModalOpen} onOpenChange={setIsModalOpen}>
+                <AlertDialogTrigger asChild>
+                  <Button className="blue-button-full" text="구매하기" />
+                </AlertDialogTrigger>
+                <AlertDialogContent>
+                  <AlertDialogHeader>
+                    <AlertDialogTitle>해당 숙박권을 구매 하시겠어요?</AlertDialogTitle>
+                    <AlertDialogDescription>
+                      해당 숙박권은 포인트로만 구매 가능합니다.
+                    </AlertDialogDescription>
+                  </AlertDialogHeader>
+                  <AlertDialogFooter>
+                    <AlertDialogCancel>취소</AlertDialogCancel>
+                    <AlertDialogAction onClick={handlePurchase}>
+                      구매
+                    </AlertDialogAction>
+                  </AlertDialogFooter>
+                </AlertDialogContent>
+              </AlertDialog>
+
+              <AlertDialog open={isInsufficientPointsModalOpen} onOpenChange={setIsInsufficientPointsModalOpen}>
+                <AlertDialogContent>
+                  <AlertDialogHeader>
+                    <AlertDialogTitle>포인트 부족</AlertDialogTitle>
+                    <AlertDialogDescription>
+                      포인트가 부족합니다.
+                      <br />
+                      포인트를 충전 후 구매해주세요.
+                    </AlertDialogDescription>
+                  </AlertDialogHeader>
+                  <AlertDialogFooter>
+                    <AlertDialogCancel>아니오</AlertDialogCancel>
+                    <AlertDialogAction onClick={handleChargeFromInsufficientModal}>
+                      충전
+                    </AlertDialogAction>
+                  </AlertDialogFooter>
+                </AlertDialogContent>
+              </AlertDialog>
             </div>
-          </div>
 
-          <div className={styles["divider"]} />
-
-          <div className={styles["detail-section"]}>
-            <h2 className={styles["section-title"]}>상세 설명</h2>
-            <p className={styles["description"]}>{mockTripData.description}</p>
-          </div>
-
-          <div className={styles["divider"]} />
-
-          <div className={styles["location-section"]}>
-            <h2 className={styles["section-title"]}>상세 위치</h2>
-            <div className={styles["map-container"]}>
-              <img src={mockTripData.mapImage} alt="상세 위치 지도" />
-            </div>
-          </div>
-
-          <div className={styles["inquiry-section"]}>
-            <div className={styles["inquiry-header"]}>
-              <ChatBubbleLeftIcon className={styles["icon"]} />
-              <h2 className={styles["inquiry-title"]}>문의하기</h2>
-            </div>
-            <div className={styles["inquiry-form"]}>
-              <div className={styles["textarea-wrapper"]}>
-                <textarea
-                  className={styles["inquiry-textarea"]}
-                  placeholder="문의사항을 입력해 주세요."
-                  maxLength={100}
+            <div className={styles["seller-card"]}>
+              <h3 className={styles["seller-title"]}>판매자</h3>
+              <div className={styles["seller-profile"]}>
+                <img
+                  src={mockTripData.seller.profileImage}
+                  alt={mockTripData.seller.name}
+                  className={styles["profile-image"]}
                 />
-                <div className={styles["char-count"]}>0/100</div>
-              </div>
-              <Button className="black-button" text="문의 하기" />
-            </div>
-            <p className={styles["empty-message"]}>
-              등록된 문의사항이 없습니다.
-            </p>
-          </div>
-        </div>
-
-        <aside className={styles["sidebar"]}>
-          <div className={styles["price-card"]}>
-            <div className={styles["price-info"]}>
-              <div className={styles["price"]}>
-                <span className={styles["price-amount"]}>
-                  {mockTripData.price.toLocaleString()}
+                <span className={styles["seller-name"]}>
+                  {mockTripData.seller.name}
                 </span>
-                <span className={styles["price-unit"]}>원</span>
               </div>
-              <ul className={styles["price-notice"]}>
-                <li>숙박권은 트립트립에서 포인트 충전 후 구매하실 수 있습니다.</li>
-                <li className={styles["light"]}>
-                  상세 설명에 숙박권 사용기한을 꼭 확인해 주세요.
-                </li>
-              </ul>
             </div>
-            <Button className="blue-button-full" text="구매하기" />
-          </div>
-
-          <div className={styles["seller-card"]}>
-            <h3 className={styles["seller-title"]}>판매자</h3>
-            <div className={styles["seller-profile"]}>
-              <img
-                src={mockTripData.seller.profileImage}
-                alt={mockTripData.seller.name}
-                className={styles["profile-image"]}
-              />
-              <span className={styles["seller-name"]}>
-                {mockTripData.seller.name}
-              </span>
-            </div>
-          </div>
-        </aside>
+          </aside>
         </div>
       </div>
     </div>
