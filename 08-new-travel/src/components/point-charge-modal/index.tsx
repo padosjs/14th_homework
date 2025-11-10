@@ -34,6 +34,14 @@ const FETCH_USER_LOGGED_IN = gql`
 `;
 
 export default function PointChargeModal() {
+  // 환경 변수 검증
+  const storeId = process.env.NEXT_PUBLIC_PORTONE_STORE_ID;
+  const channelKey = process.env.NEXT_PUBLIC_PORTONE_CHANNEL_KEY;
+
+  if (!storeId || !channelKey) {
+    throw new Error("결제 설정이 올바르지 않습니다. 관리자에게 문의하세요.");
+  }
+
   const { isChargeModalOpen, closeChargeModal, setPoints, isLoading, setIsLoading } =
     useUserPointsStore();
   const [selectedAmount, setSelectedAmount] = useState<number | null>(null);
@@ -53,12 +61,12 @@ export default function PointChargeModal() {
     try {
       // PortOne 결제 요청
       const rsp = await PortOne.requestPayment({
-        storeId: process.env.NEXT_PUBLIC_PORTONE_STORE_ID || "",
+        storeId,
         paymentId: `payment-${crypto.randomUUID()}`,
         orderName: "포인트 충전",
         totalAmount: selectedAmount,
         currency: "CURRENCY_KRW",
-        channelKey: process.env.NEXT_PUBLIC_PORTONE_CHANNEL_KEY || "",
+        channelKey,
         payMethod: "EASY_PAY",
         redirectUrl: `${typeof window !== "undefined" ? window.location.origin : ""}/payment-result`,
       });
