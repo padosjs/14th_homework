@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import { useQuery } from "@apollo/client";
 import TabNavigation from "@/components/mypage/tab-navigation";
 import FeaturedCard from "@/components/trips-list/featured-card";
 import PromoBanner from "@/components/trips-list/promo-banner";
@@ -8,8 +9,10 @@ import SearchSection from "@/components/trips-list/search-section";
 import FilterSection from "@/components/trips-list/filter-section";
 import AccommodationCard from "@/components/trips-list/accommodation-card";
 import styles from "./styles.module.css";
+import { FETCH_TRAVELPRODUCTS } from "./queries";
+import type { Travelproduct } from "@/commons/graphql/graphql";
 
-// Mock 데이터
+// Mock 데이터 (추천 상품, 최근 본 상품용)
 const MOCK_DATA = {
   featured: [
     {
@@ -29,16 +32,6 @@ const MOCK_DATA = {
       image: "/assets/images/tripsbg2.jpg",
     },
   ],
-  accommodations: Array.from({ length: 8 }, (_, i) => ({
-    id: `acc-${i + 1}`,
-    title: "살어리 살어리랏다 쳥산(靑山)애 살어리랏다멀위랑 ᄃᆞ래랑 먹고 쳥산(靑山)애 살어리랏다",
-    description: "살어리 살어리랏다 쳥산(靑山)애 살어리랏다멀위랑 ᄃᆞ래랑 먹고 쳥산(靑山)애 살어리랏다",
-    tags: "#6인 이하 #건식 사우나 #애견동반 가능",
-    price: 32900,
-    bookmarkCount: 24,
-    image: `/assets/images/banner${['A', 'B', 'C'][i % 3]}.jpg`,
-    seller: { name: "빈얀트리" },
-  })),
   recent: [
     { id: "r1", image: "/assets/images/bannerA.jpg" },
     { id: "r2", image: "/assets/images/bannerB.jpg" },
@@ -53,6 +46,14 @@ const TABS = [
 
 export default function TripsPage() {
   const [activeTab, setActiveTab] = useState("available");
+
+  // GraphQL 쿼리로 숙소 데이터 조회
+  const { data, loading, error } = useQuery(FETCH_TRAVELPRODUCTS, {
+    variables: {
+      page: 1,
+      isSoldout: activeTab === "closed",
+    },
+  });
 
   return (
     <div className={styles.page}>
@@ -82,8 +83,23 @@ export default function TripsPage() {
 
           {/* 숙소 그리드 */}
           <div className={styles.accommodationGrid}>
-            {MOCK_DATA.accommodations.map((item) => (
-              <AccommodationCard key={item.id} {...item} />
+            {loading && <p>로딩 중...</p>}
+            {error && <p>오류가 발생했습니다: {error.message}</p>}
+            {data?.fetchTravelproducts?.map((product: Travelproduct) => (
+              <AccommodationCard
+                key={product._id}
+                id={product._id}
+                title={product.name}
+                description={product.remarks}
+                tags={product.tags?.join(" #") ?? ""}
+                price={product.price ?? 0}
+                bookmarkCount={product.pickedCount ?? 0}
+                image={product.images?.[0] ?? ""}
+                seller={{
+                  name: product.seller?.name ?? "",
+                  profileImage: product.seller?.picture ?? null,
+                }}
+              />
             ))}
           </div>
         </section>

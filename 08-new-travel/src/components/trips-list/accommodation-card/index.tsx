@@ -29,7 +29,7 @@ export default function AccommodationCard({
       {/* 이미지 영역 */}
       <div className={styles.imageSection}>
         <div className={styles.imageContainer}>
-          <img src={image} alt={title} className={styles.image} />
+          <img src={`https://storage.googleapis.com/${image}`} alt={title} className={styles.image} />
         </div>
         <div className={styles.bookmark}>
           <BookmarkIcon className={styles.bookmarkIcon} />
@@ -53,7 +53,7 @@ export default function AccommodationCard({
             <div className={styles.seller}>
               {seller.profileImage ? (
                 <img
-                  src={seller.profileImage}
+                  src={`https://storage.googleapis.com/${seller.profileImage}`}
                   alt={seller.name}
                   className={styles.sellerImage}
                 />

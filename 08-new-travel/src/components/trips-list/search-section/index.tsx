@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import { useRouter } from "next/navigation";
 import { MagnifyingGlassIcon, CalendarIcon, PlusIcon } from "@heroicons/react/24/outline";
 import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover";
 import { Calendar } from "@/components/ui/calendar";
@@ -10,8 +11,13 @@ import { ko } from 'date-fns/locale';
 import styles from "./styles.module.css";
 
 export default function SearchSection() {
+  const router = useRouter();
   const [date, setDate] = useState<DateRange | undefined>(undefined);
   const [open, setOpen] = useState(false);
+
+  const handleSellAccommodation = () => {
+    router.push("/trips/new");
+  };
 
   return (
     <div className={styles.container}>
@@ -71,7 +77,7 @@ export default function SearchSection() {
         </div>
 
         {/* 숙박권 판매하기 버튼 */}
-        <button className={styles.sellButton}>
+        <button className={styles.sellButton} onClick={handleSellAccommodation}>
           <PlusIcon className={styles.plusIcon} />
           숙박권 판매하기
         </button>

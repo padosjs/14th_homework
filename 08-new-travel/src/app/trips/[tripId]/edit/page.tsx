@@ -3,8 +3,8 @@
 import { withAuth } from "@/commons/hocs/withAuth";
 import TripsWrite from "@/components/trips-write";
 
-function TripNewPage() {
-  return <TripsWrite isEdit={false} />;
+function TripEditPage() {
+  return <TripsWrite isEdit={true} />;
 }
 
-export default withAuth(TripNewPage);
+export default withAuth(TripEditPage);
