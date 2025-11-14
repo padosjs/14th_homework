@@ -11,7 +11,7 @@
   max-width: 80rem;
   padding: 2.5rem;
   flex-direction: column;
-  align-items: flex-start;
+  align-items: center;
   gap: 2.5rem;
   flex-shrink: 0;
 }
@@ -248,6 +248,7 @@
 
 /* 이미지 업로드 버튼 */
 .image-upload-button {
+  position: relative;
   display: flex;
   width: 10rem;
   height: 10rem;
@@ -268,7 +269,57 @@
 .button-icon {
   width: 2.5rem;
   height: 2.5rem;
-  color: var(--gray-800, #333);
+}
+
+/* 이미지 업로드 그룹 및 아이템 */
+.button-group-image-upload {
+  display: flex;
+  width: 100%;
+  gap: 1rem;
+}
+
+.image-upload-item {
+  position: relative;
+  display: flex;
+  width: 10rem;
+  height: 10rem;
+  border-radius: 0.5rem;
+  overflow: hidden;
+  justify-content: end;
+  cursor: pointer;
+}
+
+.uploaded-image {
+  object-fit: cover;
+  width: 100%;
+}
+
+.image-delete-button {
+  display: flex;
+  padding: 0.25rem;
+  align-items: center;
+  gap: 0.625rem;
+  border-radius: 6.25rem;
+  background: rgba(0, 0, 0, 0.40);
+  margin: 0.75rem;
+  position: absolute;
+  top: 0;
+  right: 0;
+  cursor: pointer;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.3s ease, visibility 0.3s ease;
+}
+
+.image-upload-item:hover .image-delete-button {
+  opacity: 1;
+  visibility: visible;
+}
+
+.image-delete-button-icon {
+  width: 1rem;
+  height: 1rem;
+  color: white;
 }
 
 /* 버튼 그룹 */
