@@ -13,6 +13,7 @@ import { FETCH_TRAVELPRODUCTS } from "./queries";
 import type { Travelproduct } from "@/commons/graphql/graphql";
 
 // Mock 데이터 (추천 상품, 최근 본 상품용)
+// Note: FeaturedCard의 ID는 실제 DB의 상품 ID여야 합니다
 const MOCK_DATA = {
   featured: [
     {

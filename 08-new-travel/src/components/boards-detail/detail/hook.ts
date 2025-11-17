@@ -1,8 +1,8 @@
 "use client";
 
-import { useQuery } from "@apollo/client";
+import { useQuery, useMutation } from "@apollo/client";
 import { useParams, useRouter } from "next/navigation";
-import { FETCH_BOARD_LIST } from './queries';
+import { FETCH_BOARD_LIST, LIKE_BOARD, DISLIKE_BOARD } from './queries';
 
 export default function useBoardsDetail() {
 
@@ -18,9 +18,52 @@ export default function useBoardsDetail() {
         }
     });
 
+    const [likeBoard] = useMutation(LIKE_BOARD);
+    const [dislikeBoard] = useMutation(DISLIKE_BOARD);
+
+    const onClickLike = async () => {
+        try {
+            await likeBoard({
+                variables: { boardId: addressparams.boardId },
+                optimisticResponse: {
+                    likeBoard: (data?.fetchBoard?.likeCount ?? 0) + 1,
+                },
+                refetchQueries: [
+                    {
+                        query: FETCH_BOARD_LIST,
+                        variables: { boardId: addressparams.boardId }
+                    }
+                ]
+            });
+        } catch (error) {
+            console.error(error);
+        }
+    };
+
+    const onClickDislike = async () => {
+        try {
+            await dislikeBoard({
+                variables: { boardId: addressparams.boardId },
+                optimisticResponse: {
+                    dislikeBoard: (data?.fetchBoard?.dislikeCount ?? 0) + 1,
+                },
+                refetchQueries: [
+                    {
+                        query: FETCH_BOARD_LIST,
+                        variables: { boardId: addressparams.boardId }
+                    }
+                ]
+            });
+        } catch (error) {
+            console.error(error);
+        }
+    };
+
     return {
         onClickList,
         onClickEdit,
+        onClickLike,
+        onClickDislike,
         data
     }
 }

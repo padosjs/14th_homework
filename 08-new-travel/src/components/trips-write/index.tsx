@@ -25,13 +25,13 @@ export default function TripsWrite(props: ITripsWriteProps) {
     data,
     router,
     imageUrls,
-    setImageUrls,
     previewUrls,
-    uploadingStates,
     fileRef,
     onChangeFile,
     onClickImage,
     onClickDeleteImage,
+    isSubmitting,
+    uploadingStates,
   } = useTripsWrite(props);
 
   const travelproductData = data?.fetchTravelproduct as

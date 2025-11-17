@@ -29,49 +29,30 @@ export default function useTripsWrite(props: ITripsWriteProps) {
 
   const [createTravelproduct] = useMutation(CREATE_TRAVELPRODUCT, {
     update(cache, { data }) {
-      // 기존 캐시에서 여행 상품 목록 읽기
-      const existingData = cache.readQuery({
-        query: FETCH_TRAVELPRODUCTS,
-        variables: { page: 1, isSoldout: false },
-      });
-
-      // 새로 생성된 상품을 목록 맨 앞에 추가
-      if (existingData && data?.createTravelproduct) {
-        cache.writeQuery({
-          query: FETCH_TRAVELPRODUCTS,
-          variables: { page: 1, isSoldout: false },
-          data: {
-            fetchTravelproducts: [
-              data.createTravelproduct,
-              ...existingData.fetchTravelproducts,
-            ],
-          },
+      if (data?.createTravelproduct) {
+        cache.modify({
+          fields: {
+            fetchTravelproducts(existingTravelproducts = [], { readField }: any) {
+              return [data.createTravelproduct, ...existingTravelproducts];
+            }
+          }
         });
       }
     },
   });
   const [updateTravelproduct] = useMutation(UPDATE_TRAVELPRODUCT, {
     update(cache, { data }) {
-      // 기존 캐시에서 여행 상품 목록 읽기
-      const existingData = cache.readQuery({
-        query: FETCH_TRAVELPRODUCTS,
-        variables: { page: 1, isSoldout: false },
-      });
-
-      // 업데이트된 상품을 목록에서 찾아서 교체
-      if (existingData && data?.updateTravelproduct) {
-        const updatedProduct = data.updateTravelproduct;
-        const updatedList = existingData.fetchTravelproducts.map(
-          (product) =>
-            product._id === updatedProduct._id ? updatedProduct : product
-        );
-
-        cache.writeQuery({
-          query: FETCH_TRAVELPRODUCTS,
-          variables: { page: 1, isSoldout: false },
-          data: {
-            fetchTravelproducts: updatedList,
-          },
+      if (data?.updateTravelproduct) {
+        cache.modify({
+          fields: {
+            fetchTravelproducts(existingTravelproducts = [], { readField }: any) {
+              return existingTravelproducts.map((productRef: any) =>
+                readField('_id', productRef) === data.updateTravelproduct._id
+                  ? data.updateTravelproduct
+                  : productRef
+              );
+            }
+          }
         });
       }
     },
@@ -80,12 +61,14 @@ export default function useTripsWrite(props: ITripsWriteProps) {
   // 이미지 관련 상태
   const [imageUrls, setImageUrls] = useState(["", "", ""]);
   const [previewUrls, setPreviewUrls] = useState(["", "", ""]);
+  const [selectedFiles, setSelectedFiles] = useState<(File | null)[]>([null, null, null]);
+  const [isSubmitting, setIsSubmitting] = useState(false);
   const [uploadingStates, setUploadingStates] = useState([false, false, false]);
   const fileRef = useRef<HTMLInputElement[] | null[]>([]);
   const [uploadFile] = useMutation(UPLOAD_FILE);
 
-  // 파일 업로드 핸들러
-  const onChangeFile = async (
+  // 파일 선택 핸들러 - 미리보기만 표시하고 업로드는 나중에 진행
+  const onChangeFile = (
     event: ChangeEvent<HTMLInputElement>,
     index: number
   ) => {
@@ -104,30 +87,53 @@ export default function useTripsWrite(props: ITripsWriteProps) {
     };
     reader.readAsDataURL(file);
 
-    // 업로드 상태 표시
-    const newUploadingStates = [...uploadingStates];
-    newUploadingStates[index] = true;
-    setUploadingStates(newUploadingStates);
+    // 파일 객체 저장 (나중에 일괄 업로드)
+    const newSelectedFiles = [...selectedFiles];
+    newSelectedFiles[index] = file;
+    setSelectedFiles(newSelectedFiles);
+  };
+
+  // 선택된 모든 이미지를 병렬 업로드
+  const uploadAllImages = async (): Promise<string[]> => {
+    const uploadPromises = selectedFiles
+      .map((file, index) => {
+        // null이 아닌 파일만 업로드
+        if (!file) return Promise.resolve(imageUrls[index] || "");
+
+        // 업로드 시작 시 해당 이미지의 상태를 true로 설정
+        setUploadingStates((prev) => {
+          const newStates = [...prev];
+          newStates[index] = true;
+          return newStates;
+        });
+
+        return uploadFile({ variables: { file } })
+          .then((result) => {
+            // 업로드 완료 후 해당 이미지의 상태를 false로 설정
+            setUploadingStates((prev) => {
+              const newStates = [...prev];
+              newStates[index] = false;
+              return newStates;
+            });
+            return result.data?.uploadFile.url || "";
+          })
+          .catch((error) => {
+            // 오류 발생 시에도 상태를 false로 설정
+            setUploadingStates((prev) => {
+              const newStates = [...prev];
+              newStates[index] = false;
+              return newStates;
+            });
+            console.error(`Image ${index} upload failed:`, error);
+            throw new Error(`${index + 1}번째 이미지 업로드 실패`);
+          });
+      });
 
     try {
-      const result = await uploadFile({ variables: { file } });
-      const url = result.data?.uploadFile.url;
-
-      const newImageUrls = [...imageUrls];
-      newImageUrls[index] = url;
-      setImageUrls(newImageUrls);
+      const uploadedUrls = await Promise.all(uploadPromises);
+      return uploadedUrls;
     } catch (error) {
-      console.error(error);
-      alert("이미지 업로드에 실패했습니다.");
-
-      // 실패 시 미리보기도 제거
-      const newPreviewUrls = [...previewUrls];
-      newPreviewUrls[index] = "";
-      setPreviewUrls(newPreviewUrls);
-    } finally {
-      const newUploadingStates = [...uploadingStates];
-      newUploadingStates[index] = false;
-      setUploadingStates(newUploadingStates);
+      throw error;
     }
   };
 
@@ -145,6 +151,10 @@ export default function useTripsWrite(props: ITripsWriteProps) {
     const newPreviewUrls = [...previewUrls];
     newPreviewUrls[index] = "";
     setPreviewUrls(newPreviewUrls);
+
+    const newSelectedFiles = [...selectedFiles];
+    newSelectedFiles[index] = null;
+    setSelectedFiles(newSelectedFiles);
 
     if (fileRef.current[index]) {
       fileRef.current[index]!.value = "";
@@ -205,7 +215,11 @@ export default function useTripsWrite(props: ITripsWriteProps) {
   // 등록 핸들러
   const onClickSubmit = async (data: IFormFullData) => {
     try {
-      const filteredImages = data.imageUrls.filter((url) => url !== "");
+      setIsSubmitting(true);
+
+      // 이미지 일괄 업로드
+      const uploadedUrls = await uploadAllImages();
+      const filteredImages = uploadedUrls.filter((url) => url !== "");
 
       // 태그를 배열로 변환 (# 기준으로 분할)
       const tagsArray = data.tags
@@ -243,13 +257,19 @@ export default function useTripsWrite(props: ITripsWriteProps) {
       } else {
         alert("상품 등록에 실패했습니다.");
       }
+    } finally {
+      setIsSubmitting(false);
     }
   };
 
   // 수정 핸들러
   const onClickUpdate = async (data: IFormFullData) => {
     try {
-      const filteredImages = data.imageUrls.filter((url) => url !== "");
+      setIsSubmitting(true);
+
+      // 이미지 일괄 업로드
+      const uploadedUrls = await uploadAllImages();
+      const filteredImages = uploadedUrls.filter((url) => url !== "");
 
       // 태그를 배열로 변환 (# 기준으로 분할)
       const tagsArray = data.tags
@@ -288,6 +308,8 @@ export default function useTripsWrite(props: ITripsWriteProps) {
       } else {
         alert("상품 수정에 실패했습니다.");
       }
+    } finally {
+      setIsSubmitting(false);
     }
   };
 
@@ -306,10 +328,11 @@ export default function useTripsWrite(props: ITripsWriteProps) {
     imageUrls,
     setImageUrls,
     previewUrls,
-    uploadingStates,
     fileRef,
     onChangeFile,
     onClickImage,
     onClickDeleteImage,
+    isSubmitting,
+    uploadingStates,
   };
 }

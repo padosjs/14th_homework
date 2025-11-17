@@ -1,3 +1,4 @@
+import { useRouter } from 'next/navigation';
 import { BookmarkIcon } from '@heroicons/react/24/outline';
 import styles from "./styles.module.css";
 
@@ -11,16 +12,30 @@ interface FeaturedCardProps {
 }
 
 export default function FeaturedCard({
+  id,
   title,
   description,
   price,
   bookmarkCount,
   image,
 }: FeaturedCardProps) {
+  const router = useRouter();
+
+  const handleCardClick = () => {
+    router.push(`/trips/${id}`);
+  };
+
   return (
-    <div className={styles.card}>
+    <div className={styles.card} onClick={handleCardClick} style={{ cursor: 'pointer' }}>
       <div className={styles.imageContainer}>
-        <img src={image} alt={title} className={styles.image} />
+        <img
+          src={image}
+          alt={title}
+          className={styles.image}
+          onError={(e) => {
+            e.currentTarget.src = '/assets/images/image_error.png';
+          }}
+        />
         <div className={styles.gradient} />
       </div>
 

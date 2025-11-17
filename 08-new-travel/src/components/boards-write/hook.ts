@@ -26,27 +26,78 @@ export default function useBoardsWrite(props: IBoardsWriteProps) {
 
 
     const [imageUrls, setImageUrls] = useState(["", "", ""])
+    const [previewUrls, setPreviewUrls] = useState(["", "", ""])
+    const [selectedFiles, setSelectedFiles] = useState<(File | null)[]>([null, null, null]);
+    const [isSubmitting, setIsSubmitting] = useState(false);
+    const [uploadingStates, setUploadingStates] = useState([false, false, false]);
     const fileRef = useRef<HTMLInputElement[] | null[]>([]);
     const [uploadFile] = useMutation(UPLOAD_FILE)
 
-    const onChangeFile = async (event: ChangeEvent<HTMLInputElement>, index: number) => {
+    const onChangeFile = (event: ChangeEvent<HTMLInputElement>, index: number) => {
         const file = event.target.files?.[0];
         if (!file) return;
 
         const isValid = checkValidationFile(file)
         if (!isValid) return
 
-        try {
-            const result = await uploadFile({ variables: { file } })
-            const url = result.data?.uploadFile.url
+        // FileReader로 즉시 미리보기 생성
+        const reader = new FileReader();
+        reader.onload = (e) => {
+            const newPreviewUrls = [...previewUrls];
+            newPreviewUrls[index] = e.target?.result as string;
+            setPreviewUrls(newPreviewUrls);
+        };
+        reader.readAsDataURL(file);
 
-            const newImageUrls = [...imageUrls];
-            newImageUrls[index] = url;
-            setImageUrls(newImageUrls);
-        } catch (error) {
-            console.error(error);
-        }
+        // 파일 객체 저장 (나중에 일괄 업로드)
+        const newSelectedFiles = [...selectedFiles];
+        newSelectedFiles[index] = file;
+        setSelectedFiles(newSelectedFiles);
     }
+
+    // 선택된 모든 이미지를 병렬 업로드
+    const uploadAllImages = async (): Promise<string[]> => {
+        const uploadPromises = selectedFiles
+            .map((file, index) => {
+                // null이 아닌 파일만 업로드
+                if (!file) return Promise.resolve(imageUrls[index] || "");
+
+                // 업로드 시작 시 해당 이미지의 상태를 true로 설정
+                setUploadingStates((prev) => {
+                    const newStates = [...prev];
+                    newStates[index] = true;
+                    return newStates;
+                });
+
+                return uploadFile({ variables: { file } })
+                    .then((result) => {
+                        // 업로드 완료 후 해당 이미지의 상태를 false로 설정
+                        setUploadingStates((prev) => {
+                            const newStates = [...prev];
+                            newStates[index] = false;
+                            return newStates;
+                        });
+                        return result.data?.uploadFile.url || "";
+                    })
+                    .catch((error) => {
+                        // 오류 발생 시에도 상태를 false로 설정
+                        setUploadingStates((prev) => {
+                            const newStates = [...prev];
+                            newStates[index] = false;
+                            return newStates;
+                        });
+                        console.error(`Image ${index} upload failed:`, error);
+                        throw new Error(`${index + 1}번째 이미지 업로드 실패`);
+                    });
+            });
+
+        try {
+            const uploadedUrls = await Promise.all(uploadPromises);
+            return uploadedUrls;
+        } catch (error) {
+            throw error;
+        }
+    };
     const onClickImage = (index: number) => {
         fileRef.current[index]?.click()
     }
@@ -54,6 +105,14 @@ export default function useBoardsWrite(props: IBoardsWriteProps) {
         const newImageUrls = [...imageUrls];
         newImageUrls[index] = "";
         setImageUrls(newImageUrls);
+
+        const newPreviewUrls = [...previewUrls];
+        newPreviewUrls[index] = "";
+        setPreviewUrls(newPreviewUrls);
+
+        const newSelectedFiles = [...selectedFiles];
+        newSelectedFiles[index] = null;
+        setSelectedFiles(newSelectedFiles);
 
         if (fileRef.current[index]) {
             fileRef.current[index]!.value = "";
@@ -106,7 +165,11 @@ export default function useBoardsWrite(props: IBoardsWriteProps) {
 
     const onClickSubmit = async (data: IFormFullData) => {
         try {
-            const filteredImages = data.imageUrls.filter(url => url !== "");
+            setIsSubmitting(true);
+
+            // 이미지 일괄 업로드
+            const uploadedUrls = await uploadAllImages();
+            const filteredImages = uploadedUrls.filter(url => url !== "");
 
             const result = await createBoard({
                 variables: {
@@ -138,14 +201,24 @@ export default function useBoardsWrite(props: IBoardsWriteProps) {
             })
             router.push(`/boards/${result.data.createBoard._id}`)
         } catch (error) { alert("에러가 발생하였습니다.") }
+        finally {
+            setIsSubmitting(false);
+        }
     }
 
     const onClickUpdate = async (data: IFormFullData) => {
         try {
-            const password = data.passwordforedit 
-            if (password === null || password === undefined) { 
+            setIsSubmitting(true);
+
+            const password = data.passwordforedit
+            if (password === null || password === undefined) {
                 return;
             }
+
+            // 이미지 일괄 업로드
+            const uploadedUrls = await uploadAllImages();
+            const filteredImages = uploadedUrls.filter(url => url !== "");
+
             const updateBoardInput = {
                 title: data.title,
                 contents: data.content,
@@ -155,7 +228,7 @@ export default function useBoardsWrite(props: IBoardsWriteProps) {
                     address: data.address,
                     addressDetail: data.addressDetail
                 },
-                images: data.imageUrls.filter(url => url !== "")
+                images: filteredImages
             };
             const result = await updateBoard({
                 variables: {
@@ -200,6 +273,9 @@ export default function useBoardsWrite(props: IBoardsWriteProps) {
                 alert("에러가 발생했습니다.");
             }
         }
+        finally {
+            setIsSubmitting(false);
+        }
     };
 
     return {
@@ -218,9 +294,12 @@ export default function useBoardsWrite(props: IBoardsWriteProps) {
         router,
         imageUrls,
         setImageUrls,
+        previewUrls,
         fileRef,
         onChangeFile,
         onClickImage,
-        onClickDeleteImage
+        onClickDeleteImage,
+        isSubmitting,
+        uploadingStates,
     }
 }

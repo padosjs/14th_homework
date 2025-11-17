@@ -24,10 +24,10 @@ import { useEffect } from 'react';
 
 export default function BoardsWrite(props: IBoardsWriteProps) {
     const {
-        onChangeAddressDetail, 
-        onChangeYoutubeUrl, 
-        onClickSubmit, 
-        onClickUpdate, 
+        onChangeAddressDetail,
+        onChangeYoutubeUrl,
+        onClickSubmit,
+        onClickUpdate,
         setAddressAndZipcode,
         onChangePasswordforedit,
         passwordforedit,
@@ -39,10 +39,13 @@ export default function BoardsWrite(props: IBoardsWriteProps) {
         router,
         imageUrls,
         setImageUrls,
+        previewUrls,
         fileRef,
         onChangeFile,
         onClickImage,
         onClickDeleteImage,
+        isSubmitting,
+        uploadingStates,
     } = useBoardsWrite(props)
 
     const boardData = data?.fetchBoard as Board | undefined;
@@ -210,14 +213,23 @@ export default function BoardsWrite(props: IBoardsWriteProps) {
                 <div className={styles['button-group-image-upload']}>
                     {Array.from({ length: UPLOAD_LIMIT }).map((_, index) => (
                         <div key={index} className={styles['image-upload-item']}>
-                            {imageUrls[index] ? (
+                            {imageUrls[index] || previewUrls[index] ? (
                                 <>
                                     <img
-                                        src={`https://storage.googleapis.com/${imageUrls[index]}`}
+                                        src={
+                                            imageUrls[index]
+                                                ? `https://storage.googleapis.com/${imageUrls[index]}`
+                                                : previewUrls[index]
+                                        }
                                         alt={`업로드된 이미지 ${index + 1}`}
                                         className={styles['uploaded-image']}
                                         onClick={() => onClickImage(index)}
                                     />
+                                    {uploadingStates[index] && (
+                                        <div className={styles['uploading-overlay']}>
+                                            <span>업로드 중...</span>
+                                        </div>
+                                    )}
                                     <div className={styles['image-delete-button']} onClick={() => onClickDeleteImage(index)}>
                                         <XMarkIcon className={styles['image-delete-button-icon']} />
                                     </div>

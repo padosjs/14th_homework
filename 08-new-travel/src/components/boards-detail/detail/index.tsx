@@ -16,6 +16,8 @@ export default function BoardsDetail() {
     const {
         onClickList,
         onClickEdit,
+        onClickLike,
+        onClickDislike,
         data
     } = useBoardsDetail()
 
@@ -59,6 +61,9 @@ export default function BoardsDetail() {
                                 src={`https://storage.googleapis.com/${url}`}
                                 alt={`첨부 이미지 ${index + 1}`}
                                 className={styles['uploaded-image']}
+                                onError={(e) => {
+                                    e.currentTarget.src = '/assets/images/image_error.png';
+                                }}
                             />
                         ))}
                     </div>
@@ -80,8 +85,8 @@ export default function BoardsDetail() {
             </div>
             <div className={styles['boards-detail-action']}>
                 <div className={styles['boards-deatil-button-group2']}>
-                    <Button className="simple-vertical-button" icon={HandThumbDownIcon} text="24" />
-                    <Button className="simple-vertical-red-button" icon={HandThumbUpIcon} text="12" />
+                    <Button className="simple-vertical-button" icon={HandThumbDownIcon} text={String(data?.fetchBoard?.dislikeCount ?? 0)} onClick={onClickDislike} />
+                    <Button className="simple-vertical-red-button" icon={HandThumbUpIcon} text={String(data?.fetchBoard?.likeCount ?? 0)} onClick={onClickLike} />
                 </div>
                 <div className={styles['boards-deatil-button-group2']}>
                     <Button className="white-button" icon={ListBulletIcon} text="목록으로" onClick={onClickList} />

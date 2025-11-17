@@ -1,3 +1,4 @@
+import { useRouter } from 'next/navigation';
 import { BookmarkIcon, UserCircleIcon } from '@heroicons/react/24/outline';
 import styles from "./styles.module.css";
 
@@ -16,6 +17,7 @@ interface AccommodationCardProps {
 }
 
 export default function AccommodationCard({
+  id,
   title,
   description,
   tags,
@@ -24,12 +26,25 @@ export default function AccommodationCard({
   image,
   seller,
 }: AccommodationCardProps) {
+  const router = useRouter();
+
+  const handleCardClick = () => {
+    router.push(`/trips/${id}`);
+  };
+
   return (
-    <div className={styles.card}>
+    <div className={styles.card} onClick={handleCardClick} style={{ cursor: 'pointer' }}>
       {/* 이미지 영역 */}
       <div className={styles.imageSection}>
         <div className={styles.imageContainer}>
-          <img src={`https://storage.googleapis.com/${image}`} alt={title} className={styles.image} />
+          <img
+            src={`https://storage.googleapis.com/${image}`}
+            alt={title}
+            className={styles.image}
+            onError={(e) => {
+              e.currentTarget.src = '/assets/images/image_error.png';
+            }}
+          />
         </div>
         <div className={styles.bookmark}>
           <BookmarkIcon className={styles.bookmarkIcon} />
