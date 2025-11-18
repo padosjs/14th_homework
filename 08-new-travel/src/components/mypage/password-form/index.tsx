@@ -40,8 +40,6 @@ export default function PasswordForm({ onSubmit }: PasswordFormProps) {
 
     onSubmit?.(password);
 
-    // Mock 성공 처리
-    alert("비밀번호가 변경되었습니다.");
     setPassword("");
     setConfirmPassword("");
   };

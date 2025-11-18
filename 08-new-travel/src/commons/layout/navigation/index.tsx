@@ -1,12 +1,14 @@
 "use client"
 
 import Link from "next/link"
+import { usePathname } from "next/navigation";
 import styles from "./styles.module.css";
 import Button from "@/components/button/button";
 import { Button as UIButton } from "@/components/ui/button";
 import { useMutation, gql } from "@apollo/client";
 import { useAccessTokenStore } from "@/commons/stores/access-token-store";
 import { useUserPointsStore } from "@/commons/stores/user-points-store";
+import { ILoggedInUser } from "@/lib/queries/user";
 
 // GraphQL 로그아웃 뮤테이션
 const LOGOUT_USER = gql`
@@ -15,22 +17,13 @@ const LOGOUT_USER = gql`
     }
 `
 
-// 사용자 정보가 담길 타입 인터페이스를 정의합니다.
-// null 또는 undefined일 수 있으므로 선택적(optional)으로 처리합니다.
-interface ILoggedInUser {
-    _id: string;
-    email: string;
-    name: string;
-    userPoint?: {
-        _id: string;
-        amount: number;
-    };
-}
-
 // Navigation 컴포넌트가 userData prop을 받을 수 있도록 수정합니다.
 export default function Navigation({ userData }: { userData?: ILoggedInUser | null }) {
     // userData가 존재하면 true, 없으면 false가 됩니다.
     const isLoggedIn = !!userData;
+
+    // 현재 경로 감지
+    const pathname = usePathname();
 
     // 로그아웃 뮤테이션 및 상태 관리
     const [logoutUser] = useMutation(LOGOUT_USER);
@@ -59,6 +52,11 @@ export default function Navigation({ userData }: { userData?: ILoggedInUser | nu
             setPoints(userData.userPoint.amount);
         }
         openChargeModal();
+    };
+
+    // 경로가 특정 기본 경로로 시작하는지 확인하는 함수
+    const isPathActive = (basePath: string) => {
+        return pathname === basePath || pathname.startsWith(basePath + "/");
     };
 
     // 로그인 여부에 따라 다른 컴포넌트를 반환합니다.
@@ -107,9 +105,15 @@ export default function Navigation({ userData }: { userData?: ILoggedInUser | nu
                         </svg>
                     </Link>
                     <div className={styles.navLinksContainer}>
-                        <div className={styles.navLinkActive}>트립토크</div>
-                        <div className={styles.navLink}>숙박권 구매</div>
-                        <div className={styles.navLink}>마이 페이지</div>
+                        <Link href="/boards">
+                            <div className={isPathActive("/boards") ? styles.navLinkActive : styles.navLink}>트립토크</div>
+                        </Link>
+                        <Link href="/trips">
+                            <div className={isPathActive("/trips") ? styles.navLinkActive : styles.navLink}>숙박권 구매</div>
+                        </Link>
+                        <Link href="/mypage">
+                            <div className={isPathActive("/mypage") ? styles.navLinkActive : styles.navLink}>마이 페이지</div>
+                        </Link>
                     </div>
                 </div>
                 {renderSetting()}

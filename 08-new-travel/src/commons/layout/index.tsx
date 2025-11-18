@@ -4,21 +4,8 @@ import { usePathname, useRouter } from 'next/navigation';
 import Navigation from "@/commons/layout/navigation";
 import BannerCarousel from "@/commons/layout/banner";
 import PointChargeModal from "@/components/point-charge-modal";
-import { gql, useQuery } from "@apollo/client"
-
-const FETCH_USER_LOGGED_IN = gql`
-    query {
-        fetchUserLoggedIn {
-            _id
-            email
-            name
-            userPoint {
-                _id
-                amount
-            }
-        }
-    }
-`
+import { useQuery } from "@apollo/client"
+import { FETCH_USER_LOGGED_IN } from "@/lib/queries/user"
 
 interface IProps { children: ReactNode; }
 

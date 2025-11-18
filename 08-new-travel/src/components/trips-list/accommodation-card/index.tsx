@@ -14,6 +14,7 @@ interface AccommodationCardProps {
     name: string;
     profileImage?: string | null;
   };
+  onMouseEnter?: () => void;
 }
 
 export default function AccommodationCard({
@@ -25,6 +26,7 @@ export default function AccommodationCard({
   bookmarkCount,
   image,
   seller,
+  onMouseEnter,
 }: AccommodationCardProps) {
   const router = useRouter();
 
@@ -33,7 +35,7 @@ export default function AccommodationCard({
   };
 
   return (
-    <div className={styles.card} onClick={handleCardClick} style={{ cursor: 'pointer' }}>
+    <div className={styles.card} onClick={handleCardClick} onMouseEnter={onMouseEnter} style={{ cursor: 'pointer' }}>
       {/* 이미지 영역 */}
       <div className={styles.imageSection}>
         <div className={styles.imageContainer}>

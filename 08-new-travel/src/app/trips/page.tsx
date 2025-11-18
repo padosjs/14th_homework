@@ -1,7 +1,8 @@
 "use client";
 
 import { useState } from "react";
-import { useQuery } from "@apollo/client";
+import { useQuery, useApolloClient } from "@apollo/client";
+import { debounce } from "lodash";
 import TabNavigation from "@/components/mypage/tab-navigation";
 import FeaturedCard from "@/components/trips-list/featured-card";
 import PromoBanner from "@/components/trips-list/promo-banner";
@@ -10,6 +11,7 @@ import FilterSection from "@/components/trips-list/filter-section";
 import AccommodationCard from "@/components/trips-list/accommodation-card";
 import styles from "./styles.module.css";
 import { FETCH_TRAVELPRODUCTS } from "./queries";
+import { FETCH_TRAVELPRODUCT } from "./[tripId]/queries";
 import type { Travelproduct } from "@/commons/graphql/graphql";
 
 // Mock 데이터 (추천 상품, 최근 본 상품용)
@@ -47,6 +49,7 @@ const TABS = [
 
 export default function TripsPage() {
   const [activeTab, setActiveTab] = useState("available");
+  const client = useApolloClient();
 
   // GraphQL 쿼리로 숙소 데이터 조회
   const { data, loading, error } = useQuery(FETCH_TRAVELPRODUCTS, {
@@ -55,6 +58,36 @@ export default function TripsPage() {
       isSoldout: activeTab === "closed",
     },
   });
+
+  // Debounce 적용: 마우스를 빠르게 움직일 때 불필요한 요청을 방지
+  const prefetchTravelproductDebounce = debounce((productId: string) => {
+    client.query({
+      query: FETCH_TRAVELPRODUCT,
+      variables: { travelproductId: productId },
+    }).then((result) => {
+      // 이미지 프리페치: 브라우저 캐시에 미리 로드
+      const travelproduct = result.data?.fetchTravelproduct;
+
+      // 상품 이미지 캐싱
+      if (travelproduct?.images && travelproduct.images.length > 0) {
+        travelproduct.images.forEach((imagePath: string) => {
+          const img = new Image();
+          img.src = `https://storage.googleapis.com/${imagePath}`;
+        });
+      }
+
+      // 판매자 프로필 이미지 캐싱
+      if (travelproduct?.seller?.picture) {
+        const sellerImg = new Image();
+        sellerImg.src = `https://storage.googleapis.com/${travelproduct.seller.picture}`;
+      }
+    });
+  }, 200);
+
+  // Prefetch 함수 실행
+  const prefetchTravelproduct = (productId: string) => () => {
+    prefetchTravelproductDebounce(productId);
+  };
 
   return (
     <div className={styles.page}>
@@ -100,6 +133,7 @@ export default function TripsPage() {
                   name: product.seller?.name ?? "",
                   profileImage: product.seller?.picture ?? null,
                 }}
+                onMouseEnter={prefetchTravelproduct(product._id)}
               />
             ))}
           </div>
