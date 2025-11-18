@@ -125,7 +125,8 @@
   gap: 24px;
 }
 
-.main-image {
+/* Main Swiper */
+.main-swiper {
   width: 640px;
   height: 480px;
   border-radius: 8px;
@@ -133,44 +134,76 @@
   flex-shrink: 0;
 }
 
-.main-image img {
+.main-slide {
+  width: 100%;
+  height: 100%;
+}
+
+.main-slide img {
   width: 100%;
   height: 100%;
   object-fit: cover;
 }
 
-.thumbnail-list {
+/* Thumbnail Swiper */
+.thumbnail-swiper {
   width: 180px;
   height: 480px;
-  display: flex;
   flex-direction: column;
-  gap: 16px;
-  position: relative;
-  overflow: hidden;
 }
 
-.thumbnail {
+.thumbnail-slide {
   width: 100%;
   height: 136px;
   border-radius: 8px;
   overflow: hidden;
-  flex-shrink: 0;
+  cursor: pointer;
+  border: 2px solid transparent;
+  transition: border-color 0.3s ease;
 }
 
-.thumbnail img {
+.thumbnail-slide img {
   width: 100%;
   height: 100%;
   object-fit: cover;
 }
 
-.thumbnail-gradient {
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background: linear-gradient(180deg, rgba(255, 255, 255, 0) 85.521%, #ffffff 102.19%);
-  pointer-events: none;
+/* Swiper Thumbs Active State */
+.thumbnail-swiper :global(.swiper-slide-thumb-active) {
+  border-color: #2974e5;
+}
+
+.thumbnail-swiper :global(.swiper-slide) {
+  opacity: 0.6;
+  transition: opacity 0.3s ease;
+}
+
+.thumbnail-swiper :global(.swiper-slide-thumb-active) {
+  opacity: 1;
+}
+
+/* Navigation Button Styling */
+.main-swiper :global(.swiper-button-next),
+.main-swiper :global(.swiper-button-prev) {
+  color: #ffffff;
+  width: 44px;
+  height: 44px;
+  background: rgba(0, 0, 0, 0.3);
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background-color 0.3s ease;
+}
+
+.main-swiper :global(.swiper-button-next:hover),
+.main-swiper :global(.swiper-button-prev:hover) {
+  background: rgba(0, 0, 0, 0.5);
+}
+
+.main-swiper :global(.swiper-button-next::after),
+.main-swiper :global(.swiper-button-prev::after) {
+  font-size: 20px;
 }
 
 /* Divider */

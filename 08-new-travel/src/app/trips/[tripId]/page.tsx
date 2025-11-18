@@ -4,6 +4,12 @@ import { useState } from "react";
 import { useParams, useRouter } from "next/navigation";
 import { useQuery, useMutation } from "@apollo/client";
 import { ChatBubbleLeftIcon, BookmarkIcon, MapPinIcon, LinkIcon, TrashIcon } from "@heroicons/react/24/outline";
+import { Swiper, SwiperSlide } from "swiper/react";
+import { FreeMode, Navigation, Thumbs } from "swiper/modules";
+import "swiper/css";
+import "swiper/css/free-mode";
+import "swiper/css/navigation";
+import "swiper/css/thumbs";
 import Button from "@/components/button/button";
 import {
   AlertDialog,
@@ -34,6 +40,7 @@ export default function TripDetailPage() {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [isInsufficientPointsModalOpen, setIsInsufficientPointsModalOpen] = useState(false);
   const [isDeleteConfirmOpen, setIsDeleteConfirmOpen] = useState(false);
+  const [thumbsSwiper, setThumbsSwiper] = useState<any>(null);
   const { points, openChargeModal } = useUserPointsStore();
 
   const travelproduct = data?.fetchTravelproduct;
@@ -150,22 +157,19 @@ export default function TripDetailPage() {
 
 
             <div className={styles["image-gallery"]}>
-              <div className={styles["main-image"]}>
-                <img
-                  src={travelproduct.images?.[0] ? `https://storage.googleapis.com/${travelproduct.images[0]}` : "/assets/images/image_error.png"}
-                  alt="숙소 메인 이미지"
-                  onError={(e) => {
-                    e.currentTarget.src = '/assets/images/image_error.png';
-                  }}
-                />
-              </div>
-              <div className={styles["thumbnail-list"]}>
+              <Swiper
+                style={{
+                  '--swiper-navigation-color': '#fff',
+                  '--swiper-pagination-color': '#fff',
+                } as React.CSSProperties}
+                spaceBetween={10}
+                navigation={true}
+                thumbs={{ swiper: thumbsSwiper }}
+                modules={[FreeMode, Navigation, Thumbs]}
+                className={styles["main-swiper"]}
+              >
                 {travelproduct.images?.map((image: string, index: number) => (
-                  <div
-                    key={index}
-                    className={styles["thumbnail"]}
-                    style={{ opacity: index === 0 ? 1 : 0.5 }}
-                  >
+                  <SwiperSlide key={index} className={styles["main-slide"]}>
                     <img
                       src={`https://storage.googleapis.com/${image}`}
                       alt={`숙소 이미지 ${index + 1}`}
@@ -173,10 +177,32 @@ export default function TripDetailPage() {
                         e.currentTarget.src = '/assets/images/image_error.png';
                       }}
                     />
-                  </div>
+                  </SwiperSlide>
                 ))}
-                <div className={styles["thumbnail-gradient"]} />
-              </div>
+              </Swiper>
+
+              <Swiper
+                direction="vertical"
+                onSwiper={setThumbsSwiper}
+                spaceBetween={16}
+                slidesPerView={3}
+                freeMode={true}
+                watchSlidesProgress={true}
+                modules={[FreeMode, Navigation, Thumbs]}
+                className={styles["thumbnail-swiper"]}
+              >
+                {travelproduct.images?.map((image: string, index: number) => (
+                  <SwiperSlide key={index} className={styles["thumbnail-slide"]}>
+                    <img
+                      src={`https://storage.googleapis.com/${image}`}
+                      alt={`숙소 이미지 ${index + 1}`}
+                      onError={(e) => {
+                        e.currentTarget.src = '/assets/images/image_error.png';
+                      }}
+                    />
+                  </SwiperSlide>
+                ))}
+              </Swiper>
             </div>
 
             <div className={styles["divider"]} />
