@@ -18,7 +18,7 @@ export default function useBoardComments() {
         if (data === undefined) return;
 
         fetchMore({
-            variables: { page: Math.ceil((data.fetchBoardComments.length ?? 5) / 5) + 1 },
+            variables: { page: Math.ceil((data.fetchBoardComments.length ?? 10) / 10) + 1 },
             updateQuery: (prev, { fetchMoreResult }) => {
                 if (!fetchMoreResult.fetchBoardComments?.length) {
                     setHasMore(false)
