@@ -11,7 +11,7 @@ import "swiper/css/free-mode";
 import "swiper/css/navigation";
 import "swiper/css/thumbs";
 import Button from "@/components/button/button";
-import KakaoMap from "./KakaoMap";
+import KakaoMap from "@/components/KakaoMap";
 import {
   AlertDialog,
   AlertDialogTrigger,

@@ -180,9 +180,15 @@ export default function useTripsWrite(props: ITripsWriteProps) {
   const [lng, setLng] = useState<number | undefined>();
 
   // 주소 설정 함수
-  const setAddressAndZipcode = (newAddress: string, newZipcode: string): void => {
+  const setAddressAndZipcode = (newAddress: string, newZipcode: string, latitude?: number, longitude?: number): void => {
     setAddress(newAddress);
     setZipcode(newZipcode);
+    if (latitude !== undefined) {
+      setLat(latitude);
+    }
+    if (longitude !== undefined) {
+      setLng(longitude);
+    }
   };
 
   // 상세주소 변경 핸들러

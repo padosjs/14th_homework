@@ -5,6 +5,7 @@ import Button from "@/components/button/button";
 import styles from "./styles.module.css";
 import { ITripsWriteProps, Travelproduct } from "./types";
 import Postcode from "../PostcodePopup";
+import KakaoMap from "@/components/KakaoMap";
 import { PlusIcon, XMarkIcon } from "@heroicons/react/24/outline";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
@@ -388,8 +389,14 @@ export default function TripsWrite(props: ITripsWriteProps) {
           {/* 지도 영역 */}
           <div className={styles["map-section"]}>
             <label className={styles["input-title"]}>상세 위치</label>
-            <div className={styles["map-placeholder"]}>
-              <p>주소를 먼저 입력해 주세요.</p>
+            <div className={styles["map-container"]}>
+              {lat && lng ? (
+                <KakaoMap lat={lat} lng={lng} />
+              ) : (
+                <div className={styles["map-placeholder"]}>
+                  <p>주소를 먼저 입력해 주세요.</p>
+                </div>
+              )}
             </div>
           </div>
         </div>

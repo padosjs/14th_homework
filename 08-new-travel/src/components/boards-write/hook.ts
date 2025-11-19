@@ -132,9 +132,10 @@ export default function useBoardsWrite(props: IBoardsWriteProps) {
     const [addressDetail, setAddressDetail] = useState<string>("");
     const [youtubeUrl, setYoutubeUrl] = useState<string>("");
 
-    const setAddressAndZipcode = (newAddress: string, newZipcode: string): void => {
-        setAddress(newAddress);
-        setZipcode(newZipcode);
+    const setAddressAndZipcode = (_newAddress: string, _newZipcode: string, _latitude?: number, _longitude?: number): void => {
+        setAddress(_newAddress);
+        setZipcode(_newZipcode);
+        // 위경도는 필요시 사용하도록 변경 가능 (현재는 boards-write에서 사용하지 않음)
     }
     const onChangeAddressDetail = (event: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>): void => {
         setAddressDetail(event.target.value);
