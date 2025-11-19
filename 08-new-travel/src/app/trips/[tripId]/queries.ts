@@ -15,6 +15,8 @@ export const FETCH_TRAVELPRODUCT = gql`
         address
         addressDetail
         zipcode
+        lat
+        lng
       }
       seller {
         _id

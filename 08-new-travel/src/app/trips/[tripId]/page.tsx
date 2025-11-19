@@ -11,6 +11,7 @@ import "swiper/css/free-mode";
 import "swiper/css/navigation";
 import "swiper/css/thumbs";
 import Button from "@/components/button/button";
+import KakaoMap from "./KakaoMap";
 import {
   AlertDialog,
   AlertDialogTrigger,
@@ -217,7 +218,10 @@ export default function TripDetailPage() {
             <div className={styles["location-section"]}>
               <h2 className={styles["section-title"]}>상세 위치</h2>
               <div className={styles["map-container"]}>
-                <img src="/assets/images/mapsample.png" alt="상세 위치 지도" />
+                <KakaoMap
+                  lat={travelproduct.travelproductAddress?.lat}
+                  lng={travelproduct.travelproductAddress?.lng}
+                />
               </div>
             </div>
 
