@@ -53,6 +53,9 @@ importers:
       graphql:
         specifier: ^16.11.0
         version: 16.11.0
+      graphql-request:
+        specifier: ^7.3.4
+        version: 7.3.4(graphql@16.11.0)
       lodash:
         specifier: ^4.17.21
         version: 4.17.21
@@ -2107,6 +2110,11 @@ packages:
     peerDependenciesMeta:
       cosmiconfig-toml-loader:
         optional: true
+
+  graphql-request@7.3.4:
+    resolution: {integrity: sha512-kbpP5dw9hHIL5jN/2VS2JU0/Sc1hlsj7zrYBKSDiYd5iG8QfX7P79u26ZBi84eAijsqYVZEpLvCCwEzVxscWhg==}
+    peerDependencies:
+      graphql: 14 - 16
 
   graphql-tag@2.12.6:
     resolution: {integrity: sha512-FdSNcu2QQcWnM2VNvSCCDCVS5PpPqpzgFT8+GXzqJuoDd0CBncxCY278u4mhRO7tMgo2JjgJA5aZ+nWSQ/Z+xg==}
@@ -5881,6 +5889,11 @@ snapshots:
       - typescript
       - uWebSockets.js
       - utf-8-validate
+
+  graphql-request@7.3.4(graphql@16.11.0):
+    dependencies:
+      '@graphql-typed-document-node/core': 3.2.0(graphql@16.11.0)
+      graphql: 16.11.0
 
   graphql-tag@2.12.6(graphql@16.11.0):
     dependencies:

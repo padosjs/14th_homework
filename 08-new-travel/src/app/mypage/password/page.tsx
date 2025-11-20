@@ -34,7 +34,6 @@ export default function PasswordPage() {
         alert("비밀번호가 변경되었습니다.");
 
         // 로그아웃 처리
-        localStorage.removeItem("accessToken");
         setAccessToken("");
 
         // 로그인 페이지로 이동

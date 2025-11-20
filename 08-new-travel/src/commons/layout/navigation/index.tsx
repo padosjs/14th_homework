@@ -39,7 +39,6 @@ export default function Navigation({ userData }: { userData?: ILoggedInUser | nu
         } finally {
             // 로컬 상태 정리 (API 결과와 무관하게 실행)
             setAccessToken("");
-            localStorage.removeItem("accessToken");
         }
     };
 
