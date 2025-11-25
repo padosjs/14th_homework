@@ -18,9 +18,16 @@ import {
     AlertDialogTrigger,
 } from "@/components/ui/alert-dialog";
 import { zodResolver } from "@hookform/resolvers/zod"
-import { useForm } from "react-hook-form"
+import { useForm, Controller } from "react-hook-form"
 import { IScehma, schema, editSchema } from "./schema"
-import { useEffect } from 'react'; 
+import { useEffect, useMemo } from 'react';
+import dynamic from 'next/dynamic';
+import 'react-quill/dist/quill.snow.css';
+
+const ReactQuill = dynamic(() => import('react-quill'), {
+    ssr: false,
+    loading: () => <p>Loading editor...</p>
+});
 
 export default function BoardsWrite(props: IBoardsWriteProps) {
     const {
@@ -54,9 +61,10 @@ export default function BoardsWrite(props: IBoardsWriteProps) {
     const {
         register,
         handleSubmit,
-        formState: { errors, isValid }, 
-        setValue, 
+        formState: { errors, isValid },
+        setValue,
         getValues,
+        control,
     } = useForm<IScehma>({
         resolver: zodResolver(props.isEdit ? editSchema : schema),
         mode: "onChange",
@@ -109,12 +117,32 @@ export default function BoardsWrite(props: IBoardsWriteProps) {
     useEffect(() => {
         if (props.isEdit && boardData) {
             setValue("writer", boardData.writer || "");
-            setValue("password", "●●●●●●"); 
+            setValue("password", "●●●●●●");
             setValue("title", boardData.title || "");
             setValue("content", boardData.contents || "");
         }
     }, [props.isEdit, boardData, setValue])
 
+    const quillModules = useMemo(() => ({
+        toolbar: [
+            [{ 'header': [1, 2, 3, false] }],
+            ['bold', 'italic', 'underline', 'strike'],
+            [{ 'list': 'ordered'}, { 'list': 'bullet' }],
+            [{ 'align': [] }],
+            ['link', 'image', 'video'],
+            [{ 'color': [] }, { 'background': [] }],
+            ['clean']
+        ],
+    }), []);
+
+    const quillFormats = [
+        'header',
+        'bold', 'italic', 'underline', 'strike',
+        'list', 'bullet',
+        'align',
+        'link', 'image', 'video',
+        'color', 'background'
+    ];
 
     return (
         <form className={styles['main-content']} onSubmit={props.isEdit ? (e) => e.preventDefault() : handleSubmit(onSubmitCreate)}>
@@ -160,13 +188,26 @@ export default function BoardsWrite(props: IBoardsWriteProps) {
                 </div>
                 <div className={styles['divider']}></div>
                 <div className={styles['input-container']}>
-                    <label htmlFor="content" className={`${styles['input-title']} ${styles['required']}`}>내용 <p className={styles['input-title-asterisk']}>*</p></label>
-                    <textarea
-                        id="content"
-                        className={`${styles['input-text']} ${styles['textarea-field']} ${errors.content ? styles['input-error'] : ''}`}
-                        placeholder="내용을 입력해주세요."
-                        rows={13}
-                        {...register("content")} 
+                    <label htmlFor="content" className={`${styles['input-title']} ${styles['required']}`}>
+                        내용 <p className={styles['input-title-asterisk']}>*</p>
+                    </label>
+                    <Controller
+                        name="content"
+                        control={control}
+                        render={({ field }) => (
+                            <div className={`${styles['quill-wrapper']} ${errors.content ? styles['quill-error'] : ''}`}>
+                                <ReactQuill
+                                    theme="snow"
+                                    value={field.value || ''}
+                                    onChange={field.onChange}
+                                    onBlur={field.onBlur}
+                                    modules={quillModules}
+                                    formats={quillFormats}
+                                    placeholder="내용을 입력해주세요."
+                                    className={styles['quill-editor']}
+                                />
+                            </div>
+                        )}
                     />
                     {errors.content && <p className={styles['error-message']}>{errors.content.message}</p>}
                 </div>

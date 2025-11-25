@@ -20,7 +20,16 @@ export const schema = z.object({
         .max(16, { message: "비밀번호는 16자 이하로 입력해 주세요." }),
     title: z.string()
         .min(2, { message: "제목은 2자 이상 입력해 주세요." }),
-    content: z.string().min(1, { message: "내용을 입력해주세요." }),
+    content: z.string()
+        .min(1, { message: "내용을 입력해주세요." })
+        .refine(
+            (val) => {
+                // Strip HTML tags and check if there's actual content
+                const text = val.replace(/<[^>]*>/g, '').trim();
+                return text.length > 0;
+            },
+            { message: "내용을 입력해주세요." }
+        ),
     zipcode: z.string().optional(),
     address: z.string().optional(),
     addressDetail: z.string().optional(),
@@ -38,7 +47,16 @@ export const editSchema = z.object({
 
     title: z.string()
         .min(2, { message: "제목은 2자 이상 입력해 주세요." }), // 수정 필수 항목
-    content: z.string().min(1, { message: "내용을 입력해주세요." }), // 수정 필수 항목
+    content: z.string()
+        .min(1, { message: "내용을 입력해주세요." })
+        .refine(
+            (val) => {
+                // Strip HTML tags and check if there's actual content
+                const text = val.replace(/<[^>]*>/g, '').trim();
+                return text.length > 0;
+            },
+            { message: "내용을 입력해주세요." }
+        ), // 수정 필수 항목
     
     zipcode: z.string().optional(),
     address: z.string().optional(),

@@ -216,3 +216,72 @@
   /* 150% */
 }
 
+/* ReactQuill Editor Styles */
+.quill-wrapper {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  border-radius: 0.5rem;
+  overflow: hidden;
+  border: 1px solid var(--Gray-Gray-200, #D4D3D3);
+  background: var(--Gray-W, #FFF);
+}
+
+.quill-wrapper.quill-error {
+  border: 1px solid var(--red, #F66A6A);
+}
+
+.quill-editor {
+  width: 100%;
+}
+
+/* Customize Quill toolbar */
+.quill-editor :global(.ql-toolbar) {
+  border: none;
+  border-bottom: 1px solid var(--gray-50, #F2F2F2);
+  background: var(--Gray-W, #FFF);
+  padding: 1rem;
+}
+
+.quill-editor :global(.ql-container) {
+  border: none;
+  font-family: 'Pretendard Variable', sans-serif;
+  font-size: 1rem;
+  font-weight: 400;
+  line-height: 1.5rem;
+  min-height: 20rem;
+}
+
+.quill-editor :global(.ql-editor) {
+  padding: 1rem;
+  min-height: 20rem;
+}
+
+.quill-editor :global(.ql-editor.ql-blank::before) {
+  color: var(--Gray-Gray-400, #ABABAB);
+  font-style: normal;
+  font-size: 1rem;
+  font-weight: 400;
+  line-height: 1.5rem;
+}
+
+/* Toolbar button hover states */
+.quill-editor :global(.ql-toolbar button:hover),
+.quill-editor :global(.ql-toolbar button:focus),
+.quill-editor :global(.ql-toolbar button.ql-active) {
+  color: var(--blue, #4A90E2);
+}
+
+.quill-editor :global(.ql-toolbar .ql-stroke) {
+  stroke: currentColor;
+}
+
+.quill-editor :global(.ql-toolbar .ql-fill) {
+  fill: currentColor;
+}
+
+/* Scrollable content area */
+.quill-editor :global(.ql-editor) {
+  overflow-y: auto;
+  max-height: 40rem;
+}
