@@ -8,9 +8,11 @@ import Postcode from "../PostcodePopup";
 import KakaoMap from "@/components/KakaoMap";
 import { PlusIcon, XMarkIcon } from "@heroicons/react/24/outline";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { useForm } from "react-hook-form";
+import { useForm, Controller } from "react-hook-form";
 import { ISchema, schema, editSchema } from "./schema";
 import { useEffect } from "react";
+import ReactQuill from "react-quill";
+import "react-quill/dist/quill.snow.css";
 
 export default function TripsWrite(props: ITripsWriteProps) {
   const {
@@ -46,6 +48,7 @@ export default function TripsWrite(props: ITripsWriteProps) {
     formState: { errors, isValid },
     setValue,
     getValues,
+    control,
   } = useForm<ISchema>({
     resolver: zodResolver(props.isEdit ? editSchema : schema),
     mode: "onChange",
@@ -106,6 +109,28 @@ export default function TripsWrite(props: ITripsWriteProps) {
       );
     }
   }, [props.isEdit, travelproductData, setValue]);
+
+  // ReactQuill toolbar configuration
+  const modules = {
+    toolbar: [
+      [{ 'header': [1, 2, 3, false] }],
+      ['bold', 'italic', 'underline'],
+      [{ 'list': 'ordered'}, { 'list': 'bullet' }],
+      [{ 'align': [] }],
+      ['link', 'image', 'video'],
+      ['code-block'],
+      ['clean']
+    ],
+  };
+
+  const formats = [
+    'header',
+    'bold', 'italic', 'underline',
+    'list', 'bullet',
+    'align',
+    'link', 'image', 'video',
+    'code-block'
+  ];
 
   return (
     <form
@@ -173,117 +198,27 @@ export default function TripsWrite(props: ITripsWriteProps) {
           >
             상품 설명 <span className={styles["input-title-asterisk"]}>*</span>
           </label>
-          <div className={styles["editor-container"]}>
-            {/* Editor Toolbar */}
-            <div className={styles["editor-toolbar"]}>
-              <div className={styles["toolbar-group"]}>
-                <button
-                  type="button"
-                  className={styles["toolbar-button"]}
-                  title="Bold"
-                >
-                  <span className={styles["toolbar-icon"]}>B</span>
-                </button>
-                <button
-                  type="button"
-                  className={styles["toolbar-button"]}
-                  title="Italic"
-                >
-                  <span className={styles["toolbar-icon"]}>I</span>
-                </button>
-                <button
-                  type="button"
-                  className={styles["toolbar-button"]}
-                  title="Underline"
-                >
-                  <span className={styles["toolbar-icon"]}>U</span>
-                </button>
-                <button
-                  type="button"
-                  className={styles["toolbar-button"]}
-                  title="Font Size"
-                >
-                  <span className={styles["toolbar-icon"]}>A↓</span>
-                </button>
-              </div>
-              <div className={styles["toolbar-group"]}>
-                <button
-                  type="button"
-                  className={styles["toolbar-button"]}
-                  title="Align Left"
-                >
-                  <span className={styles["toolbar-icon"]}>≡</span>
-                </button>
-                <button
-                  type="button"
-                  className={styles["toolbar-button"]}
-                  title="Align Center"
-                >
-                  <span className={styles["toolbar-icon"]}>≡</span>
-                </button>
-                <button
-                  type="button"
-                  className={styles["toolbar-button"]}
-                  title="Bullets"
-                >
-                  <span className={styles["toolbar-icon"]}>•</span>
-                </button>
-                <button
-                  type="button"
-                  className={styles["toolbar-button"]}
-                  title="Numbering"
-                >
-                  <span className={styles["toolbar-icon"]}>1.</span>
-                </button>
-              </div>
-              <div className={styles["toolbar-group"]}>
-                <button
-                  type="button"
-                  className={styles["toolbar-button"]}
-                  title="Link"
-                >
-                  <span className={styles["toolbar-icon"]}>🔗</span>
-                </button>
-                <button
-                  type="button"
-                  className={styles["toolbar-button"]}
-                  title="Image"
-                >
-                  <span className={styles["toolbar-icon"]}>🖼</span>
-                </button>
-                <button
-                  type="button"
-                  className={styles["toolbar-button"]}
-                  title="Video"
-                >
-                  <span className={styles["toolbar-icon"]}>▶</span>
-                </button>
-                <button
-                  type="button"
-                  className={styles["toolbar-button"]}
-                  title="Code"
-                >
-                  <span className={styles["toolbar-icon"]}>&lt;/&gt;</span>
-                </button>
-              </div>
-            </div>
-            <div className={styles["editor-divider"]}></div>
-            {/* Editor Content */}
-            <textarea
-              id="contents"
-              className={`${styles["editor-textarea"]} ${
-                errors.contents ? styles["input-error"] : ""
-              }`}
-              placeholder="내용을 입력해 주세요."
-              rows={15}
-              {...register("contents")}
+          <div className={styles["quill-wrapper"]}>
+            <Controller
+              name="contents"
+              control={control}
+              render={({ field }) => (
+                <ReactQuill
+                  theme="snow"
+                  value={field.value || ""}
+                  onChange={field.onChange}
+                  modules={modules}
+                  formats={formats}
+                  placeholder="내용을 입력해 주세요."
+                />
+              )}
             />
-            {errors.contents && (
-              <p className={styles["error-message"]}>
-                {errors.contents.message}
-              </p>
-            )}
           </div>
+          {errors.contents && (
+            <p className={styles["error-message"]}>
+              {errors.contents.message}
+            </p>
+          )}
         </div>
 
         <div className={styles["divider"]}></div>

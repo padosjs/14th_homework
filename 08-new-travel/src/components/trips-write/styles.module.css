@@ -85,8 +85,8 @@
   color: var(--gray-500, #919191);
 }
 
-/* 에디터 스타일 */
-.editor-container {
+/* ReactQuill wrapper */
+.quill-wrapper {
   display: flex;
   flex-direction: column;
   width: 100%;
@@ -96,61 +96,37 @@
   overflow: hidden;
 }
 
-.editor-toolbar {
-  display: flex;
-  gap: 3rem;
-  padding: 1rem;
-  background: var(--gray-w, #FFF);
-}
-
-.toolbar-group {
-  display: flex;
-  gap: 1.5rem;
-  align-items: center;
-}
-
-.toolbar-button {
-  display: flex;
-  width: 1.5rem;
-  height: 1.5rem;
-  align-items: center;
-  justify-content: center;
-  background: transparent;
+/* Quill toolbar customization */
+.quill-wrapper :global(.ql-toolbar) {
   border: none;
-  cursor: pointer;
-  padding: 0;
+  border-bottom: 1px solid var(--gray-50, #F2F2F2);
+  background: var(--gray-w, #FFF);
+  padding: 1rem;
 }
 
-.toolbar-icon {
+/* Quill editor container */
+.quill-wrapper :global(.ql-container) {
+  border: none;
+  font-family: 'Pretendard Variable', sans-serif;
   font-size: 1rem;
-  color: #000;
-  font-weight: 500;
+  line-height: 1.5rem;
 }
 
-.editor-divider {
-  width: 100%;
-  height: 0.0625rem;
-  background: var(--gray-50, #F2F2F2);
-}
-
-.editor-textarea {
-  width: 100%;
+/* Editor text area */
+.quill-wrapper :global(.ql-editor) {
   min-height: 25rem;
   padding: 1rem;
-  border: none;
-  resize: vertical;
-  font-size: 1rem;
-  font-weight: 400;
-  line-height: 1.5rem;
-  font-family: 'Pretendard Variable', sans-serif;
 }
 
-.editor-textarea::placeholder {
+/* Placeholder styling */
+.quill-wrapper :global(.ql-editor.ql-blank::before) {
   color: var(--gray-400, #ABABAB);
+  font-style: normal;
 }
 
-.editor-textarea:focus {
-  outline: none;
+/* Error state */
+.quill-wrapper.quill-error {
+  border-color: var(--red, #F66A6A);
 }
 
 /* 주소 및 지도 컨테이너 */
