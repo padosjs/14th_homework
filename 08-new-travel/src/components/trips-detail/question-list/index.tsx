@@ -1,6 +1,5 @@
 import QuestionWrite from '../question-write';
 import QuestionItem from '../question-item';
-import Button from '@/components/button/button';
 import useQuestionList from './hook';
 import styles from './styles.module.css';
 
@@ -46,11 +45,12 @@ export default function QuestionList({ sellerId, currentUserId }: IQuestionListP
         )
       ))}
       {hasMore && (
-        <Button
-          className="white-button-full"
-          text="더보기"
+        <button
+          className={styles['load-more-button']}
           onClick={onLoadMore}
-        />
+        >
+          더보기
+        </button>
       )}
     </div>
   );
