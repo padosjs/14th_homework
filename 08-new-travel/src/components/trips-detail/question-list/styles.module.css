@@ -1,0 +1,18 @@
+.question-list {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.loading,
+.error,
+.empty {
+  text-align: center;
+  padding: 40px 0;
+  font-size: 1rem;
+  color: #818181;
+}
+
+.error {
+  color: #f66a6a;
+}

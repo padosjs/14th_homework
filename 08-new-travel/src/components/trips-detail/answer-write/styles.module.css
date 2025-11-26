@@ -1,0 +1,35 @@
+.answer-write {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  padding: 16px;
+  background-color: #f9f9f9;
+  border-radius: 8px;
+}
+
+.answer-textarea {
+  width: 100%;
+  min-height: 80px;
+  padding: 12px 16px;
+  border: 1px solid #d4d3d3;
+  border-radius: 8px;
+  font-family: 'Pretendard', sans-serif;
+  font-size: 1rem;
+  resize: vertical;
+  background-color: white;
+}
+
+.answer-textarea:focus {
+  outline: none;
+  border-color: #2974e5;
+}
+
+.answer-textarea::placeholder {
+  color: #ababab;
+}
+
+.button-group {
+  display: flex;
+  justify-content: flex-end;
+  gap: 8px;
+}

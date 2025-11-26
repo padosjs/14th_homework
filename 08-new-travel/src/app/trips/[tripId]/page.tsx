@@ -25,7 +25,9 @@ import {
 } from "@/components/ui/alert-dialog";
 import { useUserPointsStore } from "@/commons/stores/user-points-store";
 import { FETCH_TRAVELPRODUCT, DELETE_TRAVELPRODUCT } from "./queries";
-import { FETCH_TRAVELPRODUCTS } from "../queries";
+import { FETCH_USER_LOGGED_IN } from "@/lib/queries/user";
+import QuestionWrite from "@/components/trips-detail/question-write";
+import QuestionList from "@/components/trips-detail/question-list";
 import styles from "./styles.module.css";
 
 export default function TripDetailPage() {
@@ -36,6 +38,8 @@ export default function TripDetailPage() {
     variables: { travelproductId: tripId },
   });
 
+  const { data: userData } = useQuery(FETCH_USER_LOGGED_IN);
+
   const [deleteTravelproduct] = useMutation(DELETE_TRAVELPRODUCT);
 
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -45,6 +49,7 @@ export default function TripDetailPage() {
   const { points, openChargeModal } = useUserPointsStore();
 
   const travelproduct = data?.fetchTravelproduct;
+  const currentUser = userData?.fetchUserLoggedIn;
 
   const handlePurchase = () => {
     // 포인트 체크
@@ -230,20 +235,11 @@ export default function TripDetailPage() {
                 <ChatBubbleLeftIcon className={styles["icon"]} />
                 <h2 className={styles["inquiry-title"]}>문의하기</h2>
               </div>
-              <div className={styles["inquiry-form"]}>
-                <div className={styles["textarea-wrapper"]}>
-                  <textarea
-                    className={styles["inquiry-textarea"]}
-                    placeholder="문의사항을 입력해 주세요."
-                    maxLength={100}
-                  />
-                  <div className={styles["char-count"]}>0/100</div>
-                </div>
-                <Button className="black-button" text="문의 하기" />
-              </div>
-              <p className={styles["empty-message"]}>
-                등록된 문의사항이 없습니다.
-              </p>
+              <QuestionWrite />
+              <QuestionList
+                sellerId={travelproduct?.seller?._id}
+                currentUserId={currentUser?._id}
+              />
             </div>
           </div>
 
